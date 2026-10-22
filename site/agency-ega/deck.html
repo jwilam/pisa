@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PISA 2025 香港 · 學生學習自主性與科學表現</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --navy:#13294b; --navy2:#1f3d6b; --ink:#1c2633; --muted:#5b6878; --line:#dfe6ee;
+    --bg:#f6f8fb; --card:#ffffff; --accent:#2f6db5; --gold:#b8860b; --gold-bg:#fbf3dc;
+    --pos:#2f6db5; --neg:#c0392b; --null:#8a96a3;
+    --d1:#1b9e77; --d2:#7570b3; --d3:#d95f02; --d4:#e7298a;
+    --d1t:#14795c; --d2t:#5b56a0; --d3t:#b34d00; --d4t:#c2186f;
+    --d1b:#e6f5ef; --d2b:#eeedf7; --d3b:#fcecdf; --d4b:#fce6f1;
+  }
+  html,body{height:100%;}
+  body{font-family:'Inter','Noto Sans TC','Microsoft JhengHei','PingFang TC',system-ui,sans-serif;background:#0c1b31;color:var(--ink);
+       display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;overflow:hidden;}
+
+  /* ---------- scalable 16:9 canvas ---------- */
+  #viewport{position:relative;width:1280px;height:720px;flex:none;}   /* default size = safe fallback before / without JS */
+  #stage{--dur:450ms;position:absolute;top:0;left:0;width:1280px;height:720px;transform-origin:top left;
+         background:var(--bg);border-radius:14px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45);}
+  .slide{position:absolute;inset:0;padding:40px 56px 76px;display:none;flex-direction:column;}
+  .slide.active{display:flex;animation:fade .45s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+
+  /* ---------- automatic sequence animation ---------- */
+  .seq{opacity:0;transform:translateY(12px);
+       transition:opacity var(--dur) ease,transform var(--dur) ease,box-shadow .3s;}
+  .seq.shown{opacity:1;transform:none;}
+  .seq.shown.past{opacity:.42;}
+  .slide.instant .seq,.slide.instant .rec .act,.slide.instant .band,
+  .slide.instant .dim{transition:none!important;}
+
+  /* ---------- typography ---------- */
+  .eyebrow{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);}
+  h1{font-size:50px;line-height:1.12;font-weight:800;color:var(--navy);letter-spacing:-.5px;}
+  h2{font-size:33px;line-height:1.2;font-weight:800;color:var(--navy);margin-top:6px;letter-spacing:-.3px;}
+  h3{font-size:17px;font-weight:700;color:var(--navy);}
+  p,li{font-size:16px;line-height:1.55;}
+  .muted{color:var(--muted);}
+  b.pos{color:var(--pos);} b.neg{color:var(--neg);}
+
+  /* ---------- bilingual (English) dimension labels ---------- */
+  .en{font-family:'Inter',system-ui,sans-serif;font-weight:600;letter-spacing:.1px;}
+
+  /* ---------- footer / progress ---------- */
+  .footer{position:absolute;left:0;right:0;bottom:0;height:52px;background:var(--navy);
+          display:flex;align-items:center;padding:0 56px;gap:6px;}
+  .step{font-size:13px;font-weight:600;color:#7f93ad;padding:6px 14px;border-radius:20px;letter-spacing:.3px;}
+  .step.on{background:#fff;color:var(--navy);}
+  .sep{color:#3e5878;font-size:12px;}
+  .pageno{margin-left:auto;color:#9fb3cc;font-size:13px;font-weight:600;}
+
+  /* ---------- shared components ---------- */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;}
+  .fig{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px;cursor:zoom-in;
+       position:relative;display:flex;align-items:center;justify-content:center;transition:box-shadow .2s;}
+  .fig:hover{box-shadow:0 8px 24px rgba(19,41,75,.15);}
+  .fig img{max-width:100%;max-height:100%;display:block;border-radius:6px;}
+  .fig .zoom{position:absolute;right:10px;bottom:10px;background:rgba(19,41,75,.85);color:#fff;
+             font-size:12px;padding:4px 10px;border-radius:12px;z-index:3;}
+  .fig .missing{display:none;text-align:center;color:var(--muted);font-size:15px;padding:30px;}
+  .fig.err img,.fig.err .zoom,.fig.err .imgwrap{display:none;} .fig.err .missing{display:block;}
+  .figcap{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.45;}
+
+  .stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;}
+  .stat .v{font-size:34px;font-weight:800;color:var(--navy);line-height:1;}
+  .stat .l{font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.4;}
+
+  .insight{background:var(--navy);color:#e8f0fa;border-radius:12px;padding:14px 18px;font-size:16px;line-height:1.55;}
+  .insight b{color:#ffd27a;}
+
+  /* ---------- slide 1 ---------- */
+  .s1-main{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;margin-top:18px;flex:1;min-height:0;align-items:stretch;}
+  .s1-left{display:flex;flex-direction:column;justify-content:center;}
+  .chain{display:flex;align-items:center;gap:10px;margin-top:26px;flex-wrap:wrap;}
+  .chain .pill{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-weight:700;color:var(--navy);font-size:16px;}
+  .chain .pill small{display:block;font-weight:500;color:var(--muted);font-size:12px;margin-top:2px;}
+  .chain .pill.hl{background:var(--gold-bg);border-color:#e8cf8f;}
+  .chain .arr{color:var(--gold);font-weight:800;font-size:22px;}
+  .glance{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:14px;}
+  .glance .stat{display:flex;flex-direction:column;justify-content:center;padding:18px 20px;}
+  .glance .stat .v{font-size:46px;}
+  .glance .stat .v.gold{color:var(--gold);}
+  .glance .stat .l{font-size:14.5px;margin-top:10px;}
+  .rqs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px;}
+  .rq{background:#fff;border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:12px;padding:14px 16px;
+      display:flex;flex-direction:column;cursor:pointer;}
+  .rq.seq{transform:translateY(18px);}
+  .rq.seq.shown{transform:none;}
+  .rq.seq.shown:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(19,41,75,.12);}
+  .rq .n{font-size:13px;font-weight:800;color:var(--accent);letter-spacing:1px;}
+  .rq p{font-size:16px;margin-top:4px;font-weight:500;}
+  .rq .go{margin-top:auto;padding-top:8px;font-size:12.5px;font-weight:700;color:var(--accent);}
+  .s1-note{margin-top:12px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px;}
+  .s1-note::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);flex:none;}
+
+  /* ---------- slide 2 ---------- */
+  .s2-top{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:20px;}
+  .s2-top .card{border-top:4px solid var(--accent);}
+  .s2-top .card p{font-size:15px;margin-top:6px;}
+  .s2-top h3{display:flex;justify-content:space-between;align-items:center;gap:8px;}
+  .count{font-size:12px;font-weight:800;color:#fff;background:var(--accent);padding:3px 9px;border-radius:12px;
+         font-variant-numeric:tabular-nums;min-width:52px;text-align:center;}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  .chip{font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:14px;background:#eef3f9;color:var(--navy);}
+  .chip.seq{transform:scale(.6);}
+  .chip.seq.shown{transform:none;}
+  .chip.gold{background:var(--gold-bg);color:#7a5c00;}
+  .pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:22px;}
+  .pstep{position:relative;background:#fff;border:1px solid var(--line);padding:16px 18px;}
+  .pstep:first-child{border-radius:12px 0 0 12px;} .pstep:last-child{border-radius:0 12px 12px 0;}
+  .pstep + .pstep{border-left:none;}
+  .pstep .num{width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;
+              display:flex;align-items:center;justify-content:center;font-size:14px;margin-bottom:8px;}
+  .pstep h3{font-size:16px;} .pstep p{font-size:14px;margin-top:4px;color:var(--muted);line-height:1.5;}
+  .pstep + .pstep::before{content:"›";position:absolute;left:-10px;top:50%;transform:translateY(-50%);
+              background:var(--bg);color:var(--gold);font-weight:800;font-size:22px;width:20px;text-align:center;z-index:2;}
+
+  /* ---------- slide 3 ---------- */
+  .s3-grid{display:grid;grid-template-columns:660px 1fr;gap:24px;margin-top:14px;flex:1;min-height:0;}
+  .s3-grid .fig{height:470px;}
+  .dimlist{display:flex;flex-direction:column;gap:7px;}
+  .dimhint{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:-2px;}
+  .dim{background:#fff;border:1px solid var(--line);border-left:6px solid;border-radius:10px;padding:8px 14px;
+       opacity:.35;transition:opacity var(--dur) ease,transform .2s ease,box-shadow .2s ease;}
+  .dim.lit{opacity:1;}
+  .dim[data-dim]{cursor:pointer;}
+  .dim[data-dim]:hover{transform:translateX(3px);box-shadow:0 6px 16px rgba(19,41,75,.12);}
+  .dim[data-dim]:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .dim .top{display:flex;justify-content:space-between;align-items:baseline;}
+  .dim h3{font-size:15.5px;}
+  .dim h3 .en{display:block;font-size:11.5px;line-height:1.3;margin-top:1px;opacity:.85;}
+  .dim .sc{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap;display:inline-flex;align-items:center;}
+  .info{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;
+        border:1.5px solid currentColor;font-size:10px;font-style:normal;font-weight:800;margin-left:7px;opacity:.65;
+        font-family:Georgia,serif;transition:opacity .2s,color .2s;}
+  .dim:hover .info{opacity:1;color:var(--navy);}
+  .dim p{font-size:13.5px;color:var(--ink);margin-top:2px;line-height:1.45;min-height:19px;}
+  .dim .tag{display:inline-block;margin-left:8px;font-size:10.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+            color:#7a5c00;background:var(--gold-bg);border:1px solid #ecd59c;padding:1px 8px;border-radius:10px;vertical-align:2px;}
+  .nd{display:inline-block;}
+  .nd.seq{transform:translateY(6px);transition-duration:calc(var(--dur) * .6);}
+  .nd.seq.shown{transform:none;}
+  .nd + .nd::before{content:"·";margin:0 6px;color:#9aa8b8;font-style:normal;}
+  .nd + .nd.br::before{content:"";margin:0 0 0 6px;}
+  .dim .br{color:var(--muted);}
+  .dim.d1{border-left-color:var(--d1);} .dim.d1 h3{color:var(--d1);}
+  .dim.d2{border-left-color:var(--d2);} .dim.d2 h3{color:var(--d2);}
+  .dim.d3{border-left-color:var(--d3);} .dim.d3 h3{color:var(--d3);}
+  .dim.d4{border-left-color:var(--d4);} .dim.d4 h3{color:#c2186f;}
+  .bridge{background:#fff;border:1px dashed #9aa8b8;border-radius:10px;padding:10px 14px;margin-top:2px;}
+  .bridge h3{font-size:14.5px;margin-bottom:6px;}
+  .brow{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:10px;margin-top:5px;font-size:13px;}
+  .bar{display:flex;height:18px;border-radius:9px;overflow:hidden;font-size:11px;font-weight:700;color:#fff;background:#eef2f6;}
+  .bar span{display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden;width:var(--w);}
+  .s3-stats{display:flex;gap:10px;margin-top:8px;}
+  .s3-stats .stat{flex:1;padding:8px 12px;} .s3-stats .stat .v{font-size:22px;} .s3-stats .stat .l{font-size:12px;margin-top:3px;}
+
+  /* ---------- slide 3 · dimension definition panel ---------- */
+  .def-layer{position:absolute;inset:0;z-index:20;background:rgba(12,27,49,.46);backdrop-filter:blur(1.5px);
+             -webkit-backdrop-filter:blur(1.5px);opacity:0;visibility:hidden;cursor:pointer;
+             transition:opacity .28s ease,visibility 0s linear .28s;}
+  .def-layer.on{opacity:1;visibility:visible;transition:opacity .28s ease;}
+  .def-panel{position:absolute;top:26px;left:56px;right:56px;background:#fff;border-radius:16px;overflow:hidden;
+             box-shadow:0 26px 64px rgba(6,16,34,.38);transform:translateY(-18px) scale(.985);
+             transition:transform .34s cubic-bezier(.2,.8,.2,1);}
+  .def-layer.on .def-panel{transform:none;}
+  .def{display:none;grid-template-columns:10px 1fr;}
+  .def.on{display:grid;}
+  .def[data-dim="1"]{--c:var(--d1);--ct:var(--d1t);--t:var(--d1b);}
+  .def[data-dim="2"]{--c:var(--d2);--ct:var(--d2t);--t:var(--d2b);}
+  .def[data-dim="3"]{--c:var(--d3);--ct:var(--d3t);--t:var(--d3b);}
+  .def[data-dim="4"]{--c:var(--d4);--ct:var(--d4t);--t:var(--d4b);}
+  .def .stripe{background:var(--c);}
+  .def .body{padding:20px 30px 16px 26px;}
+  .def header{display:flex;align-items:center;gap:14px;}
+  .def .num{width:44px;height:44px;border-radius:50%;background:var(--c);color:#fff;font-weight:800;font-size:21px;
+            display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 0 0 5px var(--t);}
+  .def .kick{font-size:11.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);}
+  .def h3{font-size:27px;line-height:1.15;font-weight:800;color:var(--ct);margin-top:2px;letter-spacing:-.2px;}
+  .def h3 .en{display:block;font-size:15px;font-weight:700;line-height:1.3;letter-spacing:.2px;margin-top:3px;opacity:.85;}
+  .def h3 .tag{display:inline-block;margin-left:10px;font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+               color:#7a5c00;background:var(--gold-bg);border:1px solid #ecd59c;padding:2px 9px;border-radius:10px;vertical-align:5px;}
+  .def p{font-size:18.5px;line-height:1.7;margin-top:14px;color:var(--ink);}
+  .def .f{font-weight:700;color:var(--ct);background:var(--t);padding:1px 6px;border-radius:5px;
+          -webkit-box-decoration-break:clone;box-decoration-break:clone;}
+  .def .f.br{background:#fff;border:1.5px dashed var(--c);padding:0 5px;}
+  .def .f.perf{background:var(--gold-bg);color:#7a5c00;border:1.5px solid #e0c06e;}
+  .def .x{font-weight:700;color:var(--xc);white-space:nowrap;}
+  .def .x::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--xc);
+                  margin-right:5px;vertical-align:1px;}
+  .def footer{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);}
+  .def .fc{font-size:13px;font-weight:700;padding:4px 11px;border-radius:14px;background:var(--t);color:var(--ct);}
+  .def .fc.br{background:#fff;border:1.5px dashed var(--c);padding:3px 10px;}
+  .def .fc.perf{background:var(--gold-bg);color:#7a5c00;border:1.5px solid #e0c06e;padding:3px 10px;}
+  .def .close-hint{margin-left:auto;font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap;}
+  .def .close-hint kbd{font-family:inherit;font-size:11px;font-weight:800;border:1px solid #c9d3de;border-bottom-width:2px;
+                       border-radius:4px;padding:0 5px;margin:0 2px;color:var(--ink);background:#f6f8fb;}
+
+  /* ---------- slide 4 ---------- */
+  .s4-grid{display:grid;grid-template-columns:620px 1fr;gap:26px;margin-top:14px;flex:1;min-height:0;}
+  .s4-grid .fig{height:465px;}
+  .imgwrap{position:relative;display:inline-block;line-height:0;max-width:100%;overflow:hidden;border-radius:6px;}
+  .s4-grid .imgwrap img{max-height:447px;max-width:100%;}
+  .band{position:absolute;left:.5%;width:81%;top:var(--top);height:var(--h);border:2.5px solid var(--c);
+        border-radius:8px;box-shadow:0 0 0 9999px rgba(255,255,255,.62);opacity:0;transition:opacity var(--dur) ease;pointer-events:none;}
+  .band.on{opacity:1;}
+  .tiers{display:flex;flex-direction:column;gap:8px;}
+  .tier{background:#fff;border:1px solid var(--line);border-left:6px solid;border-radius:10px;padding:9px 14px;}
+  .tier.current{box-shadow:0 8px 20px rgba(19,41,75,.13);}
+  .tier h3{font-size:14.5px;} .tier p{font-size:14px;margin-top:2px;line-height:1.45;}
+  .tier.t1{border:2px solid #1f4f8f;border-left:8px solid #1f4f8f;background:#eef4fc;padding:11px 16px;
+           box-shadow:0 6px 18px rgba(31,79,143,.14);}
+  .tier.t1 h3{color:#1f4f8f;font-size:16px;font-weight:800;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+  .tier.t1 .badge{font-size:10.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#fff;
+                  background:#1f4f8f;padding:3px 9px;border-radius:10px;white-space:nowrap;}
+  .tier.t1 .sub{display:block;font-size:12.5px;font-weight:700;color:#3f6ea8;margin-top:1px;}
+  .tier.t1 p{font-size:15.5px;font-weight:600;margin-top:4px;}
+  .tier.t1 p b{font-size:17px;font-weight:800;}
+  .tier.t1.seq.shown.past{opacity:.85;}
+  .tier.t2{border-left-color:#7fa6d6;} .tier.t2 h3{color:#3f6ea8;}
+  .tier.t3{border-left-color:var(--null);} .tier.t3 h3{color:#5f6b78;}
+  .tier.t4{border-left-color:var(--neg);} .tier.t4 h3{color:var(--neg);}
+  .r2{display:flex;align-items:center;gap:14px;background:var(--gold-bg);border:1px solid #ecd59c;border-radius:12px;padding:10px 16px;}
+  .r2 .v{font-size:38px;font-weight:800;color:var(--gold);line-height:1;}
+  .r2 .l{font-size:14px;color:#5e4a10;line-height:1.45;}
+
+  /* ---------- slide 5 ---------- */
+  .recs{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
+  .rec{display:grid;grid-template-columns:44px 380px 1fr;gap:16px;align-items:center;
+       background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 18px;}
+  .rec.current{box-shadow:0 8px 22px rgba(19,41,75,.13);border-color:#c9d6e5;}
+  .rec .n{width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;
+          display:flex;align-items:center;justify-content:center;font-size:16px;}
+  .rec .ev{font-size:13.5px;color:var(--muted);border-right:2px solid var(--line);padding-right:16px;line-height:1.5;}
+  .rec .ev b{color:var(--navy);}
+  .rec .act{opacity:0;transform:translateX(-10px);
+            transition:opacity var(--dur) ease calc(var(--dur) * .9),transform var(--dur) ease calc(var(--dur) * .9);}
+  .rec.shown .act{opacity:1;transform:none;}
+  .rec .act h3{font-size:16.5px;} .rec .act p{font-size:14.5px;margin-top:2px;line-height:1.5;}
+  .rec.key{border:2px solid #e8cf8f;border-left:6px solid var(--gold);background:#fffaf0;}
+  .rec.key.current{border-color:#e0c06e;border-left-color:var(--gold);}
+  .rec.key .n{background:var(--gold);}
+  .rec.key .act h3{color:#7a5c00;}
+  .colhead{display:grid;grid-template-columns:44px 380px 1fr;gap:16px;padding:0 18px;margin-top:16px;
+           font-size:12px;font-weight:800;letter-spacing:1.5px;color:var(--accent);text-transform:uppercase;}
+
+  /* ---------- slide 6 · summary ---------- */
+  .slide.s6{padding:26px 48px 62px;
+            --s6-title:42px; --s6-sub:21px; --s6-head:21px; --s6-list:18px; --s6-banner:23px; --s6-foot:14.5px;}
+  .s6-title{font-size:var(--s6-title);line-height:1.15;font-weight:800;color:var(--navy);letter-spacing:-.2px;}
+  .s6-sub{font-size:var(--s6-sub);line-height:1.35;color:var(--muted);font-weight:500;margin-top:4px;}
+  .eco{position:relative;flex:1;min-height:0;margin-top:12px;padding:8px 16px;border-radius:22px;
+       background:radial-gradient(ellipse at center,#ffffff 0%,#f1f5fa 55%,#e9eff6 100%);border:1px solid #e1e8f0;
+       display:grid;grid-template-columns:1fr 240px 1fr;grid-template-rows:1fr 70px 1fr;}
+  .dc{position:relative;z-index:2;background:#fff;border:1px solid var(--line);border-left:6px solid var(--c);
+      border-radius:14px;padding:10px 18px;display:flex;flex-direction:column;justify-content:center;
+      box-shadow:0 2px 8px rgba(19,41,75,.05);}
+  .dc.d1{--c:var(--d1);--ct:var(--d1t);} .dc.d2{--c:var(--d2);--ct:var(--d2t);}
+  .dc.d3{--c:var(--d3);--ct:var(--d3t);} .dc.d4{--c:var(--d4);--ct:var(--d4t);}
+  .dc h3{font-size:var(--s6-head);line-height:1.2;font-weight:800;color:var(--ct);letter-spacing:-.1px;}
+  .dc h3 .en{display:block;font-size:13.5px;font-weight:600;line-height:1.3;margin-top:2px;opacity:.85;letter-spacing:.1px;}
+  .dc .vl{margin-top:6px;font-size:var(--s6-list);line-height:1.4;color:var(--ink);}
+  .dc.d3{border:2px solid #f2bf94;border-left:6px solid var(--d3);background:linear-gradient(180deg,#ffffff 0%,#fff7f0 100%);
+         box-shadow:0 8px 22px rgba(217,95,2,.13);}
+  .dc .entry{position:absolute;top:-11px;right:16px;font-size:11.5px;font-weight:800;letter-spacing:1.5px;color:#fff;
+             background:var(--d3);padding:4px 11px;border-radius:10px;white-space:nowrap;box-shadow:0 3px 8px rgba(217,95,2,.25);}
+  .cn{position:relative;z-index:1;}
+  .cn::before{content:"";position:absolute;background:#c4cedb;}
+  .cn.h::before{left:0;right:0;top:calc(var(--y,50%) - 1px);height:2px;}
+  .cn.v::before{top:0;bottom:0;left:calc(var(--x,50%) - 1px);width:2px;}
+  .cn.v.b23::before{background:linear-gradient(to bottom,var(--d2),var(--d3));}
+  .cn.h.b34::before{background:linear-gradient(to right,var(--d4),var(--d3));}
+  .bl{position:absolute;z-index:3;left:var(--x,50%);top:var(--y,50%);transform:translate(-50%,-50%);
+      background:#fff;border:1.5px dashed #8f9db0;border-radius:10px;padding:3px 14px 4px;text-align:center;
+      box-shadow:0 2px 6px rgba(19,41,75,.06);white-space:nowrap;}
+  .bl small{display:block;font-size:10.5px;font-weight:800;letter-spacing:1.5px;color:var(--muted);line-height:1.35;}
+  .bl b{display:block;font-size:15px;font-weight:700;color:var(--navy);line-height:1.25;}
+  .bl.wide{min-width:180px;}
+  .core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;width:236px;text-align:center;pointer-events:none;}
+  .core::before{content:"";position:absolute;left:50%;top:50%;width:250px;height:250px;transform:translate(-50%,-50%);
+                border-radius:50%;z-index:-1;
+                background:radial-gradient(circle,rgba(255,210,122,.34) 0%,rgba(255,210,122,.12) 38%,rgba(255,210,122,0) 64%);}
+  .core .k{font-size:26px;font-weight:800;letter-spacing:4px;line-height:1.2;color:var(--navy);}
+  .core .rule{width:38px;height:3px;border-radius:2px;background:var(--gold);margin:8px auto 7px;}
+  .core .t{font-size:15.5px;line-height:1.45;color:#3a4757;font-weight:500;}
+  .s6-cap{margin-top:3px;text-align:right;font-size:13.5px;color:var(--muted);}
+  .s6-banner{margin-top:8px;background:linear-gradient(100deg,var(--navy),var(--navy2));color:#fff;border-radius:14px;
+             border-left:6px solid var(--gold);padding:11px 26px 12px;}
+  .s6-banner .hl{font-size:var(--s6-banner);font-weight:700;line-height:1.35;}
+  .s6-banner .hl em{font-style:normal;color:#ffd27a;}
+  .s6-banner .acts{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:6px;font-size:18px;font-weight:600;color:#dbe7f5;}
+  .s6-banner .acts .lab{font-size:12px;font-weight:800;letter-spacing:1.5px;color:#ffd27a;margin-right:6px;}
+  .s6-banner .acts .d{color:#ffd27a;font-weight:800;}
+  .s6-foot{margin-top:6px;font-size:var(--s6-foot);color:#4f5c6c;display:flex;align-items:center;gap:8px;}
+  .s6-foot::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);flex:none;}
+
+  /* ---------- controls / lightbox ---------- */
+  .controls{display:flex;align-items:center;gap:14px;margin-top:14px;}
+  .controls button{background:#24456f;color:#fff;border:none;padding:8px 18px;border-radius:8px;font-size:14px;
+                   font-weight:600;cursor:pointer;font-family:inherit;}
+  .controls button.small{padding:6px 12px;font-size:13px;}
+  .controls button:hover:not(:disabled){background:#2f6db5;}
+  .controls button:disabled{opacity:.35;cursor:default;}
+  .dots{display:flex;gap:8px;}
+  .dot{width:10px;height:10px;border-radius:50%;background:#4a6487;cursor:pointer;transition:.2s;}
+  .dot.on{background:#fff;transform:scale(1.3);}
+  #status{color:#9fb3cc;font-size:12px;font-weight:600;min-width:96px;text-align:center;font-variant-numeric:tabular-nums;}
+  .speedbox{display:flex;align-items:center;gap:6px;color:#9fb3cc;font-size:12px;font-weight:600;}
+  .speedbox select{background:#24456f;color:#fff;border:none;border-radius:6px;padding:5px 6px;font-family:inherit;font-size:13px;cursor:pointer;}
+  .hint{color:#7f93ad;font-size:12px;margin-top:6px;}
+  #lightbox{position:fixed;inset:0;background:rgba(8,16,30,.92);display:none;align-items:center;justify-content:center;
+            z-index:99;cursor:zoom-out;padding:24px;}
+  #lightbox.on{display:flex;}
+  #lightbox img{max-width:96vw;max-height:94vh;background:#fff;border-radius:8px;}
+
+  @media (prefers-reduced-motion: reduce){
+    .slide.active{animation:none;}
+    .seq,.rec .act,.band,.dim,.def-layer,.def-panel{transition:none!important;}
+  }
+  @media print{
+    @page{size:1280px 720px;margin:0;}
+    body{background:#fff;display:block;overflow:visible;}
+    .controls,.hint,#lightbox,.def-layer,.dimhint{display:none!important;}
+    #viewport{width:auto!important;height:auto!important;}
+    #stage{position:static;transform:none!important;box-shadow:none;border-radius:0;height:auto;}
+    .slide{display:flex!important;position:relative;width:1280px;height:720px;page-break-after:always;animation:none;}
+    .seq,.seq.past,.rec .act,.dim{opacity:1!important;transform:none!important;}
+    .band{display:none!important;}
+    .fig .zoom{display:none;}
+  }
+  
+    /* ===== Site theme alignment · PISA HKU seminar ===== */
+  :root{
+    /* ↓ copy the exact values from css/style.css :root */
+    --site-green-dark:#0f3d2e; --site-green:#1f5e46; --site-teal:#2f8f7b; --site-gold:#b8962e;
+    --navy:var(--site-green-dark); --navy2:var(--site-green);
+    --accent:var(--site-teal); --gold:var(--site-gold); --gold-bg:#faf3de;
+    --bg:#f5f8f6; --line:#dde7e1; --muted:#5d6b66; --ink:#1d2a25;
+  }
+  body{background:linear-gradient(135deg,var(--site-green-dark),#173f31);
+       font-family:'Noto Sans TC','Inter','Microsoft JhengHei','PingFang TC',system-ui,sans-serif;}
+  .step{color:#9fbfb0;} .sep{color:#4f7a68;} .pageno,#status,.speedbox{color:#b5d0c3;}
+  .controls button,.speedbox select{background:#2a6a52;}
+  .controls button:hover:not(:disabled){background:var(--site-teal);}
+  .dot{background:#4f7a68;} .hint{color:#9fbfb0;}
+  .insight{color:#eaf4ef;} .insight b{color:#f1d27a;}
+  .chip{background:#eaf3ee;color:var(--navy);}
+  .fig:hover{box-shadow:0 8px 24px rgba(15,61,46,.15);}
+  .def-layer{background:rgba(10,38,28,.5);}
+  .eco{background:radial-gradient(ellipse at center,#ffffff 0%,#f0f6f2 55%,#e6efea 100%);border-color:#dbe7e0;}
+  .cn::before{background:#c3d4cb;}
+  .s6-banner .hl em,.s6-banner .acts .lab,.s6-banner .acts .d{color:#f1d27a;}
+  /* links back to the site */
+  .xlink{display:inline-block;margin-top:6px;font-size:12.5px;font-weight:700;color:var(--accent);text-decoration:none;}
+  .xlink:hover{text-decoration:underline;}
+  .controls .back{color:#cfe3d8;font-size:13px;font-weight:600;text-decoration:none;margin-right:4px;}
+  .embedded .hint,.embedded .controls .back{display:none;}
+  
+    .seq:not(.shown) .xlink{pointer-events:none;}
+
+</style>
+</head>
+<body>
+
+<div id="viewport">
+<div id="stage">
+
+  <!-- ================= 第 1 頁 · 概覽 ================= -->
+  <section class="slide active" data-anim="overview">
+    <div class="eyebrow">PISA 2025 · 中國香港 · 探索性圖分析（EGA）</div>
+    <div class="s1-main">
+      <div class="s1-left">
+        <h1>學生學習自主性：<br>未來準備度的條件</h1>
+        <p class="muted" style="font-size:19px;margin-top:14px;">學習自主性如何組織，以及它如何與科學表現相連</p>
+        <div class="chain">
+          <div class="pill">學生學習自主性<small>自主行動能力</small></div>
+          <div class="arr">→</div>
+          <div class="pill">未來準備度<small>適應 · 解難 · 持續學習</small></div>
+          <div class="arr">→</div>
+          <div class="pill hl">PISA 科學<small>可量度的代理指標</small></div>
+        </div>
+      </div>
+      <div class="glance">
+        <div class="stat"><div class="v">5,942</div><div class="l">名 15 歲學生納入分析（保留加權樣本的 92.1%）</div></div>
+        <div class="stat"><div class="v">17</div><div class="l">個網絡節點：16 個學習自主性及情境面向 + 科學表現</div></div>
+        <div class="stat"><div class="v">4</div><div class="l">個學習自主性維度，於 500 次自助抽樣中 <b>98.4%</b> 得以重現</div></div>
+        <div class="stat"><div class="v gold">18%</div><div class="l">的科學表現變異量可由學習自主性網絡解釋</div></div>
+      </div>
+    </div>
+    <div class="rqs">
+      <div class="rq seq" data-k="1" data-goto="2"><div class="n">RQ1 · 結構</div><p>學生學習自主性如何組織？</p><span class="go">第 3 頁 →</span></div>
+      <div class="rq seq" data-k="2" data-goto="3"><div class="n">RQ2 · 關聯</div><p>科學表現如何與學習自主性相連？</p><span class="go">第 4 頁 →</span></div>
+      <div class="rq seq" data-k="3" data-goto="4"><div class="n">RQ3 · 行動</div><p>這對科學教學有何啟示？</p><span class="go">第 5 頁 →</span></div>
+    </div>
+    <div class="s1-note">全部採用以抽樣設計為本的估計：最終學生權重 + 80 組 Fay-BRR 重複權重，並合併 10 個可能值。</div>
+    <div class="footer"><span class="step on">概覽</span><span class="sep">›</span><span class="step">研究設計</span><span class="sep">›</span><span class="step">RQ1 結構</span><span class="sep">›</span><span class="step">RQ2 關聯</span><span class="sep">›</span><span class="step">RQ3 行動</span><span class="sep">›</span><span class="step">總結</span><span class="pageno">1 / 6</span></div>
+  </section>
+
+  <!-- ================= 第 2 頁 · 研究設計 ================= -->
+  <section class="slide" data-anim="facets">
+    <div class="eyebrow">概念框架與研究方法</div>
+    <h2>從「學生知道甚麼」到「學生能調動甚麼」</h2>
+    <div class="s2-top">
+      <div class="card">
+        <h3>未來準備度</h3>
+        <p>適應環境、解決新問題及持續學習的能力。<b>PISA 科學素養</b>作為其可量度的代理指標。</p>
+      </div>
+      <div class="card">
+        <h3>學習自主性：16 個面向 <span class="count" data-count></span></h3>
+        <div class="chips">
+          <span class="chip seq" data-k="1">好奇心</span><span class="chip seq" data-k="2">堅毅</span><span class="chip seq" data-k="3">目標設定</span>
+          <span class="chip seq" data-k="4">解難樂趣</span><span class="chip seq" data-k="5">自我調節</span><span class="chip seq" data-k="6">認知適應力</span>
+          <span class="chip seq" data-k="7">成長心態</span><span class="chip seq" data-k="8">歸屬感</span><span class="chip seq" data-k="9">重視學校</span>
+          <span class="chip seq" data-k="10">教師支援</span><span class="chip seq" data-k="11">認知激發</span><span class="chip seq" data-k="12">協作推理</span>
+          <span class="chip seq" data-k="13">科學樂趣</span><span class="chip seq" data-k="14">自我效能感</span><span class="chip seq" data-k="15">科學信念</span>
+          <span class="chip seq" data-k="16">科學實踐</span><span class="chip gold seq" data-k="17" data-wait="2.5">+ 科學表現</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>政策問題</h3>
+        <p>哪些面向與準備度指標的連繫最緊密，從而讓教學投入能夠<b>聚焦</b>而非分散？</p>
+      </div>
+    </div>
+    <div class="pipeline">
+      <div class="pstep"><div class="num">1</div><h3>加權相關</h3><p>由 10 個可能值 × 81 組權重得出 17 × 17 矩陣，於 Fisher-z 尺度合併（Fay-BRR + Rubin 規則）</p></div>
+      <div class="pstep"><div class="num">2</div><h3>偏相關網絡</h3><p>EBICglasso 只保留每對變項之間的獨特關聯，並控制其餘所有變項</p></div>
+      <div class="pstep"><div class="num">3</div><h3>社群偵測</h3><p>Leiden 演算法找出緊密相連的面向群組（即學習自主性維度）</p></div>
+      <div class="pstep"><div class="num">4</div><h3>穩定性檢驗</h3><p>在各分層內進行 500 次學校群集自助抽樣，檢驗每個維度及節點的可重現程度</p></div>
+    </div>
+    <div class="insight" style="margin-top:20px;">
+      <b>閱讀提示：</b>連線代表兩個面向在<b>控制其餘 15 個面向之後</b>仍然相關。沒有連線與有連線同樣具資訊價值。
+    <a class="xlink" style="color:#f1d27a;margin-left:8px;" href="method.html" target="_top">📐 分析步驟詳解 →</a>
+	</div>
+    <div class="footer"><span class="step">概覽</span><span class="sep">›</span><span class="step on">研究設計</span><span class="sep">›</span><span class="step">RQ1 結構</span><span class="sep">›</span><span class="step">RQ2 關聯</span><span class="sep">›</span><span class="step">RQ3 行動</span><span class="sep">›</span><span class="step">總結</span><span class="pageno">2 / 6</span></div>
+  </section>
+
+  <!-- ================= 第 3 頁 · RQ1 ================= -->
+  <section class="slide" data-anim="dims">
+    <div class="eyebrow">RQ1 · 學習自主性如何組織？</div>
+    <h2>四個穩定維度，由兩個橋接面向連結</h2>
+    <div class="s3-grid">
+      <div>
+        <div class="fig" data-zoom>
+          <img src="img/Fig1_EGA_network.png" alt="學生學習自主性與科學表現的 EGA 網絡圖">
+          <span class="zoom">⤢ 點擊放大</span>
+          <div class="missing">找不到 Fig1_EGA_network.png。<br>請將檔案放在與本頁相同的資料夾。</div>
+        </div>
+        <div class="figcap">外環及數字 = 可預測度 R²（%）· 連線粗幼 ∝ |偏相關 r| · 分色填充 = 橋接節點的自助抽樣歸屬 · 金環 = 科學表現</div>
+      </div>
+      <div class="dimlist">
+        <div class="dimhint"><i class="info" style="margin-left:0;opacity:1;">i</i>點擊維度（或按 1–4）查看定義</div>
+        <div class="dim d1" data-dim="1" role="button" tabindex="0" aria-label="顯示「學習驅動力 Drive to Learn」的定義"><div class="top"><h3>1 · 學習驅動力<span class="en">Drive to Learn</span></h3><span class="sc">核心 0.99<i class="info">i</i></span></div>
+          <p><span class="nd seq" data-k="1">好奇心</span><span class="nd seq" data-k="2">堅毅</span><span class="nd seq" data-k="3">解難樂趣</span><span class="nd seq" data-k="4">目標設定</span></p></div>
+        <div class="dim d2" data-dim="2" role="button" tabindex="0" aria-label="顯示「學校情境調節資源 School-Situated Regulatory Resources」的定義"><div class="top"><h3>2 · 學校情境調節資源<span class="en">School-Situated Regulatory Resources</span></h3><span class="sc">核心 0.97<i class="info">i</i></span></div>
+          <p><span class="nd seq" data-k="5" data-wait="3">歸屬感</span><span class="nd seq" data-k="6">自我調節</span><span class="nd seq" data-k="7">認知適應力</span><span class="nd seq" data-k="8">成長心態</span><span class="nd seq" data-k="9">重視學校</span><span class="nd br seq" data-k="10">+ 教師支援</span></p></div>
+        <div class="dim d3" data-dim="3" role="button" tabindex="0" aria-label="顯示「學習機會設計 Learning Opportunity Design」的定義"><div class="top"><h3>3 · 學習機會設計<span class="tag">教師著力點 · Teachers' Lever</span><span class="en">Learning Opportunity Design</span></h3><span class="sc">核心 0.97<i class="info">i</i></span></div>
+          <p><span class="nd seq" data-k="11" data-wait="3">認知激發</span><span class="nd seq" data-k="12">協作科學推理</span></p></div>
+        <div class="dim d4" data-dim="4" role="button" tabindex="0" aria-label="顯示「科學傾向與能力 Science Dispositions and Competencies」的定義"><div class="top"><h3>4 · 科學傾向與能力<span class="en">Science Dispositions and Competencies</span></h3><span class="sc">核心 0.96<i class="info">i</i></span></div>
+          <p><span class="nd seq" data-k="13" data-wait="3">科學樂趣</span><span class="nd seq" data-k="14">自我效能感</span><span class="nd seq" data-k="15">科學信念</span><span class="nd seq" data-k="16"><b>科學表現</b></span><span class="nd br seq" data-k="17">+ 科學實踐</span></p></div>
+        <div class="bridge">
+          <h3>橋接面向：在各維度的自助抽樣佔比</h3>
+          <div class="brow"><span>教師支援</span>
+            <div class="bar"><span style="--w:54%;background:var(--d2)">維度 2 · 54%</span><span style="--w:46%;background:var(--d3)">維度 3 · 46%</span></div></div>
+          <div class="brow"><span>科學實踐</span>
+            <div class="bar"><span style="--w:61%;background:var(--d3)">維度 3 · 61%</span><span style="--w:37%;background:var(--d4)">維度 4 · 37%</span><span style="--w:2%;background:#c9d1da"></span></div></div>
+        </div>
+        <div class="s3-stats">
+          <div class="stat"><div class="v">98.4%</div><div class="l">的自助抽樣得出 4 個維度</div></div>
+          <div class="stat"><div class="v">0.87</div><div class="l">與主要解相比的 ARI 中位數</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span class="step">概覽</span><span class="sep">›</span><span class="step">研究設計</span><span class="sep">›</span><span class="step on">RQ1 結構</span><span class="sep">›</span><span class="step">RQ2 關聯</span><span class="sep">›</span><span class="step">RQ3 行動</span><span class="sep">›</span><span class="step">總結</span><span class="pageno">3 / 6</span></div>
+
+    <!-- 維度定義（點擊時顯示） -->
+    <div class="def-layer" id="defLayer" aria-hidden="true">
+      <div class="def-panel" role="dialog" aria-live="polite">
+
+        <article class="def" data-dim="1">
+          <div class="stripe"></div>
+          <div class="body">
+            <header><div class="num">1</div><div>
+              <div class="kick">維度 1 / 4 · 核心一致性 0.99 · 4 個面向</div>
+              <h3>學習驅動力<span class="en">Drive to Learn</span></h3></div></header>
+            <p>學生發起、引導並持續投入學習的動機，涵蓋
+              <b class="f">好奇心</b>、<b class="f">堅毅</b>、<b class="f">解難樂趣</b>及<b class="f">目標設定</b>。</p>
+            <footer>
+              <span class="fc">好奇心</span><span class="fc">堅毅</span><span class="fc">解難樂趣</span><span class="fc">目標設定</span>
+              <span class="close-hint">點擊任何位置或按 <kbd>Esc</kbd> 關閉</span>
+            </footer>
+          </div>
+        </article>
+
+        <article class="def" data-dim="2">
+          <div class="stripe"></div>
+          <div class="body">
+            <header><div class="num">2</div><div>
+              <div class="kick">維度 2 / 4 · 核心一致性 0.97 · 5 個面向 + 1 個橋接</div>
+              <h3>學校情境調節資源<span class="en">School-Situated Regulatory Resources</span></h3></div></header>
+            <p>學生可藉以管理自身學習的個人能力、信念及與學校的聯繫。
+              此維度涵蓋<b class="f">自我調節</b>、<b class="f">認知適應力</b>、<b class="f">成長心態</b>、
+              <b class="f">歸屬感</b>及<b class="f">重視學校</b>，而<b class="f br">教師支援</b>則可能作為通往
+              <span class="x" style="--xc:var(--d3t)">學習機會設計</span>的橋樑。</p>
+            <footer>
+              <span class="fc">自我調節</span><span class="fc">認知適應力</span><span class="fc">成長心態</span>
+              <span class="fc">歸屬感</span><span class="fc">重視學校</span><span class="fc br">教師支援 · 橋接</span>
+              <span class="close-hint">虛線 = 橋接 · 點擊任何位置或按 <kbd>Esc</kbd> 關閉</span>
+            </footer>
+          </div>
+        </article>
+
+        <article class="def" data-dim="3">
+          <div class="stripe"></div>
+          <div class="body">
+            <header><div class="num">3</div><div>
+              <div class="kick">維度 3 / 4 · 核心一致性 0.97 · 2 個面向 + 2 個橋接</div>
+              <h3>學習機會設計<span class="tag">教師著力點 · Teachers' Lever</span><span class="en">Learning Opportunity Design</span></h3></div></header>
+            <p>科學學習經驗的組織方式，以學生所報告的<b class="f">認知激發教學</b>
+              及<b class="f">協作科學推理</b>機會為代表。<b class="f br">教師支援</b>及<b class="f br">參與科學實踐</b>
+              可能作為橋樑，分別將學習機會與
+              <span class="x" style="--xc:var(--d2t)">學校情境調節資源</span>及
+              <span class="x" style="--xc:var(--d4t)">科學傾向與能力</span>連結起來。</p>
+            <footer>
+              <span class="fc">認知激發</span><span class="fc">協作科學推理</span>
+              <span class="fc br">教師支援 · 橋接</span><span class="fc br">科學實踐 · 橋接</span>
+              <span class="close-hint">虛線 = 橋接 · 點擊任何位置或按 <kbd>Esc</kbd> 關閉</span>
+            </footer>
+          </div>
+        </article>
+
+        <article class="def" data-dim="4">
+          <div class="stripe"></div>
+          <div class="body">
+            <header><div class="num">4</div><div>
+              <div class="kick">維度 4 / 4 · 核心一致性 0.96 · 3 個面向 + 科學表現 + 1 個橋接</div>
+              <h3>科學傾向與能力<span class="en">Science Dispositions and Competencies</span></h3></div></header>
+            <p>學生與科學相關的信念、信心及態度，以及其實際展現的<b class="f perf">科學表現</b>。
+              此維度涵蓋<b class="f">認識論信念</b>、<b class="f">科學自我效能感</b>及<b class="f">科學學習樂趣</b>，
+              而<b class="f br">參與科學實踐</b>則可能作為通往
+              <span class="x" style="--xc:var(--d3t)">學習機會設計</span>的橋樑。</p>
+            <footer>
+              <span class="fc">認識論信念</span><span class="fc">科學自我效能感</span><span class="fc">科學學習樂趣</span>
+              <span class="fc perf">科學表現</span><span class="fc br">科學實踐 · 橋接</span>
+              <span class="close-hint">虛線 = 橋接 · 點擊任何位置或按 <kbd>Esc</kbd> 關閉</span>
+            </footer>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 第 4 頁 · RQ2 ================= -->
+  <section class="slide" data-anim="tiers" data-focus>
+    <div class="eyebrow">RQ2 · 表現如何與學習自主性相連？</div>
+    <h2>科學表現與「科學專屬」的信念及樂趣緊密相連</h2>
+    <div class="s4-grid">
+      <div>
+        <div class="fig" data-zoom>
+          <div class="imgwrap">
+            <img src="img/Fig2_PV_edges_forest.png" alt="各面向與科學表現之偏相關森林圖">
+            <div class="band" data-hl="1" style="--top:10.7%;--h:14.4%;--c:#1f4f8f"></div>
+            <div class="band" data-hl="2" style="--top:25.1%;--h:19.3%;--c:#3f6ea8"></div>
+            <div class="band" data-hl="3" style="--top:44.4%;--h:28.9%;--c:#6b7785"></div>
+            <div class="band" data-hl="4" style="--top:73.3%;--h:14.5%;--c:#c0392b"></div>
+          </div>
+          <span class="zoom">⤢ 點擊放大</span>
+          <div class="missing">找不到 Fig2_PV_edges_forest.png。<br>請將檔案放在與本頁相同的資料夾。</div>
+        </div>
+        <div class="figcap">實心圓 = 以抽樣設計為本的偏相關（95% 置信區間，FDR q &lt; .05）· 空心 = 不顯著 · 紅色 × = 正則化網絡連線 · 高亮框隨所討論的層級移動</div>
+      </div>
+      <div class="tiers">
+        <div class="r2"><div class="v">18%</div><div class="l">的科學表現變異量由 16 個面向共同解釋<br><span style="font-size:12.5px;">R² = .178 [.157, .198]</span></div></div>
+        <div class="tier t1 seq" data-k="1">
+          <h3>強而直接（+）<span class="badge">最強關聯</span></h3>
+          <span class="sub">科學傾向與能力 <span class="en">· Science Dispositions and Competencies</span></span>
+          <p>科學信念 <b class="pos">.21</b> · 科學樂趣 <b class="pos">.18</b> · 自我效能感 <b class="pos">.12</b></p>
+		  <a class="xlink" href="../science-factors/indicators.html" target="_top">三個指標量度甚麼？→</a>
+		  </div>
+        <div class="tier t2 seq" data-k="2"><h3>細小但穩定（+）</h3><p>好奇心 <b>.07</b> · 自我調節 <b>.06</b> · 認知激發 <b>.05</b> · 成長心態 <b>.05</b></p></div>
+        <div class="tier t3 seq" data-k="3"><h3>沒有獨特關聯</h3><p>堅毅 · 目標設定 · 認知適應力 · 重視學校 · 教師支援 · 科學實踐</p></div>
+        <div class="tier t4 seq" data-k="4"><h3>細小的條件性負關聯（−）</h3><p>協作推理 <b class="neg">−.13</b> · 解難樂趣 <b class="neg">−.07</b> · 歸屬感 <b class="neg">−.04</b></p></div>
+        <div class="insight seq" data-k="5" style="font-size:14.5px;padding:11px 16px;">科學表現位於「科學傾向與能力」維度<b>之內</b>。學習驅動力及調節相關面向主要<b>經由</b>科學專屬節點與之相連：這與間接路徑的推論一致，但並非對間接路徑的檢驗。</div>
+      </div>
+    </div>
+    <div class="footer"><span class="step">概覽</span><span class="sep">›</span><span class="step">研究設計</span><span class="sep">›</span><span class="step">RQ1 結構</span><span class="sep">›</span><span class="step on">RQ2 關聯</span><span class="sep">›</span><span class="step">RQ3 行動</span><span class="sep">›</span><span class="step">總結</span><span class="pageno">4 / 6</span></div>
+  </section>
+
+  <!-- ================= 第 5 頁 · RQ3 ================= -->
+  <section class="slide" data-anim="recs" data-focus>
+    <div class="eyebrow">RQ3 · 對教與學的啟示</div>
+    <h2>學習設計是著力點；科學傾向是關鍵門徑</h2>
+    <div class="colhead"><span></span><span>證據</span><span>行動</span></div>
+    <div class="recs">
+      <div class="rec seq" data-k="1"><div class="n">1</div>
+        <div class="ev">信念、樂趣及自我效能感（<b>科學傾向與能力</b>）與表現有<b>三項最強關聯</b>（.12–.21）</div>
+        <div class="act"><h3>建立學科專屬的信心與興趣</h3><p>透過精熟經驗、真實探究，以及在科學任務中看得見的成功。</p></div></div>
+      <div class="rec key seq" data-k="2"><div class="n">2</div>
+        <div class="ev">教師支援<b>橋接</b>學校情境調節資源與<b>學習機會設計</b>（54% / 46%）；認知激發保持穩定的直接關聯（.05）</div>
+        <div class="act"><h3>以學習機會設計作為教師的著力點</h3><p>學習自主性無法直接教授，但有效的支援及精心設計的學習活動，能讓其餘三個維度得以成長。</p></div></div>
+      <div class="rec seq" data-k="3"><div class="n">3</div>
+        <div class="ev">當科學傾向與能力納入網絡後，堅毅、目標設定及認知適應力<b>沒有獨特關聯</b></div>
+        <div class="act"><h3>視一般學習自主性為土壤，而非植物</h3><p>將一般傾向明確連結到科學情境，而非期望其單獨帶來成效。</p></div></div>
+      <div class="rec seq" data-k="4"><div class="n">4</div>
+        <div class="ev">好奇心、自我調節及成長心態保持<b>細小的直接關聯</b>（.05–.07）</div>
+        <div class="act"><h3>明確教授好奇心及自主學習</h3><p>在科學課堂內建立提問常規，以及計劃、監察和反思的習慣。</p></div></div>
+            <div class="rec seq" data-k="5"><div class="n">5</div>
+        <div class="ev">在控制認知激發及科學傾向後，協作推理呈<b>負關聯（−.13）</b></div>
+        <div class="act"><h3>提升協作的質素，而非數量</h3><p>有結構、有問責、具認知挑戰的小組活動。這是有待驗證的假設，並非有害的證明。</p>
+          <a class="xlink" href="../science-factors/collaboration.html" target="_top">協作悖論的四個解釋 →</a>
+        </div>
+      </div>
+
+    <div class="footer"><span class="step">概覽</span><span class="sep">›</span><span class="step">研究設計</span><span class="sep">›</span><span class="step">RQ1 結構</span><span class="sep">›</span><span class="step">RQ2 關聯</span><span class="sep">›</span><span class="step on">RQ3 行動</span><span class="sep">›</span><span class="step">總結</span><span class="pageno">5 / 6</span></div>
+  </section>
+
+  <!-- ================= 第 6 頁 · 總結 =================
+       講者備註（不會在投影片上顯示）：
+       · 四個維度於 500 次自助抽樣中有 98.4% 重現；核心一致性 0.96–0.99；ARI 中位數 0.87。
+       · 16 個面向共同解釋 18% 的科學表現變異量（R² = .178 [.157, .198]）。
+       · 橋接面向：教師支援（維度 2 佔 54% / 維度 3 佔 46%）；科學實踐（維度 3 佔 61% / 維度 4 佔 37%）。
+       · 另一 Walktrap 分割：TEFI 較低，ARI = .24。
+       · 局限：橫斷面設計；自陳指標；主模型未調整 ESCS（調整後結果呈現相同的核心模式）；負向連線屬條件性效應，可能反映統計抑制。
+       · 中央陳述是概念性詮釋，並非第五個 EGA 維度或已量度的因素。
+  -->
+  <section class="slide s6">
+    <h2 class="s6-title">學習自主性在實踐中展現——而非獨力施展</h2>
+    <div class="s6-sub">學習自主性相關學習生態系統中四個互相關聯的維度</div>
+
+    <div class="eco" role="img" aria-label="概念圖：四個互相關聯的維度環繞「行動中的學習自主性」這一理念。教師支援是學校情境調節資源與學習機會設計之間的潛在橋接；參與科學實踐是學習機會設計與科學傾向與能力之間的潛在橋接。">
+
+      <div class="dc d1" style="grid-area:1/1;">
+        <h3>1 · 學習驅動力<span class="en">Drive to Learn</span></h3>
+        <div class="vl"><div>好奇心 · 堅毅</div><div>解難樂趣 · 目標設定</div></div>
+      </div>
+
+      <div class="cn h" style="grid-area:1/2;"></div>
+
+      <div class="dc d2" style="grid-area:1/3;">
+        <h3>2 · 學校情境調節資源<span class="en">School-Situated Regulatory Resources</span></h3>
+        <div class="vl"><div>自我調節 · 認知適應力</div><div>成長心態 · 歸屬感 · 重視學校</div></div>
+      </div>
+
+      <div class="cn v" style="grid-area:2/1;--x:66%;"></div>
+
+      <div class="cn v b23" style="grid-area:2/3;--x:26%;">
+        <div class="bl"><small>潛在橋接</small><b>教師支援</b></div>
+      </div>
+
+      <div class="dc d4" style="grid-area:3/1;">
+        <h3>4 · 科學傾向與能力<span class="en">Science Dispositions and Competencies</span></h3>
+        <div class="vl"><div>認識論信念 · 科學自我效能感</div><div>科學學習樂趣 · 科學成就</div></div>
+      </div>
+
+      <div class="cn h b34" style="grid-area:3/2;--y:64%;">
+        <div class="bl wide"><small>潛在橋接</small><b>參與科學實踐</b></div>
+      </div>
+
+      <div class="dc d3" style="grid-area:3/3;">
+        <span class="entry">教學切入點</span>
+        <h3>3 · 學習機會設計<span class="en">Learning Opportunity Design</span></h3>
+        <div class="vl"><div>認知激發</div><div>協作科學推理</div></div>
+      </div>
+
+      <div class="core">
+        <div class="k">行動中的<br>學習自主性</div>
+        <div class="rule"></div>
+        <div class="t">學生在學習環境中<br>有目的地行動，<br>並參與塑造這個環境</div>
+      </div>
+    </div>
+    <div class="s6-cap">基於 EGA 的概念摘要；僅顯示選定的連結，不表示因果方向。</div>
+
+    <div class="s6-banner">
+      <div class="hl">不止要求學生更有動機——<br><em>更要設計讓學生發揮學習自主性的機會</em>。</div>
+      <div class="acts"><span class="lab">實踐啟示</span>認知挑戰 <span class="d">·</span> 有意義的選擇 <span class="d">·</span> 回應式支援</div>
+    </div>
+
+    <div class="s6-foot">橫斷面關聯，並非因果效應。潛在橋接反映變項在各自助抽樣樣本中社群歸屬的變動。</div>
+
+    <div class="footer"><span class="step">概覽</span><span class="sep">›</span><span class="step">研究設計</span><span class="sep">›</span><span class="step">RQ1 結構</span><span class="sep">›</span><span class="step">RQ2 關聯</span><span class="sep">›</span><span class="step">RQ3 行動</span><span class="sep">›</span><span class="step on">總結</span><span class="pageno">6 / 6</span></div>
+  </section>
+
+</div>
+</div>
+
+<div class="controls">
+  <a class="back" href="index.html" target="_top">↩ 專題頁</a>
+
+  <button id="prev">‹ 上一頁</button>
+  <div class="dots" id="dots"></div>
+  <span id="status"></span>
+  <button id="next">下一頁 ›</button>
+  <button id="replay" class="small" title="重播動畫（R）">↻ 重播</button>
+  <button id="pause" class="small" title="暫停／繼續（P）">⏸ 暫停</button>
+  <label class="speedbox">速度 <select id="speed"></select></label>
+</div>
+<div class="hint">→ / 空白鍵：下一頁 · ←：上一頁 · R 重播 · P 暫停／繼續 · [ ] 減速／加速 · F 全螢幕 · 點擊圖表放大 · 第 3 頁：點擊維度或按 1–4，按 Esc 關閉</div>
+
+<div id="lightbox"><img alt="放大的圖表"></div>
+
+<script>
+  const EMBED = window.self !== window.top;
+  if (EMBED) document.body.classList.add('embedded');
+
+
+  /* 動畫速度：SPEED 為整體倍數（1 = 正常）；亦可用「速度」選單、[ ] 鍵或網址參數 ?speed=1.5 調整 */
+  let SPEED = 1;
+  const TIMING = { start:500, overview:500, facets:160, dims:160, tiers:1000, recs:1000, fade:450 };
+  const SPEED_STEPS = [0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3];
+
+  const urlSpeed = parseFloat(new URLSearchParams(location.search).get('speed'));
+  if (urlSpeed > 0) SPEED = urlSpeed;
+
+  const slides = [...document.querySelectorAll('.slide')];
+  const stage = document.getElementById('stage');
+  const viewport = document.getElementById('viewport');
+  const dotsBox = document.getElementById('dots');
+  const statusEl = document.getElementById('status');
+  const btnPrev = document.getElementById('prev');
+  const btnNext = document.getElementById('next');
+  const btnReplay = document.getElementById('replay');
+  const btnPause = document.getElementById('pause');
+  const sel = document.getElementById('speed');
+  const lb = document.getElementById('lightbox');
+  const defLayer = document.getElementById('defLayer');
+  let i = 0, k = 0, timer = null, paused = false, defOpen = 0;
+
+  /* ---- 將 1280x720 畫布縮放並置中於視窗 ---- */
+  function fit(){
+    const reserve = document.fullscreenElement ? 70 : (EMBED ? 64 : 90);
+    /*const reserve = document.fullscreenElement ? 70 : 90;*/
+    const s = Math.max(0.1, Math.min((window.innerWidth - 32) / 1280, (window.innerHeight - reserve) / 720));
+    stage.style.transform = `scale(${s})`;
+    viewport.style.width = (1280 * s) + 'px';
+    viewport.style.height = (720 * s) + 'px';
+  }
+  fit();                                                   // 立即執行，避免畫面錯位
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);                    // 字型載入後再校正一次
+  document.addEventListener('fullscreenchange', fit);
+
+  const maxK = s => Math.max(0, ...[...s.querySelectorAll('.seq')].map(e => +e.dataset.k));
+
+  function render(s, kk, instant){
+    const max = maxK(s), focus = s.hasAttribute('data-focus');
+    if (instant) s.classList.add('instant');
+    s.querySelectorAll('.seq').forEach(e => {
+      const b = +e.dataset.k;
+      e.classList.toggle('shown', b <= kk);
+      e.classList.toggle('current', focus && b === kk && kk < max);
+      e.classList.toggle('past', focus && b < kk && kk < max);
+    });
+    s.querySelectorAll('[data-hl]').forEach(e => e.classList.toggle('on', +e.dataset.hl === kk && kk < max));
+    s.querySelectorAll('.dim').forEach(d => d.classList.toggle('lit', !!d.querySelector('.seq.shown')));
+    s.querySelectorAll('[data-count]').forEach(c =>
+      c.textContent = `${s.querySelectorAll('.chip.seq.shown').length} / 17`);
+    if (instant) { void s.offsetWidth; requestAnimationFrame(() => requestAnimationFrame(() => s.classList.remove('instant'))); }
+  }
+
+  function stopTimer(){ clearTimeout(timer); timer = null; }
+  function schedule(){
+    stopTimer();
+    const s = slides[i], max = maxK(s);
+    if (!max || k >= max || paused) { ui(); return; }
+    const nextEl = s.querySelector(`.seq[data-k="${k + 1}"]`);
+    const wait = parseFloat(nextEl?.dataset.wait || 1);
+    const ms = (k === 0 ? TIMING.start : TIMING[s.dataset.anim] * wait) / SPEED;
+    timer = setTimeout(() => { k++; render(s, k, false); schedule(); }, ms);
+    ui();
+  }
+
+  /* ---- 第 3 頁：維度定義面板 ---- */
+  function openDef(n){
+    const s = slides[i];
+    if (!defLayer || !s.contains(defLayer)) return;
+    const max = maxK(s);
+    if (k < max) { stopTimer(); k = max; render(s, k, true); ui(); }
+    defLayer.querySelectorAll('.def').forEach(d => d.classList.toggle('on', +d.dataset.dim === n));
+    defLayer.classList.add('on');
+    defLayer.setAttribute('aria-hidden', 'false');
+    defOpen = n;
+  }
+  function closeDef(){
+    if (!defLayer || !defOpen) return;
+    defLayer.classList.remove('on');
+    defLayer.setAttribute('aria-hidden', 'true');
+    defOpen = 0;
+  }
+  document.querySelectorAll('.dim[data-dim]').forEach(card => {
+    card.addEventListener('click', () => openDef(+card.dataset.dim));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); openDef(+card.dataset.dim); }
+    });
+  });
+  document.addEventListener('click', e => {
+    if (defOpen && !e.target.closest('.dim[data-dim]')) closeDef();
+  });
+
+  function show(n, mode = 'play'){
+    stopTimer();
+    closeDef();
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, j) => s.classList.toggle('active', j === i));
+    const s = slides[i];
+    k = (mode === 'end') ? maxK(s) : 0;
+    paused = false;
+    render(s, k, true);
+    schedule();
+  }
+  function togglePause(){
+    const max = maxK(slides[i]);
+    if (!max || k >= max) return;
+    paused = !paused;
+    if (paused) stopTimer(); else schedule();
+    ui();
+  }
+  function setSpeed(v){
+    SPEED = v;
+    stage.style.setProperty('--dur', (TIMING.fade / SPEED) + 'ms');
+    sel.value = String(v);
+    if (!paused) schedule();
+  }
+
+  slides.forEach((_, j) => {
+    const d = document.createElement('div');
+    d.className = 'dot'; d.title = '第 ' + (j + 1) + ' 頁'; d.onclick = () => show(j);
+    dotsBox.appendChild(d);
+  });
+  const dots = [...document.querySelectorAll('.dot')];
+
+  if (!SPEED_STEPS.includes(SPEED)) { SPEED_STEPS.push(SPEED); SPEED_STEPS.sort((a, b) => a - b); }
+  SPEED_STEPS.forEach(v => { const o = document.createElement('option'); o.value = String(v); o.textContent = v + '×'; sel.appendChild(o); });
+  sel.onchange = () => setSpeed(parseFloat(sel.value));
+
+  function ui(){
+    const max = maxK(slides[i]);
+    dots.forEach((d, j) => d.classList.toggle('on', j === i));
+    btnPrev.disabled = i === 0;
+    btnNext.disabled = i === slides.length - 1;
+    const running = max && k < max;
+    btnPause.disabled = !running;
+    btnReplay.disabled = !max;
+    btnPause.textContent = paused ? '▶ 繼續' : '⏸ 暫停';
+    statusEl.textContent = !max ? '' : (k >= max ? '✓ 完成' : (paused ? `⏸ 已暫停 ${k} / ${max}` : `▶ ${k} / ${max}`));
+  }
+
+  btnPrev.onclick = () => show(i - 1, 'end');
+  btnNext.onclick = () => show(i + 1);
+  btnReplay.onclick = () => show(i);
+  btnPause.onclick = togglePause;
+
+  document.querySelectorAll('[data-goto]').forEach(el =>
+    el.addEventListener('click', () => show(+el.dataset.goto)));
+
+  document.addEventListener('keydown', e => {
+    if (e.target === sel) return;
+    if (lb.classList.contains('on')) { if (e.key === 'Escape' || e.key === ' ') { e.preventDefault(); lb.classList.remove('on'); } return; }
+    if (defOpen && (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); closeDef(); return; }
+    if (/^[1-4]$/.test(e.key) && defLayer && slides[i].contains(defLayer)) { e.preventDefault(); openDef(+e.key); return; }
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); show(i + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(i - 1, 'end'); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'r' || e.key === 'R') show(i);
+    else if (e.key === 'p' || e.key === 'P') togglePause();
+    else if (e.key === '[' || e.key === ']') {
+      const idx = SPEED_STEPS.indexOf(SPEED) + (e.key === ']' ? 1 : -1);
+      if (idx >= 0 && idx < SPEED_STEPS.length) setSpeed(SPEED_STEPS[idx]);
+    }
+    else if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+      else document.exitFullscreen?.();
+    }
+  });
+
+  document.querySelectorAll('.fig').forEach(f => {
+    const img = f.querySelector('img');
+    img.addEventListener('error', () => f.classList.add('err'));
+    if (img.complete && img.naturalWidth === 0) f.classList.add('err');
+    f.addEventListener('click', () => {
+      if (f.classList.contains('err')) return;
+      lb.querySelector('img').src = img.src; lb.classList.add('on');
+    });
+  });
+  lb.addEventListener('click', () => lb.classList.remove('on'));
+
+  fit(); setSpeed(SPEED); show(0);
+</script>
+</body>
+</html>
+<!-- END OF FILE · 檔案結尾 -->

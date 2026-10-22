@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>香港、新加坡與 OECD｜科學表現因素系列</title>
+<link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="sf.css">
+<script src="sf.js" defer></script>
+</head>
+<body data-page="comparison.html" id="top">
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <div class="inner">
+    <span class="eyebrow">02 · 港星比較</span>
+    <h1>香港、新加坡與 OECD：<br>三個指標的比較</h1>
+    <p class="lead">兩個東亞體系的學生同樣重視證據，但在「喜歡科學」和「相信自己做得到」兩方面，呈現截然不同的圖像。</p>
+  </div>
+</section>
+
+<main class="content">
+  <h2>互動圖表</h2>
+  <p>圖中的 0 代表 OECD 平均；向右（綠色區）高於平均，向左（紅色區）低於平均。</p>
+  <div class="chips">
+    <button class="chip active" data-key="all">全部指標</button>
+    <button class="chip" data-key="STBELSCIE">科學本質信念</button>
+    <button class="chip" data-key="JOYSCIE">科學學習樂趣</button>
+    <button class="chip" data-key="EFFSCIE">科學自我效能感</button>
+  </div>
+  <div class="legend"><span><i style="background:var(--green)"></i>香港</span><span><i style="background:var(--gold)"></i>新加坡</span><span><i style="background:var(--ink)"></i>OECD 平均（0）</span></div>
+  <div id="idx-chart" aria-live="polite"></div>
+  <div class="chart-note" id="idx-note"></div>
+  <!-- 待核實：所有指數數值須按 OECD Volume I 附錄表格核實 -->
+
+  <h3>數據一覽</h3>
+  <table>
+    <tr><th>指數</th><th class="num">OECD 平均</th><th class="num">香港</th><th class="num">新加坡</th></tr>
+    <tr><td>科學本質信念（STBELSCIE）</td><td class="num">0.00</td><td class="num">0.02</td><td class="num">0.20</td></tr>
+    <tr><td>科學學習樂趣（JOYSCIE）</td><td class="num">0.00</td><td class="num neg">−0.32</td><td class="num neg">−0.11</td></tr>
+    <tr><td>科學自我效能感（EFFSCIE）</td><td class="num">0.00</td><td class="num neg">−0.19</td><td class="num">0.31</td></tr>
+  </table>
+
+  <h2>三個觀察</h2>
+  <h3>① 重視證據：香港與 OECD 相若</h3>
+  <p>香港的科學本質信念指數（0.02）與 OECD 平均幾乎一樣，新加坡（0.20）則較高。值得注意的是，兩地均有<strong>逾九成學生同意</strong>資訊應經其他可靠來源查證。香港學生並非不重視證據；分別在於如何看待「常識」，詳見<a href="profiles.html">下一頁</a>。</p>
+
+  <h3>② 成績與樂趣的落差</h3>
+  <p>香港（科學 496 分）與新加坡（560 分）<!-- 待核實：新加坡 560 分 -->的學生，科學學習樂趣都低於 OECD 平均。高成績不會自動轉化為對科學的興趣。OECD 指出，<strong>認知激發</strong>的教學（引導學生深入思考、連繫概念、評估假設）與更高的科學學習樂趣相關。</p>
+
+  <h3>③ 自信的差距</h3>
+  <p>新加坡學生對完成科學任務較有信心（0.31），香港學生的自評則較保守（−0.19）。</p>
+  <div class="callout warn">
+    <div class="callout-title">研究團隊的詮釋</div>
+    <p>香港學生自我效能感偏低，可能與謙遜的自評文化、學業壓力等因素有關，但這些推測仍有待研究驗證。自我效能感是學生的<strong>自評</strong>，並不等同實際能力。</p>
+  </div>
+</main>
+
+<div id="pager"></div>
+<div id="site-footer"></div>
+</body>
+</html>

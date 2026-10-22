@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>科學認知取向｜科學表現因素系列</title>
+<link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="sf.css">
+<script src="sf.js" defer></script>
+</head>
+<body data-page="profiles.html" id="top">
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <div class="inner">
+    <span class="eyebrow">03 · 查證與常識</span>
+    <h1>查證，還是靠常識？<br>學生的科學認知取向</h1>
+    <p class="lead">當科學證據與直覺「常識」出現衝突，學生會怎樣取捨？PISA 2025 以兩條問卷題目，把學生分成不同的取向。</p>
+  </div>
+</section>
+
+<main class="content">
+  <h2>三個層次的概念</h2>
+  <p>「認知信念」、「科學本質信念」與「科學認知取向」三個名詞關係密切，但屬於不同的分析層次：</p>
+  <div class="hierarchy">
+    <div class="lv"><b>認知信念（Epistemic Beliefs）</b><small>理論範疇：學生對「知識是甚麼」及「怎樣知道某事為真」的基本信念</small></div>
+    <div class="down">▼</div>
+    <div class="lv"><b>科學本質信念指數（STBELSCIE）</b><small>連續指數：由多條題目合成的標準化分數（OECD 平均 = 0）</small></div>
+    <div class="down">▼</div>
+    <div class="lv"><b>科學認知取向（Profiles）</b><small>類別分組：只取「查證」與「常識」兩條題目，把學生分成不同類別</small></div>
+  </div>
+
+  <h2>小測：你屬於哪一種取向？</h2>
+  <p>試回答 PISA 用來劃分取向的兩條題目（意譯）：</p>
+  <div class="quiz" id="profile-quiz">
+    <div class="q"><p>① 來自單一來源的資訊，應先經其他可靠來源查證，才可接受。</p>
+      <button class="opt" data-q="check" data-v="1">同意</button><button class="opt" data-q="check" data-v="0">不同意</button></div>
+    <div class="q"><p>② 我們應多依賴常識，少依賴科學研究。</p>
+      <button class="opt" data-q="cs" data-v="1">同意</button><button class="opt" data-q="cs" data-v="0">不同意</button></div>
+  </div>
+
+  <div class="matrix" aria-label="科學認知取向矩陣">
+    <div></div><div class="head">不同意<br>依賴常識</div><div class="head">同意<br>依賴常識</div>
+    <div class="head">同意<br>查證</div>
+    <div class="cell" data-key="10"><b>強科學取向</b><span>OECD 約 46%</span></div>
+    <div class="cell" data-key="11"><b>非限制取向</b><span>OECD 約 37%</span></div>
+    <div class="head">不同意<br>查證</div>
+    <div class="cell" data-key="00"><b>信任科學但不查證</b><span>OECD 約 11%</span></div>
+    <div class="cell" data-key="01"><b>不查證且依賴常識</b><span>OECD 約 5%</span></div>
+  </div>
+  <!-- 待核實：第三、四類的正式中英文名稱；434 分應屬哪一類 -->
+  <div class="result" id="quiz-result" hidden></div>
+
+  <h2>OECD 的整體分布</h2>
+  <div class="stack" role="img" aria-label="OECD 平均：強科學取向 46.4%，非限制取向 37.5%，信任科學但不查證 10.9%，不查證且依賴常識約 5%">
+    <span style="width:46.4%;background:var(--green)">強科學 46.4%</span>
+    <span style="width:37.5%;background:var(--teal)">非限制 37.5%</span>
+    <span style="width:10.9%;background:var(--gold)">11%</span>
+    <span style="width:5.2%;background:#9aa5ab">5%</span>
+  </div>
+  <div class="stats">
+    <div class="stat"><b>532</b><span>強科學取向學生的平均科學成績（OECD）</span></div>
+    <div class="stat"><b>466</b><span>非限制取向學生的平均科學成績（OECD）</span></div>
+  </div>
+
+  <h2>香港的情況</h2>
+  <p>香港、新加坡、日本、韓國、澳門等東亞體系均有<strong>逾九成學生</strong>同意應查證資訊來源。然而，香港與日本、愛沙尼亞、芬蘭、瑞士等體系一樣，屬於「非限制取向」比例相對較高的一群（介乎 39% 至 47%）。<!-- 待核實：香港的確實百分比 --></p>
+
+  <h3>如何理解「非限制取向」？</h3>
+  <details class="acc"><summary>這類學生在高表現體系中成績仍然不俗</summary>
+    <div class="body"><p>在香港、日本等體系，非限制取向的學生仍然掌握核心科學概念及查證習慣。OECD 指出，這種區分<strong>並不單純反映能力差異</strong>。</p></div></details>
+  <details class="acc"><summary>「常識」在中文語境中的含義（研究團隊的詮釋）</summary>
+    <div class="body"><p>中文的「常識」常指基礎通識或實用知識，而不是「不科學的猜測」。學生同意常識有用，可能是肯定實用的推理，而非否定科學。這是研究團隊的詮釋，並非 OECD 的結論。</p></div></details>
+  <details class="acc"><summary>認知上的務實</summary>
+    <div class="body"><p>學生可以在解決科學問題時嚴謹地運用證據，同時在日常生活的決定中，認為常識仍有價值。</p></div></details>
+  <details class="acc"><summary>真正需要關注的是「不查證」的學生</summary>
+    <div class="body"><p>在資訊氾濫的 AI 時代，最大的風險是<strong>不查證來源</strong>。即使學生信任科學，若不懂得查證，仍容易被假冒科學的資訊誤導。</p></div></details>
+</main>
+
+<div id="pager"></div>
+<div id="site-footer"></div>
+</body>
+</html>

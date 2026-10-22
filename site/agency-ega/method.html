@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>如何以 EGA 分析 PISA 數據｜學習能動性研究</title>
+<meta name="description" content="以探索性圖分析（EGA）分析 PISA 2025 香港數據：可能值、Fay-BRR 重複權重、EBICglasso、Leiden 社群偵測、學校群集自助抽樣，並附完整 R 代碼。">
+<link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="ega.css">
+<script src="ega.js" defer></script>
+<script src="code-viewer.js" defer></script>
+</head>
+<body data-page="method.html" id="top">
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <div class="inner">
+    <span class="eyebrow">學習能動性研究 B · 研究方法</span>
+    <h1>如何以 EGA 分析 PISA 數據</h1>
+    <p class="lead">PISA 數據有可能值、抽樣權重及學校群集等特性。本頁逐步說明研究團隊如何在尊重這些特性的前提下，以探索性圖分析（EGA）找出學習能動性的結構，並附上完整、可重現的 R 代碼。</p>
+    <div class="stats on-hero">
+      <div class="stat"><b>17</b><span>個網絡節點</span></div>
+      <div class="stat"><b>810</b><span>個加權相關矩陣（10 PV × 81 權重）</span></div>
+      <div class="stat"><b>9</b><span>個敏感度組合</span></div>
+      <div class="stat"><b>500</b><span>次學校群集自助抽樣</span></div>
+    </div>
+  </div>
+</section>
+
+<main class="content">
+  <div class="callout">
+    <div class="callout-title">本頁導覽</div>
+    <p><a href="#spec">1 研究設計一覽</a> · <a href="#nodes">2 十七個節點</a> · <a href="#pisa">3 PISA 數據的特性</a> · <a href="#steps">4 十個分析步驟</a> · <a href="#outputs">5 輸出檔案</a> · <a href="#figs">6 如何閱讀圖表</a> · <a href="#code">7 完整 R 代碼</a> · <a href="#repro">8 如何重現</a> · <a href="#limits">9 局限</a></p>
+  </div>
+
+  <!-- ================= 1 ================= -->
+  <h2 id="spec">1. 研究設計一覽</h2>
+  <p>EGA 把每個面向視為網絡中的節點，以<strong>偏相關</strong>作連線，再以社群偵測演算法找出緊密相連的群組，即「維度」。與傳統因素分析不同，它可把科學表現直接作為節點放入網絡，並以自助抽樣檢驗結構的穩定性。</p>
+  <table>
+    <tr><th>項目</th><th>設定</th></tr>
+    <tr><td>數據</td><td>PISA 2025 香港學生數據檔（學生問卷及科學評估）</td></tr>
+    <tr><td>分析樣本</td><td>5,942 名 15 歲學生；完整個案分析，保留加權樣本的 92.1%</td></tr>
+    <tr><td>節點</td><td>17 個：14 個 OECD 問卷指數（WLE）＋ 2 個題目合成分數 ＋ 科學表現（10 個可能值）</td></tr>
+    <tr><td>抽樣設計</td><td>最終學生權重 <code>W_FSTUWT</code>；80 組 Fay-BRR 重複權重 <code>W_FSTURWT1–80</code>（k = 0.5）；學校 <code>CNTSCHID</code>；分層 <code>STRATUM</code></td></tr>
+    <tr><td>估計</td><td>10 個可能值 × 81 組權重 = 810 個加權相關矩陣；於 Fisher-z 尺度合併（Fay-BRR ＋ Rubin 規則）</td></tr>
+    <tr><td>協變項</td><td>主模型不作調整；敏感度分析調整社經文化地位（ESCS）</td></tr>
+    <tr><td>網絡模型</td><td>EBICglasso；EBIC 樣本量採用名義樣本量</td></tr>
+    <tr><td>社群偵測</td><td>Leiden（模組度目標函數），隨機種子 42；單維檢查採用 Louvain</td></tr>
+    <tr><td>敏感度分析</td><td>3 種 EBIC 樣本量（名義／Kish／設計效應）× 3 種演算法（Walktrap／Louvain／Leiden）</td></tr>
+    <tr><td>穩定性</td><td>500 次分層內學校群集自助抽樣（種子 42）；節點穩定性閾值 0.70</td></tr>
+    <tr><td>統計推論</td><td>95% 置信區間；Benjamini–Hochberg 錯誤發現率（涵蓋全部 136 對節點），q &lt; .05</td></tr>
+    <tr><td>軟件</td><td>R ≥ 4.1；EGAnet、igraph、haven、dplyr、tidyr、purrr、tibble、ggplot2 <span class="todo">待補：版本</span></td></tr>
+  </table>
+
+  <!-- ================= 2 ================= -->
+  <h2 id="nodes">2. 十七個節點</h2>
+  <p>16 個學習能動性及學習情境面向中，14 個直接採用 OECD 以 IRT 建構的問卷指數；成長心態及重視學校則由研究團隊以題目平均分建構。</p>
+  <table>
+    <tr><th>節點</th><th>代碼</th><th>類型</th><th>維度</th></tr>
+    <tr><td>好奇心</td><td><code>CURIO</code></td><td>OECD 指數</td><td><i class="dd d1"></i>1 學習驅動力</td></tr>
+    <tr><td>堅毅</td><td><code>PERSEV</code></td><td>OECD 指數</td><td><i class="dd d1"></i>1</td></tr>
+    <tr><td>解難樂趣</td><td><code>ENPROBS</code></td><td>OECD 指數</td><td><i class="dd d1"></i>1</td></tr>
+    <tr><td>目標設定</td><td><code>GOALSET</code></td><td>OECD 指數</td><td><i class="dd d1"></i>1</td></tr>
+    <tr><td>歸屬感</td><td><code>BELONG</code></td><td>OECD 指數</td><td><i class="dd d2"></i>2 學校情境調節資源</td></tr>
+    <tr><td>自我調節</td><td><code>SELFREG</code></td><td>OECD 指數</td><td><i class="dd d2"></i>2</td></tr>
+    <tr><td>認知適應力</td><td><code>COGABIL</code></td><td>OECD 指數</td><td><i class="dd d2"></i>2</td></tr>
+    <tr><td>成長心態</td><td><code>GROWTHMND</code></td><td>合成分數：ST420Q01DA、ST420Q02DA（均反向計分；兩題須齊全）</td><td><i class="dd d2"></i>2</td></tr>
+    <tr><td>重視學校</td><td><code>VALSCHL</code></td><td>合成分數：ST324Q10JA、ST324Q11JA（反向）、ST324Q13JA（至少答 2 題）</td><td><i class="dd d2"></i>2</td></tr>
+    <tr><td>教師支援</td><td><code>TEACHSUP</code></td><td>OECD 指數</td><td><i class="dd br"></i>橋接：維度 2 / 3</td></tr>
+    <tr><td>認知激發（科學）</td><td><code>COGACSC</code></td><td>OECD 指數</td><td><i class="dd d3"></i>3 學習機會設計</td></tr>
+    <tr><td>協作科學推理</td><td><code>SCIECOLLR</code></td><td>OECD 指數</td><td><i class="dd d3"></i>3</td></tr>
+    <tr><td>參與科學實踐</td><td><code>ENGSCIPR</code></td><td>OECD 指數</td><td><i class="dd br"></i>橋接：維度 3 / 4</td></tr>
+    <tr><td>科學本質信念</td><td><code>STBELSCIE</code></td><td>OECD 指數</td><td><i class="dd d4"></i>4 科學傾向與能力</td></tr>
+    <tr><td>科學學習樂趣</td><td><code>JOYSCIE</code></td><td>OECD 指數</td><td><i class="dd d4"></i>4</td></tr>
+    <tr><td>科學自我效能感</td><td><code>EFFSCIE</code></td><td>OECD 指數</td><td><i class="dd d4"></i>4</td></tr>
+    <tr class="hl"><td><b>科學表現</b></td><td><code>PV1SCIE–PV10SCIE</code></td><td>10 個可能值</td><td><i class="dd d4"></i>4</td></tr>
+  </table>
+  <p class="table-note">合成分數的題目方向須按 PISA 2025 codebook 的題目措辭核實 <span class="todo">待確認</span>。</p>
+
+  <!-- ================= 3 ================= -->
+  <h2 id="pisa">3. PISA 數據的特性與處理方法</h2>
+  <div class="cards">
+    <div class="card"><span class="no">1</span><h4>可能值（PV）</h4><p>每名學生有 10 個科學可能值。所有估計須對 10 個可能值分別進行，再以 Rubin 規則合併，不可只用 PV1 或先取平均。</p></div>
+    <div class="card"><span class="no">2</span><h4>權重與重複權重</h4><p>以最終學生權重估計香港學生整體；以 80 組 Fay-BRR 重複權重估計抽樣誤差。</p></div>
+    <div class="card"><span class="no">3</span><h4>學校群集</h4><p>學生嵌套於學校之中。穩定性檢驗以學校為重抽單位，並在各分層內進行，以保留抽樣設計。</p></div>
+    <div class="card"><span class="no">4</span><h4>缺失值</h4><p>依變項元數據辨識缺失代碼；|WLE| &gt; 15 亦視作缺失。所有節點及可能值齊全的學生構成單一分析樣本（完整個案）。</p></div>
+  </div>
+  <h3>三條核心公式</h3>
+  <div class="formula">
+    Fay-BRR 抽樣變異：V<sub>m</sub> = 1 / [G(1 − k)<sup>2</sup>] · Σ<sub>g</sub> (θ̂<sub>mg</sub> − θ̂<sub>m</sub>)<sup>2</sup>
+    <small>G = 80 組重複權重，k = 0.5，即把平方差總和除以 20；θ̂ 為 Fisher-z 尺度上的相關或偏相關。</small>
+  </div>
+  <div class="formula">
+    Rubin 規則：θ̄ = (1/M) Σ<sub>m</sub> θ̂<sub>m</sub>　　T = Ū + (1 + 1/M) · B
+    <small>M = 10 個可能值；Ū 為平均抽樣變異；B 為可能值之間的變異；T 為總變異。</small>
+  </div>
+  <div class="formula">
+    偏相關與可預測度：ρ<sub>ij</sub> = − Ω<sub>ij</sub> / √(Ω<sub>ii</sub> Ω<sub>jj</sub>)　　R<sup>2</sup><sub>i</sub> = 1 − 1 / Ω<sub>ii</sub>
+    <small>Ω 為相關矩陣的逆矩陣（精確度矩陣）。R² 表示某節點的變異量有多少可由其餘所有節點解釋。</small>
+  </div>
+
+  <!-- ================= 4 ================= -->
+  <h2 id="steps">4. 十個分析步驟</h2>
+  <p>每一步均可點擊「查看代碼」，直接展開下方 R 代碼的對應章節。</p>
+  <div data-stepper>
+    <div class="stepper-nav" role="tablist">
+      <button class="st-btn" role="tab"><span class="n">1</span>載入與篩選</button>
+      <button class="st-btn" role="tab"><span class="n">2</span>建立節點</button>
+      <button class="st-btn" role="tab"><span class="n">3</span>分析樣本</button>
+      <button class="st-btn" role="tab"><span class="n">4</span>冗餘檢查</button>
+      <button class="st-btn" role="tab"><span class="n">5</span>設計為本估計</button>
+      <button class="st-btn" role="tab"><span class="n">6</span>EBIC 樣本量</button>
+      <button class="st-btn" role="tab"><span class="n">7</span>主要 EGA</button>
+      <button class="st-btn" role="tab"><span class="n">8</span>敏感度</button>
+      <button class="st-btn" role="tab"><span class="n">9</span>穩定性</button>
+      <button class="st-btn" role="tab"><span class="n">10</span>推論與圖表</button>
+    </div>
+
+    <div class="st-panel" role="tabpanel">
+      <h3>步驟 1 · 載入數據並篩選</h3>
+      <p>讀取學生數據檔、國家對照表及變項元數據（若元數據檔不存在，則從數據檔的屬性自動建立），然後只保留香港學生。程式會先檢查最終權重、80 組重複權重、學校及分層變項是否齊全；缺少任何一項便停止執行，避免得出無效的抽樣推論。</p>
+      <div class="st-meta">
+        <div><b>關鍵設定</b><code>FOCUS_COUNTRIES</code>、<code>DEMO_FILTERS</code></div>
+        <div><b>產出</b>已篩選的學生數據</div>
+        <div><b>注意</b>若同時分析多個地區，須改用 senate weight 及各地區獨立的分層</div>
+      </div>
+      <button class="btn ghost cv-jump" data-code="1">‹/› 查看代碼 §1</button>
+      <button class="btn ghost cv-jump" data-code="2">‹/› 查看代碼 §2</button>
+    </div>
+
+    <div class="st-panel" role="tabpanel" hidden>
+      <h3>步驟 2 · 建立 17 個節點</h3>
+      <p>14 個 OECD 指數先經清理：移除元數據標示的缺失代碼（≥ 95）及 PISA 缺失值代碼，並把 |WLE| &gt; 15 的數值視作缺失。成長心態及重視學校按題目反向計分後取平均，並以加權 Cronbach's α 報告信度。科學表現則保留 10 個可能值。</p>
+      <div class="st-meta">
+        <div><b>關鍵設定</b><code>SELECTED_INDICES</code>、<code>EXTRA_NODES</code>、<code>WLE_ABS_MAX</code></div>
+        <div><b>產出</b>節點矩陣及可能值矩陣</div>
+        <div><b>彈性</b><code>NET_SOURCE = "construct"</code> 可改用題目層面的自訂構念</div>
+      </div>
+      <button class="btn ghost cv-jump" data-code="3">‹/› 查看代碼 §3</button>
+      <button class="btn ghost cv-jump" data-code="METADATA HELPERS">‹/› 數據清理函數</button>
+    </div>
+
+    <div class="st-panel" role="tabpanel" hidden>
+      <h3>步驟 3 · 分析樣本與流失診斷</h3>
+      <p>所有節點、協變項及 10 個可能值齊全且權重大於 0 的學生，構成<strong>單一</strong>分析樣本，所有後續估計均使用同一樣本。程式同時輸出兩個診斷表：各變項的加權缺失比例，以及保留與排除學生在加權比例、平均科學成績及平均 ESCS 上的比較。</p>
+      <div class="st-meta">
+        <div><b>結果</b>5,942 名學生，佔加權樣本 92.1%</div>
+        <div><b>產出</b><code>Table_attrition_by_variable</code>、<code>Table_retained_vs_excluded</code></div>
+        <div><b>用途</b>判斷完整個案分析是否可能引入偏差</div>
+      </div>
+      <button class="btn ghost cv-jump" data-code="4">‹/› 查看代碼 §4</button>
+    </div>
+
+    <div class="st-panel" role="tabpanel" hidden>
+      <h3>步驟 4 · 冗餘檢查（UVA，可選）</h3>
+      <p>獨特變項分析（UVA）可檢查是否有節點過度相似、重複量度同一概念；科學表現節點受保護，不會被移除。本研究<strong>未啟用</strong>此步驟（<code>NET_USE_UVA = FALSE</code>），16 個面向全部保留。</p>
+      <div class="st-meta">
+        <div><b>關鍵設定</b><code>NET_USE_UVA</code>、<code>NET_UVA_CUTOFF = 0.25</code></div>
+        <div><b>產出</b>保留／移除的節點清單</div>
+        <div><b>建議</b>改用其他指數組合時，宜先啟用作檢查</div>
+      </div>
+      <button class="btn ghost cv-jump" data-code="5">‹/› 查看代碼 §5</button>
+    </div>
+
+    <div class="st-panel" role="tabpanel" hidden>
+      <h3>步驟 5 · 以抽樣設計為本的估計</h3>
+      <p>對每個可能值（10 個）及每組權重（1 組最終權重 ＋ 80 組重複權重），計算一個 17 × 17 加權相關矩陣，共 810 個。若設定了協變項，則以條件相關（Schur 補數）把協變項的影響排除。每個矩陣再求逆矩陣，得出偏相關及各節點的可預測度 R²。相關及偏相關先轉換至 Fisher-z 尺度，再以 Fay-BRR 估計抽樣變異、以 Rubin 規則合併。</p>
+      <div class="st-meta">
+        <div><b>產出</b>合併相關矩陣；偏相關及其標準誤；R² 及置信區間；缺失資訊比例（FMI）</div>
+        <div><b>關鍵設定</b><code>N_REP = 80</code>、<code>FAY_K = 0.5</code>、<code>ADJUST_FOR</code></div>
+        <div><b>主要函數</b><code>wcor()</code>、<code>cond_cor()</code>、<code>pool_brr_rubin()</code></div>
+      </div>
+      <button class="btn ghost cv-jump" data-code="6">‹/› 查看代碼 §6</button>
+      <button class="btn ghost cv-jump" data-code="NETWORK / DESIGN HELPERS">‹/› 抽樣設計函數</button>
+    </div>
+
+    <div class="st-panel" role="tabpanel" hidden>
+      <h3>步驟 6 · EBIC 樣本量與正定修正</h3>
+      <p>EBICglasso 需要一個樣本量。複雜抽樣下的「有效」樣本量小於名義樣本量，因此程式計算三種：名義樣本量（5,942）、Kish 有效樣本量（(Σw)² / Σw²）及設計效應樣本量（名義樣本量 ÷ 各對節點設計效應的中位數）。主分析採用名義樣本量，其餘兩種用於敏感度分析。若合併矩陣的最小特徵值低於 10⁻⁴，則以 <code>nearPD</code> 修正為正定矩陣。</p>
+      <div class="st-meta">
+        <div><b>關鍵設定</b><code>EBIC_N_MODE = "nominal"</code></div>
+        <div><b>產出</b>三種樣本量；修正後的相關矩陣</div>
+        <div><b>意義</b>樣本量越小，EBIC 懲罰越重，網絡越稀疏</div>
+      </div>
+      <button class="btn ghost cv-jump" data-code="7">‹/› 查看代碼 §7</button>
+    </div>
+
+    <div class="st-panel" role="tabpanel" hidden>
+      <h3>步驟 7 · 主要 EGA</h3>
+      <p>以合併相關矩陣執行 EGA：EBICglasso 估計正則化偏相關網絡（微弱連線收縮至零），再以 Leiden 演算法（模組度目標函數，種子 42）偵測社群。程式同時計算網絡負荷（類似因素負荷）及 TEFI（von Neumann 熵擬合指數，數值越低越好），並檢查維度編號是否與標籤設定一致。</p>
+      <div class="st-meta">
+        <div><b>結果</b>4 個維度</div>
+        <div><b>產出</b>維度歸屬、網絡矩陣、網絡負荷、TEFI</div>
+        <div><b>注意</b>改變協變項、演算法或種子後，維度編號可能改變，須重新核對 <code>DIMENSION_LABELS</code></div>
+      </div>
+      <button class="btn ghost cv-jump" data-code="8">‹/› 查看代碼 §8</button>
+    </div>
+
+    <div class="st-panel" role="tabpanel" hidden>
+      <h3>步驟 8 · 敏感度分析</h3>
+      <p>以 3 種 EBIC 樣本量 × 3 種社群偵測演算法（Walktrap、Louvain、Leiden）重複 EGA，比較維度數目、連線數目、與主要解的一致程度（ARI）及 TEFI。</p>
+      <div class="st-meta">
+        <div><b>結果</b>Walktrap 分割與主要解的 ARI ＝ .24</div>
+        <div><b>選擇 Leiden 的理由</b><span class="todo">待補：Walktrap 的 TEFI 較低，須說明仍以 Leiden 為主要解的原因</span></div>
+        <div><b>產出</b><code>Table_sensitivity_n_algorithm</code></div>
+      </div>
+      <button class="btn ghost cv-jump" data-code="9">‹/› 查看代碼 §9</button>
+    </div>
+
+    <div class="st-panel" role="tabpanel" hidden>
+      <h3>步驟 9 · 穩定性：分層內學校群集自助抽樣</h3>
+      <p>重複 500 次：在每個分層內有放回地重抽相同數目的學校，保留被抽中學校的全部學生；每次輪替使用一個可能值（第 b 次用第 ((b − 1) mod 10) + 1 個），以最終權重重新計算相關矩陣並執行 EGA。各次的維度編號以匈牙利演算法與主要解對齊後，再計算穩定性指標。</p>
+      <table>
+        <tr><th>指標</th><th>定義</th><th class="num">結果</th></tr>
+        <tr><td>維度數目重現率</td><td>得出相同維度數目的自助樣本比例</td><td class="num">98.4%</td></tr>
+        <tr><td>ARI 中位數</td><td>每次分割與主要解的一致程度</td><td class="num">0.87</td></tr>
+        <tr><td>核心一致性</td><td>只看穩定節點時，維度被完整重現的比例</td><td class="num">0.96–0.99</td></tr>
+        <tr><td>節點穩定性</td><td>節點被分到原有維度的比例；低於 0.70 界定為橋接面向</td><td class="num">教師支援、科學實踐</td></tr>
+        <tr><td>維度歸屬比例</td><td>橋接面向在各維度的自助樣本佔比</td><td class="num">54/46；61/37</td></tr>
+      </table>
+      <div class="st-meta">
+        <div><b>其他產出</b>共同歸屬矩陣；連線納入比例及自助置信區間；節點強度置信區間</div>
+        <div><b>比較選項</b><code>BOOT_TYPE = "both"</code> 可另行執行 EGAnet 的參數自助抽樣（假設學生互相獨立，不反映抽樣設計）</div>
+        <div><b>主要函數</b><code>align_memberships()</code>、<code>summarise_stability()</code></div>
+      </div>
+      <button class="btn ghost cv-jump" data-code="10">‹/› 查看代碼 §10</button>
+    </div>
+
+    <div class="st-panel" role="tabpanel" hidden>
+      <h3>步驟 10 · 統計推論、表格與圖表</h3>
+      <p>全部 136 對節點均報告：正則化連線權重、合併相關及偏相關（95% 置信區間）、p 值（Fisher-z 尺度的常態近似）及以 Benjamini–Hochberg 方法校正的 q 值。圖 2 的實心圓即 q &lt; .05 的科學表現連線。科學表現的可預測度 R² ＝ .178 [.157, .198]。</p>
+      <div class="st-meta">
+        <div><b>網絡圖</b>|w| ≥ 0.10 的連線以藍／紅顯示；外環＝R²；分色填充＝橋接面向；區域只包含穩定節點</div>
+        <div><b>其他圖表</b>森林圖、節點穩定性圖、維度穩定性圖、維度數目分布、共同歸屬熱圖</div>
+        <div><b>格式</b>PDF 及 PNG（600 dpi）；儲存前先離線渲染檢查，避免輸出空白檔案</div>
+      </div>
+      <button class="btn ghost cv-jump" data-code="11">‹/› 查看代碼 §11</button>
+      <button class="btn ghost cv-jump" data-code="PLOT HELPERS">‹/› 繪圖函數</button>
+    </div>
+
+    <div class="st-foot">
+      <button class="btn ghost st-prev">← 上一步</button>
+      <button class="btn st-next">下一步 →</button>
+    </div>
+  </div>
+
+  <!-- ================= 5 ================= -->
+  <h2 id="outputs">5. 輸出檔案</h2>
+  <table>
+    <tr><th>檔案（CSV）</th><th>內容</th></tr>
+    <tr><td><code>Table_edges_design_based</code></td><td>136 對節點：連線權重、相關、偏相關、置信區間、p／q 值、自助納入比例</td></tr>
+    <tr><td><code>Table_nodes_dimensions_centrality</code></td><td>各節點的維度、強度、預期影響、穩定性、是否橋接</td></tr>
+    <tr><td><code>Table_node_predictability</code></td><td>各節點的 R² 及置信區間</td></tr>
+    <tr><td><code>Table_node_descriptives</code></td><td>加權平均數、標準差、合成分數的加權 α</td></tr>
+    <tr><td><code>Table_attrition_by_variable</code>／<code>Table_retained_vs_excluded</code></td><td>缺失值及樣本流失診斷</td></tr>
+    <tr><td><code>Table_network_loadings</code></td><td>網絡負荷</td></tr>
+    <tr><td><code>Table_sensitivity_n_algorithm</code></td><td>9 個敏感度組合的結果</td></tr>
+    <tr><td><code>Matrix_pooled_adjusted_correlation</code>／<code>Matrix_EGA_network</code></td><td>合併相關矩陣及 EGA 網絡矩陣</td></tr>
+  </table>
+  <p class="table-note">另有穩定性表及全部圖表（PDF／PNG）；檔名附加執行時間戳記。</p>
+
+  <!-- ================= 6 ================= -->
+  <h2 id="figs">6. 如何閱讀圖表</h2>
+  <table>
+    <tr><th>圖表元素</th><th>意思</th></tr>
+    <tr><td>節點顏色</td><td>所屬維度（四色，與第 A 頁一致）</td></tr>
+    <tr><td>節點外環及數字</td><td>可預測度 R²（%）</td></tr>
+    <tr><td>藍色／紅色連線</td><td>|偏相關| ≥ 0.10 的正／負連線；越粗越強</td></tr>
+    <tr><td>灰色連線</td><td>|偏相關| &lt; 0.10 的較弱連線</td></tr>
+    <tr><td>淡色區域</td><td>各維度的穩定節點（不包括橋接面向）</td></tr>
+    <tr><td>分色填充節點</td><td>橋接面向：在自助樣本中歸屬各維度的比例</td></tr>
+    <tr><td>金環</td><td>科學表現</td></tr>
+    <tr><td>森林圖：圓點與橫線</td><td>未正則化偏相關及 95% 置信區間；實心＝FDR q &lt; .05</td></tr>
+    <tr><td>森林圖：紅色 ×</td><td>EGA 正則化連線權重（一般較偏相關小）</td></tr>
+  </table>
+  <figure class="efig"><img src="img/Fig1_EGA_network.png" alt="EGA 網絡圖" loading="lazy"><figcaption>圖 1　EGA 網絡圖（點擊放大）</figcaption></figure>
+  <figure class="efig"><img src="img/Fig2_PV_edges_forest.png" alt="與科學表現的偏相關森林圖" loading="lazy"><figcaption>圖 2　與科學表現的偏相關（點擊放大）</figcaption></figure>
+
+  <!-- ================= 7 ================= -->
+  <h2 id="code">7. 完整 R 代碼</h2>
+  <p>代碼按腳本內的章節標題自動分節，並分為「設定」、「輔助函數」及「主流程」三組。點擊標題展開；可搜尋關鍵字、從函數索引跳轉，或在網址加上 <code>#L行號</code> 直接連結至某一行。</p>
+  <div class="cv" id="rcode" data-src="code/network_ega_pisa_design.R">
+    <div class="cv-toolbar">
+      <input type="search" class="cv-search" placeholder="搜尋代碼，例如 pool_brr_rubin、STRATUM、leiden" aria-label="搜尋 R 代碼">
+      <span class="cv-count" aria-live="polite"></span>
+      <select class="cv-fn" aria-label="跳至函數"><option>載入中…</option></select>
+      <button type="button" class="btn ghost" data-act="expand">全部展開</button>
+      <button type="button" class="btn ghost" data-act="collapse">全部收起</button>
+      <a class="btn" href="code/network_ega_pisa_design.R" download>⬇ 下載 .R</a>
+    </div>
+    <div class="cv-stats"></div>
+    <div class="cv-layout">
+      <nav class="cv-toc" aria-label="代碼目錄"></nav>
+      <div class="cv-body"><p class="cv-loading">正在載入 R 代碼…</p></div>
+    </div>
+  </div>
+  <!-- 選用：如需以 file:// 離線瀏覽，可把整份 R 腳本貼在下面（毋須轉義） -->
+  <script type="text/plain" id="r-inline"></script>
+
+  <!-- ================= 8 ================= -->
+  <h2 id="repro">8. 如何重現分析</h2>
+  <p>腳本設計為「只修改設定區」：所有路徑、節點、模型及繪圖參數都集中在 <code>CONFIGURATION</code> 一節。</p>
+  <div class="code-box"><pre><span class="cm"># 1. 檔案結構</span>
+project/
+├── network_ega_pisa_design.R
+├── rds_data/  CY09_MS_STU_IDB2_HKG.rds · cntry_fcnt.rds
+└── csv_data/  CY09_MS_STU_IDB2.csv      <span class="cm"># 變項元數據（可省略，會自動建立）</span>
+
+<span class="cm"># 2. 安裝套件（R ≥ 4.1）</span>
+install.packages(c("EGAnet", "igraph", "haven", "dplyr", "tidyr", "purrr", "tibble", "ggplot2",
+                   "Matrix", "clue", "ggraph", "tidygraph", "ggrepel", "ggforce", "scales",
+                   "concaveman", "graphlayouts"))
+
+<span class="cm"># 3. 執行（輸出至 network_ega_output/）</span>
+source("network_ega_pisa_design.R")
+
+<span class="cm"># 4. 記錄軟件環境，以便日後重現</span>
+sessionInfo(); packageVersion("EGAnet")</pre></div>
+  <table>
+    <tr><th>想做的事</th><th>修改設定</th></tr>
+    <tr><td>調整 ESCS 的敏感度分析</td><td><code>ADJUST_FOR &lt;- c("ESCS")</code></td></tr>
+    <tr><td>同時執行參數自助抽樣作比較</td><td><code>BOOT_TYPE &lt;- "both"</code></td></tr>
+    <tr><td>改用其他地區</td><td><code>FOCUS_COUNTRIES</code> 及資料檔路徑</td></tr>
+    <tr><td>加入或移除節點</td><td><code>SELECTED_INDICES</code>、<code>EXTRA_NODES</code>、<code>NODE_LABELS</code></td></tr>
+    <tr><td>期刊格式圖表</td><td><code>PLOT_SHOW_TITLE &lt;- FALSE</code>；<code>PLOT_FORMATS</code> 加入 <code>"tiff"</code></td></tr>
+  </table>
+  <p class="table-note">隨機種子：EGA 42、自助抽樣 42、網絡圖排版 7。<span class="todo">待補：代碼庫連結</span></p>
+
+  <!-- ================= 9 ================= -->
+  <h2 id="limits">9. 局限與詮釋原則</h2>
+  <details class="acc"><summary>橫斷面設計：只能談關聯</summary><div class="body"><p>網絡連線沒有方向。「經由科學專屬節點相連」與間接路徑的推論一致，但並非對間接路徑的檢驗。</p></div></details>
+  <details class="acc"><summary>完整個案分析</summary><div class="body"><p>7.9% 的加權樣本因缺失值被排除。保留與排除學生的比較表可用作判斷偏差的參考，但不能完全排除偏差。</p></div></details>
+  <details class="acc"><summary>自陳指標與回應風格</summary><div class="body"><p>自我效能感、樂趣等屬學生自評，可能受謙遜或文化回應傾向影響。</p></div></details>
+  <details class="acc"><summary>負連線可能是統計抑制</summary><div class="body"><p>協作科學推理的 −.13 是在控制認知激發及科學傾向後的條件性結果，宜視為有待驗證的假設。</p></div></details>
+  <details class="acc"><summary>自助抽樣的設計</summary><div class="body"><p>穩定性檢驗以分層內學校重抽反映抽樣設計，但每次只用最終權重及一個輪替的可能值；完整的設計為本抽樣誤差則由主分析的 Fay-BRR ＋ Rubin 置信區間反映。</p></div></details>
+  <details class="acc"><summary>EBIC 樣本量的選擇</summary><div class="body"><p>主分析採用名義樣本量；Kish 及設計效應樣本量的結果見敏感度分析。p 值以常態近似計算，在約 5,900 人的樣本下影響輕微。</p></div></details>
+  <details class="acc"><summary>維度名稱屬研究者的詮釋</summary><div class="body"><p>維度由數據得出，名稱則由研究團隊命名；總結頁中央的「行動中的學習能動性」是概念性陳述，並非第五個維度。</p></div></details>
+</main>
+
+<div id="pager"></div>
+<div id="site-footer"></div>
+</body>
+</html>
