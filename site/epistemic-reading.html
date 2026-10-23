@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>審辨閱讀：讀甚麼、信甚麼、為何信｜PISA 2025 研討會專題</title>
+<meta name="description" content="審辨閱讀：在多文本、多媒體及 AI 時代評鑑文本。認識論思維、認知警覺、評估真確性、交叉印證、反思內容與形式、處理文本衝突、論證與推理，以及評鑑能力的進程。">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/site.js" defer></script>
+<style>
+  .er{--er-ink:#1f2a2a;--er-mut:#5d6b68;--er-paper:#f7f5ef;--er-sh:0 10px 26px #0000000f;
+      --er-tl:#2a7f8f;--er-tlbg:#eaf4f5;--er-gd:#b8860b;--er-gdbg:#fbf4e2;--er-gn:#2f5d50;--er-gnbg:#e9f1ed;
+      --er-rd:#b5523b;--er-rdbg:#fbf1ec;--er-pu:#6a5a8c;--er-pubg:#efebf5}
+  .er h2{scroll-margin-top:84px} .er h3[id]{scroll-margin-top:84px}
+  .er-back{display:inline-block;margin:0 0 14px;font-size:.92rem;color:var(--er-gn);text-decoration:none;font-weight:600}
+  .er-back:hover{text-decoration:underline}
+  .er-toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+  .er-toc a{font-size:.84rem;padding:5px 13px;border-radius:999px;background:#fff;border:1px solid #0000001a;text-decoration:none;color:var(--er-gn)}
+  .er-toc a:hover{background:var(--er-gnbg)}
+  .er-fic{font-size:.72rem;color:var(--er-mut);background:var(--er-paper);border-radius:999px;padding:2px 9px;margin-left:6px;font-weight:400;white-space:nowrap}
+  .er-src{font-size:.8rem;color:var(--er-mut);margin:4px 0 0}
+  .er-anim{animation:erIn .3s ease} @keyframes erIn{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}
+  .er-panel{background:#fff;border-radius:16px;box-shadow:var(--er-sh);padding:18px 22px;border-top:6px solid var(--c,var(--er-gn))}
+  .er-panel h3,.er-panel h4{margin:0 0 4px;color:var(--c,var(--er-gn))}
+  .er-panel h3 small,.er-panel h4 small{font-weight:400;color:var(--er-mut)}
+  .er-panel p{margin:4px 0 0}
+  .er-panel .q{background:var(--er-paper);border-radius:10px;padding:8px 12px;font-size:.9rem;margin-top:10px}
+  .er-panel .q b{color:var(--c);font-size:.78rem;display:block;letter-spacing:.05em}
+  .er-panel .fw{font-size:.82rem;margin-top:8px;color:var(--er-mut)} .er-panel .fw b{color:var(--c)}
+  .er-panel a.go{display:inline-block;margin-top:10px;font-size:.86rem;font-weight:700;color:var(--c);text-decoration:none}
+  .er-sub{font-size:1.12rem;margin:26px 0 6px;color:var(--er-gn);display:flex;align-items:center;gap:8px}
+  .er-sub .n{width:28px;height:28px;border-radius:50%;background:var(--c,var(--er-gn));color:#fff;display:grid;place-items:center;font-size:.85rem}
+  .er-btn{font:inherit;font-size:.86rem;font-weight:700;padding:6px 15px;border-radius:999px;border:1px solid var(--c,var(--er-rd));background:#fff;color:var(--c,var(--er-rd));cursor:pointer}
+  .er-btn:hover{background:var(--er-paper)} .er-btn.solid{background:var(--c,var(--er-rd));color:#fff}
+
+  /* 1 why */
+  .er-eco{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:12px 0}
+  .er-eco div{background:var(--er-paper);border-radius:14px;padding:14px 16px;font-size:.9rem;line-height:1.65}
+  .er-eco b{display:block;color:var(--er-gn);margin-bottom:4px}
+  .er-eco .big{font-size:1.5rem;font-weight:800;color:var(--er-rd);display:block;line-height:1.2}
+  .er-three{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:stretch;margin:16px 0}
+  .er-three .s{background:#fff;border-radius:16px;padding:14px 16px;box-shadow:var(--er-sh);border-top:6px solid var(--c)}
+  .er-three .s .n{font-size:.74rem;font-weight:700;color:var(--c);letter-spacing:.08em}
+  .er-three .s b{display:block;font-size:1.15rem;margin:2px 0}
+  .er-three .s small{color:var(--er-mut);font-size:.84rem}
+  .er-three .ar{align-self:center;color:#9aa5a2;font-size:1.3rem}
+  .er-aisrc{display:grid;grid-template-columns:52px 1fr;gap:4px 14px;background:var(--er-rdbg);border-left:6px solid var(--er-rd);border-radius:16px;padding:16px 20px;margin:14px 0}
+  .er-aisrc .ic{grid-row:1/3;width:52px;height:52px;border-radius:12px;background:var(--er-rd);color:#fff;display:grid;place-items:center;font-size:1.5rem}
+  .er-aisrc b{color:var(--er-rd)} .er-aisrc p{margin:2px 0 0;font-size:.93rem}
+
+  /* 2 definition & process map */
+  .er-def{background:linear-gradient(135deg,var(--er-gn),#1f4036);color:#fff;border-radius:20px;padding:24px 28px;margin:14px 0 12px}
+  .er-def small.lab{display:block;color:#f1d27a;font-size:.78rem;letter-spacing:.1em;font-weight:700;margin-bottom:6px}
+  .er-def .zh{font-size:1.28rem;line-height:2.1;margin:0}
+  .er-term{font:inherit;color:#f1d27a;background:#ffffff14;border:0;border-bottom:2px dashed #f1d27a;padding:0 5px;border-radius:5px;cursor:pointer}
+  .er-term:hover,.er-term.on{background:#f1d27a;color:#1f4036}
+  .er-map{display:grid;grid-template-columns:1fr 1fr 1fr 1.5fr 1fr;gap:10px;margin:16px 0 0}
+  .er-map .m{background:#fff;border-radius:14px;padding:12px 14px;border:1px solid #0000001a;border-top:5px solid var(--c);font-size:.84rem;line-height:1.55;text-decoration:none;color:inherit;display:block;transition:transform .15s}
+  .er-map a.m:hover{transform:translateY(-3px)}
+  .er-map .m b{display:block;color:var(--c);font-size:.95rem;margin-bottom:4px}
+  .er-map .hot{background:var(--er-gdbg);outline:2px solid var(--er-gd)}
+  .er-map .hot a{display:block;margin-top:5px;padding:4px 9px;border-radius:8px;background:#fff;text-decoration:none;color:#8a6508;font-weight:700}
+  .er-map .hot a:hover{background:var(--er-gd);color:#fff}
+
+  /* 3 keywords */
+  .er-kw{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:14px 0}
+  .er-kg{background:var(--bg);border-radius:16px;padding:14px 16px;border-top:5px solid var(--c)}
+  .er-kg h3{margin:0;font-size:1rem;color:var(--c)} .er-kg p{margin:2px 0 8px;font-size:.8rem;color:var(--er-mut)}
+  .er-chip{display:block;width:100%;text-align:left;font:inherit;margin:6px 0 0;padding:7px 11px;border-radius:10px;background:#fff;border:1px solid #0000001a;cursor:pointer;transition:transform .15s}
+  .er-chip b{font-size:.92rem} .er-chip small{display:block;color:var(--er-mut);font-size:.72rem}
+  .er-chip:hover{transform:translateX(3px)} .er-chip.on{outline:2px solid var(--c);box-shadow:0 6px 14px #00000014}
+
+  /* 4 disorder */
+  .er-dis{display:grid;grid-template-columns:1.05fr 1fr;gap:22px;align-items:start;margin-top:12px}
+  .er-venn{width:100%;height:auto;background:#fff;border-radius:18px;box-shadow:var(--er-sh)}
+  .er-venn text{font-family:inherit}
+  .er-venn .lab rect{transition:fill .2s,stroke .2s} .er-venn .lab.hit rect{fill:#f1d27a;stroke:#b8860b}
+  .er-quiz{background:#fff;border-radius:18px;box-shadow:var(--er-sh);padding:18px 22px;border-top:6px solid var(--c,var(--er-rd))}
+  .er-quiz .hd{display:flex;justify-content:space-between;font-size:.8rem;color:var(--er-mut)}
+  .er-quiz .sc{font-size:1.02rem;font-weight:700;margin:10px 0 14px;min-height:4.2em;line-height:1.6}
+  .er-opts{display:flex;flex-wrap:wrap;gap:8px}
+  .er-opts button{font:inherit;font-size:.88rem;font-weight:700;padding:7px 15px;border-radius:999px;border:1px solid var(--c,var(--er-rd));background:#fff;color:var(--c,var(--er-rd));cursor:pointer}
+  .er-opts button:hover{background:var(--er-paper)}
+  .er-opts button.ok{background:var(--er-gn);border-color:var(--er-gn);color:#fff}
+  .er-opts button.no{background:#eee;border-color:#ccc;color:#888}
+  .er-opts button:disabled{cursor:default}
+  .er-fb{margin-top:12px;font-size:.9rem;background:var(--er-paper);border-radius:10px;padding:10px 12px;display:none}
+  .er-fb.show{display:block}
+  .er-two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}
+  .er-box{border-radius:14px;padding:12px 16px;font-size:.9rem;background:var(--bg);border-left:5px solid var(--c)}
+  .er-box b{color:var(--c)} .er-box h4{margin:0 0 4px;color:var(--c)} .er-box ul{margin:6px 0 0;padding-left:18px}
+
+  /* 5 epistemic */
+  .er-aim{display:grid;grid-template-columns:1fr 1.3fr;gap:18px;margin-top:12px;align-items:start}
+  .er-aim .opt button{display:block;width:100%;text-align:left;font:inherit;font-size:.92rem;margin:0 0 8px;padding:10px 14px;border-radius:12px;border:1px solid #0000001a;background:#fff;cursor:pointer}
+  .er-aim .opt button:hover{background:var(--er-pubg)} .er-aim .opt button.on{background:var(--er-pu);color:#fff;border-color:var(--er-pu)}
+  .er-aim dl{margin:8px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:.9rem}
+  .er-aim dt{font-weight:700;color:var(--er-pu)} .er-aim dd{margin:0}
+  .er-vrow{background:#fff;border-radius:14px;border:1px solid #0000001a;padding:12px 16px;margin:10px 0}
+  .er-vrow .top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .er-vrow .cl{font-weight:700;font-size:.98rem;flex:1;min-width:240px}
+  .er-vrow .tg{font-size:.72rem;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;background:var(--c)}
+  .er-vrow .res{display:none;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+  .er-vrow.open .res{display:grid;animation:erIn .3s ease}
+  .er-vrow .res div{border-radius:10px;padding:8px 12px;font-size:.86rem}
+  .er-vrow .res .a{background:var(--er-paper)} .er-vrow .res .b{background:var(--er-tlbg)}
+  .er-vrow .res b{display:block;font-size:.76rem;color:var(--er-mut);letter-spacing:.04em}
+  .er-vrow .res span{display:block;font-weight:700}
+
+  /* 6 evaluate */
+  .er-ev{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+  .er-ev a{display:block;text-decoration:none;color:inherit;background:var(--bg);border-radius:16px;padding:16px 18px;border-top:6px solid var(--c);transition:transform .15s}
+  .er-ev a:hover{transform:translateY(-3px)}
+  .er-ev .n{font-size:.75rem;font-weight:700;color:var(--c)} .er-ev b{display:block;font-size:1.08rem;color:var(--c);margin:2px 0 4px}
+  .er-ev small{font-size:.86rem;color:var(--er-ink)}
+  .er-vc{display:grid;grid-template-columns:1fr 1.1fr;gap:20px;margin-top:14px;align-items:start}
+  .er-post{background:#fff;border-radius:16px;box-shadow:var(--er-sh);padding:16px 18px;border:1px solid #0000001a}
+  .er-post .who{display:flex;gap:10px;align-items:center;font-size:.84rem;color:var(--er-mut)}
+  .er-post .av{width:36px;height:36px;border-radius:50%;background:var(--er-tl);color:#fff;display:grid;place-items:center;font-weight:700}
+  .er-post .txt{font-size:1.04rem;font-weight:700;margin:10px 0 6px;line-height:1.6}
+  .er-post .ft{font-size:.78rem;color:var(--er-mut)}
+  .er-checks{display:flex;flex-direction:column;gap:7px}
+  .er-ck{display:flex;gap:10px;align-items:center;font:inherit;font-size:.88rem;text-align:left;padding:8px 12px;border-radius:12px;border:1px solid #0000001a;background:#fff;cursor:pointer}
+  .er-ck .box{flex:0 0 22px;height:22px;border-radius:6px;border:2px solid #b9c2bf;display:grid;place-items:center;font-size:.8rem;color:#fff}
+  .er-ck .tg{margin-left:auto;font-size:.7rem;padding:1px 8px;border-radius:999px;background:var(--er-paper);color:var(--er-mut);white-space:nowrap}
+  .er-ck.on{border-color:var(--er-tl);background:var(--er-tlbg)} .er-ck.on .box{background:var(--er-tl);border-color:var(--er-tl)}
+  .er-verdict{margin-top:12px;border-radius:14px;padding:12px 16px;color:#fff;font-size:.92rem;transition:background .3s}
+  .er-verdict b{display:block;font-size:1.05rem}
+  .er-gauge{display:flex;gap:4px;margin:8px 0 2px}.er-gauge i{flex:1;height:8px;border-radius:4px;background:#ffffff40}.er-gauge i.f{background:#fff}
+  .er-claim{background:linear-gradient(135deg,var(--er-tl),#1f5f6b);color:#fff;border-radius:16px;padding:14px 20px;margin:14px 0 10px}
+  .er-claim small{opacity:.85} .er-claim b{display:block;font-size:1.12rem;margin-top:4px}
+  .er-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .er-tab{font:inherit;text-align:left;background:#fff;border:1px solid #0000001a;border-radius:14px;padding:12px 14px;cursor:pointer;transition:transform .15s}
+  .er-tab:hover{transform:translateY(-2px)}
+  .er-tab .t{font-size:.78rem;color:var(--er-mut)} .er-tab b{display:block;font-size:.95rem;margin:2px 0}
+  .er-tab .r{display:none;font-size:.86rem;line-height:1.6;margin-top:8px;padding-top:8px;border-top:1px dashed #0000002a}
+  .er-tab.open .r{display:block} .er-tab .hint{font-size:.78rem;color:var(--er-tl);font-weight:700} .er-tab.open .hint{display:none}
+  .er-tab .st{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 9px;border-radius:999px;color:#fff;margin-bottom:4px}
+  .er-concl{margin-top:12px;border-radius:14px;padding:14px 18px;background:var(--er-gdbg);border-left:6px solid var(--er-gd);display:none}
+  .er-concl.show{display:block;animation:erIn .3s ease}
+  .er-hlw{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;align-items:start;margin-top:12px}
+  .er-hl{background:#1f2a2a;color:#fff;border-radius:16px;padding:20px 22px;font-size:1.3rem;font-weight:800;line-height:1.9}
+  .er-hl small{display:block;font-size:.76rem;font-weight:400;opacity:.7;margin-bottom:6px}
+  .er-hl [data-h]{cursor:pointer;border-radius:6px;padding:0 3px;border-bottom:3px dotted #f1d27a}
+  .er-hl [data-h]:hover{background:#ffffff1f} .er-hl [data-h].found{background:#f1d27a;color:#1f2a2a;border-bottom-color:transparent}
+  .er-hl [data-h].on{outline:3px solid #fff}
+  .er-hlc{font-size:.84rem;color:var(--er-mut);margin:8px 0 0}
+  .er-conf2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+  .er-doc{background:#fff;border-radius:16px;box-shadow:var(--er-sh);padding:16px 18px;border-top:6px solid var(--c)}
+  .er-doc .k{font-size:.76rem;font-weight:700;color:var(--c);letter-spacing:.06em}
+  .er-doc h4{margin:2px 0 6px;font-size:1.05rem} .er-doc p{margin:0;font-size:.9rem}
+  .er-doc dl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:.84rem;margin:10px 0 0;background:var(--er-paper);border-radius:10px;padding:8px 12px}
+  .er-doc dt{color:var(--er-mut)} .er-doc dd{margin:0;font-weight:700}
+  .er-crs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:12px}
+  .er-cr{font:inherit;text-align:left;background:#fff;border:1px solid #0000001a;border-radius:14px;padding:10px 12px;cursor:pointer;font-size:.86rem}
+  .er-cr b{display:block;font-size:.92rem} .er-cr .hint{font-size:.76rem;color:var(--er-tl);font-weight:700}
+  .er-cr .r{display:none;margin-top:6px;line-height:1.55} .er-cr.open .r{display:block} .er-cr.open .hint{display:none}
+  .er-cr em{display:block;font-style:normal;font-weight:700} .er-cr em.y{color:var(--er-gn)} .er-cr em.n{color:var(--er-rd)}
+  .er-disc{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:14px 0 0;font-size:.86rem}
+  .er-disc span{background:var(--er-gnbg);color:var(--er-gn);font-weight:700;border-radius:999px;padding:5px 12px}
+  .er-disc i{font-style:normal;color:#9aa5a2}
+
+  /* toulmin */
+  .er-tou{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;margin-top:12px;align-items:start}
+  .er-para{background:#fff;border-radius:16px;box-shadow:var(--er-sh);padding:18px 22px;font-size:1.02rem;line-height:2.1}
+  .er-para span[data-r]{cursor:pointer;border-radius:5px;padding:1px 2px;border-bottom:2px solid var(--c);transition:background .2s}
+  .er-para span[data-r].on{background:var(--bg)}
+  .er-leg{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+  .er-leg button{font:inherit;font-size:.82rem;padding:4px 12px;border-radius:999px;border:2px solid var(--c);background:#fff;color:var(--c);font-weight:700;cursor:pointer}
+  .er-leg button.on{background:var(--c);color:#fff}
+  .er-fall{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px}
+  .er-fall div{background:#fff;border:1px solid #0000001a;border-radius:14px;padding:12px 14px;font-size:.85rem}
+  .er-fall b{display:block;color:var(--er-rd);margin-bottom:4px} .er-fall q{display:block;color:var(--er-mut);quotes:none;margin-bottom:6px}
+
+  /* reader */
+  .er-bel{background:#fff;border-radius:18px;box-shadow:var(--er-sh);padding:20px 24px;border-top:6px solid var(--er-pu);margin-top:12px}
+  .er-bel input[type=range]{width:100%;accent-color:var(--er-pu);margin:8px 0 2px}
+  .er-ticks{display:flex;justify-content:space-between;font-size:.8rem;color:var(--er-mut)}
+  .er-ticks span{cursor:pointer} .er-ticks span.on{color:var(--er-pu);font-weight:700}
+  .er-belg{display:grid;grid-template-columns:1fr 1.3fr;gap:16px;margin-top:14px}
+  .er-belg .box{background:var(--er-pubg);border-radius:12px;padding:12px 14px;font-size:.92rem}
+  .er-belg .box b{display:block;color:var(--er-pu);font-size:.78rem;letter-spacing:.05em;margin-bottom:4px}
+  .er-belg .say{background:#fff;border:2px dashed var(--er-pu);border-radius:14px;padding:12px 14px;font-size:.98rem;position:relative}
+  .er-belg .say::before{content:"💬";position:absolute;top:-14px;left:12px;font-size:1.2rem}
+  .er-risk{font-size:.86rem;color:var(--er-rd);margin-top:8px}
+  .er-just{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+  .er-jc{background:#fff;border-radius:16px;padding:14px 16px;border:1px solid #0000001a;border-top:5px solid var(--c)}
+  .er-jc b{display:block;color:var(--c);font-size:1rem} .er-jc small{color:var(--er-mut);font-size:.76rem}
+  .er-jc q{display:block;quotes:none;background:var(--er-paper);border-radius:8px;padding:8px 10px;margin:8px 0;font-size:.9rem}
+  .er-jc p{margin:0;font-size:.86rem;line-height:1.6}
+  .er-rc{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .er-rc div{background:var(--er-paper);border-radius:12px;padding:12px 14px;font-size:.86rem}
+  .er-rc b{display:block;color:var(--er-gn)}
+
+  /* discipline */
+  .er-dsc{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+  .er-dsc div{background:#fff;border-radius:16px;padding:16px 18px;box-shadow:var(--er-sh);border-top:6px solid var(--c);font-size:.88rem}
+  .er-dsc h4{margin:0 0 6px;color:var(--c);font-size:1.05rem}
+  .er-dsc ul{margin:4px 0 8px;padding-left:18px}
+  .er-dsc q{display:block;quotes:none;background:var(--er-paper);border-radius:8px;padding:8px 10px}
+  .er-sci{display:grid;grid-template-columns:52px 1fr;gap:4px 14px;background:var(--er-gnbg);border-left:6px solid var(--er-gn);border-radius:16px;padding:16px 20px;margin:14px 0}
+  .er-sci .ic{grid-row:1/3;width:52px;height:52px;border-radius:12px;background:var(--er-gn);color:#fff;display:grid;place-items:center;font-size:1.5rem}
+  .er-sci b{color:var(--er-gn)} .er-sci p{margin:2px 0 0;font-size:.92rem}
+
+  /* levels */
+  .er-lv{display:grid;grid-template-columns:58px 1fr;gap:14px;align-items:center;padding:10px 14px;border-radius:14px;background:#fff;border:1px solid #0000000f;margin:6px 0}
+  .er-lv.base{outline:2px solid var(--er-gd);background:var(--er-gdbg)}
+  .er-lv .n{height:46px;border-radius:10px;background:var(--c);color:#fff;font-weight:800;display:grid;place-items:center;line-height:1.1;font-size:1.05rem}
+  .er-lv .n small{display:block;font-size:.66rem;font-weight:400;opacity:.85}
+  .er-lv p{margin:0;font-size:.9rem;line-height:1.6}
+  .er-drv{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+  .er-drv div{border-radius:14px;padding:12px 14px;background:var(--er-paper);font-size:.86rem}
+  .er-drv b{display:block;color:var(--er-gn);margin-bottom:4px}
+  .er-drv .g{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--er-mut)}
+  .er-drv .g i{flex:1;height:6px;border-radius:6px;background:linear-gradient(90deg,#cfe3df,var(--er-rd))}
+
+  /* culture */
+  .er-cul{background:linear-gradient(180deg,#f4ead3,#efe3c8);border-radius:18px;padding:18px 22px;margin:18px 0}
+  .er-cul .mt{font-family:"Noto Serif TC","PMingLiU",serif;font-size:1.15rem;letter-spacing:.12em;margin:0 0 4px;color:#3b2f1c}
+  .er-cul .mt small{letter-spacing:0;font-size:.8rem;color:#6b5a3a;margin-left:6px}
+  .er-cul p{font-size:.88rem;color:#5b4a2c;margin:4px 0 10px}
+  .er-cul .row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  .er-cul a{display:block;text-decoration:none;background:#fffaf0;border-radius:12px;padding:10px;font-size:.8rem;color:#3b2f1c;border:1px solid #d9c79f}
+  .er-cul a:hover{background:#fff}
+  .er-cul a b{display:block;font-family:"Noto Serif TC","PMingLiU",serif;font-size:1.05rem;color:#8a6508}
+
+  @media (max-width:900px){
+    .er-eco,.er-kw,.er-fall{grid-template-columns:1fr 1fr}
+    .er-three{grid-template-columns:1fr}.er-three .ar{transform:rotate(90deg);justify-self:center}
+    .er-map{grid-template-columns:1fr 1fr}.er-map .hot{grid-column:1/-1}
+    .er-dis,.er-aim,.er-vc,.er-hlw,.er-conf2,.er-tou,.er-belg,.er-two{grid-template-columns:1fr}
+    .er-ev,.er-tabs,.er-just,.er-rc,.er-dsc,.er-drv{grid-template-columns:1fr}
+    .er-crs{grid-template-columns:1fr 1fr}.er-cul .row{grid-template-columns:1fr 1fr}
+    .er-vrow .res{grid-template-columns:1fr}
+  }
+  @media (max-width:560px){.er-eco,.er-kw,.er-fall,.er-map,.er-crs,.er-cul .row{grid-template-columns:1fr}.er-def .zh{font-size:1.08rem}.er-hl{font-size:1.1rem}}
+</style>
+</head>
+<body data-page="reading.html" id="top">
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <div class="inner">
+    <span class="eyebrow">延伸專題 · 閱讀素養</span>
+    <h1>審辨閱讀：<br>讀甚麼、信甚麼、為何信</h1>
+    <p class="lead">閱讀素養不只是讀懂文本，而是「有效且具批判性地」評鑑文本，從而發展知識。在多文本、多媒體及 AI 時代，讀者要評估資訊的質素與真確性、反思作者的目的與觀點、處理文本之間的衝突，並說得出「為何相信」。這就是審辨閱讀（Epistemic Reading）。</p>
+  </div>
+</section>
+
+<main class="content er">
+  <a class="er-back" href="reading.html">← 返回〈閱讀素養〉</a>
+  <nav class="er-toc" aria-label="本頁目錄">
+    <a href="#why">為何需要</a><a href="#def">閱讀素養中的審辨</a><a href="#words">關鍵詞</a><a href="#disorder">資訊失序</a>
+    <a href="#epistemic">認識論思維</a><a href="#evaluate">三個評鑑過程</a><a href="#argument">權衡論點</a>
+    <a href="#reader">讀者因素</a><a href="#discipline">學科閱讀</a><a href="#levels">能力進程</a><a href="#class">課堂</a>
+  </nav>
+
+  <!-- 1 為何需要 -->
+  <h2 id="why">為何需要審辨閱讀：資訊生態的轉變</h2>
+  <p>2025 年，全球約 75% 人口（約 60 億人）已經上網，2018 年只有 48%。閱讀由紙本轉向數碼，讀者每天面對的文本更多、更雜，而且愈來愈多未經編輯把關。</p>
+  <div class="er-eco">
+    <div><b>📱 社交媒體與網紅</b>新聞愈來愈多經 Instagram、YouTube、TikTok 接收，而非出版機構網站；資訊與廣告、意見混在一起。</div>
+    <div><b>⚠️ 錯誤與虛假資訊</b><span class="big">66%</span>歐洲人至少有時會接觸錯誤資訊。青少年雖然熟悉數碼工具，往往更容易受誤導。</div>
+    <div><b>🔁 推薦演算法</b>按用戶行為過濾內容，可能形成「同溫層」：只看到與自己看法一致的說法。</div>
+    <div><b>✨ 生成式 AI</b>大型語言模型按統計規律產生像人寫的文字：方便尋找資訊，卻有準確性及偏見的疑慮。</div>
+  </div>
+
+  <p>因此，閱讀的重點由「讀懂一篇」轉向「判斷多篇」。審辨的讀者會問三個問題：</p>
+  <div class="er-three">
+    <div class="s" style="--c:var(--er-tl)"><span class="n">理解</span><b>說了甚麼？</b><small>主張、依據、出處；多個文本之間怎樣關連</small></div>
+    <div class="ar">➜</div>
+    <div class="s" style="--c:var(--er-rd)"><span class="n">評鑑</span><b>可信嗎？</b><small>來源可靠嗎？內容真確嗎？文本之間有沒有矛盾？</small></div>
+    <div class="ar">➜</div>
+    <div class="s" style="--c:var(--er-gd)"><span class="n">證成</span><b>為何相信？</b><small>能否以證據和推理說明理由，信心與證據相稱</small></div>
+  </div>
+  <div class="er-aisrc">
+    <div class="ic">🤖</div>
+    <b>AI 文本是「來源」，不是「答案」</b>
+    <p>閱讀素養關注的，是把生成式 AI 產生的文本當作<strong>需要閱讀和評鑑的來源</strong>：它與其他文本一樣，可能準確、片面或錯誤。至於怎樣向 AI 提問、使用 AI 工具，屬於媒體與 AI 素養的範疇。</p>
+  </div>
+
+  <!-- 2 定位 -->
+  <h2 id="def">閱讀素養中的審辨</h2>
+  <p>最新的國際閱讀素養定義，把「評鑑」及「有效且具批判性地」放在核心位置。點選字詞看看它們與審辨閱讀的關係：</p>
+  <div class="er-def">
+    <small class="lab">閱讀素養定義（本站中譯）</small>
+    <p class="zh">閱讀素養是指為了<button class="er-term" data-k="goals">發展知識</button>、實現個人及社會目標，而<button class="er-term" data-k="crit">有效且具批判性地</button>投入、<button class="er-term" data-k="understand">理解</button>及<button class="er-term" data-k="evaluate">評鑑</button>文本的能力。</p>
+  </div>
+  <div class="er-panel er-anim" id="er-defbox" aria-live="polite"></div>
+
+  <p style="margin-top:18px">審辨不只出現在「評鑑與反思」，而是貫穿整個閱讀過程：</p>
+  <div class="er-map">
+    <a class="m" href="#epistemic" style="--c:var(--er-gn)"><b>基礎過程</b>「驗證」自動檢查說法是否合理；「認識論思維」設定求真的目的與標準</a>
+    <a class="m" href="#veracity" style="--c:#4a9aa5"><b>搜尋與存取</b>判斷哪些搜尋結果或社交媒體帖文最相關、最可信</a>
+    <a class="m" href="#conflict" style="--c:var(--er-tl)"><b>理解與詮釋</b>建立心理模型，掌握多個文本怎樣重疊、互補或矛盾</a>
+    <div class="m hot" style="--c:var(--er-gd)"><b>評鑑與反思 ★</b>審辨閱讀的核心
+      <a href="#veracity">① 評估質素與真確性</a><a href="#form">② 反思內容與形式</a><a href="#conflict">③ 察覺及評估衝突</a></div>
+    <a class="m" href="#reader" style="--c:var(--er-pu)"><b>任務管理與自我調節</b>設定目標、監察理解；知道何時要停下來查證</a>
+  </div>
+
+  <!-- 3 關鍵詞 -->
+  <h2 id="words">關鍵詞地圖</h2>
+  <p>十四個關鍵詞分為四組。點選任何一個詞，查看解說、讀者自問，以及它在閱讀素養框架中的位置。</p>
+  <div class="er-kw" id="er-kw"></div>
+  <div class="er-panel er-anim" id="er-kwp" aria-live="polite"></div>
+
+  <!-- 4 資訊失序 -->
+  <h2 id="disorder">資訊失序：錯誤、虛假與惡意資訊</h2>
+  <p>錯誤資訊（misinformation）指不準確的資訊，不論傳播者是否有意；虛假資訊（disinformation）指刻意誤導的資訊。研究者再加上「惡意資訊」，按「內容是否虛假」及「是否有意傷害」分為三類（Wardle &amp; Derakhshan, 2017）。</p>
+  <div class="er-dis">
+    <svg class="er-venn" viewBox="0 0 720 360" role="img" aria-label="兩圓交疊：左為內容虛假，右為意圖傷害；左圓獨有部分為錯誤資訊，交疊部分為虛假資訊，右圓獨有部分為惡意資訊">
+      <circle cx="275" cy="190" r="145" fill="#b5523b" fill-opacity=".14" stroke="#b5523b" stroke-width="2.5"/>
+      <circle cx="445" cy="190" r="145" fill="#6a5a8c" fill-opacity=".14" stroke="#6a5a8c" stroke-width="2.5"/>
+      <text x="200" y="34" font-size="15" font-weight="700" fill="#b5523b" text-anchor="middle">內容虛假 Falseness</text>
+      <text x="520" y="34" font-size="15" font-weight="700" fill="#6a5a8c" text-anchor="middle">意圖傷害 Intent to harm</text>
+      <g class="lab" id="v-mis"><rect x="128" y="160" width="124" height="58" rx="12" fill="#fff" stroke="#b5523b" stroke-width="2"/>
+        <text x="190" y="184" font-size="15" font-weight="800" fill="#1f2a2a" text-anchor="middle">錯誤資訊</text>
+        <text x="190" y="205" font-size="11" fill="#5d6b68" text-anchor="middle">Misinformation</text></g>
+      <g class="lab" id="v-dis"><rect x="298" y="160" width="124" height="58" rx="12" fill="#fff" stroke="#8a4a5f" stroke-width="2"/>
+        <text x="360" y="184" font-size="15" font-weight="800" fill="#1f2a2a" text-anchor="middle">虛假資訊</text>
+        <text x="360" y="205" font-size="11" fill="#5d6b68" text-anchor="middle">Disinformation</text></g>
+      <g class="lab" id="v-mal"><rect x="468" y="160" width="124" height="58" rx="12" fill="#fff" stroke="#6a5a8c" stroke-width="2"/>
+        <text x="530" y="184" font-size="15" font-weight="800" fill="#1f2a2a" text-anchor="middle">惡意資訊</text>
+        <text x="530" y="205" font-size="11" fill="#5d6b68" text-anchor="middle">Malinformation</text></g>
+      <g font-size="11.5" fill="#5d6b68" text-anchor="middle">
+        <text x="190" y="248">虛假，但無意傷害</text><text x="190" y="264">誤傳、AI「幻覺」</text>
+        <text x="360" y="248">虛假，而且刻意誤導</text><text x="360" y="264">捏造、冒充、操縱</text>
+        <text x="530" y="248">內容屬實，但用來傷害</text><text x="530" y="264">洩露私隱、斷章公開</text></g>
+    </svg>
+    <div class="er-quiz">
+      <div class="hd"><b>🧩 分類小測</b><span id="er-qn"></span></div>
+      <div class="sc" id="er-qs"></div>
+      <div class="er-opts" id="er-qo"></div>
+      <div class="er-fb" id="er-qf"></div>
+      <p style="margin:12px 0 0"><button class="er-btn solid" type="button" id="er-qnext" hidden>下一題 →</button></p>
+    </div>
+  </div>
+  <div class="er-two">
+    <div class="er-box" style="--c:var(--er-rd);--bg:var(--er-rdbg)"><b>🧠 錯誤資訊不只「讀錯一次」：</b>研究顯示，錯誤資訊可能干擾長期記憶，並影響讀者理解其後相關的新資訊。愈早察覺，代價愈小。</div>
+    <div class="er-box" style="--c:var(--er-pu);--bg:var(--er-pubg)"><b>🔄 類型會在傳播中改變：</b>有人刻意捏造的虛假資訊，經不知情的朋友轉發，就成了錯誤資訊。判斷時要問「誰、為甚麼」發布。</div>
+  </div>
+
+  <!-- 5 認識論思維 -->
+  <h2 id="epistemic">認識論思維：求真的目的與判斷的標準</h2>
+  <p>審辨閱讀始於讀者的「認識論思維」（epistemic thinking）：閱讀時設定與真相及知識有關的目的（<strong>認識論目的</strong>），並運用標準判斷資訊（<strong>認識論標準</strong>），例如證據、方法、來源專業及一致性（參考 Chinn et al., 2014）。</p>
+  <div class="er-aim">
+    <div class="opt">
+      <b style="font-size:.86rem;color:var(--er-mut)">你搜尋「AI 寫作工具對學生是否有效」，目的是……</b>
+      <div id="er-aimo" style="margin-top:8px"></div>
+    </div>
+    <div class="er-panel er-anim" id="er-aimp" style="--c:var(--er-pu)" aria-live="polite"></div>
+  </div>
+
+  <h3 class="er-sub">🧪 兩層檢查：自動驗證 vs 策略性評鑑</h3>
+  <p>讀者會<strong>自動</strong>檢查資訊是否與已有知識一致、是否合理（驗證，validation）；但聽起來合理的說法，未必真確，這時需要<strong>刻意</strong>檢查邏輯與來源（策略性評鑑，strategic evaluation）。準確的背景知識有助快速驗證（Richter et al., 2009）。按「逐層檢查」比較：</p>
+  <div id="er-val"></div>
+
+  <!-- 6 三個評鑑過程 -->
+  <h2 id="evaluate">三個評鑑過程</h2>
+  <p>「評鑑與反思」包括三個互相關連的過程，也是閱讀素養的報告分量表之一：</p>
+  <div class="er-ev">
+    <a href="#veracity" style="--c:var(--er-tl);--bg:var(--er-tlbg)"><span class="n">過程 ①</span><b>評估質素與真確性</b><small>資訊準確嗎？不偏頗嗎？以核查來源或交叉印證判斷</small></a>
+    <a href="#form" style="--c:var(--er-gd);--bg:var(--er-gdbg)"><span class="n">過程 ②</span><b>反思內容與形式</b><small>作者的風格、目的及觀點；分辨事實與意見</small></a>
+    <a href="#conflict" style="--c:var(--er-rd);--bg:var(--er-rdbg)"><span class="n">過程 ③</span><b>察覺及評估衝突</b><small>辨識來源之間的矛盾，按證據權衡論點</small></a>
+  </div>
+
+  <h3 class="er-sub" id="veracity" style="--c:var(--er-tl)"><span class="n">①</span>評估質素與真確性</h3>
+  <p>我們大部分知識都來自別人的說法，因此需要「認知警覺」（epistemic vigilance），從<strong>來源</strong>及<strong>內容</strong>兩方面過濾資訊（Sperber et al., 2010）。判斷來源可信度，要看作者的<strong>能力</strong>及<strong>善意</strong>。</p>
+  <div class="er-two">
+    <div class="er-box" style="--c:var(--er-tl);--bg:var(--er-tlbg)"><h4>對來源警覺：誰說的？</h4><ul><li><strong>能力：</strong>作者有相關專業嗎？</li><li><strong>善意：</strong>有利益衝突或誤導的動機嗎？</li></ul></div>
+    <div class="er-box" style="--c:var(--er-gd);--bg:var(--er-gdbg)"><h4>對內容警覺：說得通嗎？</h4><ul><li><strong>證據：</strong>能否追查原始出處？</li><li><strong>一致性：</strong>其他獨立來源怎樣說？</li></ul></div>
+  </div>
+  <p><strong>試一試：</strong>你在社交媒體看到這則帖文。逐項檢查，看看應給它多少信任。</p>
+  <div class="er-vc">
+    <div class="er-post">
+      <div class="who"><span class="av">智</span><span><b style="color:#1f2a2a">智學科技 EduAI</b><br>贊助內容 · 3 小時前</span></div>
+      <div class="txt">「研究證實！每天用 AI 寫作的學生，作文分數提升 30%！家長快讓孩子用起來 👉 立即訂閱」</div>
+      <div class="ft">❤️ 2.3 萬　🔁 5,812 次轉發　<span class="er-fic">虛構示例</span></div>
+    </div>
+    <div><div class="er-checks" id="er-ck"></div><div class="er-verdict" id="er-vd" aria-live="polite"></div></div>
+  </div>
+
+  <p style="margin-top:18px"><strong>交叉印證（corroborating）：</strong>判斷真確性的最佳方法，往往不是把一個網站讀得更仔細，而是離開它，看看其他來源怎樣說。專業事實查核員會「橫向閱讀」，因而比學者及大學生更快、更準確地判斷可信度（Wineburg &amp; McGrew, 2019）。</p>
+  <div class="er-claim"><small>待查證的說法　<span class="er-fic" style="background:#ffffff26;color:#fff">虛構示例</span></small><b>「AI 回饋能提升學生的寫作質素。」</b></div>
+  <div class="er-tabs" id="er-tabs"></div>
+  <div class="er-concl" id="er-concl">
+    <b>🧭 交叉印證後的判斷：有條件地成立</b><br>
+    兩項獨立研究都支持「初稿質素提升」，可以較有信心接受；但「全面提升寫作能力」只得公司宣傳支持，而且有獨立研究顯示過度依賴有害，所以暫不接受。<strong>結論的信心，應與印證的程度相稱。</strong>
+  </div>
+
+  <h3 class="er-sub" id="form" style="--c:var(--er-gd)"><span class="n">②</span>反思內容與形式</h3>
+  <p>審辨的讀者不只問「說了甚麼」，也問「<strong>怎樣說、為何這樣說</strong>」：作者的用字、標題、版面及觀點，都透露寫作目的。點選標題中的可疑部分（共 5 個警號）：</p>
+  <div class="er-hlw">
+    <div>
+      <div class="er-hl" id="er-hl"><small>網上新聞標題 · 虛構示例</small><span data-h="0">震驚！</span><span data-h="1">專家</span>警告：AI <span data-h="2">正在摧毀</span><span data-h="3">下一代</span>的閱讀能力 <span data-h="4">👉 立即看</span></div>
+      <p class="er-hlc" id="er-hlc">已找到 0／5 個警號</p>
+    </div>
+    <div class="er-panel er-anim" id="er-hlp" style="--c:var(--er-gd)" aria-live="polite"><h3>點選標題中的劃線部分</h3><p>想一想：作者想令你感受甚麼、做甚麼？</p></div>
+  </div>
+
+  <p style="margin-top:18px"><strong>分辨事實與意見：</strong>事實陳述可以查證（但未必正確）；意見是價值判斷或立場，要看理由是否充分。</p>
+  <div class="er-quiz" style="--c:var(--er-gd)">
+    <div class="hd"><b>⚖️ 事實還是意見？</b><span id="er-fn"></span></div>
+    <div class="sc" id="er-fs"></div>
+    <div class="er-opts" id="er-fo"></div>
+    <div class="er-fb" id="er-ff"></div>
+    <p style="margin:12px 0 0"><button class="er-btn solid" type="button" id="er-fnext" style="--c:var(--er-gd)" hidden>下一句 →</button></p>
+  </div>
+
+  <h3 class="er-sub" id="conflict" style="--c:var(--er-rd)"><span class="n">③</span>察覺及評估衝突</h3>
+  <p>兩個文本互相矛盾時，審辨的讀者不會隨便選一邊，也不會說「各有道理」，而是追查<strong>為甚麼會矛盾</strong>。研究發現，察覺矛盾會促使讀者更留意來源（Braasch &amp; Bråten, 2017）：</p>
+  <div class="er-disc"><span>察覺矛盾</span><i>➜</i><span>留意來源</span><i>➜</i><span>追查原因</span><i>➜</i><span>按證據權衡</span><i>➜</i><span>有條件的結論</span></div>
+  <div class="er-conf2">
+    <div class="er-doc" style="--c:var(--er-tl)"><span class="k">文本甲 · 虛構示例</span><h4>〈看短片令學生專注力下降〉</h4><p>研究發現，學生看短片後，閱讀測驗的專注表現明顯下降。</p>
+      <dl><dt>研究對象</dt><dd>大學生 120 人</dd><dt>量度方法</dt><dd>實驗室閱讀測驗</dd><dt>發布者</dt><dd>大學研究團隊</dd><dt>發表年份</dt><dd>2025</dd></dl></div>
+    <div class="er-doc" style="--c:var(--er-rd)"><span class="k">文本乙 · 虛構示例</span><h4>〈短片學習有助學生專注〉</h4><p>調查顯示，大部分學生認為看短片學習令他們更專注。</p>
+      <dl><dt>研究對象</dt><dd>初中生 30 人</dd><dt>量度方法</dt><dd>學生自評問卷</dd><dt>發布者</dt><dd>短片學習平台</dd><dt>發表年份</dt><dd>2025</dd></dl></div>
+  </div>
+  <p style="margin:14px 0 0"><strong>兩篇為何會矛盾？</strong>逐一核對以下解釋：</p>
+  <div class="er-crs" id="er-crs"></div>
+  <div class="er-concl" id="er-crc">
+    <b>🧭 權衡後的判斷</b><br>
+    文本甲的證據較強（樣本較大、客觀量度、沒有明顯利益衝突），但結論只適用於大學生；文本乙有利益衝突，而且只靠自評。<strong>暫時結論：</strong>短片可能影響專注，但對初中生的影響仍需更多獨立研究。
+  </div>
+
+  <!-- 7 論點 -->
+  <h2 id="argument">權衡論點：論證與推理</h2>
+  <p>處理衝突，最終要比較雙方<strong>論點</strong>的質素。論說文本（argumentative text）以證據支持主張；按 Toulmin（1958）的模型，可拆解為六個部分。點選圖例或文中的劃線部分：</p>
+  <div class="er-leg" id="er-leg"></div>
+  <div class="er-tou">
+    <div class="er-para" id="er-para">
+      <span data-r="claim">本校初中寫作課應有條件地容許學生使用生成式 AI。</span><span data-r="data">一項大學團隊的同行評審研究發現，使用 AI 回饋的學生，初稿的結構及用詞質素較高。</span><span data-r="warrant">如果一種工具能提升初稿質素，學生就能把更多時間投放在構思與修訂上。</span><span data-r="backing">寫作教學研究一直指出，有質素的回饋是改善寫作的關鍵。</span><span data-r="qual">不過，這個好處可能只在初稿階段成立；</span><span data-r="rebut">另有研究指出，學生若過度依賴 AI，獨立寫作表現反而下降，因此修訂必須由學生自行完成。</span>
+      <span class="er-fic">虛構示例</span>
+    </div>
+    <div class="er-panel er-anim" id="er-tp" aria-live="polite"></div>
+  </div>
+  <p style="margin-top:16px"><strong>推理（reasoning）的常見陷阱：</strong>即使證據屬實，推理出錯也會得出錯誤結論。</p>
+  <div class="er-fall">
+    <div><b>以偏概全</b><q>「我表弟用 AI 後作文進步了，所以 AI 對所有學生都有效。」</q>一個例子不足以支持普遍結論。</div>
+    <div><b>相關不等於因果</b><q>「多用 AI 的學生成績較高，所以 AI 令成績提高。」</q>可能是成績好的學生本來就較常使用工具。</div>
+    <div><b>訴諸權威</b><q>「某名人說 AI 會毀掉教育，所以一定是真的。」</q>他是該領域的專家嗎？有證據嗎？</div>
+    <div><b>流暢即正確</b><q>「AI 的回答寫得很有條理，應該是對的。」</q>文字流暢不代表內容真確，AI 文本尤其如此。</div>
+  </div>
+
+  <!-- 8 讀者 -->
+  <h2 id="reader">讀者因素：認識論信念與自我調節</h2>
+  <p>同一組文本，不同讀者會有不同判斷。關鍵之一是<strong>認識論信念</strong>（epistemic beliefs）：讀者認為知識是確定的，還是需要證據支持。拖動滑桿，看看三個發展層次（Kuhn, Cheney &amp; Weinstock, 2000）：</p>
+  <div class="er-bel">
+    <b>情境：</b>上面兩篇關於短片與專注力的文本，結論相反。
+    <input type="range" min="0" max="2" step="1" value="0" id="er-bs" aria-label="認識論理解層次">
+    <div class="er-ticks" id="er-bt"><span data-v="0">絕對主義</span><span data-v="1">多元主義</span><span data-v="2">評價主義</span></div>
+    <div class="er-belg er-anim" id="er-bo"></div>
+  </div>
+
+  <p style="margin-top:18px"><strong>知識怎樣才算有根據？</strong>多文本閱讀研究把讀者的「證成信念」分為三類（Bråten et al., 2013）。國際閱讀評估亦以問卷了解學生傾向依靠權威，還是依靠多個來源：</p>
+  <div class="er-just">
+    <div class="er-jc" style="--c:var(--er-rd)"><b>個人證成</b><small>Personal justification</small><q>「我覺得對，就是對。」</q><p>憑個人意見或經驗判斷。研究顯示，愈依賴這種方式，多文本理解往往愈弱。</p></div>
+    <div class="er-jc" style="--c:var(--er-gd)"><b>權威證成</b><small>Justification by authority</small><q>「專家或教科書這樣說。」</q><p>有用但不足：還要問權威是否在其專業範圍內、有沒有利益衝突。</p></div>
+    <div class="er-jc" style="--c:var(--er-gn)"><b>多源證成</b><small>Justification by multiple sources</small><q>「多個獨立來源都這樣說。」</q><p>比較並印證多個來源；研究顯示與較佳的多文本理解相關。</p></div>
+  </div>
+  <div class="er-rc">
+    <div><b>🧭 後設認知</b>知道有哪些策略可以查證來源、評估 AI 生成內容，並知道何時要用。</div>
+    <div><b>🛑 執行功能</b>「抑制」能力幫助讀者忽略點擊誘餌及無關內容，專注於閱讀目的。</div>
+    <div><b>📚 先備知識</b>不只要多，還要準確：錯誤的背景知識會令錯誤資訊更易通過驗證。</div>
+  </div>
+
+  <!-- 9 學科 -->
+  <h2 id="discipline">學科閱讀：不同學科，不同的證成方式</h2>
+  <p>不同學科建構、證成及傳達知識的方式各有不同。審辨的讀者會按學科調整「憑甚麼相信」的標準：</p>
+  <div class="er-dsc">
+    <div style="--c:var(--er-tl)"><h4>🔬 科學</h4><ul><li>實證數據與研究方法</li><li>樣本、對照、可重複驗證</li><li>同行評審</li></ul><q>證據從哪種研究方法得來？足以支持結論嗎？</q></div>
+    <div style="--c:var(--er-gd)"><h4>📜 歷史</h4><ul><li>溯源：誰寫的、何時、為何寫</li><li>情境化：當時的背景</li><li>佐證：與其他史料比對</li></ul><q>這份史料的作者站在甚麼位置？其他史料怎樣說？</q></div>
+    <div style="--c:var(--er-pu)"><h4>📖 文學</h4><ul><li>以文本證據支持詮釋</li><li>容許多種合理詮釋</li><li>但詮釋仍有優劣之分</li></ul><q>我的詮釋有文本證據支持嗎？</q></div>
+  </div>
+  <div class="er-sci">
+    <div class="ic">🔬</div>
+    <b>與 PISA 2025 科學素養相連：認識論知識</b>
+    <p>PISA 2025 科學框架重視「認識論知識」：理解科學知識怎樣透過證據、方法及同行審查建立，並能評鑑科學資訊。PISA 2025 結果顯示，OECD 平均只有 46% 學生既會查核資訊來源，又較信任科學證據而非常識。審辨閱讀與科學探究，培養的是同一種判斷力。<a href="science.html">看〈科學教育〉→</a></p>
+  </div>
+
+  <!-- 10 能力進程 -->
+  <h2 id="levels">評鑑能力的進程</h2>
+  <p>從閱讀素養的精練程度描述，可以看到評鑑能力怎樣由淺入深（只列與評鑑相關的部分；第 2 級為基準水平）：</p>
+  <div id="er-lvs"></div>
+  <p class="er-src">改寫自國際閱讀素養框架的精練程度描述；分數為該級的最低分。</p>
+  <p style="margin-top:16px"><strong>甚麼令評鑑任務變難？</strong></p>
+  <div class="er-drv">
+    <div><b>📄 文本</b>多個互相矛盾的來源、陌生題材、資訊準確度低<div class="g">易<i></i>難</div></div>
+    <div><b>❓ 任務</b>需要同時考慮多個準則、多個步驟、開放式回應<div class="g">易<i></i>難</div></div>
+    <div><b>🔗 文本與任務</b>線索間接、資訊分散、干擾項似是而非（如點擊誘餌）<div class="g">易<i></i>難</div></div>
+  </div>
+
+  <!-- 11 課堂 -->
+  <h2 id="class">課堂啟示</h2>
+  <div class="cards">
+    <div class="card"><span class="no">1</span><h4>先定認識論目的</h4><p>閱讀前讓學生寫下「我想知道甚麼才算可靠」，避免只找支持自己立場的資料。</p></div>
+    <div class="card"><span class="no">2</span><h4>教橫向閱讀</h4><p>示範開新分頁查作者及其他來源，再讓學生限時查證一則帖文。</p></div>
+    <div class="card"><span class="no">3</span><h4>把 AI 回答當作來源</h4><p>要求學生為 AI 回答中的每個事實找出原始出處，並標示信心程度。</p></div>
+    <div class="card"><span class="no">4</span><h4>刻意使用矛盾文本</h4><p>提供兩篇結論相反的文本，請學生解釋「為何矛盾」，而非只選一邊。</p></div>
+    <div class="card"><span class="no">5</span><h4>以論證結構讀與寫</h4><p>閱讀時拆解主張、證據、理據及反駁；寫作時要求回應反方。</p></div>
+    <div class="card"><span class="no">6</span><h4>跨科共用審辨語言</h4><p>各科以「證據」「來源」「可信度」「證成」等詞彙，教本科獨有的閱讀方式。</p></div>
+  </div>
+
+  <div class="er-cul">
+    <p class="mt">博學之，審問之，慎思之，明辨之，篤行之。<small>──《禮記·中庸》</small></p>
+    <p>「審辨」取自「審問」與「明辨」。古人求學的五個層次，與審辨閱讀的過程互相呼應：</p>
+    <div class="row">
+      <a href="#veracity"><b>博學</b>搜尋與選取多元來源</a>
+      <a href="#epistemic"><b>審問</b>追問：憑甚麼知道？</a>
+      <a href="#form"><b>慎思</b>反思內容、形式與自己的信念</a>
+      <a href="#conflict"><b>明辨</b>評估真確性，處理衝突</a>
+      <a href="#argument"><b>篤行</b>作出與證據相稱的判斷</a>
+    </div>
+  </div>
+
+  <h2>參考文獻</h2>
+  <ul class="refs">
+    <li>Braasch, J. L. G., &amp; Bråten, I. (2017). The discrepancy-induced source comprehension (D-ISC) model. <i>Educational Psychologist, 52</i>(3), 167–181.</li>
+    <li>Bråten, I., Britt, M. A., Strømsø, H. I., &amp; Rouet, J.-F. (2011). The role of epistemic beliefs in the comprehension of multiple expository texts. <i>Educational Psychologist, 46</i>(1), 48–70.</li>
+    <li>Bråten, I., Ferguson, L. E., Strømsø, H. I., &amp; Anmarkrud, Ø. (2013). Justification beliefs and multiple-documents comprehension. <i>European Journal of Psychology of Education, 28</i>(3), 879–902.</li>
+    <li>Chinn, C. A., Rinehart, R. W., &amp; Buckland, L. A. (2014). Epistemic cognition and evaluating information: Applying the AIR model of epistemic cognition. In D. N. Rapp &amp; J. L. G. Braasch (Eds.), <i>Processing inaccurate information</i> (pp. 425–453). MIT Press.</li>
+    <li>Kuhn, D., Cheney, R., &amp; Weinstock, M. (2000). The development of epistemological understanding. <i>Cognitive Development, 15</i>(3), 309–328.</li>
+    <li>OECD (2026). <i>PISA 2025 Results (Volume I)</i>. OECD Publishing.</li>
+    <li>OECD (2026). <i>PISA 2029 reading literacy framework</i> (final version; EDU/PISA/GB(2026)21). OECD.</li>
+    <li>Richter, T., Schroeder, S., &amp; Wöhrmann, B. (2009). You don’t have to believe everything you read: Background knowledge permits fast and efficient validation of information. <i>Journal of Personality and Social Psychology, 96</i>(3), 538–558.</li>
+    <li>Sperber, D., Clément, F., Heintz, C., Mascaro, O., Mercier, H., Origgi, G., &amp; Wilson, D. (2010). Epistemic vigilance. <i>Mind &amp; Language, 25</i>(4), 359–393.</li>
+    <li>Toulmin, S. (1958). <i>The uses of argument</i>. Cambridge University Press.</li>
+    <li>Wardle, C., &amp; Derakhshan, H. (2017). <i>Information disorder: Toward an interdisciplinary framework for research and policy making</i>. Council of Europe.</li>
+    <li>Wineburg, S. (1991). Historical problem solving: A study of the cognitive processes used in the evaluation of documentary and pictorial evidence. <i>Journal of Educational Psychology, 83</i>(1), 73–87.</li>
+    <li>Wineburg, S., &amp; McGrew, S. (2019). Lateral reading and the nature of expertise: Reading less and learning more when evaluating digital information. <i>Teachers College Record, 121</i>(11).</li>
+    <li>《禮記·中庸》。</li>
+  </ul>
+
+  <h2>相關專題</h2>
+  <a class="trend-link" href="reading-framework.html">
+    <span class="tl-icon">🧩</span>
+    <span class="tl-text"><b>多文本時代的閱讀力</b><small>七個環節：把多個文本讀成有來源的整體理解</small></span>
+    <span class="tl-arrow">→</span>
+  </a>
+  <!--a class="trend-link" href="reading-2029.html">
+    <span class="tl-icon">🔭</span>
+    <span class="tl-text"><b>國際評估的新方向</b><small>閱讀素養框架全貌：定義、文本類型、評估設計及精練程度</small></span>
+    <span class="tl-arrow">→</span>
+  </a-->
+  <a class="trend-link" href="science.html">
+    <span class="tl-icon">🔬</span>
+    <span class="tl-text"><b>科學教育</b><small>認識論知識：科學知識怎樣以證據建立</small></span>
+    <span class="tl-arrow">→</span>
+  </a>
+  <a class="trend-link" href="agency.html">
+    <span class="tl-icon">🧠</span>
+    <span class="tl-text"><b>學習能動性</b><small>動機、後設認知與自我調節：讀者為何願意查證</small></span>
+    <span class="tl-arrow">→</span>
+  </a>
+</main>
+
+<div id="pager"></div>
+<div id="site-footer"></div>
+
+<script>
+(function(){
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const replay = el => { el.classList.remove('er-anim'); void el.offsetWidth; el.classList.add('er-anim'); };
+
+  /* ===== 1. definition ===== */
+  const DEF = {
+    evaluate:['評鑑','Evaluate','權衡資訊的相關性、論證是否合理及可信度；包括運用「認知警覺」，察覺錯誤資訊及 AI 內容的不準確之處。這是審辨閱讀的核心。','#evaluate','var(--er-gd)'],
+    crit:['有效且具批判性地','Effectively and critically','「有效」：在時間及資源限制下達成閱讀目標。「批判性」：反思地推理、質疑說法、主動尋找其他觀點。','#reader','var(--er-rd)'],
+    understand:['理解','Understand','由字面理解到跨文本推論。審辨之前，讀者先要建立「多個文本怎樣重疊、互補或矛盾」的心理模型。','#conflict','var(--er-tl)'],
+    goals:['發展知識','Develop knowledge','閱讀不只是收集及記憶資訊，而是建構可靠的知識，用於學習、工作及公民參與。','#epistemic','var(--er-gn)']
+  };
+  const defBox = $('#er-defbox');
+  function showDef(k){
+    const d = DEF[k];
+    $$('.er-term').forEach(b => b.classList.toggle('on', b.dataset.k === k));
+    defBox.style.setProperty('--c', d[4]);
+    defBox.innerHTML = `<h4>${d[0]} <small>${d[1]}</small></h4><p>${d[2]}</p><a class="go" href="${d[3]}">到本頁相關部分 ↓</a>`;
+    replay(defBox);
+  }
+  $$('.er-term').forEach(b => b.addEventListener('click', () => showDef(b.dataset.k)));
+  showDef('evaluate');
+
+  /* ===== 2. keyword map ===== */
+  const G = {
+    threat:{zh:'🚨 資訊失序',p:'要防範甚麼',c:'var(--er-rd)',bg:'var(--er-rdbg)'},
+    mind:{zh:'🧠 認識論心態',p:'怎樣看知識',c:'var(--er-pu)',bg:'var(--er-pubg)'},
+    check:{zh:'🔍 警覺與查證',p:'怎樣判斷可信',c:'var(--er-tl)',bg:'var(--er-tlbg)'},
+    arg:{zh:'⚖️ 論證與推理',p:'怎樣建立判斷',c:'var(--er-gd)',bg:'var(--er-gdbg)'}
+  };
+  const KW = [
+    ['threat','錯誤資訊','Misinformation','不準確的資訊，不論傳播者是否有意，例如誤轉發舊新聞、AI「幻覺」編造的引文。','這個說法有沒有可能出錯？最先由誰說出？','資訊生態的轉變；準確度低的文本令評鑑更難','disorder'],
+    ['threat','虛假資訊','Disinformation','刻意製造或散播、意圖誤導的虛假資訊，例如冒充官方的圖片、經剪接的影片。','誰會因為我相信這個說法而得益？','資訊生態的轉變；評鑑時要辨識隱藏的利益','disorder'],
+    ['threat','惡意資訊','Malinformation','內容屬實，卻被用來傷害他人，例如公開私隱、斷章取義地發布真實片段。','內容是真的，但發布的目的是甚麼？','延伸概念（Wardle & Derakhshan, 2017）','disorder'],
+    ['mind','認識論思維','Epistemic thinking','閱讀時設定與真相及知識有關的目的，並運用標準（證據、方法、來源）判斷資訊。','我讀這些文本，是想知道真相，還是想找支持自己的說法？','基礎閱讀過程；讀者特質','epistemic'],
+    ['mind','認識論信念','Epistemic beliefs','讀者對知識本質的看法：知識是確定的，還是需要證據支持？知識應由權威、個人感覺，還是多個來源證成？','我認為知識是固定的，還是會隨證據修正？','讀者特質；問卷：知識的證成（權威 vs 多個來源）','reader'],
+    ['mind','批判性','Critically','反思地推理、質疑說法、主動尋找其他觀點的傾向。批判不等於否定一切，而是按證據調整信任。','我是否只挑選了自己想聽的說法？','定義：「有效且具批判性地」','def'],
+    ['check','認知警覺','Epistemic vigilance','從來源（能力、善意）及內容兩方面過濾別人的說法，察覺錯誤資訊及 AI 內容的不準確之處。','說這話的人有能力知道嗎？有理由誤導我嗎？','定義：「評鑑」','veracity'],
+    ['check','評鑑','Evaluation','權衡文本的相關性、論證是否合理及可信度，判斷它對閱讀目的有多大價值。','這個文本對我的問題有多可靠、多有用？','閱讀過程「評鑑與反思」；報告分量表','evaluate'],
+    ['check','真確性','Veracity','說法是否與事實相符。判斷真確性要靠證據，不能只看文字是否流暢、版面是否專業。','有甚麼證據證明這是真的？','評鑑過程：評估質素與真確性','veracity'],
+    ['check','交叉印證','Corroborating','以其他獨立來源核對同一說法，看看是否互相支持；事實查核員常用「橫向閱讀」。','有沒有其他獨立、可靠的來源這樣說？','評鑑過程：以核查來源或交叉印證評估真確性','veracity'],
+    ['arg','論點','Argument','一個主張連同支持它的理由與證據。好的論點會說明證據為何能支持主張，並承認限制。','主張是甚麼？證據足以支持嗎？','評鑑過程：察覺及評估衝突（權衡論點）','argument'],
+    ['arg','論說文本','Argumentative text','以說服或論證為目的、以證據支持主張的文本，如評論、社論、帶立場的帖文。','這篇文本想說服我相信或做甚麼？','文本類型：說服及論證類','form'],
+    ['arg','論證','Argumentation','提出主張、回應反方、權衡雙方理據的過程。閱讀矛盾文本，本身就是一場與作者的論證。','反方會怎樣回應？我怎樣權衡？','評鑑過程：察覺及評估衝突','conflict'],
+    ['arg','推理','Reasoning','由證據得出結論的思考過程。常見陷阱包括以偏概全、相關當因果、訴諸權威、流暢即正確。','由這些證據，真的能推出這個結論嗎？','定義：「批判性」即反思地推理','argument']
+  ];
+  const kwBox = $('#er-kw'), kwP = $('#er-kwp');
+  kwBox.innerHTML = Object.entries(G).map(([g,o]) => `<div class="er-kg" style="--c:${o.c};--bg:${o.bg}">
+    <h3>${o.zh}</h3><p>${o.p}</p>
+    ${KW.map((k,i) => k[0]===g ? `<button type="button" class="er-chip" data-i="${i}"><b>${k[1]}</b><small>${k[2]}</small></button>` : '').join('')}</div>`).join('');
+  function showKW(i){
+    const k = KW[i], g = G[k[0]];
+    $$('.er-chip').forEach(b => b.classList.toggle('on', +b.dataset.i === i));
+    kwP.style.setProperty('--c', g.c);
+    kwP.innerHTML = `<h3>${k[1]} <small>${k[2]}</small></h3><p>${k[3]}</p>
+      <div class="q"><b>讀者自問</b>${k[4]}</div>
+      <div class="fw"><b>📍 框架位置：</b>${k[5]}</div>
+      <a class="go" href="#${k[6]}">到本頁相關部分 ↓</a>`;
+    replay(kwP);
+  }
+  kwBox.addEventListener('click', e => { const b = e.target.closest('.er-chip'); if (b) showKW(+b.dataset.i); });
+  showKW(0);
+
+  /* ===== 3. disorder quiz ===== */
+  const OPT = {mis:'錯誤資訊',dis:'虛假資訊',mal:'惡意資訊'};
+  const QZ = [
+    ['同學在群組轉發一則三年前的颱風新聞，以為是今天發生的事。','mis','內容與現況不符，但轉發者沒有誤導意圖，屬錯誤資訊。查看發布日期就能避免。'],
+    ['有人製作印有政府部門標誌的圖片，聲稱某保健品可預防流感，藉此推銷產品。','dis','冒充官方、刻意捏造以謀利，屬虛假資訊。'],
+    ['AI 聊天機械人在回答中引用了一篇根本不存在的研究。','mis','AI 沒有欺騙意圖，但編造了引文（「幻覺」），屬錯誤資訊。必須追查原始出處。'],
+    ['有人把某教師的私人對話截圖公開，配上嘲諷文字，令對方受辱。','mal','截圖可能屬實，但目的是傷害他人，屬惡意資訊。'],
+    ['帖文只截取專家訪問中的一句，刻意令觀眾以為專家反對使用 AI 輔助學習。','dis','刻意斷章取義、製造錯誤印象，屬虛假資訊（誤導性內容）。']
+  ];
+  let qi = 0, qok = 0;
+  const qs = $('#er-qs'), qo = $('#er-qo'), qf = $('#er-qf'), qn = $('#er-qn'), qnext = $('#er-qnext');
+  const hit = k => ['mis','dis','mal'].forEach(x => document.getElementById('v-'+x).classList.toggle('hit', x === k));
+  function renderQ(){
+    hit(null); qf.classList.remove('show'); qnext.hidden = true;
+    if (qi >= QZ.length){
+      qn.textContent = ''; qs.textContent = `完成！答對 ${qok}／${QZ.length} 題。`;
+      qo.innerHTML = ''; qnext.hidden = false; qnext.textContent = '再做一次'; return;
+    }
+    const q = QZ[qi]; qn.textContent = `第 ${qi+1}／${QZ.length} 題`; qs.textContent = q[0];
+    qo.innerHTML = Object.entries(OPT).map(([k,v]) => `<button type="button" data-k="${k}">${v}</button>`).join('');
+  }
+  qo.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || b.disabled) return;
+    const q = QZ[qi], right = b.dataset.k === q[1]; if (right) qok++;
+    [...qo.children].forEach(x => { x.disabled = true; x.classList.add(x.dataset.k === q[1] ? 'ok' : 'no'); });
+    hit(q[1]);
+    qf.innerHTML = (right ? '✅ 正確。' : '❌ 再想想。') + q[2]; qf.classList.add('show');
+    qnext.hidden = false; qnext.textContent = qi === QZ.length-1 ? '看結果 →' : '下一題 →';
+  });
+  qnext.addEventListener('click', () => { if (qi >= QZ.length){ qi = 0; qok = 0; } else qi++; renderQ(); });
+  renderQ();
+
+  /* ===== 4. epistemic aims ===== */
+  const AIM = [
+    {l:'🎯 取得準確的資訊',how:'比較多個來源，優先看有明確方法的研究；遇到矛盾會追查原因。',crit:'證據質素、作者專業、有沒有獨立印證',risk:'✅ 這是審辨閱讀需要的認識論目的。',ok:1},
+    {l:'📣 找資料支持我已有的立場',how:'只點擊與自己看法一致的搜尋結果，略過反方。',crit:'「是否合我心意」',risk:'⚠️ 風險：確認偏誤；加上推薦演算法，容易困在同溫層。'},
+    {l:'⏱️ 盡快完成功課',how:'採用第一個搜尋結果或 AI 回答，直接抄錄。',crit:'「夠不夠快」「看來像不像答案」',risk:'⚠️ 風險：以速度取代真確；流暢的錯誤資訊最容易過關。'}
+  ];
+  const aimO = $('#er-aimo'), aimP = $('#er-aimp');
+  aimO.innerHTML = AIM.map((a,i) => `<button type="button" data-i="${i}">${a.l}</button>`).join('');
+  function showAim(i){
+    const a = AIM[i];
+    [...aimO.children].forEach((b,j) => b.classList.toggle('on', j === i));
+    aimP.style.setProperty('--c', a.ok ? 'var(--er-gn)' : 'var(--er-rd)');
+    aimP.innerHTML = `<h3>${a.l}</h3><dl><dt>怎樣讀</dt><dd>${a.how}</dd><dt>判斷標準</dt><dd>${a.crit}</dd></dl>
+      <p style="margin-top:10px;font-weight:700;color:${a.ok ? 'var(--er-gn)' : 'var(--er-rd)'}">${a.risk}</p>`;
+    replay(aimP);
+  }
+  aimO.addEventListener('click', e => { const b = e.target.closest('button'); if (b) showAim(+b.dataset.i); });
+  showAim(0);
+
+  /* ===== 5. validation vs strategic evaluation ===== */
+  const VAL = [
+    {t:'「北極熊在沙漠中捕獵駱駝。」',tag:'自動驗證已足夠',c:'var(--er-gn)',
+     v:['⚠️ 即時察覺','與已有知識明顯矛盾，一讀便覺不合理。'],s:['無需再查','自動驗證已攔截這個說法。']},
+    {t:'「研究顯示，每天看短片 30 分鐘，會令專注力下降 40%。」',tag:'需要策略性評鑑',c:'var(--er-rd)',
+     v:['✅ 順利通過','聽起來合理，也符合不少人的印象。'],s:['🔍 需要查證','哪項研究？誰做的？怎樣量度「專注力」？40% 是跟甚麼比較？']},
+    {t:'AI 回答：「根據陳大文等人（2023）在《亞洲教育研究期刊》的研究，AI 回饋能令寫作分數提升 25%。」',tag:'需要策略性評鑑',c:'var(--er-rd)',
+     v:['✅ 順利通過','文字流暢，有作者、年份及期刊名稱，看似權威。'],s:['🔍 必須核實','這篇文獻真的存在嗎？AI 可能編造引文。到期刊網站或學術資料庫搜尋原文。']}
+  ];
+  const valBox = $('#er-val');
+  valBox.innerHTML = VAL.map((v,i) => `<div class="er-vrow" style="--c:${v.c}">
+    <div class="top"><span class="cl">${v.t} <span class="er-fic">虛構示例</span></span>
+      <button type="button" class="er-btn" style="--c:var(--er-tl)" data-i="${i}">逐層檢查</button></div>
+    <div class="res">
+      <div class="a"><b>① 自動驗證（validation）</b><span>${v.v[0]}</span>${v.v[1]}</div>
+      <div class="b"><b>② 策略性評鑑（strategic evaluation）</b><span>${v.s[0]}</span>${v.s[1]}<br><span class="tg" style="display:inline-block;margin-top:6px">${v.tag}</span></div>
+    </div></div>`).join('');
+  valBox.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    b.closest('.er-vrow').classList.add('open'); b.hidden = true;
+  });
+
+  /* ===== 6. credibility checker ===== */
+  const CK = [
+    ['作者有教育研究的相關專業','來源·能力'],
+    ['作者沒有明顯利益衝突（例如不是在推銷產品）','來源·善意'],
+    ['提供了可追查的研究出處','內容·證據'],
+    ['「提升 30%」說明了怎樣量度、跟甚麼比較','內容·合理性'],
+    ['與我已知的及其他可靠來源一致','內容·一致性'],
+    ['有獨立來源印證同一結論','內容·印證']
+  ];
+  const ckBox = $('#er-ck'), vd = $('#er-vd'), on = new Set();
+  ckBox.innerHTML = CK.map((c,i) => `<button type="button" class="er-ck" data-i="${i}" aria-pressed="false">
+    <span class="box">✓</span><span>${c[0]}</span><span class="tg">${c[1]}</span></button>`).join('');
+  function verdict(){
+    const n = on.size;
+    const [bg, t, d] = n <= 2 ? ['var(--er-rd)','暫不相信','目前只有轉發數字和肯定語氣，沒有可查證的依據。高轉發不等於高可信。'] :
+      n <= 4 ? ['var(--er-gd)','需要查證','部分條件成立，但仍有缺口。請以橫向閱讀找出原始研究。'] :
+               ['var(--er-gn)','可暫時接受','來源及內容大致通過檢查；仍應留意新證據。'];
+    vd.style.background = bg;
+    vd.innerHTML = `<b>${t}</b><div class="er-gauge">${CK.map((_,i) => `<i class="${i < n ? 'f' : ''}"></i>`).join('')}</div>${d}<br><small>已確認 ${n}／${CK.length} 項。這則帖文其實一項都未能確認；勾選只是模擬查證後的情況。</small>`;
+  }
+  ckBox.addEventListener('click', e => {
+    const b = e.target.closest('.er-ck'); if (!b) return;
+    const i = +b.dataset.i; on.has(i) ? on.delete(i) : on.add(i);
+    b.classList.toggle('on', on.has(i)); b.setAttribute('aria-pressed', on.has(i)); verdict();
+  });
+  verdict();
+
+  /* ===== 7. lateral reading tabs ===== */
+  const TB = [
+    ['同行評審期刊','大學團隊研究','使用 AI 回饋的學生，初稿的結構及用詞質素較高；對修訂能力的影響未有定論。','部分支持','var(--er-tl)'],
+    ['另一所大學','獨立研究','學生把 AI 用作回饋時初稿較佳；但若直接以 AI 代寫，獨立寫作表現下降。','有條件支持','var(--er-gd)'],
+    ['公司新聞稿','智學科技 EduAI','「全面提升寫作能力 30%」；沒有說明研究設計，並由產品供應商發布。','支持，但有利益衝突','var(--er-rd)']
+  ];
+  const tabs = $('#er-tabs'), opened = new Set();
+  tabs.innerHTML = TB.map((t,i) => `<button type="button" class="er-tab" data-i="${i}" aria-expanded="false">
+    <span class="t">🗂️ 分頁 ${i+1} · ${t[0]}</span><b>${t[1]}</b><span class="hint">按此開啟 ↗</span>
+    <div class="r"><span class="st" style="background:${t[4]}">${t[3]}</span><br>${t[2]}</div></button>`).join('');
+  tabs.addEventListener('click', e => {
+    const b = e.target.closest('.er-tab'); if (!b) return;
+    b.classList.add('open'); b.setAttribute('aria-expanded','true'); opened.add(b.dataset.i);
+    if (opened.size === TB.length) $('#er-concl').classList.add('show');
+  });
+
+  /* ===== 8. headline hotspots ===== */
+  const HL = [
+    ['情緒化字眼','「震驚！」旨在引起情緒反應，而非提供資訊。情緒愈強，愈要放慢判斷。','作者想令我感受甚麼？'],
+    ['來源不明','哪位專家？哪個領域？沒有名字的「專家」，無法評估其能力。','說這話的人有能力知道嗎？'],
+    ['誇大用語','「摧毀」是極端說法；研究結論通常有限定，如「可能」「部分」。','證據真的支持這麼強的結論嗎？'],
+    ['以偏概全','「下一代」把所有年輕人一概而論。','結論適用於誰？有沒有例外？'],
+    ['點擊誘餌','誘使點擊，可能是為了流量或廣告收益，屬似是而非的干擾。','發布者從我的點擊中得到甚麼？']
+  ];
+  const hl = $('#er-hl'), hlp = $('#er-hlp'), hlc = $('#er-hlc'), found = new Set();
+  hl.addEventListener('click', e => {
+    const s = e.target.closest('[data-h]'); if (!s) return;
+    const i = +s.dataset.h; found.add(i); s.classList.add('found');
+    $$('#er-hl [data-h]').forEach(x => x.classList.toggle('on', x === s));
+    const h = HL[i];
+    hlp.innerHTML = `<h3>${h[0]}</h3><p>${h[1]}</p><div class="q"><b>讀者自問</b>${h[2]}</div>`;
+    replay(hlp);
+    hlc.textContent = `已找到 ${found.size}／${HL.length} 個警號` + (found.size === HL.length ? '　✅ 全部找到！' : '');
+  });
+
+  /* ===== 9. fact vs opinion ===== */
+  const FO = [
+    ['本港不少中學已制訂學生使用生成式 AI 的指引。','f','事實陳述：可以查證（例如翻查學校網站或教育當局文件）。'],
+    ['禁止學生用 AI 是最愚蠢的做法。','o','意見：「最愚蠢」是價值判斷，無法以事實證明真假。'],
+    ['一項調查訪問了 1,200 名中學生，其中 68% 曾用 AI 完成功課。','f','事實陳述：可以查證，但仍要問調查由誰進行、怎樣抽樣。'],
+    ['學校應該教學生負責任地使用 AI，而不是一味禁止。','o','意見：「應該」表達立場；可以用理由支持，但不是事實。'],
+    ['AI 一定會令學生變懶。','o','意見：看似事實陳述，其實是缺乏證據的推斷；「一定」是警號。']
+  ];
+  let fi = 0, fok = 0;
+  const fs = $('#er-fs'), fo = $('#er-fo'), ff = $('#er-ff'), fn = $('#er-fn'), fnext = $('#er-fnext');
+  function renderF(){
+    ff.classList.remove('show'); fnext.hidden = true;
+    if (fi >= FO.length){
+      fn.textContent = ''; fs.textContent = `完成！答對 ${fok}／${FO.length} 句。記住：事實陳述可以查證，但不等於正確。`;
+      fo.innerHTML = ''; fnext.hidden = false; fnext.textContent = '再做一次'; return;
+    }
+    fn.textContent = `第 ${fi+1}／${FO.length} 句`; fs.textContent = '「' + FO[fi][0] + '」';
+    fo.innerHTML = `<button type="button" data-k="f">事實陳述（可查證）</button><button type="button" data-k="o">意見（價值判斷）</button>`;
+  }
+  fo.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || b.disabled) return;
+    const q = FO[fi], right = b.dataset.k === q[1]; if (right) fok++;
+    [...fo.children].forEach(x => { x.disabled = true; x.classList.add(x.dataset.k === q[1] ? 'ok' : 'no'); });
+    ff.innerHTML = (right ? '✅ ' : '❌ ') + q[2]; ff.classList.add('show');
+    fnext.hidden = false; fnext.textContent = fi === FO.length-1 ? '看結果 →' : '下一句 →';
+  });
+  fnext.addEventListener('click', () => { if (fi >= FO.length){ fi = 0; fok = 0; } else fi++; renderF(); });
+  renderF();
+
+  /* ===== 10. conflict reasons ===== */
+  const CR = [
+    ['研究對象不同',1,'甲以大學生、乙以初中生為對象，結論未必可以互相推論。'],
+    ['量度方法不同',1,'甲用客觀測驗，乙靠學生自評；自評較易受期望影響。'],
+    ['作者利益不同',1,'乙由短片學習平台發布，有推廣產品的利益；甲為大學研究團隊。'],
+    ['樣本大小不同',1,'甲 120 人、乙 30 人；樣本愈小，結果愈不穩定。'],
+    ['發表時間不同',0,'兩篇都在 2025 年發表，時間不是矛盾的原因。']
+  ];
+  const crs = $('#er-crs'), seen = new Set();
+  crs.innerHTML = CR.map((r,i) => `<button type="button" class="er-cr" data-i="${i}" aria-expanded="false"><b>${r[0]}？</b>
+    <span class="hint">按此核對</span><span class="r"><em class="${r[1] ? 'y' : 'n'}">${r[1] ? '✓ 成立' : '✗ 不成立'}</em>${r[2]}</span></button>`).join('');
+  crs.addEventListener('click', e => {
+    const b = e.target.closest('.er-cr'); if (!b) return;
+    b.classList.add('open'); b.setAttribute('aria-expanded','true'); seen.add(b.dataset.i);
+    if (seen.size === CR.length) $('#er-crc').classList.add('show');
+  });
+
+  /* ===== 11. Toulmin ===== */
+  const TR = {
+    claim:['主張 Claim','var(--er-rd)','var(--er-rdbg)','作者希望讀者接受的結論。','主張是甚麼？是事實、價值還是政策主張？'],
+    data:['證據 Data','var(--er-tl)','var(--er-tlbg)','支持主張的事實、數據或研究結果。','證據從哪裏來？真確嗎？足夠嗎？'],
+    warrant:['理據 Warrant','var(--er-pu)','var(--er-pubg)','連接證據與主張的推理：為甚麼這些證據能支持這個主張。理據常被省略，要讀者自行補上。','由證據到主張，中間的推理說得通嗎？'],
+    backing:['支持 Backing','var(--er-gn)','var(--er-gnbg)','令理據更可信的背景知識或更廣泛的證據。','理據本身有根據嗎？'],
+    qual:['限定 Qualifier','var(--er-gd)','var(--er-gdbg)','表示主張把握程度或適用範圍的字詞，如「可能」「在某些情況下」。','作者有沒有誇大結論的確定性？'],
+    rebut:['反駁 Rebuttal','#8a4a5f','#f5e8ee','主張不成立的例外情況，或作者對反方的回應。','作者有沒有考慮反方及例外？']
+  };
+  const leg = $('#er-leg'), para = $('#er-para'), tp = $('#er-tp');
+  leg.innerHTML = Object.entries(TR).map(([k,r]) => `<button type="button" data-r="${k}" style="--c:${r[1]}">${r[0]}</button>`).join('');
+  $$('#er-para span[data-r]').forEach(s => { const r = TR[s.dataset.r]; s.style.setProperty('--c', r[1]); s.style.setProperty('--bg', r[2]); });
+  function showT(k){
+    const r = TR[k];
+    $$('#er-leg button').forEach(b => b.classList.toggle('on', b.dataset.r === k));
+    $$('#er-para span[data-r]').forEach(s => s.classList.toggle('on', s.dataset.r === k));
+    tp.style.setProperty('--c', r[1]);
+    tp.innerHTML = `<h3>${r[0]}</h3><p>${r[3]}</p><div class="q"><b>讀者自問</b>${r[4]}</div>`;
+    replay(tp);
+  }
+  leg.addEventListener('click', e => { const b = e.target.closest('button'); if (b) showT(b.dataset.r); });
+  para.addEventListener('click', e => { const s = e.target.closest('span[data-r]'); if (s) showT(s.dataset.r); });
+  showT('claim');
+
+  /* ===== 12. epistemic beliefs ===== */
+  const BL = [
+    {view:'知識是確定的，來自權威；說法非對即錯。',say:'「其中一篇一定是錯的。看看哪篇是專家寫的，就知道答案。」',risk:'風險：盲信權威，或相信第一個讀到的來源。'},
+    {view:'知識是個人意見；人人有權持不同看法，無所謂好壞。',say:'「兩篇都只是意見，各有道理，相信哪一個都可以。」',risk:'風險：放棄評鑑，容易被流暢或合自己心意的說法說服。'},
+    {view:'知識是建構的、可修正的；但說法有好壞之分，可以按證據及推理評價。',say:'「兩篇的研究對象和量度方法不同。甲樣本較大、用客觀測驗，暫時較可信，但只適用於大學生。」',risk:'✅ 這是審辨閱讀的目標：按證據權衡，並保留修正空間。',ok:1}
+  ];
+  const bs = $('#er-bs'), bo = $('#er-bo');
+  function showB(v){
+    bs.value = v; const b = BL[v];
+    $$('#er-bt span').forEach(s => s.classList.toggle('on', +s.dataset.v === v));
+    bo.innerHTML = `<div class="box"><b>對知識的看法</b>${b.view}</div>
+      <div><div class="say">${b.say}</div><div class="er-risk" style="${b.ok ? 'color:var(--er-gn)' : ''}">${b.risk}</div></div>`;
+    replay(bo);
+  }
+  bs.addEventListener('input', () => showB(+bs.value));
+  $$('#er-bt span').forEach(s => s.addEventListener('click', () => showB(+s.dataset.v)));
+  showB(0);
+
+  /* ===== 13. evaluation progression ===== */
+  const LV = [
+    ['6',698,'以外在準則解決文本之間的衝突；辨識隱藏的利益；處理冗長、抽象而互相矛盾的文本。','#1f4036'],
+    ['5',626,'評估中立性與偏見；分辨抽象陳述中的事實與意見；評估假設；處理含違反直覺觀點的多篇長文本。','#2f5d50'],
+    ['4',553,'按顯著準則評估來源可靠程度；在似是而非的干擾下整合資訊；比較多個來源的觀點。','#2a7f8f'],
+    ['3',480,'根據明確資訊比較不同作者的觀點；在沒有明確線索時作推論。','#4a9aa5'],
+    ['2',407,'在明確提示下反思作者目的；根據明確陳述比較說法。','#b8860b']
+  ];
+  $('#er-lvs').innerHTML = LV.map(l => `<div class="er-lv${l[0] === '2' ? ' base' : ''}" style="--c:${l[3]}">
+    <span class="n">${l[0]}<small>${l[1]}+</small></span><p>${l[2]}${l[0] === '2' ? '　<b style="color:#8a6508">← 基準水平</b>' : ''}</p></div>`).join('');
+})();
+</script>
+</body>
+</html>
