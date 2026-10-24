@@ -158,7 +158,7 @@
   const lg = document.getElementById('r-links');
   if (lg){
 	if (SITE.length) lg.insertAdjacentHTML('afterend',
-      `<section class="r-site" aria-label="本站延伸專題"><h2>本站延伸專題</h2>${SITE.map(siteCard).join('')}</section>`);
+      `<section class="r-site" aria-label="評估單元樣例"><h2>評估單元樣例</h2>${SITE.map(siteCard).join('')}</section>`);
     lg.innerHTML = LINKS.map(linkCard).join('');
     const fb = document.querySelectorAll('.r-filter button');
     fb.forEach(b => b.addEventListener('click', () => {
