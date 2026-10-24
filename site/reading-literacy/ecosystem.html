@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>閱讀環境變了｜閱讀素養專題｜PISA 2025 研討會專題</title>
+<meta name="description" content="社交媒體、推薦演算法、生成式 AI 與資訊失序，怎樣改變了閱讀？以同溫層模擬體驗演算法如何收窄視野。">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="rd.css">
+<style>
+  /* 數字 */
+  .ec-num{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+  .ec-num div{background:var(--rbg);border-radius:18px;padding:18px 16px;text-align:center}
+  .ec-num b{display:block;font-size:2.5rem;font-weight:800;color:var(--rc);line-height:1.1;font-variant-numeric:tabular-nums}
+  .ec-num b small{font-size:.45em;font-weight:700}
+  .ec-num span{display:block;color:var(--mut);font-size:.84rem;margin-top:6px;line-height:1.55}
+  .ec-bar{display:flex;height:10px;border-radius:99px;background:#fff;overflow:hidden;margin:10px 0 0}
+  .ec-bar i{display:block;height:100%;width:0;background:var(--rc);transition:width 1.6s ease}
+  .ec-bar i.old{background:#9cc7cf}
+  .ec-tbd{font-size:.76rem;color:var(--W)}
+
+  /* 四大轉變 */
+  .ec-sh{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0 0}
+  .ec-sh button{font:inherit;text-align:left;border:2px solid transparent;border-radius:16px;background:var(--paper);padding:14px;cursor:pointer;transition:transform .15s}
+  .ec-sh button:hover{transform:translateY(-2px)}
+  .ec-sh button.on{border-color:var(--rc);background:#fff;box-shadow:var(--sh)}
+  .ec-sh .i{font-size:1.8rem;display:block}
+  .ec-sh b{display:block;font-size:.98rem;margin-top:4px}
+  .ec-sh small{color:var(--mut);font-size:.78rem}
+  .ec-dt{margin:12px 0 0;background:#fff;border-left:6px solid var(--rc);border-radius:14px;box-shadow:var(--sh);padding:14px 18px;animation:ecIn .3s ease}
+  @keyframes ecIn{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}
+  .ec-dt dl{display:grid;grid-template-columns:110px 1fr;gap:8px 14px;margin:0;font-size:.93rem}
+  .ec-dt dt{font-weight:700;color:var(--rc)}.ec-dt dd{margin:0}
+  .ec-dt .ask{background:var(--rbg);border-radius:10px;padding:6px 10px;font-weight:700}
+
+  /* 同溫層模擬 */
+  .ec-sim{background:var(--paper);border-radius:18px;padding:18px 20px;margin:12px 0}
+  .ec-sim .bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;font-size:.88rem}
+  .ec-meter{flex:1;min-width:180px;height:14px;border-radius:99px;background:#e4e0d2;overflow:hidden}
+  .ec-meter i{display:block;height:100%;background:linear-gradient(90deg,var(--W),var(--B),var(--C));transition:width .4s}
+  .ec-feed{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .ec-post{background:#fff;border-radius:14px;padding:12px 14px;border-top:5px solid var(--pc);font-size:.88rem;display:flex;flex-direction:column;gap:8px;animation:ecIn .35s ease}
+  .ec-post small{color:var(--pc);font-weight:700;font-size:.74rem}
+  .ec-post button{align-self:flex-start;font:inherit;font-size:.78rem;border:1px solid var(--line);border-radius:999px;background:#fff;padding:3px 12px;cursor:pointer}
+  .ec-post button:hover{background:var(--paper)}
+  .ec-msg{margin:12px 0 0;padding:10px 14px;border-radius:12px;background:#fff;font-size:.92rem;min-height:2.6em}
+  .ec-msg.warn{border-left:5px solid var(--W)}
+
+  /* 閱讀重點轉向 */
+  .ec-3q{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+  .ec-3q a{display:block;text-decoration:none;color:var(--ink);border-radius:16px;padding:14px 16px;background:var(--bg);border-top:5px solid var(--c);transition:transform .15s}
+  .ec-3q a:hover{transform:translateY(-3px)}
+  .ec-3q b{display:block;color:var(--c);font-size:1.05rem}
+  .ec-3q small{display:block;color:var(--mut);font-size:.84rem;line-height:1.6;margin-top:4px}
+  .ec-3q em{display:block;font-style:normal;font-size:.78rem;color:var(--c);font-weight:700;margin-top:8px}
+
+  @media (max-width:760px){
+    .ec-num,.ec-3q{grid-template-columns:1fr}
+    .ec-sh{grid-template-columns:1fr 1fr}
+    .ec-feed{grid-template-columns:1fr}
+    .ec-dt dl{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body class="rd" data-rd="ecosystem.html">
+<div id="site-header"></div>
+<section class="rd-hero"><div class="inner">
+  <span class="rd-eyebrow"></span>
+  <h1>閱讀環境變了：由紙本到資訊生態<small>The New Information Ecosystem</small></h1>
+  <p>讀者面對的不再是經編輯把關的一本書，而是社交媒體、推薦演算法與生成式 AI 交織的資訊生態。PISA 2029 閱讀框架是 2018 年後首次大幅修訂，正是為了回應這個轉變。</p>
+  <div class="rd-q"></div>
+</div></section>
+<nav class="rd-chap" id="rd-chap" aria-label="本章頁面"></nav>
+
+<main class="rd-main">
+  <p class="rd-crumb" id="rd-crumb"></p>
+  <p class="rd-lead">閱讀的地方變了，讀者要做的判斷也變了：以前問「看懂了沒有」，現在還要問「應該信哪一個」。</p>
+
+  <h2 id="numbers">三個數字</h2>
+  <div class="ec-num" id="ec-num">
+    <div><b><span data-from="48" data-to="75">48</span><small>%</small></b>
+      <div class="ec-bar"><i class="old" data-w="48"></i></div>
+      <div class="ec-bar"><i data-w="75"></i></div>
+      <span>全球上網人口比例：2018 年 48%，2025 年約 75%<br><span class="ec-tbd"><!-- 待核實 -->（2025 年數字為推算，出處待核實）</span></span></div>
+    <div><b>約 <span data-from="0" data-to="60">0</span><small> 億人</small></b>
+      <span>2025 年全球上網人口<br>大部分閱讀發生在螢幕上</span></div>
+    <div><b><span data-from="0" data-to="66">0</span><small>%</small></b>
+      <span>歐洲人至少有時會接觸錯誤或虛假資訊<br><span class="ec-tbd"><!-- 待核實 -->（調查出處待核實）</span></span></div>
+  </div>
+  <p>青少年熟悉數碼工具，但這不代表他們懂得分辨資訊。研究顯示，會操作工具和會判斷資訊是兩回事。</p>
+
+  <h2 id="shifts">四大轉變 <span class="rd-draft">初稿</span></h2>
+  <p>點選每一項，看看它改變了甚麼、讀者面對甚麼挑戰，以及應該問自己的問題。</p>
+  <div class="ec-sh" id="ec-sh"></div>
+  <div class="ec-dt" id="ec-dt" aria-live="polite"></div>
+
+  <h2 id="echo">體驗：同溫層是怎樣形成的？</h2>
+  <p>以下是一個模擬動態消息，議題是<strong>「學校應否全面禁止學生帶手機？」</strong>。按你同意的帖子「👍」，看看演算法怎樣調整你看到的內容。</p>
+  <div class="ec-sim">
+    <div class="bar"><b>觀點多樣度</b><div class="ec-meter"><i id="ec-m" style="width:100%"></i></div><b id="ec-mv">100%</b>
+      <button type="button" class="rd-btn" id="ec-reset">↻ 重新開始</button></div>
+    <div class="ec-feed" id="ec-feed"></div>
+    <p class="ec-msg" id="ec-msg" aria-live="polite">每按一次 👍，演算法就會推送更多同類觀點。</p>
+  </div>
+
+  <div class="rd-warn"><b>AI 的定位：</b>在閱讀素養框架中，AI 生成的文本被視為<b>需要評鑑的「來源」</b>，而不是最終答案。AI 回答流暢，不代表準確；它可能出現「AI 幻覺」，也可能帶有偏見。</div>
+
+  <h2 id="shift">閱讀重點的轉向：由「讀懂一篇」到「判斷多篇」</h2>
+  <p>面對多個來源，讀者要回答三個問題。這三個問題貫穿整個專題，每一頁頂部都會標示該頁回答哪一個：</p>
+  <div class="ec-3q">
+    <a href="documents.html" style="--c:var(--A);--bg:var(--Abg)"><b>① 說了甚麼？</b><small>理解：主張、依據、出處，以及文本之間的關係。</small><em>→ 05 文件模型</em></a>
+    <a href="vigilance.html" style="--c:var(--B);--bg:var(--Bbg)"><b>② 可信嗎？</b><small>評鑑：來源可靠度、內容真確性、文本間的衝突。</small><em>→ 08 查證與認知警覺</em></a>
+    <a href="argument.html" style="--c:var(--C);--bg:var(--Cbg)"><b>③ 為何相信？</b><small>證成：說得出證據與推理，信心與證據相稱。</small><em>→ 09 論證與推理</em></a>
+  </div>
+
+  <div class="rd-key"><div><b>重點：</b>資訊生態改變的不只是「在哪裏讀」，還有「誰替讀者篩選」：以前是編輯，現在是演算法和 AI。讀者因此要自己承擔把關的責任。下一頁看看 PISA 2029 怎樣重新定義「讀得好」。</div></div>
+
+  <div class="rd-src"><b>資料來源</b><ul>
+    <li>OECD. PISA 2029 Reading Literacy Framework <span class="rd-draft">初稿</span>（版本及年份待核實）</li>
+    <li>上網人口及歐洲調查數字：引自研討會簡報，原始出處待核實。</li>
+  </ul></div>
+  <div class="rd-pager" id="rd-pager"></div>
+</main>
+<div id="site-footer"></div>
+<script src="rd.js"></script>
+<script>
+(function(){
+  const $ = s => document.querySelector(s);
+
+  /* ---------- 數字動畫 ---------- */
+  const run = () => {
+    document.querySelectorAll('#ec-num [data-to]').forEach(el => {
+      const a = +el.dataset.from, b = +el.dataset.to, t0 = performance.now(), dur = 1400;
+      const step = t => { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        el.textContent = Math.round(a + (b - a) * e); if (k < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    });
+    document.querySelectorAll('#ec-num [data-w]').forEach(i => i.style.width = i.dataset.w + '%');
+  };
+  if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)){ run(); io.disconnect(); } }, {threshold:.4});
+    io.observe($('#ec-num'));
+  } else run();
+
+  /* ---------- 四大轉變 ---------- */
+  const SH = [
+    {i:'📱', t:'社交媒體與網紅', s:'新聞來源轉移',
+     what:'新聞來源由傳統出版機構，轉向 Instagram、YouTube、TikTok 等平台及網紅。',
+     hard:'資訊常與廣告、個人意見混在一起；發布門檻低，沒有編輯把關。',
+     ask:'這是誰發布的？他想我相信甚麼、做甚麼？'},
+    {i:'🔁', t:'推薦演算法', s:'誰替你選內容',
+     what:'平台按你的瀏覽及互動紀錄篩選內容，預測你想看甚麼。',
+     hard:'容易形成「同溫層」：只看到符合自己觀點的資訊，以為大家都這樣想。',
+     ask:'有甚麼是我看不到的？持相反意見的人會怎樣說？'},
+    {i:'🤖', t:'生成式 AI', s:'流暢不等於準確',
+     what:'大型語言模型（LLM）按統計規律產生流暢文字，方便搜尋和摘要。',
+     hard:'可能出現「AI 幻覺」（編造事實或引文）及偏見；來源往往不透明。',
+     ask:'這個說法有原始出處嗎？我能找到並核對嗎？'},
+    {i:'🚨', t:'錯誤及虛假資訊', s:'更易擴散',
+     what:'發布門檻降低，令不準確或刻意誤導的內容更容易廣泛流傳。',
+     hard:'圖片可被修改或由 AI 生成；「立即轉發」的緊迫感令人來不及查證。',
+     ask:'其他獨立來源怎樣說？我應該先停一停再轉發嗎？', more:['disorder.html','→ 07 資訊失序']}
+  ];
+  let cur = 0;
+  function sh(){
+    $('#ec-sh').innerHTML = SH.map((x,k) => `<button type="button" data-k="${k}" class="${k === cur ? 'on' : ''}" aria-pressed="${k === cur}">
+      <span class="i">${x.i}</span><b>${x.t}</b><small>${x.s}</small></button>`).join('');
+    const x = SH[cur];
+    $('#ec-dt').innerHTML = `<dl><dt>改變了甚麼</dt><dd>${x.what}</dd><dt>讀者的挑戰</dt><dd>${x.hard}</dd>
+      <dt>問自己</dt><dd class="ask">「${x.ask}」</dd></dl>${x.more ? `<p style="margin:10px 0 0"><a href="${x.more[0]}" style="color:var(--rc);font-weight:700">${x.more[1]}</a></p>` : ''}`;
+    $('#ec-dt').style.animation = 'none'; $('#ec-dt').offsetHeight; $('#ec-dt').style.animation = '';
+  }
+  $('#ec-sh').addEventListener('click', e => { const b = e.target.closest('button'); if (b){ cur = +b.dataset.k; sh(); } });
+  sh();
+
+  /* ---------- 同溫層模擬 ---------- */
+  const POOL = {
+    a:['研究指出，課室內有手機會分散注意力，成績較差。','我班禁手機後，小息大家終於會一起玩。','網絡欺凌多數在上課時間發生，禁止是保護學生。',
+       '老師：每次響機都要停課處理，浪費時間。','家長群組：支持全面禁止，手機應該放學才用。','禁手機的學校，學生睡眠和專注都改善了。'],
+    b:['學生需要手機查資料、做電子功課，不應一刀切。','有緊急事時，家長需要即時聯絡子女。','與其禁止，不如教學生自律和數碼素養。',
+       '研究結果不一：有些學校禁手機後，成績沒有明顯分別。','學生會：我們希望參與訂立手機守則。','完全禁止只會令學生偷偷用，更難管理。']
+  };
+  const COL = {a:'var(--W)', b:'var(--A)'}, LAB = {a:'支持禁止', b:'反對禁止'};
+  let w = .5, likes = 0;
+  function feed(){
+    const n = 6, na = Math.round(n * w), pick = (k, m) => [...POOL[k]].sort(() => Math.random() - .5).slice(0, m).map(t => ({k, t}));
+    const posts = [...pick('a', na), ...pick('b', n - na)].sort(() => Math.random() - .5);
+    $('#ec-feed').innerHTML = posts.map(p => `<div class="ec-post" style="--pc:${COL[p.k]}"><small>${LAB[p.k]}</small>${p.t}
+      <button type="button" data-k="${p.k}">👍 讚好</button></div>`).join('');
+    const d = Math.round((1 - Math.abs(2 * w - 1)) * 100);
+    $('#ec-m').style.width = Math.max(d, 4) + '%'; $('#ec-mv').textContent = d + '%';
+    const m = $('#ec-msg');
+    if (likes === 0){ m.className = 'ec-msg'; m.textContent = '每按一次 👍，演算法就會推送更多同類觀點。'; }
+    else if (d <= 34){ m.className = 'ec-msg warn';
+      m.innerHTML = `⚠️ 你只按了 ${likes} 次 👍，動態消息已經幾乎只剩一種觀點。<b>這就是同溫層。</b>你沒有刻意迴避另一方，是演算法替你過濾了。審辨讀者會主動尋找相反意見。`; }
+    else { m.className = 'ec-msg'; m.textContent = `已按 ${likes} 次 👍。留意兩種顏色的比例有甚麼變化。`; }
+  }
+  $('#ec-feed').addEventListener('click', e => {
+    const b = e.target.closest('button[data-k]'); if (!b) return;
+    likes++; w = Math.min(.95, Math.max(.05, w + (b.dataset.k === 'a' ? .12 : -.12))); feed();
+  });
+  $('#ec-reset').addEventListener('click', () => { w = .5; likes = 0; feed(); });
+  feed();
+})();
+</script>
+</body>
+</html>

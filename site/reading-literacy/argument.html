@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>論證與推理｜閱讀素養專題｜PISA 2025 研討會專題</title>
+<meta name="description" content="以 Toulmin 論證模型拆解一段論說文；分辨事實、推論與意見；認識常見推理漏洞；讓信心與證據相稱。">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="rd.css">
+<style>
+  @keyframes agIn{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+  /* Toulmin */
+  .ag-para{background:#fff;border-radius:16px;box-shadow:var(--sh);padding:18px 22px;font-size:1.04rem;line-height:2.15;margin:12px 0}
+  .ag-para span[data-r]{cursor:pointer;border-radius:5px;padding:1px 2px;border-bottom:2px solid transparent;transition:background .2s,color .2s}
+  .ag-para span[data-r].show{border-bottom-color:var(--c)}
+  .ag-para span[data-r].on{background:var(--c);color:#fff}
+  .ag-leg{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 12px}
+  .ag-leg button{font:inherit;font-size:.82rem;padding:4px 12px;border-radius:999px;border:2px solid var(--c);background:#fff;color:var(--c);font-weight:700;cursor:pointer}
+  .ag-leg button.show{background:var(--c);color:#fff}
+  .ag-ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+  .ag-dg{display:grid;grid-template-columns:1fr .75fr 1fr;grid-template-areas:"d q c" "w w r" "b b .";gap:14px 18px;margin:12px 0}
+  .ag-b{border-radius:14px;padding:10px 12px;background:#fff;border:2px dashed #d5d0c2;font-size:.86rem;min-height:72px;position:relative;cursor:pointer;transition:border-color .25s,transform .2s,box-shadow .2s}
+  .ag-b .h{display:block;font-size:.76rem;font-weight:800;color:#9aa5a2;letter-spacing:.04em}
+  .ag-b .t{display:block;color:#b9c2bf;line-height:1.6}
+  .ag-b.show{border:2px solid var(--c);animation:agIn .3s ease}
+  .ag-b.show .h{color:var(--c)}.ag-b.show .t{color:var(--ink)}
+  .ag-b.on{transform:translateY(-2px);box-shadow:0 8px 18px #0000001f}
+  .ag-b[data-r="data"]::after,.ag-b[data-r="qual"]::after{content:"➜";position:absolute;right:-16px;top:50%;transform:translateY(-50%);color:#9aa5a2;font-size:1.1rem}
+  .ag-ex{background:var(--rbg);border-left:6px solid var(--c,var(--rc));border-radius:14px;padding:12px 16px;font-size:.93rem;min-height:3.2em;animation:agIn .3s ease}
+  .ag-ex b{color:var(--c,var(--rc))}
+
+  /* 事實／推論／意見 */
+  .ag-game{background:var(--paper);border-radius:18px;padding:18px 20px;margin:12px 0}
+  .ag-game .top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .ag-dots{display:flex;gap:5px}.ag-dots i{width:10px;height:10px;border-radius:50%;background:#ddd8c8}
+  .ag-dots i.ok{background:var(--C)}.ag-dots i.no{background:var(--W)}.ag-dots i.cur{outline:2px solid var(--dark);outline-offset:1px}
+  .ag-st{background:#fff;border-radius:14px;padding:14px 16px;margin:10px 0;font-weight:700;font-size:1.02rem;box-shadow:var(--sh)}
+  .ag-opts{display:flex;flex-wrap:wrap;gap:8px}
+  .ag-fb{margin:12px 0 0;padding:10px 14px;border-radius:12px;background:#fff;min-height:2.6em;font-size:.92rem}
+  .ag-fb.ok{border-left:5px solid var(--C)}.ag-fb.no{border-left:5px solid var(--W)}
+  .ag-cat{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+  .ag-cat div{border-radius:14px;padding:10px 14px;background:var(--bg);border-top:4px solid var(--c);font-size:.86rem}
+  .ag-cat b{display:block;color:var(--c)}
+
+  /* 推理漏洞 */
+  .ag-fall{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:12px 0}
+  .ag-fc{font:inherit;text-align:left;background:#fff;border:1px solid var(--line);border-top:5px solid var(--W);border-radius:14px;padding:12px 14px;cursor:pointer;font-size:.86rem}
+  .ag-fc b{display:block;color:var(--W);font-size:.98rem;margin-bottom:4px}
+  .ag-fc q{display:block;quotes:none;color:var(--mut);margin-bottom:6px;line-height:1.6}
+  .ag-fc .hint{font-size:.76rem;color:var(--rc);font-weight:700}
+  .ag-fc .r{display:none;border-top:1px dashed var(--line);padding-top:6px;line-height:1.6}
+  .ag-fc.open .r{display:block;animation:agIn .3s ease}.ag-fc.open .hint{display:none}
+  .ag-fc .r em{display:block;font-style:normal;font-weight:700;color:var(--C);margin-top:4px}
+
+  /* 信心校準 */
+  .ag-just{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+  .ag-jc{background:#fff;border-radius:16px;padding:14px 16px;border:1px solid var(--line);border-top:5px solid var(--c)}
+  .ag-jc b{display:block;color:var(--c)}
+  .ag-jc q{display:block;quotes:none;background:var(--paper);border-radius:8px;padding:6px 10px;margin:8px 0;font-size:.9rem}
+  .ag-jc p{margin:0;font-size:.86rem;line-height:1.6}
+  .ag-cal{background:#fff;border-radius:18px;box-shadow:var(--sh);border-top:6px solid var(--rc);padding:18px 22px;margin:12px 0}
+  .ag-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+  .ag-tabs button{font:inherit;font-size:.84rem;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:5px 13px;cursor:pointer}
+  .ag-tabs button.on{background:var(--rc);border-color:var(--rc);color:#fff;font-weight:700}
+  .ag-sc{background:var(--paper);border-radius:12px;padding:12px 14px;font-size:.95rem}
+  .ag-sl{display:flex;align-items:center;gap:12px;margin:14px 0 4px}
+  .ag-sl input{flex:1;accent-color:var(--rc)}
+  .ag-sl output{min-width:4.2em;font-weight:800;color:var(--rc);font-size:1.2rem;text-align:right}
+  .ag-tk{display:flex;justify-content:space-between;font-size:.76rem;color:var(--mut)}
+  .ag-cfb{margin-top:12px;border-radius:12px;padding:10px 14px;font-size:.92rem;background:var(--paper);min-height:2.6em}
+  .ag-cfb.ok{background:var(--Cbg)}.ag-cfb.no{background:var(--Wbg)}
+  .ag-cfb .say{display:block;margin-top:6px;background:#fff;border-radius:8px;padding:6px 10px;font-weight:700}
+
+  @media (max-width:820px){
+    .ag-dg{grid-template-columns:1fr;grid-template-areas:"c" "d" "q" "w" "b" "r"}
+    .ag-b[data-r="data"]::after,.ag-b[data-r="qual"]::after{display:none}
+    .ag-cat,.ag-just{grid-template-columns:1fr}.ag-fall{grid-template-columns:1fr 1fr}
+    .ag-ctrl{margin-left:0}
+  }
+  @media (max-width:520px){.ag-fall{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="rd" data-rd="argument.html">
+<div id="site-header"></div>
+<section class="rd-hero"><div class="inner">
+  <span class="rd-eyebrow"></span>
+  <h1>論證與推理：回答「為何相信？」<small>Argument, Reasoning and Justification</small></h1>
+  <p>讀懂一段論說文，不只是找出作者的立場，還要看清主張靠甚麼支撐、哪一環最弱。輪到自己下結論時，信心也要與證據相稱。</p>
+  <div class="rd-q"></div>
+</div></section>
+<nav class="rd-chap" id="rd-chap" aria-label="本章頁面"></nav>
+
+<main class="rd-main">
+  <p class="rd-crumb" id="rd-crumb"></p>
+  <p class="rd-lead">哲學家 Toulmin（1958）指出，日常論證不只有「主張」和「證據」，還有把兩者連起來的<strong>理據</strong>、支持理據的<strong>支援</strong>、表示確定程度的<strong>限定</strong>，以及處理例外的<strong>反駁</strong>。拆開這六個部分，就能看到論證哪裏穩固、哪裏薄弱。</p>
+
+  <h2 id="toulmin">拆解一段論證：Toulmin 模型</h2>
+  <p>以下段落取自 <a href="documents.html" style="color:var(--rc)">05</a> 的示例建議書。按「▶ 下一部分」逐步建構論證圖，或直接點選段落及標籤。</p>
+  <div class="ag-para" id="ag-para">
+    <span data-r="claim">本校初中寫作課應有條件地使用生成式 AI。</span><span data-r="data">一項追蹤 240 名中二學生的研究發現，使用 AI 的學生寫作效率較高，</span><span data-r="warrant">而效率提高能讓學生騰出更多時間修訂文章；</span><span data-r="backing">寫作教學研究一向指出，修訂是提升寫作質素的關鍵。</span><span data-r="qual">不過，這個建議大概只適用於修訂階段，</span><span data-r="reb">因為同一研究亦發現，經常依賴 AI 構思的學生，獨立構思表現較弱。</span>
+  </div>
+  <div class="ag-leg" id="ag-leg">
+    <span class="ag-ctrl"><button type="button" class="rd-btn solid" id="ag-next">▶ 下一部分</button>
+    <button type="button" class="rd-btn" id="ag-all">全部顯示</button>
+    <button type="button" class="rd-btn" id="ag-rs" style="--c:var(--mut)">↺</button></span>
+  </div>
+  <div class="ag-dg" id="ag-dg">
+    <div class="ag-b" data-r="data" style="grid-area:d"></div>
+    <div class="ag-b" data-r="qual" style="grid-area:q"></div>
+    <div class="ag-b" data-r="claim" style="grid-area:c"></div>
+    <div class="ag-b" data-r="warrant" style="grid-area:w"></div>
+    <div class="ag-b" data-r="backing" style="grid-area:b"></div>
+    <div class="ag-b" data-r="reb" style="grid-area:r"></div>
+  </div>
+  <div class="ag-ex" id="ag-ex" aria-live="polite">按「▶ 下一部分」開始，第一步是找出主張。</div>
+
+  <h2 id="fact">事實、推論，還是意見？</h2>
+  <div class="ag-cat">
+    <div style="--c:var(--A);--bg:var(--Abg)"><b>📌 事實</b>可以查證的陳述（但「可查證」不等於「一定正確」）</div>
+    <div style="--c:var(--B);--bg:var(--Bbg)"><b>🔗 推論</b>由證據推出的結論：要問推論是否合理</div>
+    <div style="--c:var(--P);--bg:var(--Pbg)"><b>💭 意見</b>價值判斷或立場（「最好」「應該」）</div>
+  </div>
+  <div class="ag-game">
+    <div class="top"><b>第 <span id="fo-n">1</span> / <span id="fo-t"></span> 句</b><div class="ag-dots" id="fo-dots"></div></div>
+    <div class="ag-st" id="fo-st"></div>
+    <div class="ag-opts" id="fo-opts"></div>
+    <p class="ag-fb" id="fo-fb" aria-live="polite">這句屬於哪一類？</p>
+  </div>
+
+  <h2 id="flaws">四種常見推理漏洞</h2>
+  <p>點選卡片，看看怎樣拆解。</p>
+  <div class="ag-fall" id="ag-fall"></div>
+  <div class="ag-game">
+    <div class="top"><b>找漏洞：第 <span id="fq-n">1</span> / <span id="fq-t"></span> 題</b><div class="ag-dots" id="fq-dots"></div></div>
+    <div class="ag-st" id="fq-st"></div>
+    <div class="ag-opts" id="fq-opts"></div>
+    <p class="ag-fb" id="fq-fb" aria-live="polite">這句犯了哪一種漏洞？</p>
+  </div>
+
+  <h2 id="calibrate">信心要與證據相稱</h2>
+  <p>「為何相信？」有不同層次的答案（Bråten 等，2013）：</p>
+  <div class="ag-just">
+    <div class="ag-jc" style="--c:var(--A)"><b>👩‍🏫 依權威</b><q>「因為老師／專家這樣說。」</q><p>有時合理，但要問：他在這方面有專業嗎？其他專家同意嗎？</p></div>
+    <div class="ag-jc" style="--c:var(--B)"><b>🙋 依個人經驗</b><q>「因為我自己試過。」</q><p>真實但有限：一個人的經驗不能推論到所有人。</p></div>
+    <div class="ag-jc" style="--c:var(--C)"><b>📚 依多方證據</b><q>「因為多個獨立來源都一致。」</q><p>最穩固的理由，也是審辨讀者追求的方向。</p></div>
+  </div>
+  <div class="ag-cal">
+    <div class="ag-tabs" id="cal-tabs"></div>
+    <div class="ag-sc" id="cal-sc"></div>
+    <div class="ag-sl"><label for="cal-in"><b>你有多相信這個說法？</b></label><input type="range" id="cal-in" min="0" max="100" step="5" value="50"><output id="cal-out">50%</output></div>
+    <div class="ag-tk"><span>完全不信</span><span>半信半疑</span><span>非常肯定</span></div>
+    <button type="button" class="rd-btn solid" id="cal-go" style="margin-top:10px">核對我的判斷</button>
+    <div class="ag-cfb" id="cal-fb" aria-live="polite">拉動滑桿，再按「核對」。</div>
+  </div>
+
+  <div class="rd-key"><div><b>重點：</b>好的論證不是「證據越多越好」，而是每一環都扣得緊：證據相關、理據成立、限定得宜、處理反例。最後的結論要與證據相稱：證據弱時說「目前未能確定」，證據強時願意據此行動。過度自信和過度懷疑，都不是批判思考。下一頁把這些重點帶進課堂。</div></div>
+
+  <div class="rd-src"><b>資料來源</b><ul>
+    <li>Toulmin, S. E. (2003). <i>The uses of argument</i> (Updated ed.). Cambridge University Press.（原著 1958 年）</li>
+    <li>Bråten, I., Ferguson, L. E., Strømsø, H. I., &amp; Anmarkrud, Ø. (2013). Justification beliefs and multiple-documents comprehension. <i>European Journal of Psychology of Education, 28</i>(3), 879–902.</li>
+    <li>OECD. PISA 2029 Reading Literacy Framework <span class="rd-draft">初稿</span></li>
+    <li>示例段落、句子及情境均為本站虛構，用作教學示範。</li>
+  </ul></div>
+  <div class="rd-pager" id="rd-pager"></div>
+</main>
+<div id="site-footer"></div>
+<script src="rd.js"></script>
+<script>
+(function(){
+  const $ = s => document.querySelector(s), $$ = s => document.querySelectorAll(s);
+  const anim = el => { el.style.animation = 'none'; el.offsetHeight; el.style.animation = ''; };
+  const dots = (el, n, res, cur) => el.innerHTML = Array.from({length:n}, (_,k) =>
+    `<i class="${res[k] === true ? 'ok' : res[k] === false ? 'no' : ''}${k === cur ? ' cur' : ''}"></i>`).join('');
+
+  /* ---------- Toulmin ---------- */
+  const R = {
+    claim:  {zh:'主張', en:'Claim', h:'主張', c:'var(--C)', q:'你想別人相信甚麼？', tip:'一段論說文通常只有一個核心主張；找不到主張，就無從評鑑。'},
+    data:   {zh:'依據', en:'Data', h:'依據', c:'var(--A)', q:'你有甚麼證據或事實？', tip:'評鑑依據：來源可靠嗎？與主張相關嗎？足夠嗎？'},
+    warrant:{zh:'理據', en:'Warrant', h:'因為（理據）', c:'var(--B)', q:'為甚麼這些證據能支持主張？', tip:'理據常常沒有寫出來，是最容易被忽略、也最值得追問的一環。'},
+    backing:{zh:'支援', en:'Backing', h:'基於（支援）', c:'var(--P)', q:'為甚麼這條理據成立？', tip:'支援令理據更穩固，例如研究、法規或專業共識。'},
+    qual:   {zh:'限定', en:'Qualifier', h:'所以（限定）', c:'#5d6b68', q:'主張有多確定？適用於甚麼範圍？', tip:'「大概」「只適用於……」：限定詞令主張與證據相稱，是成熟論證的標記。'},
+    reb:    {zh:'反駁', en:'Rebuttal', h:'除非（反駁）', c:'var(--W)', q:'在甚麼情況下主張不成立？', tip:'主動處理反例，論證反而更有說服力。'}
+  };
+  const ORDER = ['claim','data','warrant','backing','qual','reb'];
+  const shown = new Set();
+  const txt = r => $(`#ag-para [data-r="${r}"]`).textContent.trim();
+  $('#ag-leg').insertAdjacentHTML('afterbegin', ORDER.map(r => `<button type="button" data-r="${r}" style="--c:${R[r].c}">${R[r].zh}</button>`).join(''));
+  $$('#ag-para [data-r], #ag-dg [data-r]').forEach(el => el.style.setProperty('--c', R[el.dataset.r].c));
+  function draw(focus){
+    $$('#ag-dg .ag-b').forEach(b => {
+      const r = b.dataset.r, s = shown.has(r);
+      b.classList.toggle('show', s); b.classList.toggle('on', r === focus);
+      b.innerHTML = `<span class="h">${R[r].h}</span><span class="t">${s ? txt(r) : '？'}</span>`;
+    });
+    $$('#ag-para [data-r]').forEach(s => { s.classList.toggle('show', shown.has(s.dataset.r)); s.classList.toggle('on', s.dataset.r === focus); });
+    $$('#ag-leg button[data-r]').forEach(b => b.classList.toggle('show', shown.has(b.dataset.r)));
+    const nx = ORDER.find(r => !shown.has(r));
+    $('#ag-next').disabled = !nx;
+    $('#ag-next').textContent = nx ? `▶ 下一部分：${R[nx].zh}` : '✓ 已完成';
+    if (focus){
+      const f = R[focus], ex = $('#ag-ex'); ex.style.setProperty('--c', f.c);
+      ex.innerHTML = `<b>${f.zh} ${f.en}</b>：回答「${f.q}」<br>本段：「${txt(focus)}」<br><small style="color:var(--mut)">💡 ${f.tip}</small>`;
+      anim(ex);
+    }
+    if (shown.size === ORDER.length && !focus){
+      $('#ag-ex').innerHTML = '<b>六個部分齊全。</b>試想：如果刪去「限定」和「反駁」，主張會變成「應全面使用 AI」。這樣的論證是否變得更容易被推翻？';
+    }
+  }
+  const reveal = r => { shown.add(r); draw(r); };
+  $('#ag-next').addEventListener('click', () => { const nx = ORDER.find(r => !shown.has(r)); if (nx) reveal(nx); });
+  $('#ag-all').addEventListener('click', () => { ORDER.forEach(r => shown.add(r)); draw(null); });
+  $('#ag-rs').addEventListener('click', () => { shown.clear(); draw(null); $('#ag-ex').textContent = '按「▶ 下一部分」開始，第一步是找出主張。'; });
+  ['#ag-para','#ag-dg','#ag-leg'].forEach(id => $(id).addEventListener('click', e => {
+    const el = e.target.closest('[data-r]'); if (el) reveal(el.dataset.r);
+  }));
+  draw(null);
+
+  /* ---------- 事實／推論／意見 ---------- */
+  const CAT = {fact:['📌 事實','var(--A)'], inf:['🔗 推論','var(--B)'], op:['💭 意見','var(--P)']};
+  const FO = [
+    {s:'該研究追蹤了 240 名中二學生一個學期。', k:'fact', why:'可以翻查研究原文核實。'},
+    {s:'AI 是近二十年最偉大的發明。', k:'op', why:'「最偉大」是價值判斷，不能以證據證實或推翻。'},
+    {s:'使用 AI 的學生寫作效率較高，所以 AI 或能減輕學生的功課壓力。', k:'inf', why:'由證據推出的結論。要問：推論合理嗎？「效率高」一定等於「壓力少」嗎？'},
+    {s:'學校應全面禁止學生使用 AI。', k:'op', why:'這是立場（「應該」）。立場本身不是事實，需要理由和證據支持。'},
+    {s:'這間網店九成評論都是五星，所以產品應該很好。', k:'inf', why:'是推論，但很薄弱：評論可能是假的，或只有滿意的人才會留言。'},
+    {s:'香港中學文憑考試的筆試在每年春季舉行。', k:'fact', why:'可以在考評局網站核實。'}
+  ];
+  let fi = 0, fr = [];
+  $('#fo-t').textContent = FO.length;
+  function fo(){
+    $('#fo-n').textContent = fi + 1; $('#fo-st').textContent = `「${FO[fi].s}」`;
+    $('#fo-opts').innerHTML = Object.entries(CAT).map(([k,v]) => `<button type="button" class="rd-btn" data-k="${k}" style="--c:${v[1]}">${v[0]}</button>`).join('')
+      + '<button type="button" class="rd-btn solid" id="fo-next" style="--c:var(--dark);margin-left:auto" disabled>下一句 →</button>';
+    $('#fo-fb').className = 'ag-fb'; $('#fo-fb').textContent = '這句屬於哪一類？';
+    dots($('#fo-dots'), FO.length, fr, fi);
+  }
+  $('#fo-opts').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.id === 'fo-next'){ if (fi === FO.length - 1){ fi = 0; fr = []; } else fi++; fo(); return; }
+    const it = FO[fi], ok = b.dataset.k === it.k; fr[fi] = ok;
+    $$('#fo-opts [data-k]').forEach(x => x.disabled = true);
+    $('#fo-fb').className = 'ag-fb ' + (ok ? 'ok' : 'no');
+    $('#fo-fb').innerHTML = (ok ? '✅ 正確！' : `❌ 這句屬於「${CAT[it.k][0]}」。`) + it.why;
+    const nx = $('#fo-next'); nx.disabled = false;
+    if (fi === FO.length - 1){ nx.textContent = '再玩一次 ↻'; $('#fo-fb').innerHTML += `<br><b>完成！答對 ${fr.filter(Boolean).length} / ${FO.length}。</b>`; }
+    dots($('#fo-dots'), FO.length, fr, fi);
+  });
+  fo();
+
+  /* ---------- 推理漏洞 ---------- */
+  const FL = [
+    {t:'以偏概全', q:'「我表弟用 AI 寫作文，成績差了，所以 AI 對學生有害。」', a:'一個例子不能代表全體。', ask:'樣本有多大？有沒有其他例子？'},
+    {t:'錯誤因果', q:'「自從學校引入 AI，全校成績上升，可見 AI 令成績上升。」', a:'同時發生不等於因果。', ask:'同期有沒有其他改變（新老師、試卷變淺）？'},
+    {t:'訴諸不相關權威', q:'「著名歌手說這個學習 app 很有效，一定沒錯。」', a:'名氣不等於該領域的專業。', ask:'他在這方面有專業嗎？有沒有代言利益？'},
+    {t:'非黑即白', q:'「如果不全面禁止 AI，就等於放任學生作弊。」', a:'忽略了中間選項。', ask:'有沒有「有條件使用」等其他做法？'}
+  ];
+  $('#ag-fall').innerHTML = FL.map((f,i) => `<button type="button" class="ag-fc" data-i="${i}" aria-expanded="false"><b>${f.t}</b><q>${f.q}</q>
+    <span class="hint">點選拆解 →</span><span class="r">${f.a}<em>問：${f.ask}</em></span></button>`).join('');
+  $('#ag-fall').addEventListener('click', e => {
+    const b = e.target.closest('.ag-fc'); if (!b) return;
+    b.classList.toggle('open'); b.setAttribute('aria-expanded', b.classList.contains('open'));
+  });
+  const FQ = [
+    {s:'網上有三個人說這部手機會爆炸，所以這個型號很危險。', k:0},
+    {s:'我每次穿幸運襪去考試都合格，所以幸運襪有效。', k:1},
+    {s:'這位足球明星推介的護膚品，一定適合敏感皮膚。', k:2},
+    {s:'你不支持延長上課時間，就是不關心學生成績。', k:3}
+  ];
+  let qi = 0, qr = [];
+  $('#fq-t').textContent = FQ.length;
+  function fq(){
+    $('#fq-n').textContent = qi + 1; $('#fq-st').textContent = `「${FQ[qi].s}」`;
+    $('#fq-opts').innerHTML = FL.map((f,i) => `<button type="button" class="rd-btn" data-k="${i}" style="--c:var(--W)">${f.t}</button>`).join('')
+      + '<button type="button" class="rd-btn solid" id="fq-next" style="--c:var(--dark);margin-left:auto" disabled>下一題 →</button>';
+    $('#fq-fb').className = 'ag-fb'; $('#fq-fb').textContent = '這句犯了哪一種漏洞？';
+    dots($('#fq-dots'), FQ.length, qr, qi);
+  }
+  $('#fq-opts').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.id === 'fq-next'){ if (qi === FQ.length - 1){ qi = 0; qr = []; } else qi++; fq(); return; }
+    const it = FQ[qi], ok = +b.dataset.k === it.k, f = FL[it.k]; qr[qi] = ok;
+    $$('#fq-opts [data-k]').forEach(x => x.disabled = true);
+    $('#fq-fb').className = 'ag-fb ' + (ok ? 'ok' : 'no');
+    $('#fq-fb').innerHTML = (ok ? '✅ 正確！' : `❌ 這是「${f.t}」。`) + `${f.a}可以問：${f.ask}`;
+    const nx = $('#fq-next'); nx.disabled = false;
+    if (qi === FQ.length - 1){ nx.textContent = '再玩一次 ↻'; $('#fq-fb').innerHTML += `<br><b>完成！答對 ${qr.filter(Boolean).length} / ${FQ.length}。</b>`; }
+    dots($('#fq-dots'), FQ.length, qr, qi);
+  });
+  fq();
+
+  /* ---------- 信心校準 ---------- */
+  const CAL = [
+    {t:'一則匿名帖子', d:'討論區一則匿名帖子說：「用 AI 寫作文的學生，創意會全部消失。」', lo:0, hi:25,
+     say:'「目前沒有足夠證據支持這個說法。」'},
+    {t:'一項小型研究＋一篇報道', d:'一項 60 人的研究及一篇報道，都指出經常依賴 AI 構思，可能削弱學生的獨立構思。', lo:30, hi:65,
+     say:'「初步證據顯示……，但研究規模較小，仍需更多研究。」'},
+    {t:'多項大型獨立研究一致', d:'多個國家、數以千計學生的獨立研究，結果都指出規律運動有助提升專注力。', lo:70, hi:95,
+     say:'「多項研究一致指出……，可以較有信心地據此行動。」'}
+  ];
+  let ci = 0;
+  function cal(){
+    $('#cal-tabs').innerHTML = CAL.map((c,i) => `<button type="button" data-i="${i}" class="${i === ci ? 'on' : ''}" aria-pressed="${i === ci}">情境 ${i+1}：${c.t}</button>`).join('');
+    $('#cal-sc').textContent = CAL[ci].d;
+    $('#cal-in').value = 50; $('#cal-out').textContent = '50%';
+    $('#cal-fb').className = 'ag-cfb'; $('#cal-fb').textContent = '拉動滑桿，再按「核對」。';
+  }
+  $('#cal-tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (b){ ci = +b.dataset.i; cal(); } });
+  $('#cal-in').addEventListener('input', e => $('#cal-out').textContent = e.target.value + '%');
+  $('#cal-go').addEventListener('click', () => {
+    const v = +$('#cal-in').value, c = CAL[ci], fb = $('#cal-fb');
+    let m, ok = false;
+    if (v === 100) m = '🤔 即使證據很強，知識仍可以因新證據而修訂，很少需要 100% 確定。';
+    else if (v > c.hi) m = '⬆️ <b>過度自信</b>：這些證據未足以支持這麼高的信心。';
+    else if (v < c.lo) m = '⬇️ <b>過度懷疑</b>：懷疑一切也不是批判思考。證據充分時，應該願意相信並據此行動。';
+    else { m = '✅ <b>與證據相稱！</b>'; ok = true; }
+    fb.className = 'ag-cfb ' + (ok ? 'ok' : 'no');
+    fb.innerHTML = `${m}<br><small>建議範圍：約 ${c.lo}%–${c.hi}%</small><span class="say">結論可以這樣寫：${c.say}</span>`;
+    anim(fb);
+  });
+  cal();
+})();
+</script>
+</body>
+</html>
