@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>閱讀素養專題｜PISA 2025 研討會專題</title>
+<meta name="description" content="多文本及 AI 時代的閱讀素養：PISA 閱讀框架、文件模型、審辨閱讀及課堂啟示，分十個短頁。">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="rd.css">
+<style>
+  .ix-q{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+  .ix-q div{border-radius:18px;padding:18px;color:#fff;background:linear-gradient(135deg,var(--c),var(--dark))}
+  .ix-q b{display:block;font-size:1.3rem;margin-bottom:2px}
+  .ix-q small{opacity:.85;font-size:.86rem;line-height:1.6;display:block}
+  .ix-chs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}
+  .ix-ch{border-radius:18px;background:var(--bg);padding:16px 18px;border-top:6px solid var(--c)}
+  .ix-ch h3{margin:0 0 8px;color:var(--c);font-size:1.1rem}
+  .ix-ch h3 small{font-weight:400;color:var(--mut);font-size:.78rem;margin-left:6px}
+  .ix-ch a{display:grid;grid-template-columns:34px 1fr auto;gap:8px;align-items:center;padding:9px 10px;margin:6px 0;border-radius:12px;background:#fff;text-decoration:none;color:var(--ink);transition:transform .15s}
+  .ix-ch a:hover{transform:translateX(3px)}
+  .ix-ch a .i{font-size:1.4rem;text-align:center}
+  .ix-ch a b{display:block;font-size:.95rem}
+  .ix-ch a small{color:var(--mut);font-size:.8rem;line-height:1.5}
+  .ix-ch a .m{font-size:.74rem;color:var(--c);font-weight:700;white-space:nowrap}
+  .ix-route{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .ix-route div{background:var(--paper);border-radius:14px;padding:14px 16px;font-size:.9rem}
+  .ix-route b{display:block;color:var(--dark);margin-bottom:6px}
+  .ix-route a{display:inline-block;margin:3px 4px 0 0;font-size:.8rem;padding:2px 10px;border-radius:999px;background:#fff;border:1px solid var(--line);text-decoration:none;color:var(--dark)}
+  @media (max-width:760px){.ix-q,.ix-chs,.ix-route{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="rd" data-rd="index.html">
+<div id="site-header"></div>
+<section class="rd-hero" style="padding-bottom:70px"><div class="inner">
+  <span class="rd-eyebrow"></span>
+  <h1>讀甚麼、信甚麼、為何信<small>Reading Literacy in a World of Multiple Texts and AI</small></h1>
+  <p>在社交媒體、推薦演算法及生成式 AI 的時代，讀懂一篇文章已經不夠。本專題分四章、十個短頁，每頁只談一個重點，約 5–10 分鐘讀完。</p>
+</div></section>
+
+<main class="rd-main">
+  <p class="rd-crumb" id="rd-crumb"></p>
+
+  <h2>貫穿全專題的三個問題</h2>
+  <div class="ix-q">
+    <div style="--c:var(--A)"><b>① 說了甚麼？</b><small>理解：主張、依據、出處，以及文本之間的關係</small></div>
+    <div style="--c:var(--B)"><b>② 可信嗎？</b><small>評鑑：來源可靠度、內容真確性、文本間的衝突</small></div>
+    <div style="--c:var(--C)"><b>③ 為何相信？</b><small>證成：說得出證據與推理，信心與證據相稱</small></div>
+  </div>
+  <p style="font-size:.88rem;color:var(--mut)">每頁頂部會標示該頁回答哪一個問題。</p>
+
+  <h2>四章十頁</h2>
+  <div class="ix-chs" id="ix-chs"></div>
+
+  <h2>不知從何開始？</h2>
+  <div class="ix-route">
+    <div><b>⏱ 15 分鐘速覽</b><a href="ecosystem.html">01</a><a href="documents.html">05</a><a href="vigilance.html">08</a></div>
+    <div><b>👩‍🏫 前線教師</b><a href="documents.html">05</a><a href="conflict.html">06</a><a href="disorder.html">07</a><a href="vigilance.html">08</a><a href="classroom.html">10</a></div>
+    <div><b>🧭 課程領導</b><a href="definition.html">02</a><a href="model.html">03</a><a href="processes.html">04</a><a href="classroom.html">10</a></div>
+  </div>
+
+  
+
+  <div class="rd-pager" id="rd-pager"></div>
+</main>
+<div id="site-footer"></div>
+<script src="rd.js"></script>
+<script>
+  document.getElementById('ix-chs').innerHTML = Object.entries(RD.CH).map(([k,c]) => `
+    <section class="ix-ch" style="--c:${c.c};--bg:${c.bg}">
+      <h3>${c.n} ${c.zh}<small>${c.en}</small></h3>
+      ${RD.PAGES.filter(p => p.ch === k).map(p => `<a href="${p.f}"><span class="i">${p.ic}</span>
+        <span><b>${RD.num(p)} ${p.zh}</b><small>${p.d}</small></span><span class="m">${p.min} 分鐘</span></a>`).join('')}
+    </section>`).join('');
+</script>
+</body>
+</html>

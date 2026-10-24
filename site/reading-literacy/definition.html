@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>閱讀素養新定義｜閱讀素養專題｜PISA 2025 研討會專題</title>
+<meta name="description" content="PISA 閱讀素養定義逐詞拆解：投入、理解、評鑑、有效且具批判性、發展知識；對照 2018 年定義。">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="rd.css">
+<style>
+  /* 定義句 */
+  .df-box{position:relative;background:linear-gradient(135deg,var(--rbg),#fff);border-radius:20px;padding:26px 28px 22px;margin:14px 0;border:1px solid var(--line)}
+  .df-box::before{content:"“";position:absolute;top:-18px;left:16px;font-size:5rem;line-height:1;color:var(--rc);opacity:.25;font-family:Georgia,serif}
+  .df-sent{font-size:clamp(1.12rem,2.2vw,1.4rem);line-height:2.2;margin:0}
+  .df-sent button{font:inherit;font-weight:700;color:var(--c);background:var(--bg);border:0;border-bottom:3px solid var(--c);border-radius:6px 6px 0 0;padding:0 4px;cursor:pointer;transition:background .15s}
+  .df-sent button:hover{filter:brightness(.96)}
+  .df-sent button.on{background:var(--c);color:#fff}
+  .df-en{font-size:.86rem;color:var(--mut);margin:12px 0 0;font-style:italic}
+  .df-hint{font-size:.8rem;color:var(--mut);margin:8px 0 0}
+  .df-pane{background:#fff;border-radius:16px;box-shadow:var(--sh);border-left:7px solid var(--c,var(--rc));padding:16px 20px;animation:dfIn .3s ease}
+  @keyframes dfIn{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}
+  .df-pane h3{margin:0;color:var(--c)}
+  .df-pane h3 small{font-weight:400;color:var(--mut);font-size:.8rem;margin-left:6px}
+  .df-pane .g{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+  .df-pane .g div{background:var(--paper);border-radius:12px;padding:10px 12px;font-size:.9rem}
+  .df-pane .g b{display:block;color:var(--c);font-size:.76rem;letter-spacing:.05em;margin-bottom:2px}
+  .df-pane .q{grid-column:1/-1;background:var(--bg) !important}
+
+  /* 2018 vs 2029 */
+  .df-seg{display:inline-flex;background:var(--paper);border-radius:999px;padding:3px;margin:6px 0 12px}
+  .df-seg button{font:inherit;font-size:.86rem;border:0;background:transparent;padding:6px 16px;border-radius:999px;cursor:pointer}
+  .df-seg button.on{background:var(--dark);color:#fff}
+  .df-cmp{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .df-cmp[data-v="2018"] .y29,.df-cmp[data-v="2029"] .y18{display:none}
+  .df-cmp[data-v="2018"],.df-cmp[data-v="2029"]{grid-template-columns:1fr}
+  .df-cmp>div{border-radius:16px;padding:16px 18px;line-height:2;font-size:1.02rem}
+  .df-cmp .y18{background:#f1efe8;border-top:5px solid #9aa5a2}
+  .df-cmp .y29{background:var(--rbg);border-top:5px solid var(--rc)}
+  .df-cmp small{display:block;font-size:.78rem;font-weight:700;color:var(--mut);letter-spacing:.05em}
+  .df-cmp mark{background:#f3d9a3;border-radius:4px;padding:0 3px}
+  .df-cmp del{color:#9aa5a2}
+  .df-tbl{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+  .df-tbl th,.df-tbl td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  .df-tbl th{background:var(--paper);font-size:.82rem}
+  .df-tbl td:first-child{font-weight:700;color:var(--rc);white-space:nowrap}
+  .df-new{display:inline-block;font-size:.7rem;font-weight:700;color:#fff;background:var(--rc);border-radius:999px;padding:0 7px;margin-left:4px;vertical-align:1px}
+
+  /* 對應三問 */
+  .df-map{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+  .df-map div{border-radius:14px;padding:12px 14px;background:var(--bg);border-top:5px solid var(--c);font-size:.9rem}
+  .df-map b{display:block;color:var(--c)}
+  .df-map span{display:inline-block;font-size:.78rem;background:#fff;border-radius:999px;padding:1px 9px;margin:6px 4px 0 0}
+
+  @media (max-width:760px){.df-pane .g,.df-cmp,.df-map{grid-template-columns:1fr}.df-tbl td:first-child{white-space:normal}}
+</style>
+</head>
+<body class="rd" data-rd="definition.html">
+<div id="site-header"></div>
+<section class="rd-hero"><div class="inner">
+  <span class="rd-eyebrow"></span>
+  <h1>閱讀素養新定義：怎樣才算「讀得好」？<small>Reading Literacy Revisited</small></h1>
+  <p>PISA 閱讀素養把「有效且具批判性」放到核心位置。逐詞拆開，就能看到 AI 時代對讀者的新要求。</p>
+  <div class="rd-q"></div>
+</div></section>
+<nav class="rd-chap" id="rd-chap" aria-label="本章頁面"></nav>
+
+<main class="rd-main">
+  <p class="rd-crumb" id="rd-crumb"></p>
+
+  <h2 id="def">PISA 閱讀素養定義</h2>
+  <div class="df-box">
+    <p class="df-sent" id="df-sent">閱讀素養是指為了<button type="button" data-k="know">發展知識</button>、實現<button type="button" data-k="goal">個人及社會目標</button>，而<button type="button" data-k="crit">有效且具批判性地</button><button type="button" data-k="eng">投入</button>、<button type="button" data-k="und">理解</button>及<button type="button" data-k="eva">評鑑</button><button type="button" data-k="txt">文本</button>的能力。</p>
+    <p class="df-en">“Reading literacy is the ability to engage with, understand, and evaluate texts effectively and critically in order to develop knowledge and to achieve personal and social goals.”</p>
+    <p class="df-hint">👆 點選有底線的詞語，查看它的意思。</p>
+  </div>
+  <div class="df-pane" id="df-pane" aria-live="polite"></div>
+
+  <h2 id="compare">與過去定義對照</h2>
+  <div class="df-seg" id="df-seg">
+    <button type="button" data-v="both" class="on">並排對照</button><button type="button" data-v="2018">紙本</button><button type="button" data-v="2029">多元文本</button>
+  </div>
+  <div class="df-cmp" id="df-cmp" data-v="both">
+    <div class="y18"><small>PISA 紙本</small>閱讀素養是指為了<del>達成個人目標、發展個人知識及潛能，以及參與社會</del>，而<del>理解、運用、評鑑、反思及投入</del>文本的能力。</div>
+    <div class="y29"><small>PISA 多元文本</small>閱讀素養是指為了<mark>發展知識、實現個人及社會目標</mark>，而<mark>有效且具批判性地</mark><mark>投入、理解及評鑑</mark>文本的能力。</div>
+  </div>
+  <table class="df-tbl">
+    <tr><th>改變</th><th>紙本</th><th>多元文本</th></tr>
+    <tr><td>閱讀的方式</td><td>沒有說明</td><td><b>有效且具批判性</b><span class="df-new">新增</span>：在時間及資源限制下達成目標，並質疑說法</td></tr>
+    <tr><td>動詞</td><td>理解、運用、評鑑、反思、投入（五個）</td><td>投入、理解、評鑑（三個）。「反思」併入評鑑過程</td></tr>
+    <tr><td>評鑑的內涵</td><td>評鑑文本質素及可信度</td><td>加入<b>認知警覺</b>：察覺 AI 生成或誤導性內容</td></tr>
+    <tr><td>閱讀的目的</td><td>達成個人目標、發展知識及潛能、參與社會</td><td><b>發展知識</b>重新放在前面，強調以探究為本的閱讀</td></tr>
+  </table>
+
+  <h2 id="map">定義與三個核心問題</h2>
+  <div class="df-map">
+    <div style="--c:var(--A);--bg:var(--Abg)"><b>① 說了甚麼？</b><span>投入</span><span>理解</span></div>
+    <div style="--c:var(--B);--bg:var(--Bbg)"><b>② 可信嗎？</b><span>評鑑</span><span>批判性</span></div>
+    <div style="--c:var(--C);--bg:var(--Cbg)"><b>③ 為何相信？</b><span>有效且具批判性</span><span>發展知識</span></div>
+  </div>
+
+  <div class="rd-key"><div><b>重點：</b>新定義最大的改變，是把「批判性」由評鑑的一個環節，提升為閱讀的整體要求。讀得快而不加判斷不算讀得好，讀得仔細但不能在限制內完成任務也不算。下一頁看看讀者、文本和任務怎樣共同決定閱讀的難度。</div></div>
+
+  <div class="rd-src"><b>資料來源</b><ul>
+    <li>OECD (2019). <i>PISA 2018 Assessment and Analytical Framework</i>, Chapter 2: Reading framework. OECD Publishing.</li>
+    <li>中文譯文為本站翻譯，以英文原文為準。</li>
+  </ul></div>
+  <div class="rd-pager" id="rd-pager"></div>
+</main>
+<div id="site-footer"></div>
+<script src="rd.js"></script>
+<script>
+(function(){
+  const $ = s => document.querySelector(s);
+  const A = ['var(--A)','var(--Abg)'], B = ['var(--B)','var(--Bbg)'], C = ['var(--C)','var(--Cbg)'], P = ['var(--P)','var(--Pbg)'];
+  const T = {
+    eng:{zh:'投入', en:'Engage with', c:A, mean:'有意識、有策略地與文本互動，包括動機、付出的努力及堅持。', scope:'不只是「有沒有讀」，而是願不願意讀下去、遇到困難時會否放棄。', q:'這篇文本太長、太難，你會怎樣讀下去？'},
+    und:{zh:'理解', en:'Understand', c:A, mean:'由基本解碼，到跨文本推論，在腦中建構文本的心理表徵。', scope:'包括單一文本的字面及推論理解，以及整合多個文本的理解。', q:'這兩篇文章的說法，哪裏相同、哪裏不同？'},
+    eva:{zh:'評鑑', en:'Evaluate', c:B, mean:'權衡資訊的相關性、邏輯一致性及作者觀點。', scope:'包括<b>認知警覺</b>：察覺 AI 生成或誤導性的內容。「反思」亦屬評鑑的一部分。', q:'這個作者有足夠的專業嗎？他有沒有利益衝突？', go:['vigilance.html','→ 08 查證與認知警覺']},
+    txt:{zh:'文本', en:'Texts', c:P, mean:'所有以視覺呈現的語言：手寫、印刷或螢幕上的。', scope:'包括文字、圖表、地圖及附字幕的影片；<b>不包括</b>純音訊。AI 生成的文本也屬於文本。', q:'一張附文字的資訊圖表，也是「文本」嗎？為甚麼？', go:['model.html','→ 03 文本的三個維度']},
+    crit:{zh:'有效且具批判性', en:'Effectively and critically', c:C, mean:'<b>有效：</b>在時間及資源限制下達成閱讀目標。<br><b>批判性：</b>反思自己的推理、質疑說法、主動尋找其他觀點。', scope:'兩者需要平衡：查證每一句會太慢，甚麼都不查又會受騙。讀者要判斷「何時值得停下來查證」。', q:'這個資訊重要到值得花時間查證嗎？'},
+    know:{zh:'發展知識', en:'Develop knowledge', c:C, mean:'把閱讀轉化為可靠的知識建構。', scope:'重新強調以探究為本的閱讀：讀是為了弄清楚問題，而不只是完成題目。', q:'讀完之後，你對這個問題的理解有甚麼改變？'},
+    goal:{zh:'個人及社會目標', en:'Personal and social goals', c:P, mean:'閱讀的目的，由個人興趣延伸到積極公民參與及終身學習。', scope:'閱讀與真實生活連結：做決定、參與討論、解決社區問題。', q:'你讀這些資料，是為了做甚麼決定？'}
+  };
+  function show(k){
+    const t = T[k];
+    document.querySelectorAll('#df-sent button').forEach(b => b.classList.toggle('on', b.dataset.k === k));
+    const p = $('#df-pane'); p.style.setProperty('--c', t.c[0]); p.style.setProperty('--bg', t.c[1]);
+    p.innerHTML = `<h3>${t.zh}<small>${t.en}</small></h3><div class="g">
+      <div><b>意思</b>${t.mean}</div><div><b>範圍</b>${t.scope}</div>
+      <div class="q"><b>課堂可以問</b>「${t.q}」</div></div>
+      ${t.go ? `<p style="margin:10px 0 0"><a href="${t.go[0]}" style="color:${t.c[0]};font-weight:700">${t.go[1]}</a></p>` : ''}`;
+    p.style.animation = 'none'; p.offsetHeight; p.style.animation = '';
+  }
+  document.querySelectorAll('#df-sent button').forEach(b => {
+    const c = T[b.dataset.k].c; b.style.setProperty('--c', c[0]); b.style.setProperty('--bg', c[1]);
+  });
+  $('#df-sent').addEventListener('click', e => { const b = e.target.closest('button[data-k]'); if (b) show(b.dataset.k); });
+  show('crit');
+
+  $('#df-seg').addEventListener('click', e => {
+    const b = e.target.closest('button[data-v]'); if (!b) return;
+    document.querySelectorAll('#df-seg button').forEach(x => x.classList.toggle('on', x === b));
+    $('#df-cmp').dataset.v = b.dataset.v;
+  });
+})();
+</script>
+</body>
+</html>

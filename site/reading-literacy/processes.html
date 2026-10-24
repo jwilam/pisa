@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>閱讀過程與分量表｜閱讀素養專題｜PISA 2025 研討會專題</title>
+<meta name="description" content="PISA 閱讀過程：基礎過程、搜尋與存取、理解與詮釋、評鑑與反思，以及貫穿各層的任務管理；三個分量表及八個精練程度。">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="rd.css">
+<style>
+  /* 過程層級圖 */
+  .pr-wrap{display:grid;grid-template-columns:minmax(280px,1fr) 1fr;gap:20px;align-items:start;margin:14px 0}
+  .pr-stack{display:grid;grid-template-columns:1fr 64px;gap:8px}
+  .pr-lys{display:flex;flex-direction:column;gap:8px}
+  .pr-ly{font:inherit;text-align:left;border:0;border-radius:14px;padding:14px 16px;color:#fff;cursor:pointer;background:var(--c);position:relative;transition:transform .15s,box-shadow .15s}
+  .pr-ly:hover{transform:translateX(3px)}
+  .pr-ly.on{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--c)}
+  .pr-ly b{display:block;font-size:1.02rem}
+  .pr-ly small{opacity:.85;font-size:.76rem;letter-spacing:.03em}
+  .pr-ly .sub{position:absolute;top:10px;right:12px;font-size:.68rem;font-weight:700;background:#ffffff33;border-radius:999px;padding:1px 8px}
+  .pr-ly.l1{--c:#1f5c66}.pr-ly.l2{--c:#2a7f8f}.pr-ly.l3{--c:#4d9aa8}.pr-ly.l4{--c:#7fb5bf;color:#123}
+  .pr-ly.l4 .sub{background:#ffffff80}
+  .pr-tm{font:inherit;border:0;border-radius:14px;background:repeating-linear-gradient(180deg,var(--B) 0 18px,#c9992f 18px 36px);color:#fff;cursor:pointer;writing-mode:vertical-rl;font-weight:700;font-size:.9rem;letter-spacing:.12em;padding:10px 0}
+  .pr-tm.on{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--B)}
+  .pr-arrow{grid-column:1/-1;font-size:.78rem;color:var(--mut);text-align:center}
+  .pr-pane{background:#fff;border-radius:18px;box-shadow:var(--sh);border-top:6px solid var(--c);padding:16px 20px;position:sticky;top:90px;animation:prIn .3s ease}
+  @keyframes prIn{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}
+  .pr-pane h3{margin:0;color:var(--c)}
+  .pr-pane h3 small{font-weight:400;color:var(--mut);font-size:.8rem;margin-left:6px}
+  .pr-pane ul{margin:8px 0;padding-left:18px;font-size:.9rem}
+  .pr-pane .ex{background:var(--paper);border-radius:12px;padding:10px 12px;font-size:.88rem;margin:8px 0}
+  .pr-pane .ex b,.pr-pane .ep b{display:block;font-size:.76rem;color:var(--c);letter-spacing:.04em}
+  .pr-pane .ep{background:var(--Cbg);border-radius:12px;padding:10px 12px;font-size:.88rem}
+
+  /* 測驗 */
+  .pr-quiz{background:var(--paper);border-radius:18px;padding:18px 20px;margin:12px 0}
+  .pr-quiz .top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .pr-task{background:#fff;border-radius:14px;padding:14px 16px;margin:10px 0;font-weight:700;box-shadow:var(--sh)}
+  .pr-opts{display:flex;flex-wrap:wrap;gap:8px}
+  .pr-fb{margin:10px 0 0;padding:10px 14px;border-radius:12px;background:#fff;min-height:2.6em;font-size:.92rem}
+  .pr-fb.ok{border-left:5px solid var(--C)}.pr-fb.no{border-left:5px solid var(--W)}
+
+  /* 精練程度 */
+  .pr-lv{display:flex;gap:4px;margin:14px 0 6px;align-items:flex-end}
+  .pr-lv button{flex:1;font:inherit;font-weight:800;border:0;border-radius:10px 10px 4px 4px;color:#fff;cursor:pointer;background:var(--rc);opacity:calc(.35 + var(--i) * .09);height:calc(34px + var(--i) * 9px);position:relative}
+  .pr-lv button.on{opacity:1;box-shadow:0 0 0 3px var(--dark)}
+  .pr-lv button.base::after{content:"基準";position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:.68rem;font-weight:700;color:var(--W);white-space:nowrap}
+  .pr-lvx{display:flex;justify-content:space-between;font-size:.74rem;color:var(--mut)}
+  .pr-lvd{background:var(--rbg);border-radius:14px;padding:12px 16px;margin:10px 0;font-size:.93rem;min-height:3em}
+  .pr-lvd b{color:var(--rc)}
+  .pr-sub{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+  .pr-sub div{border-radius:14px;padding:12px 14px;background:var(--paper);border-left:5px solid var(--c);font-size:.88rem}
+  .pr-sub b{display:block;color:var(--c)}
+
+  @media (max-width:820px){.pr-wrap,.pr-sub{grid-template-columns:1fr}.pr-pane{position:static}}
+</style>
+</head>
+<body class="rd" data-rd="processes.html">
+<div id="site-header"></div>
+<section class="rd-hero"><div class="inner">
+  <span class="rd-eyebrow"></span>
+  <h1>閱讀過程：由認字到評鑑<small>Reading Processes, Subscales and Proficiency Levels</small></h1>
+  <p>PISA 把閱讀分為四層過程，由最基礎的認字與流暢度，到評鑑與反思；任務管理及自我調節則貫穿每一層。審辨思維也不只在最高層出現。</p>
+  <div class="rd-q"></div>
+</div></section>
+<nav class="rd-chap" id="rd-chap" aria-label="本章頁面"></nav>
+
+<main class="rd-main">
+  <p class="rd-crumb" id="rd-crumb"></p>
+
+  <h2 id="layers">四層過程，一條貫穿線 <span class="rd-draft">初稿</span></h2>
+  <p>點選每一層，查看它包括甚麼、在「寫作課應否使用 AI」任務中的例子，以及這一層的審辨角度。</p>
+  <div class="pr-wrap">
+    <div class="pr-stack" id="pr-stack">
+      <div class="pr-lys">
+        <button type="button" class="pr-ly l1" data-k="eva"><span class="sub">分量表</span><b>評鑑與反思</b><small>Evaluate &amp; Reflect</small></button>
+        <button type="button" class="pr-ly l2" data-k="und"><span class="sub">分量表</span><b>理解與詮釋</b><small>Understand &amp; Interpret</small></button>
+        <button type="button" class="pr-ly l3" data-k="sea"><span class="sub">分量表</span><b>搜尋與存取</b><small>Search &amp; Access</small></button>
+        <button type="button" class="pr-ly l4" data-k="fnd"><span class="sub">流暢度評估</span><b>基礎過程</b><small>Foundational Processes</small></button>
+      </div>
+      <button type="button" class="pr-tm" data-k="tm">任務管理及自我調節</button>
+      <div class="pr-arrow">▲ 由下而上：愈高層愈依賴下層的基礎</div>
+    </div>
+    <div class="pr-pane" id="pr-pane" aria-live="polite"></div>
+  </div>
+
+  <h2 id="quiz">試一試：這個任務屬於哪一層？</h2>
+  <div class="pr-quiz">
+    <div class="top"><b>題目 <span id="pq-n">1</span> / <span id="pq-t"></span></b><span id="pq-s" style="font-size:.86rem;color:var(--mut)"></span></div>
+    <div class="pr-task" id="pq-task"></div>
+    <div class="pr-opts" id="pq-opts"></div>
+    <p class="pr-fb" id="pq-fb" aria-live="polite">選擇你認為正確的一層。</p>
+  </div>
+
+  <h2 id="scales">三個分量表與八個精練程度 <span class="rd-draft">初稿</span></h2>
+  <p>上方三個較高層的過程，各自報告為一個<strong>分量表</strong>。整體表現分為<strong>八個精練程度</strong>（1c 至 6）。框架亦擴大評估詞句層面的基礎技能，以更了解低表現學生的困難。</p>
+  <div class="pr-sub">
+    <div style="--c:#1f5c66"><b>評鑑與反思</b>質素與可信度；內容與形式；察覺衝突</div>
+    <div style="--c:#2a7f8f"><b>理解與詮釋</b>單一來源；多個來源的整合</div>
+    <div style="--c:#4d9aa8"><b>搜尋與存取</b>在文本內找資訊；選擇相關文本</div>
+  </div>
+  <div class="pr-lv" id="pr-lv"></div>
+  <div class="pr-lvx"><span>← 較低</span><span>較高 →</span></div>
+  <div class="pr-lvd" id="pr-lvd" aria-live="polite"></div>
+  <p style="font-size:.8rem;color:var(--mut)">⚠️ 各等級描述為本站簡化的示意說明，<b>並非 OECD 官方描述</b>；正式描述以 OECD 公布的框架及報告為準。</p>
+
+  <div class="rd-key"><div><b>重點：</b>評鑑能力建立在穩固的基礎之上。若學生連多個文本的資訊都未能準確找出和理解，就很難判斷誰較可信。所以審辨閱讀不是高年級才教的「加料」，而是由基礎過程的自動驗證開始，每一層都要培養。下一章進入多文本閱讀的核心：文件模型。</div></div>
+
+  <div class="rd-src"><b>資料來源</b><ul>
+    <!--li>OECD. PISA 2029 Reading Literacy Framework <span class="rd-draft">初稿</span>（版本及年份待核實）</li-->
+    <li>「審辨角度」整理自研討會〈審辨閱讀〉簡報的審辨過程地圖。</li>
+  </ul></div>
+  <div class="rd-pager" id="rd-pager"></div>
+</main>
+<div id="site-footer"></div>
+<script src="rd.js"></script>
+<script>
+(function(){
+  const $ = s => document.querySelector(s);
+
+  /* ---------- 過程層級 ---------- */
+  const L = {
+    eva:{zh:'評鑑與反思', en:'Evaluate & Reflect', c:'#1f5c66', li:['<b>質素與可信度</b>：資訊是否有效、準確、沒有偏見','<b>內容與形式</b>：反思文體、結構及作者意圖','<b>察覺衝突</b>：找出來源之間的分歧，按證據權衡'],
+         ex:'比較大學研究摘要與 AI 回答：哪一個較可信？為甚麼？', ep:'審辨的<b>核心</b>：評估真確性、反思內容與形式、察覺衝突。', go:['vigilance.html','→ 08 查證與認知警覺']},
+    und:{zh:'理解與詮釋', en:'Understand & Interpret', c:'#2a7f8f', li:['<b>單一來源</b>：建立字面及推論的理解','<b>多個來源</b>：把互補或矛盾的文本整合成連貫的理解'],
+         ex:'報道說試點學校寫作效率提高，研究摘要卻指出學生過度依賴：兩者如何拼合？', ep:'掌握多個文本之間的互補或矛盾。', go:['documents.html','→ 05 文件模型']},
+    sea:{zh:'搜尋與存取', en:'Search & Access', c:'#4d9aa8', li:['<b>在文本內找資訊</b>：掃描特定目標（名稱、日期）','<b>選擇相關文本</b>：判斷哪些搜尋結果或帖文最相關、最可信'],
+         ex:'在搜尋結果中，先打開哪一個：教育局網頁、家長論壇，還是廣告？', ep:'判斷搜尋結果或帖文的相關性與可信度：在打開之前已開始評鑑。'},
+    fnd:{zh:'基礎過程', en:'Foundational Processes', c:'#5b8f99', li:['認字及解碼','句子的順序處理效率','詞彙及句法處理','產生推論、自動檢查說法是否一致'],
+         ex:'流暢地讀懂「學生過度依賴 AI，削弱獨立構思能力」這句話。', ep:'<b>自動驗證</b>：讀者會自動檢查說法是否與已有知識一致。準確的背景知識能攔截明顯錯誤，例如「北極熊在沙漠捕獵」。'},
+    tm:{zh:'任務管理及自我調節', en:'Task Management & Self-regulation', c:'var(--B)', li:['設定閱讀目標','監察理解及進度','調整策略，決定先讀甚麼、何時停止'],
+         ex:'300 字建議書要在 40 分鐘內完成：我還需要再找資料，還是可以開始寫？', ep:'決定<b>何時需要停下來查證</b>：這正是「有效且具批判性」中的取捨。', go:['definition.html','→ 02 有效且具批判性']}
+  };
+  function ly(k){
+    const l = L[k], p = $('#pr-pane');
+    document.querySelectorAll('#pr-stack [data-k]').forEach(b => b.classList.toggle('on', b.dataset.k === k));
+    p.style.setProperty('--c', l.c);
+    p.innerHTML = `<h3>${l.zh}<small>${l.en}</small></h3><ul>${l.li.map(x => `<li>${x}</li>`).join('')}</ul>
+      <div class="ex"><b>任務例子：寫作課應否使用 AI？</b>${l.ex}</div>
+      <div class="ep"><b>🔍 審辨角度</b>${l.ep}</div>
+      ${l.go ? `<p style="margin:10px 0 0"><a href="${l.go[0]}" style="color:${l.c};font-weight:700">${l.go[1]}</a></p>` : ''}`;
+    p.style.animation = 'none'; p.offsetHeight; p.style.animation = '';
+  }
+  $('#pr-stack').addEventListener('click', e => { const b = e.target.closest('[data-k]'); if (b) ly(b.dataset.k); });
+  ly('eva');
+
+  /* ---------- 測驗 ---------- */
+  const Q = [
+    {t:'在一篇巴士公司通告中，找出新路線的開始日期。', a:'sea', why:'在文本內掃描特定目標（日期）。'},
+    {t:'閱讀兩篇對疫苗副作用說法不一的文章，找出它們研究的對象有何不同。', a:'eva', why:'察覺並分析文本之間的衝突，屬評鑑與反思。'},
+    {t:'閱讀三篇關於本地海洋污染的文章，寫出它們共同指出的成因。', a:'und', why:'把多個來源的內容整合成連貫的理解。'},
+    {t:'在十條搜尋結果中，選出最可能提供可靠數據的兩個網頁。', a:'sea', why:'選擇相關且可信的文本，屬搜尋與存取，但已帶有評鑑成分。'},
+    {t:'讀到「北極熊在沙漠捕獵」時，立即覺得不對勁。', a:'fnd', why:'自動驗證：說法與已有知識不一致，讀者在基礎過程已察覺。'},
+    {t:'判斷一則帖文用「震驚！」「專家警告」等字眼，目的是甚麼。', a:'eva', why:'反思內容與形式，以及作者意圖。'}
+  ];
+  const NM = {fnd:'基礎過程', sea:'搜尋與存取', und:'理解與詮釋', eva:'評鑑與反思'};
+  let qi = 0, sc = 0;
+  $('#pq-t').textContent = Q.length;
+  function qs(){
+    $('#pq-n').textContent = qi + 1; $('#pq-task').textContent = Q[qi].t; $('#pq-s').textContent = `已答對 ${sc} 題`;
+    $('#pq-opts').innerHTML = Object.entries(NM).map(([k,v]) => `<button type="button" class="rd-btn" data-a="${k}" style="--c:${L[k].c}">${v}</button>`).join('')
+      + '<button type="button" class="rd-btn solid" id="pq-next" style="--c:var(--dark);margin-left:auto" disabled>下一題 →</button>';
+    $('#pq-fb').className = 'pr-fb'; $('#pq-fb').textContent = '選擇你認為正確的一層。';
+  }
+  $('#pq-opts').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.id === 'pq-next'){ if (qi === Q.length - 1){ qi = 0; sc = 0; } else qi++; qs(); return; }
+    const q = Q[qi], ok = b.dataset.a === q.a; if (ok) sc++;
+    document.querySelectorAll('#pq-opts [data-a]').forEach(x => x.disabled = true);
+    $('#pq-fb').className = 'pr-fb ' + (ok ? 'ok' : 'no');
+    $('#pq-fb').innerHTML = (ok ? '✅ 正確！' : `❌ 答案是「${NM[q.a]}」。`) + q.why;
+    const nx = $('#pq-next'); nx.disabled = false; $('#pq-s').textContent = `已答對 ${sc} 題`;
+    if (qi === Q.length - 1){ nx.textContent = '再玩一次 ↻'; $('#pq-fb').innerHTML += `<br><b>完成！你答對 ${sc} / ${Q.length} 題。</b>`; }
+    ly(q.a);
+  });
+  qs();
+
+  /* ---------- 精練程度（示意） ---------- */
+  const LV = [
+    ['1c','理解簡短句子的字面意思，辨識熟悉的詞語。'],
+    ['1b','在簡短、熟悉的文本中，找出明確寫出的單一資訊。'],
+    ['1a','找出明顯的主旨或作者目的，作簡單的連繫。'],
+    ['2','<b>基準水平</b>：找出文本主要意思，比較或對照一兩項資訊，並反思文本的目的。'],
+    ['3','整合文本多個部分的資訊，處理互相競爭的資訊。'],
+    ['4','處理較長或較複雜的文本，作細緻詮釋，並運用知識評鑑文本。'],
+    ['5','處理不熟悉的內容，分辨細微差異，評鑑可信度並提出假設。'],
+    ['6','跨多個文本作精細推論與比較，處理衝突、評鑑可信度，並反思作者意圖。']
+  ];
+  $('#pr-lv').innerHTML = LV.map((l,i) => `<button type="button" data-i="${i}" style="--i:${i}" class="${l[0] === '2' ? 'base' : ''}" aria-label="等級 ${l[0]}">${l[0]}</button>`).join('');
+  function lv(i){
+    document.querySelectorAll('#pr-lv button').forEach(b => b.classList.toggle('on', +b.dataset.i === i));
+    $('#pr-lvd').innerHTML = `<b>等級 ${LV[i][0]}</b>：${LV[i][1]}`;
+  }
+  $('#pr-lv').addEventListener('click', e => { const b = e.target.closest('button'); if (b) lv(+b.dataset.i); });
+  lv(3);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>課堂啟示｜閱讀素養專題｜PISA 2025 研討會專題</title>
+<meta name="description" content="把審辨閱讀帶進課堂：三問課堂流程、各科示例、按專題頁面設計的課堂活動，以及教師自我檢視清單。">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="rd.css">
+<style>
+  /* 轉變表 */
+  .cl-shift{display:grid;gap:8px;margin:12px 0}
+  .cl-shift div{display:grid;grid-template-columns:1fr 36px 1fr;align-items:center;gap:8px}
+  .cl-shift span{border-radius:12px;padding:10px 14px;font-size:.92rem}
+  .cl-shift .f{background:#f1efe8;color:var(--mut)}
+  .cl-shift .t{background:var(--rbg);font-weight:700;color:var(--rc)}
+  .cl-shift i{font-style:normal;text-align:center;color:var(--rc);font-size:1.2rem}
+  .cl-shift .h span{background:none;padding:0 14px;font-size:.78rem;font-weight:700;color:var(--mut)}
+
+  /* 三問流程 */
+  .cl-3q{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+  .cl-3q section{border-radius:18px;background:var(--bg);border-top:6px solid var(--c);padding:14px 16px}
+  .cl-3q h4{margin:0;color:var(--c);font-size:1.05rem}
+  .cl-3q .w{font-size:.76rem;color:var(--mut);font-weight:700;letter-spacing:.04em}
+  .cl-3q ul{list-style:none;margin:8px 0 0;padding:0}
+  .cl-3q li{background:#fff;border-radius:10px;padding:7px 10px;margin:6px 0;font-size:.88rem;position:relative;cursor:pointer}
+  .cl-3q li::after{content:"⧉";position:absolute;right:8px;top:7px;opacity:.35;font-size:.8rem}
+  .cl-3q li.cp{background:var(--c);color:#fff}
+  .cl-3q li.cp::after{content:"✓ 已複製";opacity:1;font-size:.72rem}
+
+  /* 學科分頁 */
+  .cl-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}
+  .cl-tabs button{font:inherit;font-size:.88rem;border:0;border-radius:12px 12px 0 0;background:var(--paper);padding:8px 16px;cursor:pointer;color:var(--mut)}
+  .cl-tabs button.on{background:var(--rbg);color:var(--rc);font-weight:700}
+  .cl-sub{background:var(--rbg);border-radius:0 16px 16px 16px;padding:16px 20px;animation:clIn .3s ease}
+  @keyframes clIn{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}
+  .cl-sub h4{margin:0 0 4px;color:var(--rc)}
+  .cl-sub .g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+  .cl-sub .g div{background:#fff;border-radius:12px;padding:10px 12px;font-size:.88rem}
+  .cl-sub .g b{display:block;font-size:.76rem;color:var(--rc);letter-spacing:.04em}
+  .cl-sub .lk{font-size:.84rem;margin:10px 0 0}
+  .cl-sub .lk a{color:var(--rc);font-weight:700}
+
+  /* 各頁活動 */
+  .cl-acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin:12px 0}
+  .cl-act{display:block;text-decoration:none;color:var(--ink);background:#fff;border-radius:16px;box-shadow:var(--sh);border-top:5px solid var(--c);padding:12px 14px;transition:transform .15s}
+  .cl-act:hover{transform:translateY(-3px)}
+  .cl-act small{color:var(--c);font-weight:700;font-size:.76rem}
+  .cl-act b{display:block;margin:2px 0 4px}
+  .cl-act p{margin:0;font-size:.86rem;color:var(--mut);line-height:1.65}
+
+  /* 自我檢視 */
+  .cl-chk{background:var(--paper);border-radius:18px;padding:18px 20px;margin:12px 0}
+  .cl-chk .top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+  .cl-meter{flex:1;min-width:160px;height:12px;border-radius:99px;background:#e4e0d2;overflow:hidden}
+  .cl-meter i{display:block;height:100%;width:0;background:var(--rc);transition:width .3s}
+  .cl-chk label{display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:12px;padding:10px 12px;margin:6px 0;cursor:pointer;font-size:.92rem}
+  .cl-chk input{margin-top:5px;accent-color:var(--rc);width:16px;height:16px;flex:0 0 auto}
+  .cl-chk label small{display:block;color:var(--mut);font-size:.78rem}
+  .cl-chk .msg{font-size:.9rem;margin:8px 0 0;min-height:1.4em}
+
+  /* MAIL */
+  .cl-mail{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;background:linear-gradient(135deg,var(--dark),#2b4f45);color:#fff;border-radius:18px;padding:18px 22px;margin:20px 0;text-decoration:none}
+  .cl-mail .i{font-size:2.2rem}
+  .cl-mail b{display:block;font-size:1.08rem;color:#f1d27a}
+  .cl-mail small{opacity:.85;line-height:1.6;display:block}
+  .cl-mail .ar{font-size:1.5rem}
+
+  @media (max-width:760px){
+    .cl-3q,.cl-sub .g{grid-template-columns:1fr}
+    .cl-shift div{grid-template-columns:1fr}.cl-shift i{transform:rotate(90deg)}.cl-shift .h{display:none !important}
+    .cl-mail{grid-template-columns:1fr}.cl-mail .ar{display:none}
+  }
+</style>
+</head>
+<body class="rd" data-rd="classroom.html">
+<div id="site-header"></div>
+<section class="rd-hero"><div class="inner">
+  <span class="rd-eyebrow"></span>
+  <h1>課堂啟示：把審辨閱讀帶進每一科<small>From Framework to Classroom</small></h1>
+  <p>審辨閱讀不是一個新科目，也不是應試題型。它是一種讀的習慣：每次讀到一個說法，都問「說了甚麼、可信嗎、為何相信」。這一頁把前九頁的重點化成課堂上可以用的做法。</p>
+  <div class="rd-q"></div>
+</div></section>
+<nav class="rd-chap" id="rd-chap" aria-label="本章頁面"></nav>
+
+<main class="rd-main">
+  <p class="rd-crumb" id="rd-crumb"></p>
+
+  <h2 id="shift">課堂的四個轉變</h2>
+  <div class="cl-shift">
+    <div class="h"><span>由……</span><span></span><span>到……</span></div>
+    <div><span class="f">讀一篇課文</span><i>➜</i><span class="t">讀一組來源各異的文本</span></div>
+    <div><span class="f">問「這個詞語是甚麼意思？」</span><i>➜</i><span class="t">問「你為何相信這個說法？」</span></div>
+    <div><span class="f">追求一個標準答案</span><i>➜</i><span class="t">接受有條件、與證據相稱的結論</span></div>
+    <div><span class="f">禁止或忽略 AI</span><i>➜</i><span class="t">把 AI 回答當作「需要評鑑的來源」</span></div>
+  </div>
+
+  <h2 id="routine">三問課堂流程</h2>
+  <p>每次閱讀活動都可以套用這三問。下面的<strong>句式鷹架</strong>可直接放上工作紙；點選句式即可複製。</p>
+  <div class="cl-3q" id="cl-3q"></div>
+
+  <h2 id="subjects">各科示例</h2>
+  <div class="cl-tabs" id="cl-tabs" role="tablist"></div>
+  <div class="cl-sub" id="cl-sub" role="tabpanel" aria-live="polite"></div>
+
+  <h2 id="acts">按專題頁面設計的課堂活動</h2>
+  <p>每張卡對應專題的一頁，點選可回到該頁重溫概念。</p>
+  <div class="cl-acts" id="cl-acts"></div>
+
+  <h2 id="check">教師自我檢視</h2>
+  <p>過去一個月，你的課堂有沒有這些元素？勾選會保存在這部裝置上。</p>
+  <div class="cl-chk">
+    <div class="top"><b>已做到 <span id="ck-n">0</span> / <span id="ck-t"></span></b><div class="cl-meter"><i id="ck-m"></i></div>
+      <button type="button" class="rd-btn" id="ck-reset">↻ 清除</button></div>
+    <div id="ck-list"></div>
+    <p class="msg" id="ck-msg" aria-live="polite"></p>
+  </div>
+
+  <a class="cl-mail" href="../digital.html#mail">
+    <span class="i">💻</span>
+    <span><b>延伸：PISA 2029 媒體與人工智能素養（MAIL）</b><small>審辨閱讀是 MAIL 的基礎。MAIL 進一步評估學生在模擬網頁、社交媒體及生成式 AI 環境中，怎樣評鑑內容、負責任地使用 AI。</small></span>
+    <span class="ar">→</span>
+  </a>
+
+  <div class="rd-key"><div><b>重點：</b>不必等待新課程或新教材。在現有課文旁加一個不同來源的文本，再問一句「你為何相信？」，審辨閱讀就已經開始了。關鍵是持之以恆，讓三問成為學生的閱讀習慣。</div></div>
+
+  <div class="rd-src"><b>資料來源</b><ul>
+    <li>Braasch, J. L. G., &amp; Bråten, I. (2017). The discrepancy-induced source comprehension (D-ISC) model. <i>Educational Psychologist, 52</i>(3), 167–181.</li>
+    <li>Wineburg, S., &amp; McGrew, S. (2019). Lateral reading and the nature of expertise. <i>Teachers College Record, 121</i>(11).</li>
+    <li>Wardle, C., &amp; Derakhshan, H. (2017). <i>Information disorder</i>. Council of Europe.</li>
+    <li>課堂流程、各科示例及活動為本站根據研討會內容整理的建議。</li>
+  </ul></div>
+  <div class="rd-pager" id="rd-pager"></div>
+</main>
+<div id="site-footer"></div>
+<script src="rd.js"></script>
+<script>
+(function(){
+  const $ = s => document.querySelector(s);
+
+  /* ---------- 三問句式 ---------- */
+  const Q3 = [
+    {c:'var(--A)', bg:'var(--Abg)', t:'① 說了甚麼？', w:'理解', s:['這篇文本主張……，依據是……','文本 A 與文本 B 都指出……','文本 A 補充了文本 B 沒有提到的……','這個說法來自……（作者／機構），發表於……']},
+    {c:'var(--B)', bg:'var(--Bbg)', t:'② 可信嗎？', w:'評鑑', s:['作者是……，他（有／沒有）……方面的專業','作者可能想我相信……，因為……','其他獨立來源（支持／不支持）這個說法，例如……','這兩個文本說法不同，可能因為……']},
+    {c:'var(--C)', bg:'var(--Cbg)', t:'③ 為何相信？', w:'證成', s:['我傾向相信……，因為……','在……的情況下，……成立；但……仍未清楚','我對這個結論的信心是（高／中／低），因為……','如要更確定，我還需要查證……']}
+  ];
+  $('#cl-3q').innerHTML = Q3.map(q => `<section style="--c:${q.c};--bg:${q.bg}"><h4>${q.t}</h4><span class="w">${q.w}</span>
+    <ul>${q.s.map(s => `<li tabindex="0" role="button" title="點選複製">${s}</li>`).join('')}</ul></section>`).join('');
+  const copy = li => {
+    const done = () => { li.classList.add('cp'); setTimeout(() => li.classList.remove('cp'), 1400); };
+    if (navigator.clipboard) navigator.clipboard.writeText(li.textContent).then(done, done); else done();
+  };
+  $('#cl-3q').addEventListener('click', e => { const li = e.target.closest('li'); if (li) copy(li); });
+  $('#cl-3q').addEventListener('keydown', e => { const li = e.target.closest('li'); if (li && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); copy(li); } });
+
+  /* ---------- 各科示例 ---------- */
+  const SUB = [
+    {k:'chi', t:'中國語文', h:'同一事件，兩篇報道', d:'比較兩份報章對同一社區事件的報道，分辨事實與意見，再寫一段有條件的評論。',
+     m:['兩篇立場不同的報道＋一則社交媒體帖文','以「誰說的／有甚麼證據／目的」表格整理','寫 150 字評論，須引用至少兩個來源'], go:['documents.html','05 文件模型']},
+    {k:'eng', t:'English', h:'News vs. chatbot', d:'Students compare a news article with an AI chatbot answer on the same topic, then annotate each claim with its source and evidence.',
+     m:['One news article + one AI answer','Claim – Evidence – Source table','Exit ticket: "I trust … more because …"'], go:['vigilance.html','08 查證與認知警覺']},
+    {k:'sci', t:'科學', h:'兩項結論相反的研究', d:'提供兩項結論相反的研究摘要（例如飲品與健康），學生分析研究對象、樣本大小及量度方法。',
+     m:['兩份研究摘要（含資助來源）','「矛盾偵探」五個原因清單','寫出有條件的科學結論'], go:['conflict.html','06 當文本互相矛盾']},
+    {k:'csd', t:'公民與社會發展', h:'轉發前停一停', d:'以一則在通訊群組流傳的「官方通告」為例，學生用橫向閱讀查證，判斷屬哪類資訊失序。',
+     m:['一則仿真通告截圖','3 分鐘橫向閱讀任務','討論：轉發者有沒有責任？'], go:['disorder.html','07 資訊失序']},
+    {k:'mat', t:'數學', h:'會說謊的圖表', d:'比較兩幅以同一組數據繪製、但縱軸起點不同的棒形圖，討論呈現方式怎樣影響讀者判斷。',
+     m:['同一數據的兩幅圖表','找出「誤導」的設計','重繪一幅公平的圖表'], go:['model.html','03 多模態文本']}
+  ];
+  let sk = 'chi';
+  function sub(){
+    $('#cl-tabs').innerHTML = SUB.map(s => `<button type="button" role="tab" data-k="${s.k}" class="${s.k === sk ? 'on' : ''}" aria-selected="${s.k === sk}">${s.t}</button>`).join('');
+    const s = SUB.find(x => x.k === sk), p = $('#cl-sub');
+    p.innerHTML = `<h4>${s.h}</h4><p style="margin:0;font-size:.93rem">${s.d}</p>
+      <div class="g"><div><b>材料</b>${s.m[0]}</div><div><b>工具</b>${s.m[1]}</div><div><b>產出</b>${s.m[2]}</div></div>
+      <p class="lk">相關概念：<a href="${s.go[0]}">${s.go[1]} →</a></p>`;
+    p.style.animation = 'none'; p.offsetHeight; p.style.animation = '';
+  }
+  $('#cl-tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (b){ sk = b.dataset.k; sub(); } });
+  sub();
+
+  /* ---------- 各頁活動 ---------- */
+  const ACT = {
+    'ecosystem.html':['同溫層日記','學生記錄一星期內社交媒體推送的內容，統計觀點是否單一，再刻意搜尋相反意見。'],
+    'definition.html':['改寫定義','學生用自己的話改寫閱讀素養定義，並為「有效」和「批判性」各舉一個生活例子。'],
+    'model.html':['調校難度','教師按來源、互動程度、多模態三個維度，把同一課題設計成由淺入深的三個任務。'],
+    'processes.html':['分層提問','為同一組文本設計四條問題，分別對應基礎、搜尋、理解及評鑑四層。'],
+    'documents.html':['來源標籤','學生每記下一個重點，都要在旁邊寫上來源（誰、何時、甚麼類型）。'],
+    'conflict.html':['矛盾偵探','提供兩段說法不一的文本，學生找出原因，再寫一句有條件的結論。'],
+    'disorder.html':['分類牆','學生收集真實例子，貼在「錯誤／虛假／惡意」三欄，說明分類理由。'],
+    'vigilance.html':['三分鐘橫向閱讀','離開原網站，用三分鐘查證作者及機構的背景，再決定是否相信。'],
+    'argument.html':['論證拼圖','把一段評論拆成主張、理由、證據及反駁，找出最弱的一環。']
+  };
+  $('#cl-acts').innerHTML = RD.PAGES.filter(p => ACT[p.f]).map(p => {
+    const c = RD.CH[p.ch], a = ACT[p.f];
+    return `<a class="cl-act" href="${p.f}" style="--c:${c.c}"><small>${c.n} ${c.zh} · ${RD.num(p)} ${p.zh}</small><b>${p.ic} ${a[0]}</b><p>${a[1]}</p></a>`;
+  }).join('');
+
+  /* ---------- 自我檢視 ---------- */
+  const CK = [
+    ['學生曾閱讀<b>兩個或以上來源</b>的文本完成一項任務','而不只是一篇課文'],
+    ['我曾問學生「<b>你為何相信？</b>」並要求說出理由','不只問「答案是甚麼」'],
+    ['學生曾記錄文本的<b>作者、時間及類型</b>','建立來源–內容連結'],
+    ['學生曾處理<b>說法互相矛盾</b>的文本','並追查矛盾的原因'],
+    ['學生曾把 <b>AI 回答</b>當作需要查證的來源','例如追查出處、與其他來源比較'],
+    ['我曾示範<b>橫向閱讀</b>：離開網站查證作者背景','而不只看網站本身的「關於我們」'],
+    ['學生曾寫出<b>有條件的結論</b>','例如「在……情況下成立」'],
+    ['閱讀任務有<b>真實的情境與目的</b>','例如寫建議書、作決定，而不只是答題']
+  ];
+  const KEY = 'pisahku-rd-classroom';
+  let st = []; try { st = JSON.parse(localStorage.getItem(KEY)) || []; } catch(e){ st = []; }
+  $('#ck-t').textContent = CK.length;
+  $('#ck-list').innerHTML = CK.map((c,i) => `<label><input type="checkbox" data-i="${i}" ${st[i] ? 'checked' : ''}><span>${c[0]}<small>${c[1]}</small></span></label>`).join('');
+  function ck(){
+    const n = st.filter(Boolean).length;
+    $('#ck-n').textContent = n; $('#ck-m').style.width = (n / CK.length * 100) + '%';
+    $('#ck-msg').innerHTML = n === 0 ? '由一項開始就好。最容易的一步：下一課多問一句「你為何相信？」'
+      : n < 4 ? '好的開始！試試加入一個與課文說法不同的文本。'
+      : n < CK.length ? '你的課堂已有不少審辨閱讀元素 👏 留意未勾選的項目，挑一項作下一步。'
+      : '全部做到！不妨把你的做法分享給同事 🎉';
+  }
+  $('#ck-list').addEventListener('change', e => {
+    const b = e.target.closest('input'); if (!b) return;
+    st[+b.dataset.i] = b.checked;
+    try { localStorage.setItem(KEY, JSON.stringify(st)); } catch(e){}
+    ck();
+  });
+  $('#ck-reset').addEventListener('click', () => {
+    st = []; try { localStorage.removeItem(KEY); } catch(e){}
+    document.querySelectorAll('#ck-list input').forEach(x => x.checked = false); ck();
+  });
+  ck();
+})();
+</script>
+</body>
+</html>
