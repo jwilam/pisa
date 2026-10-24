@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>六個公開單元｜數碼世界中的學習（LDW）｜PISA 2025 研討會專題</title>
+<meta name="description" content="OECD 公開的六個 PISA 2025 LDW 單元：回收機械爪、健身應用程式、安全着陸、生態保育、海豚叫聲、巴士時間表。">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="ldw.css">
+
+<style>
+  .un-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:6px 0 16px}
+  .un-bar .cnt{margin-left:auto;font-size:.86rem;color:var(--lw-mut)}
+  .un-dlg{border:0;padding:0;border-radius:22px;width:min(760px,calc(100% - 28px));max-height:calc(100vh - 40px);box-shadow:0 30px 60px #0000004d;overflow:auto}
+  .un-dlg::backdrop{background:#16224aa6;backdrop-filter:blur(3px)}
+  .un-dlg .hd{background:var(--bg);padding:20px 24px;display:flex;gap:14px;align-items:center;position:sticky;top:0}
+  .un-dlg .hd .ic{font-size:2.6rem}
+  .un-dlg .hd b{display:block;font-size:1.25rem;color:var(--c)}
+  .un-dlg .hd small{color:var(--lw-mut)}
+  .un-dlg .x{margin-left:auto;font:inherit;font-size:1.2rem;width:38px;height:38px;border-radius:50%;border:0;background:#fff;cursor:pointer}
+  .un-dlg .bd{padding:16px 24px 22px;font-size:.92rem}
+  .un-ph{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+  .un-ph div{border-radius:12px;padding:10px 12px;font-size:.86rem;background:var(--bg)}
+  .un-ph b{display:block;color:var(--c);font-size:.8rem}
+  .un-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .un-chips span{font-size:.8rem;background:var(--lw-paper);border-radius:999px;padding:3px 11px}
+  .un-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:14px;border-top:1px dashed #0000002a}
+  .un-det{margin-top:28px;background:#fff;border-radius:18px;box-shadow:var(--lw-sh);padding:6px 18px}
+  .un-det summary{cursor:pointer;font-weight:700;padding:12px 0;color:var(--lw-navy)}
+  .un-det table{margin:4px 0 14px}
+  @media (max-width:700px){.un-ph{grid-template-columns:1fr}.un-bar .cnt{margin-left:0}}
+</style>
+</head>
+<body class="lw-page" data-lw="units.html" data-page="digital.html">
+<div id="site-header"></div>
+<section class="lw-hero sm"><div class="inner">
+  <span class="lw-eyebrow">LDW 專題 · ③</span>
+  <h1>六個公開單元：選一個試做</h1>
+  <p>三個正式研究單元（提供香港中英文版本），三個實地測試單元（英文版）。按「詳情」看任務與能力，按「▶ 試做」在本站播放器開啟。</p>
+</div></section>
+<nav class="lw-nav" id="lw-nav" aria-label="LDW 專題導覽"></nav>
+
+<main class="content">
+  <p class="lw-crumb"><a href="../index.html">首頁</a> › <a href="index.html">數碼世界中的學習</a> › 六個單元</p>
+  <div class="un-bar">
+    <div class="lw-seg" id="un-fs"><button type="button" data-v="all" class="on">全部</button><button type="button" data-v="main">正式研究</button><button type="button" data-v="ft">實地測試</button></div>
+    <div class="lw-seg" id="un-ft"><button type="button" data-v="all" class="on">全部類型</button><button type="button" data-v="prog">編程</button><button type="button" data-v="model">建模</button></div>
+    <span class="cnt" id="un-cnt"></span>
+  </div>
+  <div class="lw-units" id="un-grid"></div>
+  <p class="lw-note">💻 每個單元約需 30 分鐘。建議使用電腦及較大屏幕；第一次試做，推薦由「回收機械爪」開始。</p>
+
+  <details class="un-det">
+    <summary>📊 六個單元比較表</summary>
+    <table>
+      <thead><tr><th>單元</th><th>類型／研究</th><th>主題</th><th>核心任務</th><th>主要能力</th></tr></thead>
+      <tbody id="un-tb"></tbody>
+    </table>
+  </details>
+
+  <div class="lw-pager" id="lw-pager"></div>
+</main>
+
+<dialog class="un-dlg" id="un-dlg" aria-labelledby="un-dt"></dialog>
+<div id="site-footer"></div>
+<script src="ldw.js"></script>
+<script>
+(function(){
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const grid = $('#un-grid'), dlg = $('#un-dlg'), filt = {study:'all', type:'all'};
+
+  grid.innerHTML = LDW.UNITS.map(u => { const t = LDW.TYPE[u.type], s = LDW.STUDY[u.study], done = LDW.prog(u.k).v;
+    return `<article class="lw-u" data-k="${u.k}" style="--c:${t.c};--bg:${t.bg}">
+      ${done ? '<span class="done">✓ 已開啟</span>' : ''}
+      <div class="top"><span class="ic">${u.ic}</span><span class="nm"><b>${u.zh}</b><small>${u.en}</small></span></div>
+      <div class="bd"><div class="bdgs"><span class="lw-bdg" style="--b:${t.c};--f:#fff">${t.zh}</span><span class="lw-bdg" style="--b:${s.b};--f:${s.f}">${s.zh}</span>
+        <span class="lw-bdg">${u.langs.length > 1 ? '中英雙語' : '英文'}</span>${u.video ? '<span class="lw-bdg" style="--b:#fbf4e2;--f:#8a6508">🎬 港大影片</span>' : ''}</div>
+        <span>${u.task}</span>
+        <div class="acts"><button type="button" class="lw-go ghost" data-d="${u.k}">詳情</button><a class="lw-go" href="${LDW.play(u.k)}">▶ 試做</a></div></div></article>`; }).join('');
+
+  function applyFilt(){
+    let n = 0;
+    $$('.lw-u').forEach(c => { const u = LDW.unit(c.dataset.k);
+      const hide = (filt.study !== 'all' && u.study !== filt.study) || (filt.type !== 'all' && u.type !== filt.type);
+      c.hidden = hide; if (!hide) n++; });
+    $('#un-cnt').textContent = `顯示 ${n}／${LDW.UNITS.length} 個單元`;
+  }
+  [['#un-fs','study'],['#un-ft','type']].forEach(([id,key]) => $(id).addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    filt[key] = b.dataset.v; $$(id + ' button').forEach(x => x.classList.toggle('on', x === b)); applyFilt();
+  }));
+  applyFilt();
+
+  function openU(k){
+    const u = LDW.unit(k); if (!u) return;
+    const t = LDW.TYPE[u.type];
+    dlg.style.setProperty('--c', t.c); dlg.style.setProperty('--bg', t.bg);
+    dlg.innerHTML = `<div class="hd"><span class="ic">${u.ic}</span><span><b id="un-dt">${u.zh}</b><small>${u.en} · ${t.zh} · ${LDW.STUDY[u.study].zh} · 約 30 分鐘</small></span>
+        <button type="button" class="x" aria-label="關閉">✕</button></div>
+      <div class="bd"><p><strong>主題：</strong>${u.topic}</p><p>${u.task}</p>
+        ${u.ph ? `<div class="un-ph"><div><b>🔎 展示</b>${u.ph.show}</div><div><b>📘 學習</b>${u.ph.learn}</div><div><b>🚀 應用</b>${u.ph.apply}</div></div>` : ''}
+        <div class="un-chips">${u.comp.map(c => `<span>${c}</span>`).join('')}</div>
+        <p class="lw-note">💡 <strong>試做小貼士：</strong>${u.tip}</p>
+        ${u.note ? `<p class="lw-note" style="background:var(--lw-paper)">📝 ${u.note}</p>` : ''}
+        ${u.verify ? '<p class="lw-note" style="background:var(--lw-rdbg)">⚠️ 此單元連結待核實。</p>' : ''}
+        <div class="un-acts">
+          ${u.langs.map(l => `<a class="lw-go" href="${LDW.play(u.k, l)}">▶ 在播放器試做（${LDW.LANG[l]}）</a>`).join('')}
+          ${u.video ? `<a class="lw-go ghost" href="${LDW.play(u.k, null, 'video')}">🎬 並排看港大影片</a>` : ''}
+          <a class="lw-go ghost" href="${LDW.url(u)}" target="_blank" rel="noopener">↗ 新分頁開啟</a></div></div>`;
+    dlg.showModal ? dlg.showModal() : dlg.setAttribute('open', '');
+    history.replaceState(null, '', '#' + k);
+  }
+  grid.addEventListener('click', e => { const b = e.target.closest('[data-d]'); if (b) openU(b.dataset.d); });
+  dlg.addEventListener('click', e => { if (e.target === dlg || e.target.closest('.x')) dlg.close ? dlg.close() : dlg.removeAttribute('open'); });
+  dlg.addEventListener('close', () => history.replaceState(null, '', location.pathname));
+  if (location.hash) openU(location.hash.slice(1));
+
+  $('#un-tb').innerHTML = [
+    ['claw','自動化回收','編寫及除錯積木程式，把回收物分類','迴圈、條件、除錯、程式效率'],
+    ['fitness','健康與運動','模擬運動計劃，在安全心率內達到卡路里目標','參數調整、模擬測試、圖表分析'],
+    ['landing','太空着陸與對接','調整推力與角度，安全着陸而不耗盡燃料','系統化實驗、推力與燃料的取捨'],
+    ['conservation','生態平衡','校準族群參數，使模型與真實數據吻合','模型驗證、數據比較'],
+    ['dolphin','海洋生物聲學','分析叫聲頻譜，辨識個別海豚的叫聲','數據篩選、模式辨識'],
+    ['bus','城市交通','調整開車間距及載客量，減少乘客等候','系統模擬、多重限制下的排程']
+  ].map(([k,a,b,c]) => { const u = LDW.unit(k);
+    return `<tr><td><a href="${LDW.play(k)}">${u.ic} ${u.zh}</a></td><td>${LDW.TYPE[u.type].zh}／${LDW.STUDY[u.study].zh}</td><td>${a}</td><td>${b}</td><td>${c}</td></tr>`; }).join('');
+})();
+</script>
+</body>
+</html>

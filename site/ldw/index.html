@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>數碼世界中的學習（LDW）｜PISA 2025 研討會專題</title>
+<meta name="description" content="PISA 2025 創新範疇「數碼世界中的學習」（LDW）專題：評估設計、熱身體驗、六個 OECD 公開單元、站內試做播放器及港大粵語教學影片。">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="ldw.css">
+
+<style>
+  .lw-routes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}
+  .lw-route{display:grid;grid-template-columns:64px 1fr auto;gap:16px;align-items:center;padding:18px 20px;border-radius:18px;background:#fff;box-shadow:var(--lw-sh);text-decoration:none;color:var(--lw-ink);border-left:6px solid var(--c);transition:transform .15s}
+  .lw-route:hover{transform:translateY(-3px)}
+  .lw-route .ic{width:64px;height:64px;border-radius:16px;background:var(--bg);display:grid;place-items:center;font-size:1.9rem}
+  .lw-route .n{font-size:.74rem;font-weight:700;color:var(--c);letter-spacing:.06em}
+  .lw-route b{display:block;font-size:1.12rem;margin:2px 0}
+  .lw-route small{display:block;color:var(--lw-mut);font-size:.86rem;line-height:1.6}
+  .lw-route .meta{font-size:.76rem;color:var(--lw-mut);margin-top:6px}
+  .lw-route .ar{font-size:1.4rem;color:var(--c)}
+  .lw-route.big{grid-column:1/-1;border-left:0;color:#fff;background:linear-gradient(135deg,#0c8a73,#0a5f50)}
+  .lw-route.big .ic{background:#ffffff26}.lw-route.big .n,.lw-route.big .ar{color:var(--lw-mint)}
+  .lw-route.big small,.lw-route.big .meta{color:#e3f4ef}
+  .lw-prog{display:grid;grid-template-columns:140px 1fr;gap:22px;align-items:center;background:#fff;border-radius:20px;box-shadow:var(--lw-sh);padding:20px 24px}
+  .lw-ring{width:140px;height:140px}
+  .lw-ring circle{fill:none;stroke-width:12}
+  .lw-ring .bg{stroke:#e8ecf4}.lw-ring .fg{stroke:var(--lw-md);stroke-linecap:round;transform:rotate(-90deg);transform-origin:60px 60px;transition:stroke-dasharray .6s}
+  .lw-ring text{text-anchor:middle;font-weight:800;font-size:22px;fill:var(--lw-navy)}
+  .lw-ring text.s{font-size:11px;font-weight:400;fill:var(--lw-mut)}
+  .lw-dots{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .lw-dots a{display:flex;gap:6px;align-items:center;padding:6px 12px;border-radius:999px;border:1.5px solid #0000001f;text-decoration:none;color:var(--lw-ink);font-size:.86rem;background:#fff}
+  .lw-dots a.ok{border-color:var(--c);background:color-mix(in srgb,var(--c) 10%,#fff)}
+  .lw-dots a:hover{transform:translateY(-1px)}
+  .lw-feat{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;border-radius:20px;padding:22px 26px;color:#fff;background:radial-gradient(circle at 90% 10%,#3b9fd855 0,transparent 45%),linear-gradient(135deg,#0d3b66,#16224a)}
+  .lw-feat b{font-size:1.2rem;display:block;margin-bottom:4px}
+  .lw-feat p{margin:0;opacity:.9;font-size:.94rem}
+  .lw-feat .ep{display:flex;gap:4px;margin-top:12px;flex-wrap:wrap}
+  .lw-feat .ep span{font-size:.72rem;background:#ffffff1f;border-radius:6px;padding:2px 7px}
+  @media (max-width:900px){.lw-routes{grid-template-columns:1fr}.lw-feat{grid-template-columns:1fr}}
+  @media (max-width:560px){.lw-prog{grid-template-columns:1fr;justify-items:center;text-align:center}.lw-dots{justify-content:center}.lw-route{grid-template-columns:52px 1fr}.lw-route .ic{width:52px;height:52px}.lw-route .ar{display:none}}
+</style>
+</head>
+<body class="lw-page" data-lw="index.html" data-page="digital.html">
+<div id="site-header"></div>
+
+<section class="lw-hero">
+  <div class="inner">
+    <span class="lw-eyebrow">PISA 2025 · 創新範疇專題</span>
+    <h1>數碼世界中的學習<small>Learning in the Digital World（LDW）</small></h1>
+    <p>PISA 首次評估學生能否在互動數碼環境中「邊學邊解難」：在單元內學習新的計算工具，以編程或建模解決問題，並自我調節學習。你可以在本站親身試做 OECD 公開的六個單元。</p>
+    <a class="lw-cta" href="player.html?u=claw">▶ 立即試做</a><a class="lw-cta ghost" href="design.html">先了解評估設計</a>
+  </div>
+</section>
+<nav class="lw-nav" id="lw-nav" aria-label="LDW 專題導覽"></nav>
+
+<main class="content">
+  <p class="lw-crumb"><a href="../index.html">首頁</a> › 數碼世界中的學習</p>
+
+  <div class="lw-stats">
+    <div class="lw-stat" style="--c:var(--lw-pg)"><div class="big">30 分鐘</div><small>每個互動單元</small></div>
+    <div class="lw-stat" style="--c:var(--lw-pu)"><div class="big">4 個階段</div><small>展示 → 學習 → 反思 → 應用</small></div>
+    <div class="lw-stat" style="--c:var(--lw-md)"><div class="big">2 類單元</div><small>積木式編程 · 計算建模</small></div>
+    <div class="lw-stat" style="--c:var(--lw-gd)"><div class="big">6 個單元</div><small>3 個正式研究（中英）＋ 3 個實地測試（英文）</small></div>
+  </div>
+
+  <h2>選擇你的路線</h2>
+  <p>第一次接觸 LDW？建議按 ① 至 ④ 的次序閱讀；趕時間的話，可以直接試做。</p>
+  <div class="lw-routes">
+    <a class="lw-route" href="design.html" style="--c:var(--lw-pu);--bg:var(--lw-pubg)"><span class="ic">🧭</span>
+      <span><span class="n">① 了解</span><b>評估設計</b><small>定義、四個學習階段、兩類單元及結果報告</small><span class="meta">⏱ 約 5 分鐘閱讀 · 適合教師、家長</span></span><span class="ar">→</span></a>
+    <a class="lw-route" href="warmup.html" style="--c:var(--lw-pg);--bg:var(--lw-pgbg)"><span class="ic">🧩</span>
+      <span><span class="n">② 熱身</span><b>熱身體驗</b><small>兩個小遊戲：重複迴圈與條件預測、控制變量的模擬實驗</small><span class="meta">⏱ 約 5 分鐘 · 適合學生</span></span><span class="ar">→</span></a>
+    <a class="lw-route" href="units.html" style="--c:var(--lw-md);--bg:var(--lw-mdbg)"><span class="ic">🗂️</span>
+      <span><span class="n">③ 選擇</span><b>六個單元</b><small>按研究類型及單元類型篩選，查看每個單元的任務與能力</small><span class="meta">⏱ 約 3 分鐘</span></span><span class="ar">→</span></a>
+    <a class="lw-route" href="classroom.html" style="--c:var(--lw-gd);--bg:var(--lw-gdbg)"><span class="ic">🏫</span>
+      <span><span class="n">④ 應用</span><b>課堂啟示</b><small>一節課的試做流程、五個教學方向及香港數據</small><span class="meta">⏱ 約 5 分鐘 · 適合教師</span></span><span class="ar">→</span></a>
+    <a class="lw-route big" href="player.html"><span class="ic">▶️</span>
+      <span><span class="n">直接試做</span><b>試做播放器</b><small>在本站內開啟 OECD 單元：中英切換、全螢幕、新視窗，附任務卡及反思卡</small><span class="meta">⏱ 每個單元約 30 分鐘 · 建議使用電腦</span></span><span class="ar">→</span></a>
+  </div>
+
+  <h2>我的試做進度</h2>
+  <div class="lw-prog">
+    <svg class="lw-ring" viewBox="0 0 120 120" aria-hidden="true">
+      <circle class="bg" cx="60" cy="60" r="50"/><circle class="fg" id="lw-ring" cx="60" cy="60" r="50" style="stroke-dasharray:0 314.16"/>
+      <text x="60" y="62" id="lw-rn">0/6</text><text x="60" y="80" class="s">已開啟</text></svg>
+    <div><b id="lw-pmsg"></b><div class="lw-dots" id="lw-dots"></div>
+      <p style="font-size:.78rem;color:var(--lw-mut);margin:10px 0 0">進度只儲存在你的瀏覽器內，不會上傳。</p></div>
+  </div>
+
+  <h2>港大教學影片</h2>
+  <div class="lw-feat">
+    <div><b>🐬 一步步試做 DolphinCall（9 集粵語講解）</b>
+      <p>港大 PISA 團隊製作，附粵語、書面語及英文字幕。在播放器內可以並排觀看影片及操作單元。</p>
+      <div class="ep" id="lw-eps"></div></div>
+    <a class="lw-cta" style="margin:0" href="player.html?u=dolphin&panel=video">🎬 並排觀看及試做</a>
+  </div>
+
+  <h2>相關專題</h2>
+  <a class="trend-link" href="../agency.html"><span class="tl-icon">🧠</span><span class="tl-text"><b>學習能動性</b><small>自主學習與後設認知：LDW「反思」階段背後的能力</small></span><span class="tl-arrow">→</span></a>
+  <a class="trend-link" href="../science.html"><span class="tl-icon">🔬</span><span class="tl-text"><b>科學教育</b><small>模型、實驗與控制變量</small></span><span class="tl-arrow">→</span></a>
+  <a class="trend-link" href="../resources/index.html"><span class="tl-icon">📚</span><span class="tl-text"><b>延伸資源</b><small>OECD 官方框架及報告</small></span><span class="tl-arrow">→</span></a>
+
+  <div class="lw-pager" id="lw-pager"></div>
+</main>
+<div id="site-footer"></div>
+<script src="ldw.js"></script>
+<script>
+(function(){
+  const n = LDW.doneCount(), C = 314.16, T = LDW.UNITS.length;
+  document.getElementById('lw-ring').style.strokeDasharray = `${C*n/T} ${C}`;
+  document.getElementById('lw-rn').textContent = `${n}/${T}`;
+  document.getElementById('lw-pmsg').textContent = n === 0 ? '還未開始。建議由「回收機械爪」開始，它是最容易上手的編程單元。'
+    : n < T ? `已開啟 ${n} 個單元，繼續加油！` : '🎉 六個單元全部試過了！';
+  document.getElementById('lw-dots').innerHTML = LDW.UNITS.map(u => `<a href="${LDW.play(u.k)}" class="${LDW.prog(u.k).v ? 'ok' : ''}" style="--c:${LDW.TYPE[u.type].c}">
+    <span>${u.ic}</span>${u.zh}${LDW.prog(u.k).v ? ' ✓' : ''}</a>`).join('');
+  document.getElementById('lw-eps').innerHTML = LDW.EPS.map(e => `<span>${e.t}</span>`).join('');
+})();
+</script>
+</body>
+</html>

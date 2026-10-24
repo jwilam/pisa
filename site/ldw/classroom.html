@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>課堂啟示｜數碼世界中的學習（LDW）｜PISA 2025 研討會專題</title>
+<meta name="description" content="把 LDW「邊學邊解難」帶進香港課室：一節課試做流程、教師連結產生器、五個教學方向、討論問題及香港數據。">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="ldw.css">
+
+<style>
+  .cr-tl{display:flex;gap:8px;margin:14px 0}
+  .cr-tl a{flex:var(--m) 1 0;min-width:130px;display:block;text-decoration:none;color:var(--lw-ink);background:var(--bg);border-radius:16px;padding:14px 16px;border-top:6px solid var(--c);transition:transform .15s}
+  .cr-tl a:hover{transform:translateY(-3px)}
+  .cr-tl .t{font-size:.76rem;font-weight:700;color:var(--c);letter-spacing:.04em}
+  .cr-tl b{display:block;font-size:1.02rem;margin:2px 0 4px}
+  .cr-tl small{display:block;font-size:.84rem;color:var(--lw-mut);line-height:1.55}
+  .cr-gen{display:grid;grid-template-columns:auto auto 1fr auto;gap:10px;align-items:center;background:#fff;border-radius:18px;box-shadow:var(--lw-sh);padding:16px 20px;border-left:6px solid var(--lw-md)}
+  .cr-gen select,.cr-gen input{font:inherit;font-size:.9rem;padding:8px 10px;border-radius:10px;border:1px solid #0000002a;background:#fff;min-width:0}
+  .cr-gen input{width:100%;background:var(--lw-paper);color:var(--lw-mut)}
+  .cr-gen .ok{grid-column:1/-1;font-size:.84rem;color:var(--lw-md);min-height:1.2em;margin:0}
+  .cr-q{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:12px 0}
+  .cr-q div{background:#fff;border-radius:16px;box-shadow:var(--lw-sh);padding:14px 16px;border-top:5px solid var(--c);font-size:.9rem}
+  .cr-q h4{margin:0 0 6px;color:var(--c)}
+  .cr-q ul{margin:0;padding-left:18px;line-height:1.7}
+  .cr-tbd{border:2px dashed #c9c2ae;border-radius:16px;padding:16px 20px;background:var(--lw-paper);font-size:.92rem}
+  .cr-tbd b{color:var(--lw-mut)}
+  @media (max-width:900px){.cr-tl{flex-direction:column}.cr-gen{grid-template-columns:1fr 1fr}.cr-gen input,.cr-gen .lw-btn{grid-column:1/-1}.cr-q{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="lw-page" data-lw="classroom.html" data-page="digital.html">
+<div id="site-header"></div>
+<section class="lw-hero sm"><div class="inner">
+  <span class="lw-eyebrow">LDW 專題 · ④</span>
+  <h1>課堂啟示：把「邊學邊解難」帶進課室</h1>
+  <p>一節課的試做流程、可直接發給學生的試做連結，以及五個教學方向。</p>
+</div></section>
+<nav class="lw-nav" id="lw-nav" aria-label="LDW 專題導覽"></nav>
+
+<main class="content">
+  <p class="lw-crumb"><a href="../index.html">首頁</a> › <a href="index.html">數碼世界中的學習</a> › 課堂啟示</p>
+  <nav class="lw-toc" aria-label="本頁目錄"><a href="#lesson">一節課流程</a><a href="#share">發送試做連結</a><a href="#ideas">五個教學方向</a><a href="#talk">討論問題</a><a href="#hkdata">香港數據</a><a href="#refs">參考資料</a></nav>
+
+  <h2 id="lesson">一節課試做流程（約 40 分鐘）</h2>
+  <p>按 LDW 的四個階段設計：先熱身、自評，再試做，最後反思。點選各段可直接開啟相關頁面。</p>
+  <div class="cr-tl">
+    <a href="warmup.html" style="--m:5;--c:var(--lw-pg);--bg:var(--lw-pgbg)"><span class="t">0–5 分鐘</span><b>🧩 熱身</b><small>全班一起玩編程熱身，預測機械爪的路徑。</small></a>
+    <a href="player.html?u=claw&panel=reflect" style="--m:3;--c:var(--lw-gd);--bg:var(--lw-gdbg)"><span class="t">5–8 分鐘</span><b>🪞 試做前自評</b><small>學生在反思卡評估自己的信心。</small></a>
+    <a href="player.html?u=claw" style="--m:25;--c:var(--lw-md);--bg:var(--lw-mdbg)"><span class="t">8–33 分鐘</span><b>▶ 試做單元</b><small>個人或兩人一組試做。教師巡視，留意學生何時使用提示、遇到錯誤時怎樣反應。</small></a>
+    <a href="#talk" style="--m:7;--c:var(--lw-pu);--bg:var(--lw-pubg)"><span class="t">33–40 分鐘</span><b>💬 反思與分享</b><small>完成試做後自評，比較前後評分，討論策略。</small></a>
+  </div>
+
+  <h2 id="share">發送試做連結</h2>
+  <p>選擇單元及語言，複製連結發給學生（例如貼在 Google Classroom）。學生會直接進入本站播放器的指定單元。</p>
+  <div class="cr-gen">
+    <select id="cr-u" aria-label="單元"></select>
+    <select id="cr-l" aria-label="語言"></select>
+    <input id="cr-out" readonly aria-label="試做連結">
+    <button type="button" class="lw-btn solid" id="cr-copy" style="--c:var(--lw-md)">📋 複製</button>
+    <p class="ok" id="cr-ok" aria-live="polite"></p>
+  </div>
+
+  <h2 id="ideas">五個教學方向</h2>
+  <div class="cards">
+    <div class="card"><span class="no">1</span><h4>讓學生「邊學邊解難」</h4><p>少一點先教後考，多一點在任務中學新工具，並給予即時回饋。</p></div>
+    <div class="card"><span class="no">2</span><h4>教學生善用提示</h4><p>提示和示例不是「作弊」。知道何時求助，正是自主學習的能力。</p></div>
+    <div class="card"><span class="no">3</span><h4>培養系統化實驗</h4><p>每次只改一個變量並記錄結果，是建模及科學探究的共同基礎。</p></div>
+    <div class="card"><span class="no">4</span><h4>把除錯當作學習</h4><p>錯誤是線索：追蹤程式、找出問題、修正，再測試。</p></div>
+    <div class="card"><span class="no">5</span><h4>跨科 STEAM 協作</h4><p>編程、科學模型、數學數據分析可以共用同一個情境任務。</p></div>
+  </div>
+
+  <h2 id="talk">課後討論問題</h2>
+  <div class="cr-q">
+    <div style="--c:var(--lw-pg)"><h4>📘 關於學習</h4><ul><li>你在甚麼時候按了「提示」？為甚麼？</li><li>示例對你有幫助嗎？你怎樣用它？</li></ul></div>
+    <div style="--c:var(--lw-md)"><h4>🚀 關於解難</h4><ul><li>第一次失敗後，你改了甚麼？</li><li>你有沒有每次只改一樣東西？</li><li>你的方案可以更精簡嗎？</li></ul></div>
+    <div style="--c:var(--lw-gd)"><h4>🪞 關於反思</h4><ul><li>你試做前的預估準確嗎？</li><li>下次遇到新工具，你會怎樣開始？</li></ul></div>
+  </div>
+
+    <h2 id="hkdata">香港學生的 LDW 表現</h2>
+  <a class="trend-link" href="../digital.html#hk-result">
+    <span class="tl-icon">📊</span>
+    <span class="tl-text"><b>香港：全球最優秀的六個體系之一</b><small>平均分、高表現學生比例，以及「學會學習」的特質（第 09 章）</small></span>
+    <span class="tl-arrow">→</span>
+  </a>
+
+
+  <h2 id="refs">參考資料</h2>
+  <ul class="refs">
+    <li>OECD. <i>PISA 2025 Learning in the Digital World</i>. <a href="https://www.oecd.org/en/topics/sub-issues/learning-in-the-digital-world/pisa-2025-learning-in-the-digital-world.html" target="_blank" rel="noopener">oecd.org ↗</a></li>
+    <li>OECD (2024). <i>PISA 2025 Learning in the Digital World assessment framework</i>. OECD Publishing.（年份及版本請核實）</li>
+    <li>OECD. PISA 2025 LDW released units. <a href="https://pisa2025ldw.pilaproject.org/" target="_blank" rel="noopener">pisa2025ldw.pilaproject.org ↗</a></li>
+    <li>DIPF. <i>PISA-LDW: Assessing competencies for learning in the digital world</i>. <a href="https://www.dipf.de/en/research/projects/pisa-ldw-assessing-competencies-for-learning-in-the-digital-world" target="_blank" rel="noopener">dipf.de ↗</a></li>
+    <li>香港大學 PISA 團隊。DolphinCall 教學影片（LDW1–LDW9，粵語）。</li>
+  </ul>
+
+  <h2>相關專題</h2>
+  <a class="trend-link" href="../agency.html"><span class="tl-icon">🧠</span><span class="tl-text"><b>學習能動性</b><small>自主學習與後設認知</small></span><span class="tl-arrow">→</span></a>
+  <a class="trend-link" href="../science.html"><span class="tl-icon">🔬</span><span class="tl-text"><b>科學教育</b><small>模型、實驗與控制變量</small></span><span class="tl-arrow">→</span></a>
+  <a class="trend-link" href="../reading-2029.html"><span class="tl-icon">🔭</span><span class="tl-text"><b>下一個周期：PISA 2029</b><small>閱讀為主要範疇；新增媒體與 AI 素養</small></span><span class="tl-arrow">→</span></a>
+
+  <div class="lw-pager" id="lw-pager"></div>
+</main>
+<div id="site-footer"></div>
+<script src="ldw.js"></script>
+<script>
+(function(){
+  const $ = s => document.querySelector(s);
+  const su = $('#cr-u'), sl = $('#cr-l'), out = $('#cr-out'), ok = $('#cr-ok');
+  su.innerHTML = LDW.UNITS.map(u => `<option value="${u.k}">${u.ic} ${u.zh}</option>`).join('');
+  function langs(){
+    const u = LDW.unit(su.value);
+    sl.innerHTML = u.langs.map(l => `<option value="${l}">${LDW.LANG[l]}</option>`).join('');
+    sl.disabled = u.langs.length < 2; build();
+  }
+  function build(){ out.value = new URL(LDW.play(su.value, sl.value), location.href).href; ok.textContent = ''; }
+  su.addEventListener('change', langs); sl.addEventListener('change', build);
+  $('#cr-copy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(out.value); ok.textContent = '✅ 已複製，可以貼給學生。'; }
+    catch(e){ out.select(); document.execCommand('copy'); ok.textContent = '✅ 已複製。'; }
+  });
+  langs();
+})();
+</script>
+</body>
+</html>

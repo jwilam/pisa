@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>評估設計｜數碼世界中的學習（LDW）｜PISA 2025 研討會專題</title>
+<meta name="description" content="LDW 的定義、展示—學習—反思—應用四個階段、編程與建模兩類單元，以及計算問題解決量表的報告方式。">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="ldw.css">
+
+<style>
+  .ds-def{background:linear-gradient(135deg,#24346e,#16224a);color:#fff;border-radius:20px;padding:24px 28px;margin:14px 0 12px}
+  .ds-def small.lab{display:block;color:var(--lw-mint);font-size:.78rem;letter-spacing:.1em;font-weight:700;margin-bottom:6px}
+  .ds-def .zh{font-size:1.28rem;line-height:2.1;margin:0}
+  .ds-def .en{font-size:.88rem;opacity:.8;margin:10px 0 0;font-style:italic}
+  .ds-term{font:inherit;color:var(--lw-mint);background:#ffffff14;border:0;border-bottom:2px dashed var(--lw-mint);padding:0 5px;border-radius:5px;cursor:pointer}
+  .ds-term:hover,.ds-term.on{background:var(--lw-mint);color:var(--lw-navy)}
+  .ds-pil{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+  .ds-pil div{border-radius:16px;padding:14px 18px;background:var(--bg);border-left:6px solid var(--c);font-size:.92rem}
+  .ds-pil b{display:block;color:var(--c);font-size:1.05rem;margin-bottom:4px}
+  .ds-steps{display:flex;align-items:stretch;gap:6px;margin:14px 0;flex-wrap:wrap}
+  .ds-step{font:inherit;flex:1;min-width:118px;border:0;border-radius:16px;padding:14px 10px;background:#fff;box-shadow:var(--lw-sh);border-top:6px solid var(--c);cursor:pointer;text-align:center;transition:transform .15s,background .15s}
+  .ds-step .ic{font-size:1.5rem;display:block}.ds-step b{display:block;color:var(--c)}.ds-step small{color:var(--lw-mut);font-size:.75rem}
+  .ds-step.mini{flex:.7;min-width:96px}
+  .ds-step:hover{transform:translateY(-2px)}.ds-step.on{background:var(--bg);transform:translateY(-4px)}
+  .ds-arr{align-self:center;color:#9aa5a2;font-size:1.2rem}
+  .ds-fc{display:flex;align-items:flex-end;gap:6px;height:90px;margin:12px 0 4px}
+  .ds-fc i{flex:1;border-radius:8px 8px 0 0;background:linear-gradient(180deg,var(--lw-md),#7fc8b7);height:var(--h)}
+  .ds-fcl{display:flex;justify-content:space-between;font-size:.78rem;color:var(--lw-mut)}
+  .ds-types{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}
+  .ds-type{background:var(--bg);border-radius:18px;padding:18px 20px;border-top:6px solid var(--c)}
+  .ds-type h3{margin:0 0 4px;color:var(--c)}.ds-type ul{margin:8px 0;padding-left:18px;font-size:.9rem}
+  .ds-type .us{display:flex;flex-wrap:wrap;gap:6px}
+  .ds-type .us a{font-size:.8rem;font-weight:700;background:#fff;color:var(--c);padding:3px 10px;border-radius:999px;text-decoration:none}
+  .ds-sc{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+  .ds-sc div{border-radius:14px;padding:14px 16px;color:#fff;background:var(--c);font-size:.88rem}
+  .ds-sc b{display:block;font-size:1.02rem}
+  @media (max-width:900px){.ds-pil,.ds-types,.ds-sc{grid-template-columns:1fr}.ds-arr{display:none}}
+  @media (max-width:560px){.ds-step{min-width:44%}.ds-def .zh{font-size:1.08rem}}
+</style>
+</head>
+<body class="lw-page" data-lw="design.html" data-page="digital.html">
+<div id="site-header"></div>
+<section class="lw-hero sm"><div class="inner">
+  <span class="lw-eyebrow">LDW 專題 · ①</span>
+  <h1>評估設計：邊學邊解難怎樣評估？</h1>
+  <p>從定義、四個學習階段、兩類單元到結果報告：五分鐘看懂一個 LDW 單元怎樣運作。</p>
+</div></section>
+<nav class="lw-nav" id="lw-nav" aria-label="LDW 專題導覽"></nav>
+
+<main class="content">
+  <p class="lw-crumb"><a href="../index.html">首頁</a> › <a href="index.html">數碼世界中的學習</a> › 評估設計</p>
+  <nav class="lw-toc" aria-label="本頁目錄"><a href="#define">定義</a><a href="#phases">四個階段</a><a href="#types">兩類單元</a><a href="#results">結果報告</a></nav>
+
+  <h2 id="define">定義：邊學邊解難的能力</h2>
+  <div class="ds-def">
+    <small class="lab">LDW 定義（本站中譯）· 點選字詞</small>
+    <p class="zh">在<button class="ds-term" data-k="iter">反覆迭代</button>及<button class="ds-term" data-k="srl">自我調節</button>的過程中，運用<button class="ds-term" data-k="tools">計算工具與實踐</button>來<button class="ds-term" data-k="know">建構知識</button>及<button class="ds-term" data-k="solve">解決問題</button>的能力。</p>
+    <p class="en">“The capacity to engage in an iterative and self-regulated process of knowledge building and problem solving using computational tools and practices.”</p>
+  </div>
+  <div class="lw-panel lw-anim" id="ds-defp" aria-live="polite"></div>
+  <div class="ds-pil">
+    <div style="--c:var(--lw-pg);--bg:var(--lw-pgbg)"><b>🧮 計算問題解決</b>分解問題、設計演算法、建立及測試模型、除錯與優化。</div>
+    <div style="--c:var(--lw-gd);--bg:var(--lw-gdbg)"><b>🧭 自主學習（SRL）</b>設定目標、監察進度、善用提示及示例、評估自己的表現。<a href="../agency.html">與〈學習能動性〉相連 →</a></div>
+  </div>
+
+  <h2 id="phases">四個階段：一個單元怎樣運作</h2>
+  <p>每個單元都是一個小型數碼學習環境。點選各階段：</p>
+  <div class="ds-steps" id="ds-steps"></div>
+  <div class="lw-panel lw-anim" id="ds-php" aria-live="polite"></div>
+
+  <h2 id="types">兩類單元：編程與建模</h2>
+  <div class="ds-types">
+    <div class="ds-type" style="--c:var(--lw-pg);--bg:var(--lw-pgbg)">
+      <h3>🧩 積木式編程 Programming</h3><p style="margin:0;font-size:.9rem">建立及除錯程式，控制數碼物件完成任務。</p>
+      <ul><li>序列、重複迴圈、條件判斷</li><li>追蹤程式的執行路徑</li><li>除錯；以較少積木完成任務</li></ul>
+      <div class="us"><a href="units.html#claw">回收機械爪</a><a href="warmup.html#prog">🧩 熱身</a></div>
+    </div>
+    <div class="ds-type" style="--c:var(--lw-md);--bg:var(--lw-mdbg)">
+      <h3>📈 計算建模 Modelling</h3><p style="margin:0;font-size:.9rem">以數碼模擬進行實驗，分析系統數據。</p>
+      <ul><li>調整參數、執行模擬</li><li>詮釋圖表及輸出數據</li><li>在多項限制之間作取捨；驗證模型</li></ul>
+      <div class="us"><a href="units.html#fitness">健身應用程式</a><a href="units.html#landing">安全着陸</a><a href="units.html#conservation">生態保育</a><a href="units.html#dolphin">海豚叫聲</a><a href="units.html#bus">巴士時間表</a><a href="warmup.html#model">🚀 熱身</a></div>
+    </div>
+  </div>
+
+  <h2 id="results">結果怎樣報告</h2>
+  <div class="ds-sc">
+    <div style="--c:var(--lw-pg)"><b>計算問題解決量表</b>主量表：平均 500、標準差 100</div>
+    <div style="--c:var(--lw-md)"><b>編程 · 建模分量表</b>按單元類型分別報告</div>
+    <div style="--c:var(--lw-pu)"><b>先備知識量表</b>來自「展示」階段</div>
+  </div>
+  <ul>
+    <li><strong>與自主學習密切相關：</strong>能否監察進度、善用提示及示例、在遇到錯誤時堅持，與計算問題解決表現息息相關。</li>
+    <li><strong>一種獨特的能力：</strong>LDW 與科學、閱讀及數學表現正相關，但量度迭代除錯、模擬測試等獨特能力，不能由傳統測試成績取代。</li>
+  </ul>
+    <p class="lw-note">📊 香港學生的 LDW 表現，見〈<a href="../digital.html#hk-result">09 從 LDW 到 MAIL</a>〉。</p>
+
+
+  <div class="lw-pager" id="lw-pager"></div>
+</main>
+<div id="site-footer"></div>
+<script src="ldw.js"></script>
+<script>
+(function(){
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const replay = el => { el.classList.remove('lw-anim'); void el.offsetWidth; el.classList.add('lw-anim'); };
+
+  const DEF = {
+    iter:['反覆迭代','Iterative','學習與解難不是一次過完成：嘗試、測試、看結果、修正，再嘗試。除錯和調整模型都是迭代。','warmup.html','到〈熱身體驗〉試試 →','var(--lw-pg)'],
+    srl:['自我調節','Self-regulated','學生自己設定目標、監察進度、決定何時使用提示或示例，並評估自己的表現。','#phases','看四個階段 ↓','var(--lw-gd)'],
+    tools:['計算工具與實踐','Computational tools & practices','工具：積木式編程、模擬模型、數據圖表。實踐：分解問題、設計演算法、建立及測試模型、除錯。','#types','看兩類單元 ↓','var(--lw-md)'],
+    know:['建構知識','Knowledge building','在單元內學習新的計算概念及工具（例如迴圈、模型參數），而不只是應用已有知識。','#phases','看「學習」階段 ↓','var(--lw-pu)'],
+    solve:['解決問題','Problem solving','把新學的工具用於開放式問題：沒有唯一答案，但有更好、更有效率的方案。','units.html','看六個單元 →','var(--lw-rd)']
+  };
+  const defP = $('#ds-defp');
+  function showDef(k){
+    const d = DEF[k];
+    $$('.ds-term').forEach(b => b.classList.toggle('on', b.dataset.k === k));
+    defP.style.setProperty('--c', d[5]);
+    defP.innerHTML = `<h3>${d[0]} <small>${d[1]}</small></h3><p>${d[2]}</p><a class="go" href="${d[3]}">${d[4]}</a>`;
+    replay(defP);
+  }
+  $$('.ds-term').forEach(b => b.addEventListener('click', () => showDef(b.dataset.k)));
+  showDef('iter');
+
+  const PH = {
+    show:{c:'#6a5a8c',bg:'#efebf5',ic:'🔎',zh:'展示所知',en:'Show',do:'完成數條短題，量度學生對演算法、變量及邏輯等計算概念的先備知識。',data:'先備知識量表',tip:'這部分不設提示，按自己的理解作答即可。'},
+    learn:{c:'#3b5bdb',bg:'#edf1fd',ic:'📘',zh:'學習',en:'Learn',do:'先完成內置教學，再做三個有鷹架的任務；系統提供即時回饋、示例及提示，由學生自行決定何時使用。',data:'學習進度；使用提示及示例的方式（過程數據）',tip:'留意自己在甚麼時候按「提示」：這正是自主學習的一部分。'},
+    reflect:{c:'#b8860b',bg:'#fbf4e2',ic:'🪞',zh:'反思',en:'Reflect',do:'在應用任務前後評估自己的理解、信心及表現。',data:'後設認知及自我評估',tip:'播放器側欄的「反思卡」讓你試試前後自評。'},
+    apply:{c:'#0c8a73',bg:'#e6f5f1',ic:'🚀',zh:'應用',en:'Apply',do:'在沒有協助下完成開放式任務，運用剛學會的工具解決較複雜的問題。',data:'計算問題解決表現（編程或建模分量表）',tip:'任務「低門檻、高上限」：先求完成，再求優化。',floor:true}
+  };
+  const ORDER = [['show',''],['learn',''],['reflect','前'],['apply',''],['reflect','後']];
+  const steps = $('#ds-steps'), phP = $('#ds-php');
+  steps.innerHTML = ORDER.map(([k,x],i) => { const p = PH[k];
+    return (i ? '<span class="ds-arr">➜</span>' : '') + `<button type="button" class="ds-step${k === 'reflect' ? ' mini' : ''}" data-i="${i}" style="--c:${p.c};--bg:${p.bg}">
+      <span class="ic">${p.ic}</span><b>${p.zh}${x ? '（' + x + '）' : ''}</b><small>${p.en}</small></button>`; }).join('');
+  function showPh(i){
+    const [k,x] = ORDER[i], p = PH[k];
+    $$('.ds-step').forEach(b => b.classList.toggle('on', +b.dataset.i === i));
+    phP.style.setProperty('--c', p.c);
+    phP.innerHTML = `<h3>${p.ic} ${p.zh}${x ? '（應用' + x + '）' : ''} <small>${p.en}</small></h3>
+      <dl><dt>學生做甚麼</dt><dd>${p.do}</dd><dt>量度甚麼</dt><dd>${p.data}</dd><dt>試做提示</dt><dd>${p.tip}</dd></dl>
+      ${p.floor ? `<div class="ds-fc">${[18,34,52,72,94].map(h => `<i style="--h:${h}%"></i>`).join('')}</div>
+        <div class="ds-fcl"><span>低門檻：人人可以起步</span><span>高上限：高手可以優化</span></div>` : ''}
+      <p style="font-size:.84rem;color:#5d6b68;margin-top:10px">🖱️ 系統亦會記錄操作行為（例如執行次數、使用提示），用以了解學生怎樣學習。</p>`;
+    replay(phP);
+  }
+  steps.addEventListener('click', e => { const b = e.target.closest('.ds-step'); if (b) showPh(+b.dataset.i); });
+  showPh(0);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>熱身體驗｜數碼世界中的學習（LDW）｜PISA 2025 研討會專題</title>
+<meta name="description" content="兩個 LDW 熱身小遊戲：重複迴圈與條件路徑預測（編程）、控制變量的着陸模擬（建模）。">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="ldw.css">
+
+<style>
+  .wu-switch{display:flex;justify-content:center;margin:6px 0 16px}
+  .wu-switch .lw-seg button{padding:9px 20px;font-size:.95rem;font-weight:700}
+  .wu-demo{background:#fff;border-radius:20px;box-shadow:var(--lw-sh);padding:20px 22px;border-top:6px solid var(--c)}
+  .wu-demo[hidden]{display:none}
+  .wu-hd{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+  .wu-hd>b{font-size:1.08rem;color:var(--c)}
+  .wu-pgw{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;margin-top:12px;align-items:start}
+  .wu-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;background:#dfe5f7;padding:6px;border-radius:14px}
+  .wu-cell{aspect-ratio:1;background:#fff;border-radius:8px;display:grid;place-items:center;font-size:1.4rem;transition:background .2s}
+  .wu-cell.grey{background:#b9bfc9}.wu-cell.trail{box-shadow:inset 0 0 0 3px #3b5bdb66}
+  .wu-cell.pred{outline:3px dashed var(--lw-gd);outline-offset:-3px}.wu-cell.hit{background:#d3f0e6}
+  .wu-grid.pick .wu-cell{cursor:pointer}.wu-grid.pick .wu-cell:hover{outline:2px solid var(--lw-gd);outline-offset:-2px}
+  .wu-code{background:#1f2440;border-radius:14px;padding:12px 14px;font-size:.88rem;color:#fff}
+  .wu-blk{display:inline-block;padding:6px 12px;border-radius:8px;color:#fff;font-weight:700;margin:3px 0;background:var(--b)}
+  .wu-blk.ev{--b:#c88a1e;border-radius:14px 14px 8px 8px}.wu-blk.lp{--b:#5b8a3c}.wu-blk.if{--b:#3b7fc4}.wu-blk.mv{--b:#8e5bd1}
+  .wu-ind{margin-left:20px;border-left:4px solid #ffffff30;padding-left:8px}
+  .wu-num{display:inline-block;background:#fff;color:#1f2440;border-radius:999px;padding:0 10px;margin:0 4px}
+  .wu-bc{font-size:.78rem;opacity:.75;margin-top:8px}
+  .wu-ctl{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+  .wu-k{background:var(--lw-mdbg);color:var(--lw-md);font-weight:700;border-radius:6px;padding:1px 7px}
+  .wu-mg{display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:18px;margin-top:14px;align-items:start}
+  .wu-sl{display:block;font-size:.9rem;font-weight:700;margin-bottom:12px}
+  .wu-sl output{float:right;color:var(--lw-md)}.wu-sl input{width:100%;accent-color:var(--lw-md);margin-top:6px}
+  .wu-gl{font-size:.86rem;margin:6px 0 4px;display:flex;justify-content:space-between}
+  .wu-gauge{position:relative;height:18px;background:#eee;border-radius:9px;overflow:hidden;margin-bottom:8px}
+  .wu-gauge i{display:block;height:100%;width:var(--w,0%);background:var(--g,#9aa5a2);transition:width .5s,background .3s}
+  .wu-gauge .th{position:absolute;top:0;bottom:0;width:3px;background:#1f2a2a;left:var(--t)}
+  .wu-res{margin-top:8px;border-radius:12px;padding:10px 12px;font-size:.9rem;background:var(--lw-paper)}
+  .wu-res.ok{background:var(--lw-mdbg);color:var(--lw-md);font-weight:700}.wu-res.no{background:var(--lw-rdbg);color:var(--lw-rd)}
+  .wu-log{background:var(--lw-paper);border-radius:14px;padding:10px 12px;font-size:.8rem;max-height:240px;overflow:auto}
+  .wu-log table{width:100%;border-collapse:collapse;margin-top:6px}.wu-log th,.wu-log td{padding:4px 5px;text-align:center;border-bottom:1px solid #0000000f}
+  .wu-log tr.ok td{color:var(--lw-md);font-weight:700}.wu-log .both{color:var(--lw-rd);font-weight:700}
+  .wu-next{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px;padding:14px 18px;border-radius:16px;background:var(--bg)}
+  .wu-next b{color:var(--c)}
+  @media (max-width:900px){.wu-pgw,.wu-mg{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="lw-page" data-lw="warmup.html" data-page="digital.html">
+<div id="site-header"></div>
+<section class="lw-hero sm"><div class="inner">
+  <span class="lw-eyebrow">LDW 專題 · ②</span>
+  <h1>熱身體驗：先玩兩個小遊戲</h1>
+  <p>試做真實單元之前，先感受編程與建模的思考方式。兩個遊戲都是示意例子，並非 PISA 真實題目。</p>
+</div></section>
+<nav class="lw-nav" id="lw-nav" aria-label="LDW 專題導覽"></nav>
+
+<main class="content">
+  <p class="lw-crumb"><a href="../index.html">首頁</a> › <a href="index.html">數碼世界中的學習</a> › 熱身體驗</p>
+  <div class="wu-switch"><div class="lw-seg" id="wu-sw"><button type="button" data-d="prog" class="on">🧩 編程熱身</button><button type="button" data-d="model">🚀 建模熱身</button></div></div>
+
+  <section class="wu-demo" id="prog" style="--c:var(--lw-pg);--bg:var(--lw-pgbg)">
+    <div class="wu-hd"><b>🧩 編程：迴圈與條件</b>
+      <div class="lw-seg" id="wu-pmode"><button type="button" data-m="loop" class="on">① 重複迴圈</button><button type="button" data-m="cond">② 預測條件路徑</button></div></div>
+    <div class="wu-pgw">
+      <div class="wu-grid" id="wu-grid" aria-label="6×4 方格"></div>
+      <div><div class="wu-code" id="wu-code"></div><div class="wu-ctl" id="wu-pctl"></div></div>
+    </div>
+    <p class="lw-msg" id="wu-pmsg" aria-live="polite"></p>
+    <span class="lw-fic">示意例子，並非 PISA 真實題目</span>
+    <div class="wu-next"><span><b>下一步：</b>在真實單元〈回收機械爪〉中，用迴圈和條件把回收物分類。</span><a class="lw-go" href="player.html?u=claw">▶ 試做回收機械爪</a></div>
+  </section>
+
+  <section class="wu-demo" id="model" style="--c:var(--lw-md);--bg:var(--lw-mdbg)" hidden>
+    <div class="wu-hd"><b>🚀 建模：控制變量的模擬實驗</b><span class="lw-fic">示意例子，並非 PISA 真實題目</span></div>
+    <p style="margin:10px 0 0"><b>任務：</b>調整進入角度及引擎推力，讓太空船安全着陸：<span class="wu-k">着陸速度 ≤ 12 m/s</span> 及 <span class="wu-k">燃料用量 ≤ 70%</span>。</p>
+    <div class="wu-mg">
+      <div>
+        <label class="wu-sl">進入角度 <output id="wu-ao">30°</output><input type="range" id="wu-a" min="10" max="40" step="5" value="30"></label>
+        <label class="wu-sl">引擎推力 <output id="wu-to">40%</output><input type="range" id="wu-t" min="0" max="100" step="5" value="40"></label>
+        <div class="wu-ctl"><button type="button" class="lw-btn solid" id="wu-mrun" style="--c:var(--lw-md)">▶ 執行模擬</button><button type="button" class="lw-btn" id="wu-mreset" style="--c:var(--lw-md)">↺ 清除記錄</button></div>
+      </div>
+      <div>
+        <div class="wu-gl">着陸速度 <b id="wu-vv">–</b></div><div class="wu-gauge" id="wu-gv"><i></i><span class="th" style="--t:13.3%"></span></div>
+        <div class="wu-gl">燃料用量 <b id="wu-fv">–</b></div><div class="wu-gauge" id="wu-gf"><i></i><span class="th" style="--t:70%"></span></div>
+        <div class="wu-res" id="wu-mres" aria-live="polite">按「執行模擬」開始實驗。黑線是安全上限。</div>
+      </div>
+      <div class="wu-log"><b>🧪 實驗記錄</b>
+        <table><thead><tr><th>#</th><th>角度</th><th>推力</th><th>速度</th><th>燃料</th><th>改變了</th></tr></thead><tbody id="wu-logb"></tbody></table></div>
+    </div>
+    <p class="lw-msg" id="wu-mhint">💡 好的實驗者會記錄每次試驗，並觀察每個變量的影響。</p>
+    <div class="wu-next"><span><b>下一步：</b>真實單元〈安全着陸〉有更多參數和限制。</span><a class="lw-go" href="player.html?u=landing">▶ 試做安全着陸</a></div>
+  </section>
+
+  <div class="lw-pager" id="lw-pager"></div>
+</main>
+<div id="site-footer"></div>
+<script src="ldw.js"></script>
+<script>
+(function(){
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+
+  /* 切換兩個熱身 */
+  function showDemo(d){
+    ['prog','model'].forEach(x => $('#' + x).hidden = x !== d);
+    $$('#wu-sw button').forEach(b => b.classList.toggle('on', b.dataset.d === d));
+    history.replaceState(null, '', '#' + d);
+  }
+  $('#wu-sw').addEventListener('click', e => { const b = e.target.closest('button'); if (b) showDemo(b.dataset.d); });
+  if (location.hash === '#model') showDemo('model');
+
+  /* ===== 編程熱身 ===== */
+  const COLS = 6, ROWS = 4, grid = $('#wu-grid');
+  grid.innerHTML = Array.from({length:COLS*ROWS}, (_,i) => `<div class="wu-cell" data-c="${i%COLS}" data-r="${Math.floor(i/COLS)}"></div>`).join('');
+  const GREY = [[1,0],[2,1],[5,0],[4,3]], isG = (c,r) => GREY.some(g => g[0] === c && g[1] === r);
+  const CAN = [4,0], same = (a,b) => a && b && a[0] === b[0] && a[1] === b[1];
+  let pm = 'loop', n = 2, busy = false, pred = null, pos = [0,0], trail = [];
+  const pmsg = $('#wu-pmsg'), pctl = $('#wu-pctl');
+  function paint(){
+    [...grid.children].forEach(el => {
+      const p = [+el.dataset.c, +el.dataset.r];
+      el.className = 'wu-cell' + (pm === 'cond' && isG(...p) ? ' grey' : '') + (trail.some(t => same(t,p)) ? ' trail' : '') +
+        (same(pred,p) ? ' pred' : '') + (pm === 'loop' && same(pos,CAN) && same(p,CAN) ? ' hit' : '');
+      el.textContent = same(pos,p) ? '🦾' : (pm === 'loop' && same(p,CAN) ? '🥫' : '');
+    });
+    grid.classList.toggle('pick', pm === 'cond' && !busy);
+  }
+  function renderCode(){
+    const code = $('#wu-code');
+    if (pm === 'loop'){
+      code.innerHTML = `<div class="wu-blk ev">▶ 開始執行</div><br><div class="wu-blk lp">🔁 重複 <span class="wu-num">${n}</span> 次</div>
+        <div class="wu-ind"><div class="wu-blk mv">➡ 向右移一格</div></div><div class="wu-bc">只用 2 塊指令積木；逐塊排列「向右移」則需要 4 塊。</div>`;
+      pctl.innerHTML = `<button type="button" class="lw-btn" data-a="dec">− 次數</button><button type="button" class="lw-btn" data-a="inc">＋ 次數</button>
+        <button type="button" class="lw-btn solid" data-a="run">▶ 執行</button><button type="button" class="lw-btn" data-a="reset">↺ 重設</button>`;
+    } else {
+      code.innerHTML = `<div class="wu-blk ev">▶ 開始執行</div><br><div class="wu-blk lp">🔁 重複 <span class="wu-num">5</span> 次</div>
+        <div class="wu-ind"><div class="wu-blk if">如果 機械爪在灰色格</div><div class="wu-ind"><div class="wu-blk mv">⬇ 向下移一格</div></div>
+        <div class="wu-blk if">否則</div><div class="wu-ind"><div class="wu-blk mv">➡ 向右移一格</div></div></div>`;
+      pctl.innerHTML = `<button type="button" class="lw-btn solid" data-a="run">▶ 執行</button><button type="button" class="lw-btn" data-a="reset">↺ 重設</button>`;
+    }
+  }
+  function resetP(){
+    pos = [0,0]; trail = []; if (pm === 'cond') pred = null;
+    pmsg.textContent = pm === 'loop' ? '任務：把機械爪移到罐子 🥫 上方。調整重複次數，再按「執行」。'
+                                     : '先在方格上點選你預測機械爪最後停在哪一格，再按「執行」驗證。';
+    paint();
+  }
+  function setBusy(b){ busy = b; $$('#wu-pctl button').forEach(x => x.disabled = b); paint(); }
+  function runP(){
+    if (busy) return;
+    pos = [0,0]; trail = [[0,0]];
+    const N = pm === 'loop' ? n : 5, path = []; let c = 0, r = 0, crash = false;
+    for (let i = 0; i < N; i++){
+      let nc = c, nr = r;
+      if (pm === 'loop' || !isG(c,r)) nc = c + 1; else nr = r + 1;
+      if (nc >= COLS || nr >= ROWS){ crash = true; break; }
+      c = nc; r = nr; path.push([c,r]);
+    }
+    setBusy(true); let k = 0;
+    (function tick(){
+      if (k < path.length){ pos = path[k]; trail.push(pos); k++; paint(); setTimeout(tick, 380); return; }
+      setBusy(false);
+      if (pm === 'loop'){
+        pmsg.textContent = crash ? '💥 撞牆！程式要求機械爪移出邊界。這是一個需要除錯的錯誤：減少重複次數。' :
+          pos[0] === CAN[0] ? '✅ 成功！機械爪到達罐子上方，只用了 2 塊指令積木：迴圈令程式更精簡。' :
+          pos[0] < CAN[0] ? `還差 ${CAN[0]-pos[0]} 格。調整重複次數再試。` : `越過了目標 ${pos[0]-CAN[0]} 格。找出錯在哪裏，就是除錯。`;
+      } else {
+        pmsg.textContent = !pred ? `機械爪停在第 ${pos[1]+1} 行、第 ${pos[0]+1} 格。下次先預測，再執行！` :
+          same(pred,pos) ? '✅ 預測正確！你準確追蹤了每一次重複中的條件判斷。' :
+          `❌ 機械爪停在第 ${pos[1]+1} 行、第 ${pos[0]+1} 格。逐次追蹤：每一步先問「現在在灰色格嗎？」`;
+      }
+    })();
+  }
+  pctl.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || busy) return;
+    const a = b.dataset.a;
+    if (a === 'inc' && n < 6){ n++; renderCode(); resetP(); }
+    if (a === 'dec' && n > 1){ n--; renderCode(); resetP(); }
+    if (a === 'run') runP();
+    if (a === 'reset') resetP();
+  });
+  grid.addEventListener('click', e => {
+    if (pm !== 'cond' || busy) return;
+    const el = e.target.closest('.wu-cell'); if (!el) return;
+    pred = [+el.dataset.c, +el.dataset.r]; pos = [0,0]; trail = [];
+    pmsg.textContent = `你預測：第 ${pred[1]+1} 行、第 ${pred[0]+1} 格。按「執行」驗證。`; paint();
+  });
+  $('#wu-pmode').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || busy) return;
+    pm = b.dataset.m; $$('#wu-pmode button').forEach(x => x.classList.toggle('on', x === b));
+    pred = null; renderCode(); resetP();
+  });
+  renderCode(); resetP();
+
+  /* ===== 建模熱身 ===== */
+  const A = $('#wu-a'), T = $('#wu-t'), logB = $('#wu-logb'), mres = $('#wu-mres'), mhint = $('#wu-mhint');
+  let trials = [], solved = false;
+  const sim = (a,t) => ({v: Math.max(0, 20 + 1.6*a - 0.5*t), f: Math.min(100, 0.8*t + 0.8*(40 - a))});
+  const upd = () => { $('#wu-ao').textContent = A.value + '°'; $('#wu-to').textContent = T.value + '%'; };
+  A.addEventListener('input', upd); T.addEventListener('input', upd); upd();
+  function gauge(id, w, ok){ const g = $(id); g.style.setProperty('--w', w + '%'); g.style.setProperty('--g', ok ? 'var(--lw-md)' : 'var(--lw-rd)'); }
+  $('#wu-mrun').addEventListener('click', () => {
+    const a = +A.value, t = +T.value, r = sim(a,t), okV = r.v <= 12, okF = r.f <= 70, ok = okV && okF;
+    const prev = trials[trials.length - 1];
+    const chg = !prev ? '–' : (prev.a !== a && prev.t !== t) ? '<span class="both">兩者</span>' : prev.a !== a ? '角度' : prev.t !== t ? '推力' : '沒有';
+    trials.push({a,t,ok});
+    gauge('#wu-gv', Math.min(100, r.v/90*100), okV); gauge('#wu-gf', r.f, okF);
+    $('#wu-vv').textContent = r.v.toFixed(1) + ' m/s'; $('#wu-fv').textContent = Math.round(r.f) + '%';
+    mres.className = 'wu-res ' + (ok ? 'ok' : 'no');
+    mres.textContent = ok ? '✅ 安全着陸！' : r.f >= 100 ? '⛽ 燃料耗盡！推力太大，或角度太淺令航程太長。' :
+      !okV && !okF ? '💥 速度過高而且燃料不足。' : !okV ? '💥 着陸速度過高：試試增加推力或減少角度。' : '⛽ 燃料用量超標：推力太大，或角度太淺。';
+    logB.insertAdjacentHTML('afterbegin', `<tr class="${ok ? 'ok' : ''}"><td>${trials.length}</td><td>${a}°</td><td>${t}%</td><td>${r.v.toFixed(1)}</td><td>${Math.round(r.f)}%</td><td>${chg}</td></tr>`);
+    const both = trials.filter((x,i) => i && x.a !== trials[i-1].a && x.t !== trials[i-1].t).length;
+    if (ok && !solved){ solved = true; mhint.textContent = `🎉 你用了 ${trials.length} 次試驗找到安全方案（這個模型只有 2 個安全組合）。有系統地改變一個變量，通常更快找到答案。`; }
+    else if (!ok && trials.length >= 3 && both) mhint.textContent = '💡 你曾同時改變兩個變量，很難分辨是哪一個造成結果。試試固定角度，只改變推力（控制變量）。';
+    else if (!ok && trials.length >= 5) mhint.textContent = '💡 提示：角度愈大，速度愈高；角度愈小，航程愈長、燃料愈多。先把角度調到最小，再微調推力。';
+  });
+  $('#wu-mreset').addEventListener('click', () => {
+    trials = []; solved = false; logB.innerHTML = ''; mres.className = 'wu-res'; mres.textContent = '記錄已清除。';
+    gauge('#wu-gv', 0, true); gauge('#wu-gf', 0, true); $('#wu-vv').textContent = '–'; $('#wu-fv').textContent = '–';
+    mhint.textContent = '💡 好的實驗者會記錄每次試驗，並觀察每個變量的影響。';
+  });
+})();
+</script>
+</body>
+</html>
