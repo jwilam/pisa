@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PISA 2018 公開閱讀樣例｜閱讀素養專題｜PISA 2025 研討會專題</title>
+<meta name="description" content="OECD 公開的四個 PISA 2018 電腦化閱讀單元：養雞論壇、拉帕努伊島、牛奶、加拉巴哥群島。站內試做，附題目解析、評析及 HKU 文本結構圖。">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="rd.css">
+<style>
+  .sm-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}
+  .sm-card{display:flex;flex-direction:column;background:#fff;border-radius:20px;box-shadow:var(--sh);overflow:hidden;border:1px solid var(--line);transition:transform .15s}
+  .sm-card:hover{transform:translateY(-3px)}
+  .sm-hd{position:relative;color:#fff;padding:16px 18px 14px;background:linear-gradient(135deg,var(--c),#1d3a33 140%)}
+  .sm-hd .ic{position:absolute;right:14px;top:8px;font-size:3rem;opacity:.9}
+  .sm-hd .cd{font-size:.74rem;font-weight:800;letter-spacing:.08em;opacity:.85}
+  .sm-hd h3{margin:2px 0 0;font-size:1.25rem;color:#fff;padding-right:60px}
+  .sm-hd small{display:block;opacity:.85;font-size:.82rem}
+  .sm-bd{flex:1;padding:14px 18px;font-size:.9rem;line-height:1.7}
+  .sm-tag{display:inline-block;font-size:.76rem;font-weight:700;color:var(--c);background:var(--bg);border-radius:999px;padding:2px 10px;margin:0 6px 6px 0}
+  .sm-bd p{margin:4px 0 10px;color:var(--ink)}
+  .sm-tx{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+  .sm-tx span{font-size:.76rem;background:var(--paper);border-radius:8px;padding:2px 8px}
+  .sm-bar{display:flex;height:9px;border-radius:99px;overflow:hidden;background:#eee}
+  .sm-bar i{display:block;height:100%}
+  .sm-bl{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:.74rem;color:var(--mut);margin-top:4px}
+  .sm-bl i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px}
+  .sm-ft{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 18px;border-top:1px solid var(--line);background:#fcfbf8}
+  .sm-ft .lg{margin-right:auto;font-size:.76rem;color:var(--mut)}
+  .sm-ft .rd-btn{--c:var(--cc)}
+  .sm-wn{font-size:.76rem;color:var(--W);margin:0 0 8px}
+
+  .sm-tbl{width:100%;border-collapse:collapse;font-size:.88rem;margin:10px 0}
+  .sm-tbl th,.sm-tbl td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  .sm-tbl th{background:var(--paper);font-size:.8rem}
+  .sm-tbl td:first-child{font-weight:700;white-space:nowrap}
+  .sm-tbl .num{text-align:center}
+  .sm-tbl a{color:var(--rc);text-decoration:none}
+
+  .sm-how{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:12px 0}
+  .sm-how div{background:var(--paper);border-radius:14px;padding:12px 14px;font-size:.86rem;line-height:1.6}
+  .sm-how b{display:block;color:var(--rc);margin-bottom:2px}
+
+  .sm-map{display:grid;grid-template-columns:1.05fr 1fr;gap:20px;align-items:center;border-radius:20px;padding:20px 22px;color:#fff;text-decoration:none;
+    background:radial-gradient(circle at 92% 8%,#f1d27a40 0,transparent 42%),linear-gradient(135deg,#7a5a14,#1d3a33 90%);margin:12px 0}
+  .sm-map:hover{filter:brightness(1.05)}
+  .sm-map b{display:block;font-size:1.2rem;margin-bottom:4px}
+  .sm-map p{margin:0;opacity:.92;font-size:.92rem;line-height:1.7}
+  .sm-map .go{display:inline-block;margin-top:10px;font-weight:800;background:#f1d27a;color:#1d3a33;border-radius:999px;padding:6px 16px;font-size:.88rem}
+  .sm-mini{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:6px;align-items:center;font-size:.78rem}
+  .sm-mini div{background:#ffffff1f;border-radius:12px;padding:8px;text-align:center;line-height:1.5}
+  .sm-mini div b{font-size:.84rem;margin:0}
+  .sm-mini i{font-style:normal;font-weight:800;color:#f1d27a}
+
+  @media (max-width:820px){.sm-cards,.sm-map{grid-template-columns:1fr}.sm-how{grid-template-columns:1fr 1fr}.sm-tbl .hide-m{display:none}}
+  @media (max-width:520px){.sm-how{grid-template-columns:1fr}.sm-mini{grid-template-columns:1fr}.sm-mini i{text-align:center}}
+</style>
+</head>
+<body class="rd" data-rd="samples.html">
+<div id="site-header"></div>
+<section class="rd-hero"><div class="inner">
+  <span class="rd-eyebrow"></span>
+  <h1>PISA 2018 公開閱讀樣例：四個單元，四種閱讀情境<small>PISA 2018 Released Reading Units</small></h1>
+  <p>OECD 公開了 PISA 2018 的電腦化閱讀單元。你可以在本站逐一試做，並在側欄對照題目解析、OECD 說明及 PISA HKU 評析。網上論壇、矛盾文本、搜尋結果、多頁網站：都是學生每天遇到的閱讀情境。</p>
+  <div class="rd-q"></div>
+</div></section>
+<nav class="rd-chap" id="rd-chap" aria-label="本章頁面"></nav>
+
+<main class="rd-main">
+  <p class="rd-crumb" id="rd-crumb"></p>
+  <p class="rd-lead">前十頁談的是框架與方法；這一章讓你親身做一次。建議先自己試做，再打開「題目」及「評析」：你答錯的地方，往往正是學生的難點。</p>
+
+  <h2 id="units">四個單元</h2>
+  <div class="sm-cards" id="sm-cards"></div>
+
+  <h2 id="compare">一表比較</h2>
+  <table class="sm-tbl" id="sm-tbl"></table>
+  <p class="rd-src" style="border:0;margin:0;padding:0">題數及閱讀過程分類是 PISA HKU 的整理，正式資料以 OECD 文件為準。</p>
+
+  <h2 id="hku-map">🧠 PISA HKU 文本結構圖</h2>
+  <a class="sm-map" href="sample.html?u=rapanui#map">
+    <span><b>拉帕努伊島：讀者腦中的文件模型</b>
+      <p>三篇文本、兩個理論、一個謎團。結構圖分六步展示讀者怎樣由「讀懂一篇」走到「整合三篇」：每個說法貼上來源標籤，再找出一致與矛盾。</p>
+      <span class="go">逐步看結構圖 →</span></span>
+    <span class="sm-mini" aria-hidden="true">
+      <div><b>① 網誌</b><br>謎團：大樹到哪裏去了？</div><i>→</i>
+      <div><b>② 書評</b><br>推測 1：人類砍伐</div><i>≠</i>
+      <div><b>③ 科學報道</b><br>推測 2：老鼠吃種子</div>
+    </span>
+  </a>
+
+  <h2 id="how">怎樣使用播放器</h2>
+  <div class="sm-how">
+    <div><b>◧ 側欄位置</b>評析可放在右側、下方或隱藏。文字較多時，選「下方」或「評析為主」。</div>
+    <div><b>🔍 單元縮放</b>單元畫面太闊時縮小至 80–90%，就能與評析並排。設定會記住。</div>
+    <div><b>⛶ 全螢幕 · ↗ 新視窗</b>全螢幕保留側欄；雙屏幕教學時可用新視窗。</div>
+    <div><b>🔗 分享</b>網址記住單元、語言及分頁，例如 <code>?u=rapanui&amp;panel=map</code>，可直接發給學生。</div>
+  </div>
+
+  <div class="rd-warn"><b>關於題目解析：</b>本站的題目解析是概述，並非 OECD 原文；標有「待核實」的內容，請以 <a id="sm-pdf" href="#" target="_blank" rel="noopener" style="color:var(--W)">OECD 公開試題及評分指引</a> 核對後使用。</div>
+
+  <div class="rd-key"><div><b>重點：</b>四個單元對應四種真實情境：論壇考「可信嗎？」，拉帕努伊島考「說了甚麼、為何相信？」，牛奶考搜尋與立場，加拉巴哥群島考導航。試做時留意自己的閱讀過程，比答對更有價值。</div></div>
+
+  <div class="rd-src"><b>資料來源</b><ul>
+    <li>OECD (2019). <i>PISA 2018 Released Reading Items</i>.</li>
+    <li>OECD (2019). <i>PISA 2018 Assessment and Analytical Framework</i>. OECD Publishing.</li>
+    <li>OECD (2019). <i>PISA 2018 Results (Volume I): What Students Know and Can Do</i>. OECD Publishing.</li>
+    <li>單元由 OECD PISA 2018 公開單元平台提供，版權屬 OECD。</li>
+  </ul></div>
+  <div class="rd-pager" id="rd-pager"></div>
+</main>
+<div id="site-footer"></div>
+<script src="samples.js"></script>
+<script src="rd.js"></script>
+<script>
+(function(){
+  const P = RS.PROC, $ = s => document.querySelector(s);
+  $('#sm-pdf').href = RS.PDF;
+
+  $('#sm-cards').innerHTML = RS.MODS.map(m => {
+    const c = RS.count(m);
+    return `<article class="sm-card" style="--c:${m.c};--bg:${m.bg};--cc:${m.c}">
+      <div class="sm-hd"><span class="ic" aria-hidden="true">${m.ic}</span><span class="cd">${m.code}</span><h3>${m.zh}</h3><small>${m.en}</small></div>
+      <div class="sm-bd">
+        <span class="sm-tag">${m.tag}</span><span class="sm-tag">${m.items.length} 題</span>
+        ${m.warn ? `<p class="sm-wn">⚠️ ${m.warn}</p>` : ''}
+        <p>${m.scen}</p>
+        <div class="sm-tx">${m.texts.map(t => `<span>${t.t}</span>`).join('')}</div>
+        <div class="sm-bar">${Object.keys(P).map(k => c[k] ? `<i style="flex:${c[k]};background:${P[k].c}"></i>` : '').join('')}</div>
+        <div class="sm-bl">${Object.keys(P).map(k => c[k] ? `<span><i style="background:${P[k].c}"></i>${P[k].zh} ${c[k]}</span>` : '').join('')}</div>
+      </div>
+      <div class="sm-ft"><span class="lg">🌐 ${m.langs.map(l => RS.LANG[l]).join(' · ')}</span>
+        ${m.map ? `<a class="rd-btn" href="sample.html?u=${m.k}#map">🧠 結構圖</a>` : ''}
+        <a class="rd-btn solid" href="sample.html?u=${m.k}">▶ 試做與評析</a></div>
+    </article>`;
+  }).join('');
+
+  const top = m => { const c = RS.count(m); return Object.keys(P).sort((a,b) => c[b] - c[a])[0]; };
+  $('#sm-tbl').innerHTML = `<thead><tr><th>單元</th><th>文本類型</th><th class="num">文本</th><th class="num">題數</th><th>主要閱讀過程</th><th class="hide-m">評估重點</th></tr></thead><tbody>` +
+    RS.MODS.map(m => `<tr><td><a href="sample.html?u=${m.k}">${m.ic} ${m.zh}</a></td><td>${m.kind}</td><td class="num">${m.texts.length}</td>
+      <td class="num">${m.items.length}</td><td><span style="color:${P[top(m)].c};font-weight:700">${P[top(m)].zh}</span></td><td class="hide-m">${m.focus}</td></tr>`).join('') + '</tbody>';
+})();
+</script>
+</body>
+</html>

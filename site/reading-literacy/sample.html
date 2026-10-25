@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>樣例試做與評析｜閱讀素養專題｜PISA 2025 研討會專題</title>
+<meta name="description" content="在 PISA HKU 網站內試做 OECD 公開的 PISA 2018 閱讀單元，附題目解析、OECD 說明、HKU 評析及拉帕努伊島圖像組織圖。">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="rd.css">
+<style>
+  .sp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  @keyframes spIn{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}
+  .sp-wrap{max-width:1440px;margin:0 auto;padding:12px 16px 0}
+  .sp-wrap .rd-crumb{margin:0 0 10px}
+
+  /* ---------- 播放器外框 ---------- */
+  .sp{--side:34%;--z:1;--mc:#b8860b;display:flex;flex-direction:column;background:#14211e;color:#e3ece8;border-radius:20px;overflow:hidden;box-shadow:0 18px 40px #0000002e}
+  .sp-top{display:flex;align-items:center;gap:10px 12px;flex-wrap:wrap;padding:10px 14px;background:var(--dark);border-bottom:3px solid var(--mc)}
+  .sp-back{width:38px;height:38px;border-radius:10px;background:#ffffff14;color:#fff;display:grid;place-items:center;text-decoration:none}
+  .sp-back:hover{background:#ffffff2e}
+  .sp-title{display:flex;gap:10px;align-items:center;margin-right:auto;min-width:0}
+  .sp-title>span{font-size:1.8rem;line-height:1}
+  .sp-title b{display:block;color:#fff;font-size:1.06rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sp-title small{color:#9db5ad;font-size:.78rem}
+  .sp-seg{display:inline-flex;background:#ffffff14;border-radius:999px;padding:3px}
+  .sp-seg button{font:inherit;font-size:.8rem;border:0;background:transparent;color:#c9dad4;padding:5px 11px;border-radius:999px;cursor:pointer;white-space:nowrap}
+  .sp-seg button:hover{color:#fff}
+  .sp-seg button.on{background:#f1d27a;color:var(--dark);font-weight:700}
+  .sp-seg .solo{font-size:.8rem;padding:5px 12px;color:#c9dad4}
+  .sp-tools{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .sp-tb{font:inherit;font-size:.8rem;font-weight:700;color:#fff;background:#ffffff1a;border:0;border-radius:10px;padding:8px 11px;cursor:pointer;text-decoration:none;white-space:nowrap}
+  .sp-tb:hover{background:#ffffff33}
+
+  .sp-view{display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap;padding:7px 14px;background:#182824;border-bottom:1px solid #ffffff10;font-size:.8rem;color:#9db5ad}
+  .sp-view .lab{font-weight:700;color:#c9dad4}
+  .sp-view .tip{margin-left:auto}
+  .sp-laygrp{display:inline-flex;align-items:center;gap:8px}
+  .sp-zoom{display:inline-flex;align-items:center;gap:2px;background:#ffffff14;border-radius:999px;padding:3px}
+  .sp-zoom button{font:inherit;font-size:.86rem;border:0;background:transparent;color:#fff;min-width:28px;height:26px;border-radius:999px;cursor:pointer}
+  .sp-zoom button:hover{background:#ffffff26}.sp-zoom button:disabled{opacity:.35;cursor:default}
+  .sp-zoom #sp-z1{padding:0 10px;color:#c9dad4;font-size:.78rem}
+  .sp-zoom b{min-width:44px;text-align:center;color:#f1d27a}
+
+  /* ---------- 主體 ---------- */
+  .sp-body{display:grid;grid-template-columns:minmax(0,1fr) 10px var(--side);min-height:0}
+  .sp-stage{position:relative;overflow:hidden;background:#fff;height:min(78vh,860px);min-width:0}
+  #sp-frame{position:absolute;top:0;left:0;border:0;width:calc(100% / var(--z));height:calc(100% / var(--z));transform:scale(var(--z));transform-origin:0 0}
+  .sp-load{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:12px;background:#f7f5ef;color:var(--mut);font-size:.92rem;text-align:center;padding:20px;transition:opacity .35s}
+  .sp-load.off{opacity:0;pointer-events:none}
+  .sp-load p{margin:0;max-width:340px}
+  .spin{width:36px;height:36px;border-radius:50%;border:4px solid #e4e0d2;border-top-color:var(--mc);animation:spSp 1s linear infinite}
+  @keyframes spSp{to{transform:rotate(360deg)}}
+  .sp-div{position:relative;background:#0e1816;cursor:col-resize;touch-action:none;outline:none}
+  .sp-div::before{content:"";position:absolute;top:50%;left:50%;width:4px;height:46px;margin:-23px 0 0 -2px;border-radius:4px;background:repeating-linear-gradient(#9db5ad 0 3px,transparent 3px 7px)}
+  .sp-div:hover,.sp-div:focus-visible,.sp.drag .sp-div{background:var(--mc)}
+  .sp.drag{user-select:none;cursor:col-resize}.sp.drag iframe{pointer-events:none}
+
+  /* 側欄位置：右側／下方／隱藏 */
+  .sp[data-side="below"] .sp-body,.sp[data-side="off"] .sp-body{grid-template-columns:minmax(0,1fr)}
+  .sp[data-side="below"] .sp-div,.sp[data-side="off"] .sp-div,.sp[data-side="off"] .sp-side{display:none}
+  .sp[data-side="below"] .sp-side{height:auto;max-height:62vh;border-top:3px solid var(--mc)}
+  .sp[data-side="below"] .sp-laygrp,.sp[data-side="off"] .sp-laygrp,.sp[data-side="below"] .sp-view .tip,.sp[data-side="off"] .sp-view .tip{display:none}
+
+  /* ---------- 側欄（淺色，方便長文閱讀） ---------- */
+  .sp-side{display:flex;flex-direction:column;min-height:0;min-width:0;height:min(78vh,860px);background:#fbfaf6;color:var(--ink)}
+  .sp-tabs{display:flex;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+  .sp-tabs button{flex:1 0 auto;font:inherit;font-size:.84rem;font-weight:700;background:transparent;border:0;color:var(--mut);padding:12px 10px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+  .sp-tabs button.on{color:var(--ink);border-bottom-color:var(--mc)}
+  .sp-pane{flex:1;overflow:auto;padding:14px 18px 20px;font-size:.9rem;line-height:1.7;animation:spIn .25s ease}
+  .sp-pane[hidden]{display:none}
+  .sp-pane h3{margin:0 0 2px;font-size:1.05rem;color:var(--dark)}
+  .sp-en{margin:0 0 8px;color:var(--mut);font-size:.8rem}
+  .sp-blk{background:#fff;border-radius:12px;border:1px solid var(--line);padding:10px 12px;margin:10px 0}
+  .sp-blk>b{display:block;font-size:.76rem;letter-spacing:.05em;color:var(--mc);margin-bottom:4px}
+  .sp-blk.warn{background:var(--Wbg);border-color:#ecd3c8}.sp-blk.warn>b{color:var(--W)}
+  .sp-blk p{margin:6px 0 0}
+  .sp-tx{display:grid;grid-template-columns:auto 1fr;gap:8px;padding:6px 0;border-top:1px dashed var(--line)}
+  .sp-tx:first-of-type{border-top:0}
+  .sp-tx i{font-style:normal;font-weight:800;color:var(--mc);white-space:nowrap}
+  .sp-tx small{display:block;color:var(--mut);font-size:.78rem}
+  .sp-more{display:inline-block;margin-top:8px;color:var(--mc);font-weight:700;font-size:.86rem;text-decoration:none}
+  .sp-more:hover{text-decoration:underline}
+  .sp-small{font-size:.8rem;color:var(--mut)}
+
+  .sp-bar{display:flex;height:10px;border-radius:99px;overflow:hidden;margin:6px 0 4px;background:#eee}
+  .sp-bar i{display:block;height:100%}
+  .sp-bl{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:.76rem;color:var(--mut)}
+  .sp-bl span{display:inline-flex;align-items:center;gap:5px}.sp-bl i{width:9px;height:9px;border-radius:3px}
+
+  .sp-filter{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+  .sp-filter button{font:inherit;font-size:.78rem;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:4px 12px;cursor:pointer}
+  .sp-filter button.on{background:var(--dark);border-color:var(--dark);color:#fff}
+  .sp-it{background:#fff;border:1px solid var(--line);border-left:5px solid var(--pc);border-radius:12px;margin:0 0 8px;scroll-margin-top:10px}
+  .sp-it summary{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:9px 12px;cursor:pointer;list-style:none}
+  .sp-it summary::-webkit-details-marker{display:none}
+  .sp-it summary .q{font-weight:800;color:var(--pc)}
+  .sp-it summary .t{font-weight:700}
+  .sp-it summary .pp{font-size:.7rem;font-weight:700;color:#fff;background:var(--pc);border-radius:999px;padding:1px 8px;white-space:nowrap}
+  .sp-it[open] summary{border-bottom:1px dashed var(--line)}
+  .sp-it dl{display:grid;grid-template-columns:92px 1fr;gap:6px 10px;margin:0;padding:10px 12px;font-size:.86rem}
+  .sp-it dt{font-weight:700;color:var(--mut)}.sp-it dd{margin:0}
+  .sp-note{margin:0 12px 8px;background:var(--paper);border-radius:8px;padding:6px 10px;font-size:.84rem}
+  .sp-chk{display:inline-block;margin:0 12px 10px;font-size:.72rem;font-weight:700;color:var(--W);background:var(--Wbg);border:1px solid #ecd3c8;border-radius:999px;padding:1px 9px}
+
+  .sp-ev{border-radius:12px;padding:10px 12px;margin:10px 0;border-left:5px solid var(--c);background:var(--bg)}
+  .sp-ev>b{display:block;color:var(--c);margin-bottom:4px}
+  .sp-ev ul{margin:0;padding-left:18px}.sp-ev li{margin:4px 0}
+  .sp-ev small{display:block;color:var(--mut);font-size:.74rem}
+
+  .sp-steps{list-style:none;margin:10px 0;padding:0}
+  .sp-steps button{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:center;width:100%;font:inherit;text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 10px;margin:0 0 6px;cursor:pointer}
+  .sp-steps button b{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--paper);color:var(--mc)}
+  .sp-steps button small{display:block;color:var(--mut);font-size:.74rem}
+  .sp-steps button.on{border-color:var(--mc);background:var(--Bbg)}.sp-steps button.on b{background:var(--mc);color:#fff}
+  .sp-goimg{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:12px;margin:8px 0 4px;background:var(--paper);cursor:zoom-in}
+
+  .sp-rf ol{margin:6px 0 0;padding-left:20px}
+  .sp-rf textarea{width:100%;min-height:120px;font:inherit;font-size:.9rem;border:1px solid var(--line);border-radius:10px;padding:8px 10px;resize:vertical;box-sizing:border-box}
+
+  .sp-hint{display:flex;align-items:center;gap:10px;padding:8px 14px;font-size:.82rem;background:#22362f;color:#c9dad4}
+  .sp-hint[hidden]{display:none}
+  .sp-hint button{margin-left:auto;font:inherit;font-size:.78rem;border:0;border-radius:999px;padding:3px 12px;background:#ffffff1f;color:#fff;cursor:pointer}
+  .sp-rail{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--dark)}
+  .sp-rail .list{display:flex;gap:8px;overflow-x:auto;flex:1;scrollbar-width:thin}
+  .sp-rail .list a{flex:0 0 auto;display:flex;gap:7px;align-items:center;padding:6px 12px;border-radius:12px;border:2px solid transparent;background:#ffffff0f;color:#c9dad4;text-decoration:none;font-size:.84rem}
+  .sp-rail .list a:hover{background:#ffffff1f}
+  .sp-rail .list a.on{border-color:var(--c);background:#ffffff1f;color:#fff}
+  .sp-rail .list i{font-style:normal;color:#f1d27a;font-size:.74rem}
+  .sp-rail .nav{flex:0 0 auto;font:inherit;font-size:.82rem;font-weight:700;border:0;border-radius:10px;padding:8px 12px;background:#ffffff1a;color:#fff;cursor:pointer}
+  .sp-rail .nav:disabled{opacity:.35;cursor:default}
+
+  /* 全螢幕／沉浸模式 */
+  .sp:fullscreen,.sp.imm{border-radius:0;width:100vw;height:100vh}
+  .sp.imm{position:fixed;inset:0;z-index:9999}
+  .sp:fullscreen .sp-body,.sp.imm .sp-body{flex:1;min-height:0}
+  .sp:fullscreen .sp-stage,.sp:fullscreen .sp-side,.sp.imm .sp-stage,.sp.imm .sp-side{height:auto}
+  .sp:fullscreen[data-side="below"] .sp-body,.sp.imm[data-side="below"] .sp-body{grid-template-rows:minmax(0,1fr) 40%}
+  .sp:fullscreen[data-side="below"] .sp-side,.sp.imm[data-side="below"] .sp-side{max-height:none}
+
+  /* ---------- 播放器下方 ---------- */
+  .sp-below{max-width:1180px;margin:24px auto 0;padding:0 16px}
+  .sp-sec{background:#fff;border-radius:22px;box-shadow:var(--sh);padding:22px 28px;margin:0 0 18px;line-height:1.75}
+  .sp-sec h2{color:var(--rc);margin:0 0 6px}
+  .sp-sec>p{margin:0 0 10px}
+
+  /* ---------- 圖像組織圖：互動版 ---------- */
+  .mp-tag{display:inline-block;font-size:.74rem;font-weight:700;color:var(--B);background:var(--Bbg);border-radius:999px;padding:2px 10px}
+  .mp-qa{background:var(--paper);border-radius:12px;padding:8px 12px;font-size:.84rem;margin:0 0 10px}
+  .mp-qa b{color:var(--dark)}
+  .mp-lv{display:flex;align-items:stretch;gap:8px;margin:14px 0}
+  .mp-lv>div{flex:1;border-radius:14px;padding:10px 12px;background:var(--paper);opacity:.6;transition:opacity .2s}
+  .mp-lv>div.on{opacity:1;background:var(--dark);color:#fff}
+  .mp-lv b{display:block;font-size:.95rem}.mp-lv small{font-size:.76rem;line-height:1.5;display:block}
+  .mp-lv i{align-self:center;font-style:normal;color:var(--mut)}
+  .mp-ctl{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 10px}
+  .mp-steps{display:flex;gap:4px;flex-wrap:wrap}
+  .mp-steps button{font:inherit;font-size:.84rem;font-weight:700;min-width:36px;height:34px;border-radius:10px;border:1.5px solid var(--line);background:#fff;cursor:pointer;padding:0 10px}
+  .mp-steps button.on{background:var(--B);border-color:var(--B);color:#fff}
+  .mp-steps button:disabled{opacity:.4;cursor:default}
+  .mp-lay{display:flex;gap:12px;flex-wrap:wrap;font-size:.84rem}
+  .mp-lay label{display:inline-flex;gap:5px;align-items:center;cursor:pointer}
+  .mp-step{background:var(--Bbg);border-left:6px solid var(--B);border-radius:14px;padding:12px 16px;margin:0 0 14px;animation:spIn .3s ease}
+  .mp-step>b{font-size:.76rem;color:var(--B);letter-spacing:.04em}
+  .mp-step h3{margin:2px 0 4px;font-size:1.08rem}
+  .mp-step p{margin:0 0 8px}
+  .mp-step .gl{font-size:.82rem;color:var(--mut)}
+  .mp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .mp-col{border-radius:18px;background:#fff;border:1px solid var(--line);border-top:6px solid var(--c);padding:12px;transition:opacity .25s}
+  .mp-col.dim{opacity:.35}
+  .mp-col header{margin:0 0 8px}
+  .mp-col h3{margin:0;color:var(--c);font-size:1.08rem}
+  .mp-who{display:inline-block;font-size:.76rem;font-weight:700;background:var(--paper);border-radius:999px;padding:2px 9px;margin:4px 4px 0 0}
+  .mp-mdl{display:inline-block;font-size:.76rem;color:#fff;background:var(--c);border-radius:999px;padding:2px 9px;margin-top:4px}
+  .mp-gt{display:block;margin-top:8px;font:inherit;font-size:.78rem;font-weight:700;border:1.5px dashed var(--c);color:var(--c);background:#fff;border-radius:10px;padding:4px 10px;cursor:pointer}
+  .mp-gt.on{background:var(--c);color:#fff;border-style:solid}
+  .mp-ns{display:flex;flex-direction:column;gap:0}
+  .mp-n{position:relative;background:var(--paper);border-radius:12px;padding:8px 10px;font-size:.86rem;line-height:1.6;transition:opacity .25s,box-shadow .25s}
+  .mp-n:has(>.mp-q){padding-right:52px}
+  .mp-n+.mp-n{margin-top:18px}
+  .mp-n+.mp-n::before{content:"↓";position:absolute;top:-18px;left:50%;transform:translateX(-50%);color:var(--c);font-size:.9rem;line-height:18px}
+  .mp-n b{display:block;color:var(--c);font-size:.78rem}
+  .mp-n.key{background:#fff;border:2px solid var(--c)}
+  .mp-n.hi{box-shadow:0 0 0 3px var(--c)}
+  .mp-n.dim{opacity:.3}
+  .mp-n.cq{background:var(--Wbg)}.mp-n.cq b{color:var(--W)}.mp-n.cq .m{background:var(--W)}
+  .mp-n.cq::before{content:"?" !important;color:var(--W) !important;font-weight:800}
+  .mp-q{position:absolute;top:6px;right:6px;font:inherit;font-size:.7rem;font-weight:800;border:0;border-radius:999px;background:var(--dark);color:#fff;padding:1px 8px;cursor:pointer;white-space:nowrap}
+  .mp-cn{font-size:.74rem;color:var(--mut);margin:8px 0 0}
+  .mp-g{display:grid;grid-template-columns:52px 1fr;gap:8px;align-items:start}
+  .mp-g .m{font-size:.7rem;font-weight:700;color:#fff;background:var(--c);border-radius:8px;padding:2px 0;text-align:center}
+  .mp-links{margin-top:16px}
+  .mp-links h3{margin:0 0 8px;font-size:1rem;color:var(--dark)}
+  .mp-lg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 14px}
+  .mp-l{position:relative;display:flex;gap:8px;align-items:center;border-radius:12px;padding:8px 12px;font-size:.88rem;border:2px solid var(--lc);background:var(--lb);transition:opacity .25s}
+  .mp-l.ans{--lc:#2a7f8f;--lb:#eaf4f5}.mp-l.agree{--lc:#2f5d50;--lb:#e9f1ed}.mp-l.conflict{--lc:#b5523b;--lb:#fbf1ec}
+  .mp-l .ic{font-weight:800;color:var(--lc);white-space:nowrap}
+  .mp-l .mp-q{position:static;margin-left:auto}
+  .mp-l.dim{opacity:.3}.mp-l.hi{box-shadow:0 6px 16px #0000001a}
+  .no-src .mp-who{display:none}.no-q .mp-q{display:none}.no-rel .mp-links{display:none}
+  .mp-note{font-size:.84rem;color:var(--mut);margin:14px 0 0}
+  .mp-note a{color:var(--rc);font-weight:700}
+
+  /* ---------- 圖像組織圖：檢視切換、HKU 原圖、時間線 ---------- */
+  .go-view{display:inline-flex;background:var(--paper);border-radius:999px;padding:3px;flex-wrap:wrap}
+  .go-view button{font:inherit;font-size:.84rem;font-weight:700;border:0;background:transparent;color:var(--mut);padding:6px 14px;border-radius:999px;cursor:pointer}
+  .go-view button.on{background:var(--dark);color:#fff}
+  #v-live .mp-lay{justify-content:flex-end;margin:0 0 10px}
+  .go-fig{margin:0}
+  .go-stage{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;outline:none}
+  .go-stage:focus-visible{box-shadow:0 0 0 3px var(--B)}
+  .go-stage img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;background:#fff;cursor:zoom-in}
+  .go-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:42px;height:42px;border-radius:50%;border:0;background:#1d3a33cc;color:#fff;font-size:1.6rem;line-height:1;cursor:pointer}
+  .go-nav:hover{background:#1d3a33}.go-nav.prev{left:10px}.go-nav.next{right:10px}
+  .go-zoom{position:absolute;right:10px;bottom:10px;z-index:2;font:inherit;font-size:.8rem;font-weight:700;border:0;border-radius:999px;background:#1d3a33cc;color:#fff;padding:5px 12px;cursor:pointer}
+  .go-fig figcaption{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;padding:10px 4px 6px;font-size:.92rem}
+  .go-fig figcaption b{color:var(--B)}
+  .go-fig figcaption .sp-more{margin:0 0 0 auto}
+  .go-gl{flex-basis:100%;font-size:.8rem;color:var(--mut)}
+  .go-err{flex-basis:100%;color:var(--W);font-style:normal;font-size:.84rem}
+  .go-thumbs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px}
+  .go-thumbs button{flex:0 0 140px;font:inherit;font-size:.74rem;text-align:left;background:#fff;border:2px solid var(--line);border-radius:12px;padding:4px;cursor:pointer;opacity:.7}
+  .go-thumbs button.on{border-color:var(--B);opacity:1}
+  .go-thumbs img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;background:var(--paper)}
+  .go-thumbs span{display:block;padding:4px 2px 0;line-height:1.4}
+  .go-dlg{max-width:96vw;max-height:94vh;padding:0;border:0;border-radius:14px;overflow:auto;background:#fff}
+  .go-dlg::backdrop{background:#0b1512d9}
+  .go-dlg img{display:block;width:1800px;max-width:none;height:auto}
+  .go-x{position:fixed;top:14px;right:14px;z-index:3;width:40px;height:40px;border-radius:50%;border:0;background:#fff;font-size:1.1rem;cursor:pointer;box-shadow:var(--sh)}
+  .tl-dyn{background:var(--Bbg);border-radius:14px;padding:10px 14px;margin:0 0 12px;font-size:.9rem}
+  .tl{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px}
+  .tl-ar{align-self:center;font-size:1.4rem;color:var(--mut)}
+  .tl-sec{background:var(--paper);border-radius:16px;padding:12px 14px;border-top:5px solid var(--dark)}
+  .tl-sec.gap{border-top-color:var(--W)}
+  .tl-sec>b{display:block;font-size:1rem}
+  .tl-sec>em{display:inline-block;font-style:normal;font-size:.78rem;font-weight:700;background:var(--dark);color:#fff;border-radius:999px;padding:1px 10px;margin:4px 0 8px}
+  .tl-sec ul{list-style:none;margin:0;padding:0}
+  .tl-sec li{background:#fff;border-left:4px solid var(--c);border-radius:10px;padding:6px 10px;margin:0 0 6px;font-size:.88rem;line-height:1.55}
+  .tl-sec li .qa{display:inline-block;font-size:.7rem;font-weight:800;color:#fff;background:var(--dark);border-radius:999px;padding:0 8px;margin-right:6px}
+  .tl-sec li small,.tl-h small{display:block;color:var(--c);font-size:.72rem;font-weight:700;margin-top:2px}
+  .tl-why{margin-top:14px;background:var(--Wbg);border-radius:16px;padding:12px 14px}
+  .tl-why>p{margin:0 0 8px;font-weight:700}
+  .tl-why>div{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
+  .tl-why i{font-style:normal;font-weight:800;font-size:1.3rem;color:var(--W);text-align:center}
+  .tl-why .tl-nt{display:block;margin-top:8px;font-size:.84rem;color:var(--ink)}
+  .tl-h{background:#fff;border:2px solid var(--c);border-radius:12px;padding:8px 12px;font-size:.88rem}
+  .tl-h b{display:block;color:var(--c)}
+
+  /* 題組地圖 */
+  .qm-leg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8rem;color:var(--mut);margin:0 0 10px}
+  .qm-leg span{display:inline-flex;align-items:center;gap:5px}.qm-leg i{width:10px;height:10px;border-radius:3px}
+  .qm{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+  .qm button{font:inherit;text-align:left;background:#fff;border:1px solid var(--line);border-top:5px solid var(--pc);border-radius:14px;padding:10px 12px;cursor:pointer;transition:transform .15s}
+  .qm button:hover{transform:translateY(-2px);box-shadow:var(--sh)}
+  .qm b{color:var(--pc)}.qm span{display:block;font-weight:700;font-size:.88rem;margin:2px 0}
+  .qm small{display:block;color:var(--mut);font-size:.74rem}
+  .tc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+  .tc div{background:var(--paper);border-radius:14px;padding:12px 14px;font-size:.9rem}
+  .tc b{display:block;color:var(--rc);font-size:.8rem}
+
+  @media (max-width:1000px){
+    .sp-body{grid-template-columns:1fr !important}
+    .sp-div,.sp-laygrp,.sp-view .tip,#sp-pos{display:none !important}
+    .sp-stage{height:70vh}
+    .sp-side{height:auto;max-height:70vh;border-top:3px solid var(--mc)}
+    .sp[data-side="off"] .sp-side{display:flex}
+    .sp-tb span,.sp-seg button span{display:none}
+    .mp-grid,.mp-lg{grid-template-columns:1fr}
+    .mp-lv{flex-direction:column}.mp-lv i{display:none}
+    .tl,.tl-why>div{grid-template-columns:1fr}.tl-ar{justify-self:center;transform:rotate(90deg)}
+  }
+  @media (max-width:560px){.sp-wrap{padding:10px 8px 0}.sp-rail .nav{display:none}.sp-sec{padding:18px}.sp-it dl{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="rd" data-rd="sample.html">
+<div id="site-header"></div>
+<h1 class="sp-sr" id="sp-h1">PISA 2018 閱讀公開樣例</h1>
+
+<div class="sp-wrap">
+  <p class="rd-crumb" id="rd-crumb"></p>
+  <section class="sp" id="sp" data-side="right" aria-label="PISA 2018 閱讀樣例播放器">
+    <header class="sp-top">
+      <a class="sp-back" href="samples.html" title="返回樣例總覽" aria-label="返回樣例總覽">☰</a>
+      <div class="sp-title"><span id="sp-ic"></span><div><b id="sp-name"></b><small id="sp-meta"></small></div></div>
+      <div class="sp-seg" id="sp-lang" aria-label="單元語言"></div>
+      <div class="sp-tools">
+        <span class="sp-seg" id="sp-pos" aria-label="側欄位置">
+          <button type="button" data-s="right" title="側欄在右">◧ <span>右側</span></button>
+          <button type="button" data-s="below" title="側欄在下">⬓ <span>下方</span></button>
+          <button type="button" data-s="off" title="隱藏側欄">▢ <span>隱藏</span></button>
+        </span>
+        <button type="button" class="sp-tb" id="sp-reload" title="重新載入單元">↻ <span>重新載入</span></button>
+        <button type="button" class="sp-tb" id="sp-fs" title="全螢幕">⛶ <span>全螢幕</span></button>
+        <a class="sp-tb" id="sp-win" href="#" target="_blank" rel="noopener" title="在新視窗開啟">↗ <span>新視窗</span></a>
+      </div>
+    </header>
+
+    <div class="sp-view">
+      <span class="sp-laygrp"><span class="lab">版面</span>
+        <span class="sp-seg" id="sp-lay">
+          <button type="button" data-r=".3">▭ 單元為主</button>
+          <button type="button" data-r=".5">◫ 平分</button>
+          <button type="button" data-r=".62">▯ 評析為主</button>
+        </span></span>
+      <span class="lab">單元縮放</span>
+      <span class="sp-zoom"><button type="button" id="sp-zo" aria-label="縮小單元">−</button><b id="sp-zv" aria-live="polite">100%</b><button type="button" id="sp-zi" aria-label="放大單元">＋</button><button type="button" id="sp-z1">重設</button></span>
+      <span class="tip">💡 拖動中間分隔線調整比例；雙擊還原</span>
+    </div>
+
+    <div class="sp-body" id="sp-body">
+      <div class="sp-stage">
+        <iframe id="sp-frame" title="PISA 2018 閱讀公開單元" allow="fullscreen" allowfullscreen></iframe>
+        <div class="sp-load" id="sp-load"><span class="spin"></span><p>載入單元中…</p></div>
+      </div>
+      <div class="sp-div" id="sp-div" role="separator" tabindex="0" aria-orientation="vertical" aria-label="拖動調整單元與側欄的比例" title="拖動調整比例；雙擊還原"></div>
+      <aside class="sp-side" aria-label="評估資料">
+        <div class="sp-tabs" id="sp-tabs" role="tablist"></div>
+        <div class="sp-pane" id="pane-info" role="tabpanel"></div>
+        <div class="sp-pane" id="pane-items" role="tabpanel" hidden></div>
+        <div class="sp-pane" id="pane-eval" role="tabpanel" hidden></div>
+        <div class="sp-pane" id="pane-map" role="tabpanel" hidden></div>
+        <div class="sp-pane" id="pane-reflect" role="tabpanel" hidden></div>
+      </aside>
+    </div>
+
+    <div class="sp-hint" id="sp-hint">ℹ️ 單元由 OECD PISA 平台提供，在本站內嵌顯示。畫面太闊可按「單元縮放 −」；如畫面空白，請按「↗ 新視窗」。<button type="button" id="sp-hx">知道了</button></div>
+    <footer class="sp-rail" id="sp-rail"></footer>
+  </section>
+</div>
+
+<div class="sp-below">
+  <section class="sp-sec" id="map" hidden>
+    <span class="mp-tag">PISA HKU 設計 · 圖像組織圖（Graphic Organiser）</span>
+    <h2>🧠 讀者腦中的「文件模型」</h2>
+    <p>圖像組織圖把文本結構「畫出來」，幫助讀者為單篇及多篇文本建立連貫的心智表徵。好讀者讀完三篇文本後，腦中不是三段零散的文字，而是一個有結構的模型：每篇文本的內容、每個說法的來源，以及文本之間的一致與矛盾。按步驟看看這個模型怎樣逐步建立。</p>
+    <p class="mp-qa">🔤 <b>圖中的 Q1、Q2</b> 是網誌提出的兩個謎團，<b>A1、A2</b> 是它們的答案；與 PISA 題號不同。PISA 題目以深色「題 1、題 2……」按鈕顯示，點擊可查看解析。</p>
+    <div class="mp-lv" id="mp-lv"></div>
+    <div class="mp-ctl">
+      <div class="mp-steps" id="mp-steps"></div>
+      <div class="go-view" id="go-view" role="tablist" aria-label="檢視方式">
+        <button type="button" role="tab" data-v="live">🧩 互動版</button>
+        <button type="button" role="tab" data-v="orig">📑 HKU 原圖</button>
+        <button type="button" role="tab" data-v="time">⏳ 整合時間線</button>
+      </div>
+    </div>
+    <div class="mp-step" id="mp-step" aria-live="polite"></div>
+
+    <div id="v-live">
+      <div class="mp-lay" id="mp-lay">
+        <label><input type="checkbox" data-l="src" checked> 🏷️ 來源標籤</label>
+        <label><input type="checkbox" data-l="rel" checked> 🔗 文本間關係</label>
+        <label><input type="checkbox" data-l="q" checked> ❓ 題號</label>
+      </div>
+      <div class="mp-grid" id="mp-grid"></div>
+      <div class="mp-links" id="mp-links"></div>
+    </div>
+
+    <div id="v-orig" hidden>
+      <figure class="go-fig">
+        <div class="go-stage" id="go-stage" tabindex="0" aria-label="HKU 原圖：左右方向鍵切換">
+          <button type="button" class="go-nav prev" id="go-prev" aria-label="上一張">‹</button>
+          <img id="go-img" alt="" decoding="async">
+          <button type="button" class="go-nav next" id="go-next" aria-label="下一張">›</button>
+          <button type="button" class="go-zoom" id="go-zoom">⤢ 放大</button>
+        </div>
+        <figcaption id="go-cap"></figcaption>
+      </figure>
+      <div class="go-thumbs" id="go-thumbs"></div>
+    </div>
+
+    <div id="v-time" hidden></div>
+
+    <p class="mp-note">文本表徵、情境模型及文件模型的概念，詳見 <a href="documents.html">05 文件模型</a>；處理矛盾的方法見 <a href="conflict.html">06 當文本互相矛盾</a>；後果論證及批判問題見 <a href="argument.html">09 論證與推理</a>。</p>
+  </section>
+  <dialog class="go-dlg" id="go-dlg" aria-label="放大原圖"><button type="button" class="go-x" id="go-x" aria-label="關閉">✕</button><img id="go-big" alt=""></dialog>
+
+  <section class="sp-sec">
+    <h2>❓ 題組地圖</h2>
+    <p>每張卡代表一題，顏色表示閱讀過程。點選卡片，可在側欄查看解析。</p>
+    <div class="qm-leg" id="qm-leg"></div>
+    <div class="qm" id="qm"></div>
+  </section>
+
+  <section class="sp-sec">
+    <h2>🏫 課堂建議</h2>
+    <div class="tc" id="tc"></div>
+  </section>
+
+  <section class="sp-sec">
+    <div class="rd-warn"><b>關於本頁內容：</b>題目解析是 PISA HKU 整理的概述，並非 OECD 原文。標有「待核實」的內容，請以 OECD 公開試題及評分指引核對。「OECD 官方說明」為意譯；「PISA HKU 評析」是本站觀點。</div>
+    <div class="rd-src"><b>資料來源</b><ul id="sp-src"></ul></div>
+    <div class="rd-pager" id="rd-pager"></div>
+  </section>
+</div>
+
+<div id="site-footer"></div>
+<script src="samples.js"></script>
+<script src="rd.js"></script>
+<script>
+(function(){
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+
+  /* 防呆：資料檔未載入時顯示錯誤，而不是無限轉圈 */
+  if (!window.RS){
+    const ld0 = $('#sp-load');
+    ld0.querySelector('.spin').style.display = 'none';
+    ld0.querySelector('p').innerHTML = '⚠️ 未能載入題目資料（samples.js）。<br>請確認檔案與本頁放在同一資料夾，檔名是 <b>samples.js</b>。';
+    console.error('[sample.html] window.RS 未定義：samples.js 未載入或有語法錯誤');
+    return;
+  }
+
+  /* =====================================================================
+     HKU 圖像組織圖（Graphic Organiser）資料
+     每個步驟對應一幀原圖（img），一一對應，不會錯位。
+     這裏的資料會覆蓋 samples.js 中同一單元的 map。
+     ===================================================================== */
+  const GO = {
+    rapanui:{
+      img:'img/rapanui/', pdf:'RapaNui.pdf', argCol:'t2',
+      cols:[
+        {id:'t1', t:'① 網誌', who:'教授（實地考察中）', model:'問題—答案鏈：Q1 → A1 → Q2', c:'#2a7f8f', nodes:[
+          {id:'n1', h:'處境（現在）', b:'實地考察「過去九個月」· 5 月 23 日寫網誌 · 「最後一星期」後回家', q:'Q1'},
+          {id:'n2', h:'窗外景物', b:'湛藍的天空 · 幾座死火山 · 綠悠悠的草地和灌木 · 巨大石像'},
+          {id:'n3', h:'謎團 Q1（數百年前）', b:'島民怎樣把巨大的摩艾石像搬到島上各處？'},
+          {id:'n4', h:'A1（1990 年代）', b:'考古學家與島民重現方法：① 利用植物做成繩索　② 搭配木製滾輪　③ 用曾在島上大量生長的大樹搭建軌道'},
+          {id:'n5', h:'謎團 Q2', b:'A1 引出新問題：那些大樹到哪裏去了？如今島上只見草地和灌木', q:'Q2', key:true}]},
+        {id:'t2', t:'② 書評', who:'書評作者 → Jared Diamond《崩潰》（2005）', model:'A2-i 推測 1：人類', c:'#b8860b', nodes:[
+          {id:'n6', h:'主題', b:'衝擊環境 ⇨ 文明社會崩潰；拉帕努伊島是其中一例'},
+          {id:'n7', h:'歷史：之前（公元 700 年後）', b:'人口：約 15,000 名波里尼西亞人 · 社會：蓬勃發展 · 文明：雕刻摩艾石像並移至島上各處 · 資源：唾手可得'},
+          {id:'n8', h:'推測 1：因果鏈', b:'居民淨空土地、過度捕獵海洋生物和鳥類 ⇨ 天然資源越來越少 ⇨ 內戰 ⇨ 拉帕努伊島社會崩潰', q:'Q6', key:true},
+          {id:'n9', h:'歷史：之後（公元 1772 年）', b:'首批歐洲人登島：石像還在 · 樹木都不見了 · 人口下滑至僅剩幾千人 · 生活困苦'},
+          {id:'n10', h:'後果論證：問題 ⇔ 解決', b:'問題：人類選擇摧毀環境（砍掉所有樹木，捕獵各類物種至瀕臨絕跡）⇔ 解決：我們選擇不要重蹈覆轍', q:'Q3'},
+          {id:'n11', h:'書評作者的立場', b:'👍 認同 Diamond 的論證，向讀者推介本書'}]},
+        {id:'t3', t:'③ 科學報道', who:'科學記者 → 里波與亨特（Lipo & Hunt）', model:'A2-ii 推測 2：老鼠', c:'#b5523b', nodes:[
+          {id:'n12', h:'質疑 ?!', b:'挑戰 Diamond 2005 年的解釋：令樹木消失的「罪魁禍首」另有其人'},
+          {id:'n13', h:'老鼠從哪裏來', b:'第 1 批拉帕努伊島民所乘的獨木舟帶來老鼠'},
+          {id:'n14', h:'數量驚人', b:'老鼠數量每 47 天增加 1 倍'},
+          {id:'n15', h:'證據 🔍', b:'棕櫚樹堅果上殘留老鼠咬痕', q:'Q4'},
+          {id:'n16', h:'推測 2：因果鏈', b:'老鼠吃掉堅果（種子）⇨ 樹木無法再生 ⇨ 森林消失', key:true},
+          {id:'n17', h:'人類「也有責任」', b:'報道沒有完全否定人類的角色：兩個推測的分歧在於「主要原因」'}]}],
+
+      /* 第 4 步：Diamond 的後果論證（Argument from Consequences／實踐推理） */
+      arg:[
+        {m:'問題', h:'處境前提', b:'人類選擇摧毀環境：將所有樹木砍掉，捕獵各類物種'},
+        {m:'後果', h:'後果前提', b:'這樣做帶來壞後果：物種瀕臨絕跡 ⇨ 資源減少 ⇨ 內戰 ⇨ 社會崩潰（拉帕努伊島為證）'},
+        {m:'解決', h:'結論（行動主張）', b:'所以，我們應該選擇：不要重蹈覆轍'},
+        {m:'評價', h:'書評作者', b:'👍 認同這個論證'},
+        {m:'CQ1', cq:true, h:'批判問題：後果有多可能發生？', b:'「摧毀環境 ⇨ 社會崩潰」這個因果前提有多可靠？'},
+        {m:'CQ2', cq:true, h:'批判問題：有甚麼證據？', b:'科學報道的老鼠咬痕，正好挑戰這個因果前提'},
+        {m:'CQ3', cq:true, h:'批判問題：有沒有其他原因或後果？', b:'如果主要原因是老鼠，「不要重蹈覆轍」還成立嗎？（報道指人類也有責任）'}],
+
+      links:[
+        {a:'t1', b:'t2,t3', type:'ans', t:'網誌的謎團 Q2「大樹到哪裏去了？」由書評（A2-i）及科學報道（A2-ii）回答'},
+        {a:'t2', b:'t3', type:'agree', t:'一致：大樹消失了；「之前」與「之後」兩段歷史相同', q:'Q5'},
+        {a:'t2', b:'t3', type:'conflict', t:'矛盾：主要原因是人類（Diamond）還是老鼠（里波與亨特）？報道亦指人類也有責任', q:'Q7'}],
+
+      steps:[
+        {img:'go-01.webp', on:['n1','n2'], lv:'tb', q:'Q1',
+         t:'網誌：先建立「現在」的處境', cap:'網誌：教授的處境與時間錨點',
+         alt:'教授從窗口望向拉帕努伊島：湛藍的天空、幾座死火山、綠悠悠的草地和灌木、巨大石像；時間線：過去九個月、5 月 23 日網誌、最後一星期、回家',
+         d:'教授在拉帕努伊島實地考察了「過去九個月」，5 月 23 日寫網誌時是「最後一星期」，之後便回家。讀者先以網誌日期作為「現在」的錨點，建立時間線；窗外景物則幫助讀者想像處境。'},
+        {img:'go-02.webp', on:['n3','n4','n5'], lv:'sm', q:'Q2',
+         t:'網誌：謎團鏈 Q1 → A1 → Q2', cap:'網誌：Q1 → A1 → Q2',
+         gloss:'Q1＝謎團：石像怎樣搬運？ · A1＝1990 年代考古學家的解釋 · Q2＝謎團：大樹到哪裏去了？',
+         alt:'Q1：數百年前石像怎樣搬運；A1：九十年代考古學家與島民——繩索、木製滾輪、大樹軌道；Q2：大樹消失，只剩草地',
+         d:'謎團 Q1：數百年前，島民怎樣搬運石像？A1：1990 年代考古學家與島民重現了方法——植物繩索、木製滾輪、用大樹搭建軌道。這個答案引出新謎團 Q2：島上曾大量生長的大樹到哪裏去了？一個答案引出新問題，正是網誌的推進方式。'},
+        {img:'go-03.webp', on:['n6','n7','n8','n9'], lv:'sm', q:'Q6',
+         t:'書評：推測 1——Diamond 的因果鏈', cap:'書評：推測 1（因果鏈）',
+         alt:'Diamond《崩潰》：衝擊環境導致文明社會崩潰；公元 700 年後與 1772 年兩段歷史對照；推測 1 因果鏈',
+         d:'書評介紹 Diamond《崩潰》：人類衝擊環境 ⇨ 文明社會崩潰，拉帕努伊島是其中一例。先對照兩段「歷史」：公元 700 年後（約 15,000 人、社會蓬勃、資源唾手可得）與 1772 年（樹木不見、只剩幾千人、生活困苦）；再看推測 1 怎樣以因果鏈填補中間：淨空土地、過度捕獵 ⇨ 資源減少 ⇨ 內戰 ⇨ 崩潰。'},
+        {img:'go-04.webp', on:['n10','n11'], lv:'dm', q:'Q3', arg:true,
+         t:'書評：由因果到行動——後果論證', cap:'書評：Diamond 的後果論證',
+         alt:'問題：人類選擇摧毀環境，將所有樹木砍掉，捕獵各類物種使其瀕臨絕跡；解決：我們選擇不要重蹈覆轍；書評作者表示認同',
+         d:'Diamond 根據因果關係，進而提出後果論證（Argument from Consequences，又稱實踐推理）：人類選擇摧毀環境，帶來崩潰的壞後果，所以我們應選擇不要重蹈覆轍。書評作者表示認同（👍）。讀者要分辨兩類主張：因果鏈是「事實主張」（過去發生了甚麼），「不要重蹈覆轍」是「行動主張」（我們應該怎樣做）。'},
+        {img:'go-05.webp', on:['n12','n13','n14','n15','n16'], lv:'sm', q:'Q4',
+         t:'科學報道：推測 2——里波與亨特的質疑', cap:'科學報道：推測 2（老鼠）',
+         alt:'里波與亨特質疑 Diamond 2005 年的說法；推測 2：罪魁禍首是老鼠，每 47 天增加 1 倍，吃掉堅果，棕櫚樹堅果上殘留咬痕',
+         d:'科學報道指里波與亨特挑戰 Diamond 2005 年的解釋（?!）。推測 2：罪魁禍首是老鼠——由第 1 批島民的獨木舟帶來，每 47 天增加 1 倍；牠們吃掉堅果，證據是棕櫚樹堅果上的咬痕，令樹木無法再生。注意：首尾兩段「歷史」不變，改變的只是中間的解釋；讀者要為它貼上新的來源標籤。'},
+        {img:'go-06.webp', on:'all', hi:['n5','n8','n16','n17'], lv:'dm', q:'Q5', links:true,
+         t:'整合：謎團 Q2 有兩個答案（A2）', cap:'整合：三篇文本的文件模型',
+         gloss:'A2＝Q2 的答案：推測 1（書評）＋推測 2（科學報道）',
+         alt:'三篇文本並列：網誌的 Q1、A1、Q2，書評及科學報道合成 A2：推測 1 與推測 2，並標示人類也有責任',
+         d:'把三篇文本放進同一張圖：網誌提出 Q2，書評（推測 1）與科學報道（推測 2）提供兩個答案 A2。兩者一致：大樹消失了，「之前」與「之後」的歷史相同；分歧在於主要原因是人類還是老鼠。報道亦指人類「也有責任」——兩個推測不是非此即彼，而是主次之爭。'},
+        {img:'go-07.webp', on:'all', lv:'dm', q:'Q7', links:true, view:'time',
+         t:'摘要：整合時間線', cap:'摘要：整合時間線（Summarisation）',
+         gloss:'Q1、Q2＝網誌的謎團 · A1＝考古學家 · A2 i＝Diamond · A2 ii＝里波與亨特',
+         alt:'由三篇文本建構的整合時間線，分為三段：島的歷史、研究與解釋、教授的現在；上方箭頭表示閱讀動態',
+         d:'三篇文本的時間資料可合成一條時間線，分為三段：① 島的歷史（數百年前 → 1772 年）② 研究與解釋（1990 年代考古學家 A1 → 2005 年 Diamond A2-i ↔ 里波與亨特 A2-ii）③ 教授的現在（過去九個月 → 最後一星期）。上方「閱讀動態」箭頭提示：閱讀次序與事件時序並不相同，好讀者要把資料重新排列。'}],
+
+      time:{
+        dyn:'閱讀次序是 網誌 → 書評 → 科學報道；事件的時序卻是 島的歷史 → 研究與解釋 → 教授的現在。好讀者會把三篇文本的資料重新排列。',
+        secs:[
+          {h:'① 島的歷史', when:'數百年前 → 公元 1772 年', ev:[
+            {qa:'Q1', t:'數百年前：島民怎樣搬運摩艾石像？', s:'t1'},
+            {t:'公元 700 年後：約 15,000 名居民，社會蓬勃，資源唾手可得', s:'t2'},
+            {t:'第 1 批島民的獨木舟帶來老鼠', s:'t3'},
+            {qa:'Q2', t:'島上的大樹消失了', s:'t1'},
+            {t:'公元 1772 年：首批歐洲人登島，石像還在，樹木都不見了', s:'t2'}]},
+          {h:'② 研究與解釋', when:'1990 年代 → 2005 年及其後', gap:true, ev:[
+            {qa:'A1', t:'1990 年代：考古學家與島民重現搬運方法（繩索、滾輪、大樹軌道）', s:'t1'},
+            {qa:'A2 i', t:'2005 年：Diamond《崩潰》提出推測 1——人類', s:'t2'},
+            {qa:'A2 ii', t:'其後：里波與亨特提出推測 2——老鼠', s:'t3'}]},
+          {h:'③ 教授的現在', when:'過去九個月 → 最後一星期', ev:[
+            {t:'在島上實地考察九個月', s:'t1'},
+            {t:'5 月 23 日寫網誌（「現在」）', s:'t1'},
+            {t:'最後一星期過後回家', s:'t1'}]}],
+        ask:'❓ 謎團 Q2：大樹到哪裏去了？兩篇文本給出不同答案（A2）：',
+        why:[
+          {h:'A2 i · 推測 1：人類', b:'淨空土地、過度捕獵 ⇨ 資源減少 ⇨ 內戰 ⇨ 崩潰', s:'t2'},
+          {h:'A2 ii · 推測 2：老鼠', b:'老鼠每 47 天增加 1 倍，吃掉堅果 ⇨ 樹木無法再生', s:'t3'}],
+        note:'⚖️ 科學報道亦指人類「也有責任」：兩個推測的分歧在於主次，而不是非此即彼。'}
+    }
+  };
+
+  const P = RS.PROC, q = new URLSearchParams(location.search);
+  const m = RS.mod(q.get('u')) || RS.mod('rapanui');
+  if (GO[m.k]) m.map = GO[m.k];
+  let lang = m.langs.includes(q.get('lang')) ? q.get('lang') : m.langs[0];
+  const TABS = [['info','📋 單元'],['items','❓ 題目'],['eval','📊 評析'],['map','🧠 結構圖'],['reflect','🪞 反思']].filter(t => t[0] !== 'map' || m.map);
+  let panel = TABS.some(t => t[0] === q.get('panel')) ? q.get('panel') : 'info';
+  const sp = $('#sp'), body = $('#sp-body'), fr = $('#sp-frame'), ld = $('#sp-load'), dv = $('#sp-div');
+  const store = (k, v) => { try { v === undefined ? (v = localStorage.getItem(k)) : localStorage.setItem(k, v); } catch(e){ v = null; } return v; };
+  /* 本機 file:// 預覽時，部分瀏覽器會阻止 replaceState；失敗也不影響功能 */
+  const sync = () => {
+    try { history.replaceState(null, '', `?u=${m.k}&lang=${lang}${panel !== 'info' ? '&panel=' + panel : ''}${location.hash}`); }
+    catch(e){}
+  };
+
+  /* ---------- 標題及麵包屑 ---------- */
+  sp.style.setProperty('--mc', m.c);
+  document.title = `${m.zh}｜PISA 2018 閱讀樣例｜閱讀素養專題`;
+  $('#sp-h1').textContent = `PISA 2018 閱讀公開樣例：${m.zh}`;
+  $('#sp-ic').textContent = m.ic; $('#sp-name').textContent = m.zh;
+  $('#sp-meta').textContent = `${m.code} · ${m.en} · ${m.items.length} 題 · ${m.tag}`;
+  const cr = $('#rd-crumb');
+  if (cr) cr.innerHTML = cr.innerHTML.replace('樣例試做與評析', `<a href="samples.html">PISA 2018 公開樣例</a> › ${m.zh}`);
+
+  /* ---------- 版面、側欄位置及縮放（記住於瀏覽器） ---------- */
+  const view = {r:.34, z:1, side:'right'};
+  try { Object.assign(view, JSON.parse(store('rs-view')) || {}); } catch(e){}
+  const saveV = () => store('rs-view', JSON.stringify(view));
+  function setR(r, save){
+    const w = body.clientWidth || 1200, min = 280 / w, max = Math.max(min, 1 - 420 / w);
+    view.r = Math.min(Math.max(r, min), max);
+    sp.style.setProperty('--side', (view.r * 100).toFixed(1) + '%');
+    dv.setAttribute('aria-valuenow', Math.round((1 - view.r) * 100));
+    $$('#sp-lay button').forEach(b => b.classList.toggle('on', Math.abs(+b.dataset.r - view.r) < .03));
+    if (save !== false) saveV();
+  }
+  function setZ(z){
+    view.z = Math.min(1, Math.max(.6, Math.round(z * 10) / 10));
+    sp.style.setProperty('--z', view.z);
+    $('#sp-zv').textContent = Math.round(view.z * 100) + '%';
+    $('#sp-zo').disabled = view.z <= .6; $('#sp-zi').disabled = view.z >= 1;
+    saveV();
+  }
+  function setSide(s){
+    view.side = s; sp.dataset.side = s;
+    $$('#sp-pos button').forEach(b => b.classList.toggle('on', b.dataset.s === s));
+    saveV(); if (s === 'right') setR(view.r, false);
+  }
+  $('#sp-lay').addEventListener('click', e => { const b = e.target.closest('button'); if (b) setR(+b.dataset.r); });
+  $('#sp-pos').addEventListener('click', e => { const b = e.target.closest('button'); if (b) setSide(b.dataset.s); });
+  $('#sp-zo').onclick = () => setZ(view.z - .1);
+  $('#sp-zi').onclick = () => setZ(view.z + .1);
+  $('#sp-z1').onclick = () => setZ(1);
+  dv.addEventListener('pointerdown', e => { e.preventDefault(); dv.setPointerCapture(e.pointerId); sp.classList.add('drag'); });
+  dv.addEventListener('pointermove', e => {
+    if (!sp.classList.contains('drag')) return;
+    const r = body.getBoundingClientRect(); setR((r.right - e.clientX) / r.width, false);
+  });
+  const endDrag = () => { if (sp.classList.contains('drag')){ sp.classList.remove('drag'); saveV(); } };
+  dv.addEventListener('pointerup', endDrag); dv.addEventListener('pointercancel', endDrag);
+  dv.addEventListener('dblclick', () => setR(.34));
+  dv.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft'){ e.preventDefault(); setR(view.r + .02); }
+    if (e.key === 'ArrowRight'){ e.preventDefault(); setR(view.r - .02); }
+  });
+  window.addEventListener('resize', () => setR(view.r, false));
+
+  /* ---------- 載入單元 ---------- */
+  let slow;
+  function load(){
+    const src = RS.url(m, lang);
+    ld.classList.remove('off'); ld.querySelector('p').textContent = '載入單元中…';
+    clearTimeout(slow);
+    slow = setTimeout(() => ld.querySelector('p').textContent = '載入時間較長。如畫面一直空白，請按「↗ 新視窗」開啟。', 12000);
+    fr.src = src; $('#sp-win').href = src;
+  }
+  fr.addEventListener('load', () => { if (!fr.getAttribute('src')) return; clearTimeout(slow); ld.classList.add('off'); });
+  $('#sp-reload').onclick = load;
+  $('#sp-lang').innerHTML = m.langs.length > 1
+    ? m.langs.map(l => `<button type="button" data-l="${l}" class="${l === lang ? 'on' : ''}">${RS.LANG[l]}</button>`).join('')
+    : `<span class="solo">${RS.LANG[m.langs[0]]}</span>`;
+  $('#sp-lang').addEventListener('click', e => {
+    const b = e.target.closest('button[data-l]'); if (!b || b.dataset.l === lang) return;
+    lang = b.dataset.l; $$('#sp-lang button').forEach(x => x.classList.toggle('on', x === b)); sync(); load();
+  });
+
+  /* ---------- 全螢幕 ---------- */
+  const fsOn = () => document.fullscreenElement === sp || sp.classList.contains('imm');
+  const fsLabel = () => $('#sp-fs').innerHTML = fsOn() ? '✕ <span>退出全螢幕</span>' : '⛶ <span>全螢幕</span>';
+  const imm = on => { sp.classList.toggle('imm', on); document.body.style.overflow = on ? 'hidden' : ''; fsLabel(); };
+  $('#sp-fs').onclick = () => {
+    if (document.fullscreenElement) return document.exitFullscreen();
+    if (sp.classList.contains('imm')) return imm(false);
+    if (sp.requestFullscreen) sp.requestFullscreen().catch(() => imm(true)); else imm(true);
+  };
+  document.addEventListener('fullscreenchange', fsLabel);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && sp.classList.contains('imm')) imm(false); });
+
+  /* ---------- 提示列及單元列 ---------- */
+  if (store('rs-hint') === '1') $('#sp-hint').hidden = true;
+  $('#sp-hx').onclick = () => { $('#sp-hint').hidden = true; store('rs-hint', '1'); };
+  const i0 = RS.MODS.indexOf(m), pv = RS.MODS[i0 - 1], nx = RS.MODS[i0 + 1];
+  const href = x => `?u=${x.k}${x.langs.includes(lang) ? '&lang=' + lang : ''}`;
+  $('#sp-rail').innerHTML = `<button type="button" class="nav" ${pv ? `data-go="${href(pv)}"` : 'disabled'}>← 上一個</button>
+    <div class="list">${RS.MODS.map(x => `<a href="${href(x)}" class="${x === m ? 'on' : ''}" style="--c:${x.c}"${x === m ? ' aria-current="page"' : ''}><span>${x.ic}</span>${x.zh}<i>${x.code}</i></a>`).join('')}</div>
+    <button type="button" class="nav" ${nx ? `data-go="${href(nx)}"` : 'disabled'}>下一個 →</button>`;
+  $('#sp-rail').addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) location.search = b.dataset.go; });
+
+  /* ---------- 側欄分頁 ---------- */
+  $('#sp-tabs').innerHTML = TABS.map(([k,t]) => `<button type="button" role="tab" data-p="${k}">${t}</button>`).join('');
+  function setTab(p){
+    panel = p;
+    $$('#sp-tabs button').forEach(b => { const on = b.dataset.p === p; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
+    ['info','items','eval','map','reflect'].forEach(k => $('#pane-' + k).hidden = k !== p);
+    sync();
+  }
+  $('#sp-tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (b) setTab(b.dataset.p); });
+
+  const cnt = RS.count(m);
+  const procBar = () => `<div class="sp-bar">${Object.keys(P).map(k => cnt[k] ? `<i style="flex:${cnt[k]};background:${P[k].c}"></i>` : '').join('')}</div>
+    <div class="sp-bl">${Object.keys(P).map(k => cnt[k] ? `<span><i style="background:${P[k].c}"></i>${P[k].zh} ${cnt[k]} 題</span>` : '').join('')}</div>`;
+
+  /* 單元 */
+  $('#pane-info').innerHTML = `<h3>${m.ic} ${m.zh}</h3><p class="sp-en">${m.en} · ${m.code} · ${m.kind}</p>
+    ${m.warn ? `<div class="sp-blk warn"><b>注意</b>${m.warn}</div>` : ''}
+    <div class="sp-blk"><b>閱讀情境</b>${m.scen}</div>
+    <div class="sp-blk"><b>學生讀到的文本（${m.texts.length}）</b>${m.texts.map(t => `<div class="sp-tx"><i>${t.t}</i><span>${t.d}<small>🏷️ ${t.who}</small></span></div>`).join('')}</div>
+    <div class="sp-blk"><b>評估重點</b>${procBar()}<p>${m.focus}</p></div>
+    ${m.map ? `<div class="sp-blk"><b>🧠 HKU 圖像組織圖</b>本單元附有 ${m.map.steps.length} 幀圖像組織圖，展示讀者怎樣為三篇文本建立連貫的心智表徵。<br><a class="sp-more" href="#" data-tab="map">在側欄逐步看 →</a>　<a class="sp-more" href="#map">在下方看全圖 ↓</a></div>` : ''}
+    <a class="sp-more" href="${RS.PDF}" target="_blank" rel="noopener">📄 OECD 公開試題及評分指引（PDF）↗</a>`;
+  $('#pane-info').addEventListener('click', e => { const a = e.target.closest('[data-tab]'); if (a){ e.preventDefault(); setTab(a.dataset.tab); } });
+
+  /* 題目 */
+  let pf = 'all', openI = -1;
+  function items(){
+    const list = m.items.map((x, i) => ({...x, i})).filter(x => pf === 'all' || x.p === pf);
+    $('#pane-items').innerHTML = `<h3>❓ 題目解析（${m.items.length} 題）</h3>${procBar()}
+      <div class="sp-filter" style="margin-top:10px">${[['all','全部'], ...Object.entries(P).map(([k,v]) => [k, v.zh])].map(([k,t]) =>
+        `<button type="button" data-f="${k}" class="${k === pf ? 'on' : ''}">${t}</button>`).join('')}</div>
+      ${list.map(x => `<details class="sp-it" id="it-${x.i}" style="--pc:${P[x.p].c}"${x.i === openI ? ' open' : ''}>
+        <summary><span class="q">${x.q}</span><span class="t">${x.t}</span><span class="pp">${P[x.p].zh}</span></summary>
+        <dl><dt>題型</dt><dd>${x.f}</dd><dt>涉及文本</dt><dd>${x.s}</dd><dt>答案／評分要點</dt><dd>${x.k}</dd><dt>常見錯誤</dt><dd>${x.e}</dd></dl>
+        ${x.n ? `<p class="sp-note">💡 ${x.n}</p>` : ''}${x.vf ? '' : '<span class="sp-chk">待核實：請以 OECD 評分指引核對</span>'}</details>`).join('')}
+      <a class="sp-more" href="${RS.PDF}" target="_blank" rel="noopener">📄 查看 OECD 原題及評分指引 ↗</a>`;
+  }
+  $('#pane-items').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (b){ pf = b.dataset.f; openI = -1; items(); } });
+  function openItem(i){
+    if (i < 0) return;
+    pf = 'all'; openI = i; items(); setTab('items');
+    if (view.side === 'off') setSide('right');
+    sp.scrollIntoView({behavior:'smooth', block:'start'});
+    setTimeout(() => { const d = $('#it-' + i); if (d) d.scrollIntoView({block:'nearest'}); }, 250);
+  }
+  const byQ = s => m.items.findIndex(x => x.q === String(s).split('–')[0]);
+  items();
+
+  /* 評析 */
+  const REL = {
+    chicken:[['vigilance.html','08 查證與認知警覺：來源警覺'],['argument.html','09 論證與推理：信心與證據相稱']],
+    rapanui:[['documents.html','05 文件模型：七個環節'],['conflict.html','06 當文本互相矛盾：D-ISC'],['argument.html','09 論證與推理：後果論證與批判問題']],
+    milk:[['conflict.html','06 當文本互相矛盾'],['vigilance.html','08 查證與認知警覺：橫向閱讀']],
+    galapagos:[['processes.html','04 閱讀過程與分量表'],['model.html','03 讀者×文本×任務']]
+  };
+  $('#pane-eval').innerHTML = `<h3>📊 評估與評析</h3>
+    <div class="sp-ev" style="--c:var(--A);--bg:var(--Abg)"><b>🏛️ OECD 官方說明（意譯）</b><ul>${m.oecd.map(o => `<li>${o.t}<small>${o.s}</small></li>`).join('')}</ul></div>
+    <div class="sp-ev" style="--c:var(--C);--bg:var(--Cbg)"><b>🔎 PISA HKU 評析</b><ul>${m.hku.map(t => `<li>${t}</li>`).join('')}</ul></div>
+    <div class="sp-blk"><b>本專題延伸閱讀</b>${(REL[m.k] || []).map(r => `<a class="sp-more" style="display:block" href="${r[0]}">→ ${r[1]}</a>`).join('')}</div>`;
+
+  /* =====================================================================
+     圖像組織圖：互動版、HKU 原圖、整合時間線（三個檢視共用同一組步驟）
+     ===================================================================== */
+  const LV = {
+    tb:{zh:'文本表徵', en:'Text base', d:'記住每篇文本「說了甚麼」'},
+    sm:{zh:'情境模型', en:'Situation model', d:'把內容連成處境、時間及因果'},
+    dm:{zh:'文件模型', en:'Documents model', d:'標記來源，連結文本之間的關係'}
+  };
+  const G = m.map || {}, IMG = G.img || '';
+  let st = 0, argOn = false, gv = 'live', sl = 0;
+  const qn = s => String(s).replace(/^Q/i, '');
+  const qb = s => s ? `<button type="button" class="mp-q" data-q="${s}" title="查看 PISA 第 ${qn(s)} 題解析">題 ${qn(s)}</button>` : '';
+  const colOf = id => (G.cols || []).find(c => c.id === id) || {};
+  const nm = ids => String(ids).split(',').map(id => colOf(id.trim()).t).join(' ＋ ');
+  const zoom = (src, alt) => {
+    const d = $('#go-dlg'); $('#go-big').src = src; $('#go-big').alt = alt || '';
+    if (d.showModal) d.showModal(); else window.open(src, '_blank');
+  };
+
+  /* 側欄「🧠 結構圖」：當前步驟原圖＋步驟清單 */
+  function mapPane(){
+    if (!m.map) return;
+    const S = G.steps, s = S[st];
+    $('#pane-map').innerHTML = `<h3>🧠 圖像組織圖</h3><p class="sp-en">PISA HKU 設計 · 讀者的心智表徵</p>
+      <img class="sp-goimg" src="${IMG + s.img}" alt="${s.alt || s.t}" data-zoom title="按圖放大">
+      <div class="sp-blk"><b>步驟 ${st+1} / ${S.length}：${s.t}</b>${s.d}${s.gloss ? `<p class="sp-small">🔤 ${s.gloss}</p>` : ''}</div>
+      <ol class="sp-steps">${S.map((x,i) => `<li><button type="button" data-st="${i}" class="${i === st ? 'on' : ''}"><b>${i+1}</b><span>${x.t}<small>${LV[x.lv].zh}${x.q ? ' · 題 ' + qn(x.q) : ''}</small></span></button></li>`).join('')}</ol>
+      <a class="sp-more" href="#map" data-jump>在下方看全圖 ↓</a>`;
+  }
+  $('#pane-map').addEventListener('click', e => {
+    const z = e.target.closest('[data-zoom]'); if (z){ zoom(z.src, z.alt); return; }
+    const b = e.target.closest('[data-st]'); if (b){ setStep(+b.dataset.st); return; }
+    if (e.target.closest('[data-jump]')){ e.preventDefault(); $('#map').scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+
+  /* 互動版 */
+  function drawMap(){
+    if (!m.map) return;
+    const M = G, S = M.steps, cur = S[st];
+    const all = M.cols.flatMap(c => c.nodes.map(n => n.id));
+    const seen = new Set(), hi = new Set(cur.hi || (cur.on === 'all' ? [] : cur.on));
+    S.slice(0, st + 1).forEach(s => (s.on === 'all' ? all : s.on).forEach(id => seen.add(id)));
+
+    $('#mp-lv').innerHTML = Object.entries(LV).map(([k,v], i) =>
+      `${i ? '<i>→</i>' : ''}<div class="${k === cur.lv ? 'on' : ''}"><b>${v.zh}</b><small>${v.en} · ${v.d}</small></div>`).join('');
+    $('#mp-steps').innerHTML = S.map((s,i) => `<button type="button" data-st="${i}" class="${i === st ? 'on' : ''}" title="${s.t}" aria-pressed="${i === st}">${i+1}</button>`).join('')
+      + `<button type="button" data-st="${Math.min(st + 1, S.length - 1)}"${st === S.length - 1 ? ' disabled' : ''}>下一步 →</button>`;
+    $('#mp-step').innerHTML = `<b>步驟 ${st+1} / ${S.length} · ${LV[cur.lv].zh}</b><h3>${cur.t}</h3><p>${cur.d}</p>
+      ${cur.gloss ? `<p class="gl">🔤 ${cur.gloss}</p>` : ''}
+      ${cur.q ? `<button type="button" class="rd-btn" data-q="${cur.q}">❓ 查看 PISA 第 ${qn(cur.q)} 題解析</button>` : ''}`;
+    const ms = $('#mp-step'); ms.style.animation = 'none'; ms.offsetHeight; ms.style.animation = '';
+
+    $('#mp-grid').innerHTML = M.cols.map(c => {
+      const any = c.nodes.some(n => seen.has(n.id)), hasArg = c.id === M.argCol && M.arg, a = hasArg && argOn;
+      const nodes = a
+        ? M.arg.map(x => `<div class="mp-n${x.cq ? ' cq' : ''}"><div class="mp-g"><span class="m">${x.m}</span><span><b>${x.h}</b>${x.b}</span></div></div>`).join('')
+        : c.nodes.map(n => `<div class="mp-n${n.key ? ' key' : ''}${hi.has(n.id) ? ' hi' : ''}${seen.has(n.id) ? '' : ' dim'}"><b>${n.h}</b>${n.b}${qb(n.q)}</div>`).join('');
+      return `<section class="mp-col${any ? '' : ' dim'}" style="--c:${c.c}"><header><h3>${c.t}</h3>
+        <span class="mp-who">🏷️ ${c.who}</span><span class="mp-mdl">${c.model}</span>
+        ${hasArg ? `<button type="button" class="mp-gt${a ? ' on' : ''}" data-arg>${a ? '↩ 返回內容' : '📐 顯示後果論證結構'}</button>` : ''}</header>
+        <div class="mp-ns">${nodes}</div>${c.note ? `<p class="mp-cn">${c.note}</p>` : ''}</section>`;
+    }).join('');
+
+    const showL = !!cur.links, IC = {ans:'❓→💬 回應', agree:'＝ 一致', conflict:'≠ 矛盾'};
+    const li = S.findIndex(x => x.links) + 1;
+    $('#mp-links').innerHTML = `<h3>🔗 文本之間的關係${showL ? '' : `（步驟 ${li} 顯示）`}</h3>
+      <div class="mp-lg">${M.links.map(l => `<div class="mp-l ${l.type}${showL ? ' hi' : ' dim'}"><span class="ic">${IC[l.type]}</span>
+        <span><b>${nm(l.a)} ↔ ${nm(l.b)}</b><br>${l.t}</span>${qb(l.q)}</div>`).join('')}</div>`;
+  }
+
+  /* 檢視切換 */
+  function setView(v){
+    gv = v;
+    $$('#go-view button').forEach(b => { const on = b.dataset.v === v; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
+    ['live','orig','time'].forEach(k => { const el = $('#v-' + k); if (el) el.hidden = k !== v; });
+    if (v === 'orig') showSlide(st, true);
+  }
+
+  /* HKU 原圖：第 i 幀＝第 i 步（一一對應） */
+  function showSlide(j, fromStep){
+    const S = G.steps; if (!S || !S.length) return;
+    sl = (j + S.length) % S.length;
+    const s = S[sl], img = $('#go-img');
+    $('#go-cap').innerHTML = `<b>${sl + 1} / ${S.length}</b><span>${s.cap || s.t}</span>
+      ${G.pdf ? `<a class="sp-more" href="${IMG + G.pdf}" target="_blank" rel="noopener">⬇ 下載原圖 PDF</a>` : ''}
+      ${s.gloss ? `<span class="go-gl">🔤 ${s.gloss}</span>` : ''}`;
+    img.onerror = () => $('#go-cap').insertAdjacentHTML('beforeend', `<em class="go-err">⚠️ 找不到圖片：${IMG + s.img}（請檢查檔名及資料夾）</em>`);
+    img.src = IMG + s.img; img.alt = s.alt || s.t;
+    new Image().src = IMG + S[(sl + 1) % S.length].img;   /* 預載下一幀 */
+    $$('#go-thumbs button').forEach((b, k) => b.classList.toggle('on', k === sl));
+    const th = $(`#go-thumbs [data-k="${sl}"]`); if (th) th.scrollIntoView({block:'nearest', inline:'nearest'});
+    if (!fromStep && sl !== st) setStep(sl, true);
+  }
+
+  /* 整合時間線 */
+  function drawTime(){
+    const T = G.time; if (!T) return;
+    const ev = e => `<li style="--c:${colOf(e.s).c}">${e.qa ? `<span class="qa">${e.qa}</span>` : ''}${e.t}<small>🏷️ ${colOf(e.s).t}</small></li>`;
+    $('#v-time').innerHTML = `${T.dyn ? `<p class="tl-dyn">📖 <b>閱讀動態：</b>${T.dyn}</p>` : ''}
+      <div class="tl">${T.secs.map((s, i) => `${i ? '<div class="tl-ar" aria-hidden="true">→</div>' : ''}
+        <section class="tl-sec${s.gap ? ' gap' : ''}"><b>${s.h}</b><em>${s.when}</em><ul>${s.ev.map(ev).join('')}</ul></section>`).join('')}</div>
+      <div class="tl-why"><p>${T.ask}</p>
+        <div>${T.why.map(w => `<div class="tl-h" style="--c:${colOf(w.s).c}"><b>${w.h}</b>${w.b}<small>🏷️ ${colOf(w.s).t}</small></div>`).join('<i>≠</i>')}</div>
+        ${T.note ? `<span class="tl-nt">${T.note}</span>` : ''}</div>
+      <p class="sp-small">按 HKU 原圖「Summarisation: Integrated timeline」整理。顏色代表資料出自哪篇文本：能否說出每項資料的來源，正是文件模型的關鍵。</p>`;
+  }
+
+  /* 設定步驟：三個檢視同步 */
+  function setStep(i, keep){
+    st = i; const s = G.steps[i]; argOn = !!s.arg;
+    drawMap(); mapPane();
+    if (keep) return;                                   /* 由原圖翻頁觸發：不再反向同步 */
+    if (s.view === 'time'){ if (gv === 'orig') showSlide(st, true); else setView('time'); }
+    else if (gv === 'time') setView('live');
+    else if (gv === 'orig') showSlide(st, true);
+  }
+
+  if (m.map){
+    $('#map').hidden = false;
+    $('#go-view [data-v="time"]').hidden = !G.time;
+    $('#go-thumbs').innerHTML = G.steps.map((s, k) => `<button type="button" data-k="${k}" title="${s.t}"><img src="${IMG + s.img}" alt="" loading="lazy"><span>${k + 1}. ${s.cap || s.t}</span></button>`).join('');
+    $('#map').addEventListener('click', e => {
+      const v = e.target.closest('[data-v]'); if (v){ setView(v.dataset.v); return; }
+      const k = e.target.closest('[data-k]'); if (k){ showSlide(+k.dataset.k); return; }
+      const s = e.target.closest('[data-st]'); if (s && !s.disabled){ setStep(+s.dataset.st); return; }
+      const qq = e.target.closest('[data-q]'); if (qq){ openItem(byQ(qq.dataset.q)); return; }
+      if (e.target.closest('[data-arg]')){ argOn = !argOn; drawMap(); return; }
+      if (e.target.closest('#go-prev')){ showSlide(sl - 1); return; }
+      if (e.target.closest('#go-next')){ showSlide(sl + 1); return; }
+      if (e.target.closest('#go-zoom') || e.target.id === 'go-img'){ zoom($('#go-img').src, $('#go-img').alt); }
+    });
+    $('#mp-lay').addEventListener('change', e => {
+      const c = e.target.closest('[data-l]'); if (c) $('#map').classList.toggle('no-' + c.dataset.l, !c.checked);
+    });
+    $('#go-stage').addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft'){ e.preventDefault(); showSlide(sl - 1); }
+      if (e.key === 'ArrowRight'){ e.preventDefault(); showSlide(sl + 1); }
+    });
+    $('#go-x').onclick = () => $('#go-dlg').close();
+    $('#go-dlg').addEventListener('click', e => { if (e.target.id === 'go-dlg') e.target.close(); });
+  }
+
+  /* ---------- 反思 ---------- */
+  const NK = 'rs-note-' + m.k;
+  $('#pane-reflect').innerHTML = `<h3>🪞 反思卡</h3><div class="sp-rf">
+    <div class="sp-blk"><b>試做後想一想</b><ol>${m.reflect.map(r => `<li>${r}</li>`).join('')}</ol></div>
+    <label class="sp-small" for="sp-nt">我的筆記（只儲存在這部電腦的瀏覽器）</label>
+    <textarea id="sp-nt" placeholder="寫下你的想法……"></textarea>
+    <p class="sp-small" id="sp-ns" aria-live="polite"></p>
+    <button type="button" class="rd-btn" id="sp-cp">📋 複製筆記</button>
+    <button type="button" class="rd-btn" id="sp-clr" style="--c:var(--mut)">清除</button></div>`;
+  const nt = $('#sp-nt'); nt.value = store(NK) || '';
+  let tm;
+  nt.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(() => { store(NK, nt.value); $('#sp-ns').textContent = '✓ 已自動儲存'; }, 400); });
+  $('#sp-cp').onclick = () => navigator.clipboard && navigator.clipboard.writeText(`【${m.zh}】\n${nt.value}`)
+    .then(() => $('#sp-ns').textContent = '✓ 已複製', () => $('#sp-ns').textContent = '未能複製，請手動選取');
+  $('#sp-clr').onclick = () => { if (confirm('清除這個單元的筆記？')){ nt.value = ''; store(NK, ''); $('#sp-ns').textContent = '已清除'; } };
+
+  /* ---------- 播放器下方：題組地圖、課堂建議、資料來源 ---------- */
+  $('#qm-leg').innerHTML = Object.values(P).map(p => `<span><i style="background:${p.c}"></i>${p.zh} ${p.en}</span>`).join('');
+  $('#qm').innerHTML = m.items.map((x,i) => `<button type="button" data-i="${i}" style="--pc:${P[x.p].c}">
+    <b>${x.q}</b><span>${x.t}</span><small>${P[x.p].zh} · ${x.f}</small><small>📄 ${x.s}</small></button>`).join('');
+  $('#qm').addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (b) openItem(+b.dataset.i); });
+  $('#tc').innerHTML = m.teach.map((t,i) => `<div><b>建議 ${i+1}</b>${t}</div>`).join('');
+  $('#sp-src').innerHTML = [
+    `OECD (2019). <i>PISA 2018 Released Reading Items</i>. <a href="${RS.PDF}" target="_blank" rel="noopener">PDF ↗</a>`,
+    `OECD PISA 2018 公開單元平台：<a href="${RS.url(m, lang)}" target="_blank" rel="noopener">${m.code} ${m.en} ↗</a>`,
+    'OECD (2019). <i>PISA 2018 Assessment and Analytical Framework</i>. OECD Publishing.',
+    'OECD (2019). <i>PISA 2018 Results (Volume I): What Students Know and Can Do</i>. OECD Publishing.',
+    ...(m.map ? [
+      `圖像組織圖：PISA HKU 設計，原圖見 <a href="${IMG + (G.pdf || '')}" target="_blank" rel="noopener">RapaNui.pdf</a>。`,
+      'Walton, D., Reed, C., & Macagno, F. (2008). <i>Argumentation Schemes</i>. Cambridge University Press.（後果論證及批判問題）'
+    ] : [])
+  ].map(s => `<li>${s}</li>`).join('');
+
+  /* ---------- 啟動 ---------- */
+  load();   /* 先載入單元：即使之後的設定出錯，單元仍會顯示 */
+  try { setSide(view.side); setR(view.r, false); setZ(view.z); setTab(panel); }
+  catch(e){ console.error('[sample.html] 版面初始化錯誤', e); }
+  if (m.map){
+    drawTime(); setView('live'); setStep(0);
+    if (location.hash === '#map') setTimeout(() => $('#map').scrollIntoView({block:'start'}), 300);
+  }
+})();
+</script>
+</body>
+</html>
