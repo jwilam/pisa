@@ -78,7 +78,7 @@
      zh:'閱讀素養專題', en:'Reading Literacy in a World of Multiple Texts and AI',
      url:'../reading-literacy/index.html',
      note:{
-       what:'五章十二頁：PISA 閱讀框架（初稿）、多文本閱讀與文件模型、審辨閱讀（資訊失序、橫向閱讀、論證），以及課堂啟示。',
+       what:'五章十二頁：PISA 閱讀框架、多文本閱讀與文件模型、審辨閱讀（資訊失序、橫向閱讀、論證），以及課堂啟示。',
        why:'每頁只談一個重點，並附互動練習，例如同溫層模擬、矛盾偵探、橫向閱讀查證。可配合 PISA 2025 報告中「評估資訊、跨來源連結」的弱項對讀。',
        who:'各科前線教師、課程領導及閱讀推廣主任；第Ⅳ章附各科示例及教師自我檢視清單。'},
      also:[['../reading-literacy/documents.html','🧩 文件模型'],
