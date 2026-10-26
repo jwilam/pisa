@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">☰ 目錄</button>
         <nav class="site-nav" id="site-nav" aria-label="系列導覽"><ul>
           ${SF_PAGES.map(p => `<li><a href="${p.file}"${p.file === current ? ' aria-current="page"' : ""}>${p.no} ${p.short}</a></li>`).join("")}
-          <li><a href="../index.html">↩ 研討會專題</a></li>
+          <li><a href="../science.html">↩ 06 科學</a></li>
         </ul></nav>
       </div>
       <div class="progress"><span></span></div>
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (footer) footer.outerHTML = `
     <footer class="site-footer"><div class="inner">
       <div>香港大學教育學院 PISA 香港研究團隊<br>資料來源：OECD《PISA 2025 Results (Volume I): Future-Ready Students》及研究團隊分析。</div>
-      <div><a href="index.html">系列首頁</a> · <a href="../science.html">科學</a> · <a href="#top">回到頁頂 ↑</a></div>
+      <div><a href="index.html">系列首頁</a> · <a href="../index.html">研討會專題</a> · <a href="#top">回到頁頂 ↑</a></div>
     </div></footer>`;
 
   /* Table wrapper */
