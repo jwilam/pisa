@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ${EGA_PAGES.map(p => `<li><a href="${p.file}"${p.file === current ? ' aria-current="page"' : ""}>${p.no} ${p.short}</a></li>`).join("")}
         <li><a href="../agency.html">05 學習能動性（研討會）</a></li>
         <li><a href="../science-factors/index.html">科學表現因素系列</a></li>
-        <li><a href="../index.html">↩ 研討會專題</a></li>
+        <li><a href="../agency.html">↩ 05 學習能動性</a></li>
       </ul></nav>
     </div><div class="progress"><span></span></div></header>`;
     const btn = document.querySelector(".nav-toggle"), nav = document.getElementById("site-nav");
