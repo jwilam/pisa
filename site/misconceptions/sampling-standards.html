@@ -119,7 +119,7 @@
   const fmt = d => (d > 0 ? '+' : '') + d.toFixed(1);
 
   /* ---------- 香港樣本（OECD 技術報告公布後，把 null 改為數字） ---------- */
-  const HK = {schools: 230, students: 6445, schRR: null, stuRR: null, exc: null};
+  const HK = {schools: 230, students: 6445, schRR: 96.17, stuRR: 84.15, exc: null};
   const val = (x, u) => x == null ? '<b style="color:var(--mc-mut)">待填</b>' : `<b>${x}${u}</b>`;
   $('#hk').innerHTML = `<div><b>${HK.schools}</b><span>所參與學校</span></div>
     <div><b>${HK.students.toLocaleString()}</b><span>名參與學生</span></div>
