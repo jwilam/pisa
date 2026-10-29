@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>誤解 1：抽樣｜達標標準與抽樣誤差</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="mc.css">
+<script src="../js/site.js" defer></script>
+<style>
+  .sd-wrap{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start}
+  .sd-sl label{display:block;font-weight:700;margin:12px 0 2px}
+  .sd-sl label b{color:var(--mc-b)}
+  .sd-sl input{width:100%;accent-color:var(--mc-b)}
+  .sd-sl .mc-note{margin:4px 0 0}
+  .sd-svg{width:100%;height:auto;background:#fff;border-radius:14px;border:1px solid var(--mc-line)}
+  .sd-svg text{font-size:11px;fill:#374151;font-family:inherit}
+  .sd-svg .rg{font-size:12px;font-weight:800}
+  .sd-v{display:grid;gap:8px;margin-top:14px}
+  .sd-v div{border-radius:12px;padding:10px 14px;line-height:1.65;border-left:6px solid}
+  .sd-v .ok{background:var(--mc-lg);border-color:var(--mc-g)}
+  .sd-v .warn{background:var(--mc-la);border-color:var(--mc-a)}
+  .sd-v .bad{background:var(--mc-lr);border-color:var(--mc-r)}
+  .sd-v .all{font-weight:800;font-size:1.05rem}
+  .se-svg{width:100%;height:auto;display:block}
+  .se-svg text{font-size:12px;fill:#6b7280;font-family:inherit}
+  .se-svg .t{font-weight:800;fill:#1f2937}
+  #se-t{line-height:1.8;margin:8px 0 0}
+  @media (max-width:760px){.sd-wrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-page="misconceptions/index.html" data-mc="sampling" id="top">
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <div class="inner">
+    <span class="eyebrow">04B · 先排除誤解 · 誤解 1：抽樣</span>
+    <h1>達標標準：怎樣確保樣本可信？</h1>
+    <p class="lead">隨機抽樣之外，PISA 還為回應率和排除率訂下嚴格標準。未達標的地區須接受審議，結果可能加註或不納入報告。</p>
+  </div>
+</section>
+
+<main class="content">
+  <nav id="mc-nav"></nav>
+
+  <h2>六項關鍵標準</h2>
+  <div class="mc-grid">
+    <div class="mc-card"><h4>排除率 ≤ 5%</h4><p>因嚴重殘障、語言等原因排除的學校及學生，合計不得超過目標人口的 5%。</p></div>
+    <div class="mc-card"><h4>學校回應率 ≥ 85%</h4><p>按加權計算原校參與率。</p></div>
+    <div class="mc-card" style="--c:var(--mc-o)"><h4>後備校補救有條件</h4><p>原校參與率在 65%–85% 之間，才可按次序用後備校補足；原校越低，補足後要求越高。</p></div>
+    <div class="mc-card"><h4>學校「算參與」的條件</h4><p>該校被抽中學生須有超過 33% 實際應考；33% 或以下視為未參與。</p></div>
+    <div class="mc-card"><h4>學生回應率 ≥ 80%</h4><p>按全體計算（並非逐校）；須安排補考，不准替換學生。</p></div>
+    <div class="mc-card" style="--c:var(--mc-r)"><h4>未達標會怎樣？</h4><p>須提交無回應偏差分析，經審議後加註（*）或不納入報告。</p></div>
+  </div>
+
+  <h2>互動：達標檢查器</h2>
+  <p>調整各項比率，看看一個地區的樣本是否達標。右圖顯示學校回應率的判斷規則（簡化示意），藍點代表目前的設定。</p>
+  <div class="mc-box">
+    <div class="mc-row">
+      <button type="button" class="mc-btn" data-pre="90,90,88,2">例子：完全達標</button>
+      <button type="button" class="mc-btn" data-pre="75,92,84,3">例子：以後備校補足</button>
+      <button type="button" class="mc-btn" data-pre="75,82,84,3">例子：補足不夠</button>
+      <button type="button" class="mc-btn" data-pre="60,85,82,2">例子：原校太低</button>
+    </div>
+    <div class="sd-wrap">
+      <div class="sd-sl">
+        <label for="sd-a">原校參與率：<b id="sd-av"></b></label><input type="range" id="sd-a" min="40" max="100" value="80">
+        <label for="sd-b">加入後備校後參與率：<b id="sd-bv"></b></label><input type="range" id="sd-b" min="40" max="100" value="92">
+        <p class="mc-note">加入後備校後的比率不會低於原校比率。</p>
+        <label for="sd-s">學生回應率：<b id="sd-sv"></b></label><input type="range" id="sd-s" min="50" max="100" value="85">
+        <label for="sd-x">排除率：<b id="sd-xv"></b></label><input type="range" id="sd-x" min="0" max="10" step="0.5" value="3">
+      </div>
+      <div id="sd-chart"></div>
+    </div>
+    <div class="sd-v" id="sd-v" aria-live="polite"></div>
+  </div>
+
+  <h2>香港 PISA 2025 樣本</h2>
+  <div class="mc-nums" id="hk"></div>
+  <p class="mc-note">回應率及排除率將按 OECD 技術報告公布的數字填入。</p>
+
+  <h2 id="se">「剛好抽到較弱的學生」？抽樣誤差模擬</h2>
+  <p>假設全港有 400 所學校，每次隨機抽 150 所，計算平均分。每按一次，就是「重新抽一次樣本」。樣本平均會圍繞真實平均輕微浮動，這種浮動就是抽樣誤差。</p>
+  <div class="mc-box">
+    <div class="mc-row">
+      <button type="button" class="mc-btn pri" id="se-1">🎲 抽一次</button>
+      <button type="button" class="mc-btn" id="se-100">⚡ 抽 100 次</button>
+      <button type="button" class="mc-btn" id="se-0">↺ 重設</button>
+    </div>
+    <div id="se-h"></div>
+    <p id="se-t" aria-live="polite"></p>
+    <div class="mc-bar"><b>要點：</b>「剛好抽到較弱學生」屬抽樣誤差，已計入標準誤（SE）；比較兩屆分數時，還要計入連結誤差（link error）。只有超出誤差範圍的變化才算顯著。抽樣誤差有正有負，不會連續多屆都朝同一方向。</div>
+  </div>
+
+  <div class="mc-stamp">
+    <div class="s">已排除<br>✓</div>
+    <div>
+      <h3>結論：抽樣不能解釋香港表現的下降</h3>
+      <ul>
+        <li>學校由 PISA 以 PPS 系統抽樣抽出，國家中心無權揀選或替換。</li>
+        <li>學生由軟件從完整名單隨機抽出，學校不能揀人或換人。</li>
+        <li>回應率、排除率均有嚴格標準，未達標須審議並加註。</li>
+        <li>每一屆都獨立抽樣。如果下降源於某一次「抽得不好」，不會連續多屆都朝同一方向。</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="mc-src">資料來源：OECD, PISA 2022 Technical Report（Sample Design）；PISA 2025 Technical Standards；NCES PISA Technical Notes；PISA 2025 National Report for England。檢查器及模擬為簡化示意，準確規則以最新 Technical Standards 為準。</p>
+
+  <div id="mc-next"></div>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="mc.js"></script>
+<script>
+(function(){
+  const $ = s => document.querySelector(s);
+  const fmt = d => (d > 0 ? '+' : '') + d.toFixed(1);
+
+  /* ---------- 香港樣本（OECD 技術報告公布後，把 null 改為數字） ---------- */
+  const HK = {schools: 230, students: 6445, schRR: null, stuRR: null, exc: null};
+  const val = (x, u) => x == null ? '<b style="color:var(--mc-mut)">待填</b>' : `<b>${x}${u}</b>`;
+  $('#hk').innerHTML = `<div><b>${HK.schools}</b><span>所參與學校</span></div>
+    <div><b>${HK.students.toLocaleString()}</b><span>名參與學生</span></div>
+    <div>${val(HK.schRR, '%')}<span>學校回應率</span></div>
+    <div>${val(HK.stuRR, '%')}<span>學生回應率</span></div>
+    <div>${val(HK.exc, '%')}<span>排除率</span></div>`;
+
+  /* ---------- 達標檢查器 ---------- */
+  const ia = $('#sd-a'), ib = $('#sd-b'), is = $('#sd-s'), ix = $('#sd-x');
+  const X = t => 44 + (t - 50) / 50 * 250, Y = t => 270 - (t - 50) / 50 * 258;
+  const P = a => a.map(([x, y]) => `${X(x).toFixed(1)},${Y(y).toFixed(1)}`).join(' ');
+  const req = a => 95 - (a - 65) * 0.5;          // 原校 65% → 補足後須 95%；原校 85% → 85%
+
+  $('#sd-chart').innerHTML = `<svg class="sd-svg" viewBox="0 0 305 312" role="img" aria-label="學校回應率判斷規則示意圖">
+    <polygon points="${P([[85,50],[100,50],[100,100],[85,100]])}" fill="#E7F5EE"/>
+    <polygon points="${P([[65,95],[85,85],[85,100],[65,100]])}" fill="#E7F5EE"/>
+    <polygon points="${P([[65,50],[85,50],[85,85],[65,95]])}" fill="#FEF3C7"/>
+    <polygon points="${P([[50,50],[65,50],[65,100],[50,100]])}" fill="#FDECEA"/>
+    <polygon points="${P([[50,50],[100,50],[100,100]])}" fill="#9ca3af" fill-opacity=".35"/>
+    <polyline points="${P([[65,95],[85,85]])}" stroke="#1a7f4b" stroke-width="2.5" fill="none" stroke-dasharray="5 3"/>
+    <line x1="${X(65)}" y1="${Y(50)}" x2="${X(65)}" y2="${Y(100)}" stroke="#B42318" stroke-width="1.5"/>
+    <line x1="${X(85)}" y1="${Y(50)}" x2="${X(85)}" y2="${Y(100)}" stroke="#1a7f4b" stroke-width="1.5"/>
+    <rect x="${X(50)}" y="${Y(100)}" width="${X(100) - X(50)}" height="${Y(50) - Y(100)}" fill="none" stroke="#9ca3af"/>
+    <text class="rg" x="${X(92.5)}" y="${Y(96)}" text-anchor="middle" fill="#1a7f4b">達標</text>
+    <text class="rg" x="${X(75)}" y="${Y(84)}" text-anchor="middle" fill="#B45309">須審議</text>
+    <text class="rg" x="${X(57.5)}" y="${Y(82)}" text-anchor="middle" fill="#B42318">不可補救</text>
+    <text x="${X(88)}" y="${Y(60)}" text-anchor="middle">灰色：不可能</text>
+    ${[50,65,85,100].map(t => `<text x="${X(t)}" y="286" text-anchor="middle">${t}</text>`).join('')}
+    ${[50,85,95,100].map(t => `<text x="38" y="${Y(t) + 4}" text-anchor="end">${t}</text>`).join('')}
+    <text x="${X(75)}" y="306" text-anchor="middle" class="t">原校參與率（%）</text>
+    <text transform="translate(12 ${Y(75)}) rotate(-90)" text-anchor="middle" class="t">加入後備校後（%）</text>
+    <circle id="sd-pt" r="7" fill="#0072B2" stroke="#fff" stroke-width="2.5"/>
+  </svg>`;
+  const pt = $('#sd-pt');
+  const ICON = {ok:'✓', warn:'⚠', bad:'✗'};
+  const ALL = {ok:'✓ 整體：達標，結果正常報告。',
+               warn:'⚠ 整體：須經 PISA 審議，視乎無回應偏差分析的結果。',
+               bad:'✗ 整體：未達標，須審議；結果可能加註（*）或不納入報告。'};
+
+  function check(){
+    let a = +ia.value, b = +ib.value;
+    if (b < a){ b = a; ib.value = a; }
+    const s = +is.value, x = +ix.value;
+    $('#sd-av').textContent = a + '%'; $('#sd-bv').textContent = b + '%';
+    $('#sd-sv').textContent = s + '%'; $('#sd-xv').textContent = x + '%';
+    pt.setAttribute('cx', X(Math.max(50, a))); pt.setAttribute('cy', Y(Math.max(50, b)));
+
+    let sch;
+    if (a >= 85) sch = ['ok', `學校：原校參與率 ${a}% ≥ 85%，已達標，無需後備校。`];
+    else if (a >= 65) sch = b >= req(a)
+      ? ['ok', `學校：原校 ${a}%，加入後備校後 ${b}%，達到所需的 ${req(a).toFixed(1)}%。`]
+      : ['warn', `學校：原校 ${a}%，加入後備校後只有 ${b}%，低於所需的 ${req(a).toFixed(1)}%；須提交無回應偏差分析，由 PISA 審議。`];
+    else sch = ['bad', `學校：原校參與率 ${a}% 低於 65%，後備校不能補救；須提交偏差分析，結果可能不納入報告。`];
+    const stu = s >= 80 ? ['ok', `學生：回應率 ${s}% ≥ 80%，達標。`]
+                        : ['bad', `學生：回應率 ${s}% 低於 80%；須提交偏差分析，結果可能加註或不納入報告。`];
+    const exc = x <= 5 ? ['ok', `排除：排除率 ${x}% ≤ 5%，達標。`]
+                       : ['bad', `排除：排除率 ${x}% 超過 5%；結果須加註。`];
+    const L = [sch, stu, exc];
+    const k = L.some(l => l[0] === 'bad') ? 'bad' : L.some(l => l[0] === 'warn') ? 'warn' : 'ok';
+    $('#sd-v').innerHTML = L.map(([c, t]) => `<div class="${c}">${ICON[c]} ${t}</div>`).join('') + `<div class="${k} all">${ALL[k]}</div>`;
+  }
+  [ia, ib, is, ix].forEach(el => el.addEventListener('input', check));
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-pre]'); if (!b) return;
+    const [a, bb, s, x] = b.dataset.pre.split(',').map(Number);
+    ia.value = a; ib.value = bb; is.value = s; ix.value = x; check();
+  });
+  check();
+
+  /* ---------- 抽樣誤差模擬 ---------- */
+  const pr = MC.rng(7), NS = 400, n = 150;
+  const POP = Array.from({length: NS}, () => 500 + 60 * MC.gauss(pr));
+  const MU = POP.reduce((p, q) => p + q, 0) / NS;
+  const SD = Math.sqrt(POP.reduce((p, q) => p + (q - MU) ** 2, 0) / (NS - 1));
+  const SE = SD / Math.sqrt(n) * Math.sqrt(1 - n / NS);
+  let res = [];
+
+  const drawOne = () => {
+    const a = [...Array(NS).keys()];
+    for (let i = 0; i < n; i++){ const j = i + Math.floor(Math.random() * (NS - i)); [a[i], a[j]] = [a[j], a[i]]; }
+    let s = 0; for (let i = 0; i < n; i++) s += POP[a[i]];
+    return s / n - MU;
+  };
+
+  function render(){
+    const B = 12, W = 720, H = 210, L = 30, R = W - 12, base = H - 40;
+    const bins = Array(2 * B).fill(0);
+    res.forEach(d => { const k = Math.floor(d) + B; if (k >= 0 && k < 2 * B) bins[k]++; });
+    const mx = Math.max(4, ...bins), bw = (R - L) / (2 * B);
+    const bx = v => L + (v + B) / (2 * B) * (R - L);
+    const last = res.length ? res[res.length - 1] : null;
+    $('#se-h').innerHTML = `<svg class="se-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="樣本平均與真實平均差距的分佈">
+      <rect x="${bx(-2 * SE)}" y="14" width="${bx(2 * SE) - bx(-2 * SE)}" height="${base - 14}" fill="#E6F2FA"/>
+      <text x="${bx(2 * SE) - 4}" y="28" text-anchor="end">±2 SE（約 ±${(2 * SE).toFixed(1)} 分）</text>
+      ${bins.map((c, k) => c ? `<rect x="${(L + k * bw + 1).toFixed(1)}" y="${(base - c / mx * (base - 34)).toFixed(1)}"
+          width="${(bw - 2).toFixed(1)}" height="${(c / mx * (base - 34)).toFixed(1)}" rx="3" fill="#0072B2"/>` : '').join('')}
+      <line x1="${bx(0)}" y1="14" x2="${bx(0)}" y2="${base}" stroke="#1f2937" stroke-dasharray="4 3"/>
+      <text x="${bx(0) + 4}" y="46" class="t">真實平均</text>
+      ${last === null ? '' : `<polygon points="${bx(last) - 7},${base + 14} ${bx(last) + 7},${base + 14} ${bx(last)},${base + 2}" fill="#D55E00"/>`}
+      <line x1="${L}" y1="${base}" x2="${R}" y2="${base}" stroke="#9ca3af"/>
+      ${[-12,-8,-4,0,4,8,12].map(v => `<text x="${bx(v)}" y="${base + 28}" text-anchor="middle">${v > 0 ? '+' : ''}${v}</text>`).join('')}
+      <text x="${R}" y="${H - 2}" text-anchor="end">樣本平均 − 真實平均（分）　▲ 最近一次</text>
+    </svg>`;
+    if (!res.length){ $('#se-t').textContent = '👆 按「抽一次」開始；再按「抽 100 次」看整體分佈。'; return; }
+    const within = res.filter(d => Math.abs(d) <= 2 * SE).length / res.length * 100;
+    const mean = res.reduce((p, q) => p + q, 0) / res.length;
+    $('#se-t').innerHTML = `已抽 <b>${res.length}</b> 次。最近一次樣本平均與真實平均相差 <b>${fmt(last)}</b> 分。`
+      + (res.length >= 20 ? `約 <b>${within.toFixed(0)}%</b> 的樣本落在 ±${(2 * SE).toFixed(1)} 分（約 2 個標準誤）之內；所有樣本的平均差距為 <b>${fmt(mean)}</b> 分，接近 0。如果某地區的變化遠超這個範圍，而且連續多屆朝同一方向，就不能以抽樣誤差解釋。` : '多抽幾次，看看差距是否有正有負。');
+  }
+  $('#se-1').addEventListener('click', () => { res.push(drawOne()); render(); });
+  $('#se-100').addEventListener('click', () => { for (let i = 0; i < 100; i++) res.push(drawOne()); render(); });
+  $('#se-0').addEventListener('click', () => { res = []; render(); });
+  render();
+})();
+</script>
+</body>
+</html>

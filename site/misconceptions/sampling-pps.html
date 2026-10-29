@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>誤解 1：抽樣｜PPS 系統抽樣怎樣運作？</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="mc.css">
+<script src="../js/site.js" defer></script>
+<style>
+  .pp-bar{position:relative;height:118px;margin:14px 0 0}
+  .pp-seg{position:absolute;top:44px;height:48px;border:2px solid #fff;display:grid;place-items:center;font-weight:800;background:#D9E8F5;color:var(--mc-ink);transition:background .3s,color .3s;border-radius:6px}
+  .pp-seg.sel{background:var(--mc-b);color:#fff}
+  .pp-seg small{position:absolute;top:50px;font-size:.78rem;color:var(--mc-mut);font-weight:600}
+  .pp-arr{position:absolute;top:0;transform:translateX(-50%);text-align:center;color:var(--mc-o);font-weight:800;font-size:.84rem;line-height:1.1;transition:left .4s}
+  .pp-arr::after{content:"▼";display:block;font-size:1.15rem}
+  .pp-cap{margin:4px 0 12px;font-weight:700}
+  #pp-r{flex:1 1 220px;accent-color:var(--mc-o)}
+</style>
+</head>
+<body data-page="misconceptions/index.html" data-mc="sampling" id="top">
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <div class="inner">
+    <span class="eyebrow">04B · 先排除誤解 · 誤解 1：抽樣</span>
+    <h1>學校怎樣抽？PPS 系統抽樣</h1>
+    <p class="lead">學校越大，被抽中的機會越高；之後每校抽同樣人數。兩者相乘，每名學生被抽中的機會大致相等。</p>
+  </div>
+</section>
+
+<main class="content">
+  <nav id="mc-nav"></nav>
+
+  <h2>互動示範：10 所學校抽 5 所</h2>
+  <p>示例：10 所學校共 500 名 15 歲學生，要抽 5 所。抽樣間距 I = 500 ÷ 5 = 100。拖動滑桿改變隨機起點 R，看看哪些學校被抽中；再切換到「簡單隨機」作對照。</p>
+  <div class="mc-box">
+    <div class="mc-row"><div class="mc-seg" id="pp-mode" role="group" aria-label="抽樣方法">
+      <button type="button" data-m="pps" class="on">PPS：按學校大小</button>
+      <button type="button" data-m="srs">對照：簡單隨機抽 5 所</button></div></div>
+    <div class="mc-row" id="pp-c1">
+      <label for="pp-r">隨機起點 R = <b id="pp-rv">37</b></label>
+      <input type="range" id="pp-r" min="1" max="100" value="37">
+      <button type="button" class="mc-btn pri" id="pp-rand">🎲 隨機起點</button>
+    </div>
+    <div class="mc-row" id="pp-c2" hidden><button type="button" class="mc-btn pri" id="pp-srs">🎲 隨機抽 5 所</button></div>
+    <div class="pp-bar" id="pp-bar" aria-hidden="true"></div>
+    <p class="pp-cap" id="pp-cap" aria-live="polite"></p>
+    <div class="mc-scroll"><table class="mc-tbl" id="pp-tbl"></table></div>
+    <div class="mc-row" style="margin-top:12px"><button type="button" class="mc-btn" id="pp-rep">🔁 重複抽 1,000 次</button><span class="mc-note" id="pp-rep-t">看看實際被抽中的比例是否與理論相符。</span></div>
+    <div class="mc-bar" id="pp-msg"></div>
+  </div>
+
+  <h2>五個步驟</h2>
+  <ol class="mc-ol">
+    <li>在每個分層內，按分層變項排序學校。</li>
+    <li>累計各校 15 歲學生數，得總數 S（此例 500）。</li>
+    <li>抽樣間距 I = S ÷ 抽校數 D = 500 ÷ 5 = 100。</li>
+    <li>在 1 至 I 之間隨機抽起點 R（例如 37）。</li>
+    <li>選出 R、R+I、R+2I… 所落入的學校；學生數 ≥ I 的學校必定入選。</li>
+  </ol>
+
+  <h2>為甚麼要先分層和排序？</h2>
+  <div class="mc-grid">
+    <div class="mc-card"><span class="ic">🗂️</span><h4>明確分層</h4><p>把學校分成不同組別（如學校類別），各組分別抽樣，確保每類學校都有代表。</p></div>
+    <div class="mc-card"><span class="ic">↕️</span><h4>隱含分層</h4><p>在組別內按變項（如地區、規模）排序後才系統抽樣，樣本自然在各類學校間平均分佈。</p></div>
+    <div class="mc-card" style="--c:var(--mc-o)"><span class="ic">🔁</span><h4>後備校</h4><p>抽樣時已把排序名單上緊接被抽中學校的前後兩所定為後備校，國家中心無法自行挑選。</p></div>
+  </div>
+
+  <div class="mc-bar"><b>要點：</b>PPS 抽學校，再在每校抽相同人數，結果是每名學生被抽中的機會相等。學校的大小或類別，都不會令某些學生較易或較難被抽中。</div>
+
+  <p class="mc-src">資料來源：OECD, PISA 2022 Technical Report（Sample Design）；PISA 2025 Technical Standards；NCES PISA Technical Notes。示例數字僅作說明。</p>
+
+  <div id="mc-next"></div>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="mc.js"></script>
+<script>
+(function(){
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const NM = 'ABCDEFGHIJ'.split(''), S = [40,30,90,60,80,20,70,50,40,20], TOT = 500, D = 5, I = 100, M = 10;
+  const RG = []; S.reduce((c, s) => (RG.push([c + 1, c + s]), c + s), 0);
+  const pct = v => (v * 100).toFixed(v < .1 ? 1 : 0) + '%';
+  let mode = 'pps', R = 37, srs = [0, 2, 4, 6, 7], rep = null;
+
+  const pps = r => { const pts = [...Array(D)].map((_, k) => r + k * I);
+    return {pts, sel: new Set(pts.map(p => RG.findIndex(([a, b]) => p >= a && p <= b)))}; };
+  const pickSRS = () => { const a = [...S.keys()];
+    for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+    return a.slice(0, D); };
+
+  function render(){
+    const res = mode === 'pps' ? pps(R) : {pts: [], sel: new Set(srs)};
+    $('#pp-bar').innerHTML = S.map((s, i) => `<div class="pp-seg${res.sel.has(i) ? ' sel' : ''}"
+        style="left:${(RG[i][0] - 1) / TOT * 100}%;width:${s / TOT * 100}%">${NM[i]}<small>${s}</small></div>`).join('')
+      + res.pts.map(p => `<span class="pp-arr" style="left:${(p - .5) / TOT * 100}%">${p}</span>`).join('');
+    const chosen = [...res.sel].sort((a, b) => a - b).map(i => NM[i]).join('、');
+    $('#pp-cap').textContent = mode === 'pps'
+      ? `選號：${res.pts.join('、')} → 抽中 ${chosen}（方塊寬度 = 學生人數）`
+      : `隨機抽中 ${chosen}（不理會學校大小）`;
+    const head = `<tr><th>學校</th><th>15 歲學生</th><th>累計號碼</th><th>學校被抽中機會</th><th>每校抽</th><th>每名學生被抽中機會</th><th>1,000 次模擬</th></tr>`;
+    $('#pp-tbl').innerHTML = head + S.map((s, i) => {
+      const ps = mode === 'pps' ? s / I : D / S.length, st = ps * M / s;
+      const col = mode === 'pps' ? 'var(--mc-b)' : 'var(--mc-o)';
+      return `<tr class="${res.sel.has(i) ? 'sel' : ''}"><td>${NM[i]}</td><td>${s}</td>
+        <td>${mode === 'pps' ? `${RG[i][0]}–${RG[i][1]}` : '—'}</td><td>${pct(ps)}</td><td>${M} 人</td>
+        <td style="text-align:left"><span class="mc-mini" style="width:${st / .25 * 90}px;background:${col}"></span>${pct(st)}</td>
+        <td>${rep && rep.mode === mode ? `${pct(rep.c[i] / 1000)}<small class="mc-note">（理論 ${pct(ps)}）</small>` : '—'}</td></tr>`;
+    }).join('');
+    $('#pp-msg').innerHTML = mode === 'pps'
+      ? '<b>結果：</b>大校較易被抽中，但每校只抽 10 人。兩者相乘，<b>每名學生被抽中的機會都是 10%</b>，無論他就讀大校還是小校。'
+      : '<b>問題：</b>每所學校機會相同（50%），但小校學生被抽中的機會高達 25%，大校只有約 5.6%。樣本會偏向小校學生，所以 PISA 不用這種方法。';
+  }
+
+  $('#pp-r').addEventListener('input', e => { R = +e.target.value; $('#pp-rv').textContent = R; render(); });
+  $('#pp-rand').addEventListener('click', () => { R = 1 + Math.floor(Math.random() * I); $('#pp-r').value = R; $('#pp-rv').textContent = R; render(); });
+  $('#pp-srs').addEventListener('click', () => { srs = pickSRS(); render(); });
+  $('#pp-mode').addEventListener('click', e => {
+    const b = e.target.closest('[data-m]'); if (!b) return;
+    mode = b.dataset.m;
+    $$('#pp-mode button').forEach(x => x.classList.toggle('on', x === b));
+    $('#pp-c1').hidden = mode !== 'pps'; $('#pp-c2').hidden = mode === 'pps';
+    render();
+  });
+  $('#pp-rep').addEventListener('click', () => {
+    const c = Array(S.length).fill(0);
+    for (let t = 0; t < 1000; t++){
+      (mode === 'pps' ? [...pps(1 + Math.floor(Math.random() * I)).sel] : pickSRS()).forEach(i => c[i]++);
+    }
+    rep = {mode, c};
+    $('#pp-rep-t').textContent = mode === 'pps' ? '✓ 模擬比例與理論相符：學校被抽中的機會與其大小成正比。' : '✓ 每校約 50%：機會相同，但學生的機會因此不相等。';
+    render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

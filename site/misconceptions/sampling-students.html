@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>誤解 1：抽樣｜學生也是隨機抽出</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="mc.css">
+<script src="../js/site.js" defer></script>
+<style>
+  .st-dots{display:grid;grid-template-columns:repeat(14,1fr);gap:8px;max-width:560px;margin:12px auto 16px}
+  .st-d{aspect-ratio:1;border-radius:50%;background:#D1D5DB;transition:background .2s,transform .2s}
+  .st-d.b{background:var(--mc-b);transform:scale(1.1)}
+  .st-d.r{background:var(--mc-r);transform:scale(1.1)}
+  .st-strip{position:relative;height:72px;background:var(--mc-paper);border-radius:12px;margin:8px 0 2px;overflow:hidden}
+  .st-strip i{position:absolute;width:12px;height:12px;border-radius:50%;transform:translate(-50%,-50%);opacity:.85;animation:mcIn .3s ease}
+  .st-strip i.b{background:var(--mc-b)}.st-strip i.r{background:var(--mc-r);width:18px;height:18px}
+  .st-strip .z{position:absolute;top:0;bottom:0;border-left:2px dashed var(--mc-mut)}
+  .st-ax{position:relative;height:20px;font-size:.78rem;color:var(--mc-mut)}
+  .st-ax span{position:absolute;transform:translateX(-50%)}
+  .st-leg{display:flex;gap:16px;font-size:.86rem;color:var(--mc-mut);margin:4px 0 0}
+  .st-leg i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;vertical-align:middle}
+</style>
+</head>
+<body data-page="misconceptions/index.html" data-mc="sampling" id="top">
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <div class="inner">
+    <span class="eyebrow">04B · 先排除誤解 · 誤解 1：抽樣</span>
+    <h1>學生也是隨機抽出：學校不能揀學生</h1>
+    <p class="lead">這是第二階段抽樣。學校只提供「全部合資格學生名單」，再由軟件隨機抽出學生，學校和國家中心都不能決定人選。</p>
+  </div>
+</section>
+
+<main class="content">
+  <nav id="mc-nav"></nav>
+
+  <h2>四個步驟</h2>
+  <div class="mc-flow">
+    <div><h4>① 列出名單</h4><small>學校協調員 + 國家中心</small><p>列出該校全部合資格的 15 歲學生；不可預先篩選（不論成績、班別或個別情況）。</p></div>
+    <i aria-hidden="true">→</i>
+    <div><h4>② 輸入軟件</h4><small>國家中心</small><p>把完整名單輸入 PISA 提供的 Acer Maple 軟件，由軟件進行抽樣。</p></div>
+    <i aria-hidden="true">→</i>
+    <div style="--c:var(--mc-b)"><h4>③ 隨機抽出</h4><small>PISA 軟件（Acer Maple）</small><p>按既定規則、每人機會相等，抽出 35 人；不足 35 人則全取。</p></div>
+    <i aria-hidden="true">→</i>
+    <div><h4>④ 通知與補考</h4><small>學校 + 國家中心</small><p>學校只收到「已抽中」名單；學生缺席須安排補考，不可換人。</p></div>
+  </div>
+
+  <h2>互動示範：隨機抽樣 vs 學校揀人</h2>
+  <div class="mc-box">
+    <div class="mc-row">
+      <button type="button" class="mc-btn pri" id="st-rand">🎲 軟件隨機抽 35 人</button>
+      <button type="button" class="mc-btn warn" id="st-pick">🙅 假如學校揀最好的 35 人</button>
+      <button type="button" class="mc-btn" id="st-reset">↺ 重設</button>
+    </div>
+    <p class="mc-note">示意：某校名單上有 84 名合資格學生。每點代表一名學生；滑鼠停在點上可看假設的能力分數（只作示範）。</p>
+    <div class="st-dots" id="st-dots"></div>
+    <div class="mc-nums" id="st-stats"></div>
+    <h4 style="margin:0">每次抽樣的「樣本平均 − 全校平均」</h4>
+    <div class="st-strip" id="st-strip"></div>
+    <div class="st-ax" id="st-ax"></div>
+    <div class="st-leg"><span><i style="background:var(--mc-b)"></i>軟件隨機抽樣</span><span><i style="background:var(--mc-r)"></i>學校揀人（PISA 不容許）</span></div>
+    <div class="mc-bar" id="st-msg" aria-live="polite"></div>
+  </div>
+
+  <h2>常見誤解：點擊卡片看事實</h2>
+  <div class="mc-flips" id="flips"></div>
+
+  <div class="mc-bar"><b>要點：</b>兩個階段都是隨機的。學校由 PPS 系統抽樣抽出，學生由軟件按等機會隨機抽出；學校只負責提供名單與安排補考。</div>
+
+  <p class="mc-src">資料來源：OECD, PISA 2022 Technical Report（Sample Design）；PISA 2025 Technical Standards；NCES PISA Technical Notes。示範分數為虛構數據。</p>
+
+  <div id="mc-next"></div>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="mc.js"></script>
+<script>
+(function(){
+  const $ = s => document.querySelector(s);
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const r = MC.rng(2025), N = 84, K = 35;
+  const sc = Array.from({length: N}, () => Math.round(500 + 90 * MC.gauss(r)));
+  const avg = a => a.reduce((x, y) => x + y, 0) / a.length, ALL = avg(sc);
+  const fmt = d => (d > 0 ? '+' : '') + d.toFixed(1);
+  let sel = new Set(), kind = 'none', log = [], busy = false;
+
+  $('#st-dots').innerHTML = sc.map((v, i) => `<span class="st-d" title="學生 ${i + 1}：${v} 分（假設）"></span>`).join('');
+  const DOTS = [...$('#st-dots').children];
+  const LO = -40, HI = 120, pos = d => Math.min(100, Math.max(0, (d - LO) / (HI - LO) * 100));
+  $('#st-ax').innerHTML = [-40, 0, 40, 80, 120].map(v => `<span style="left:${pos(v)}%">${v > 0 ? '+' : ''}${v}</span>`).join('');
+
+  const shuffle = () => { const a = [...Array(N).keys()];
+    for (let i = N - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+    return new Set(a.slice(0, K)); };
+  const top = () => new Set([...Array(N).keys()].sort((a, b) => sc[b] - sc[a]).slice(0, K));
+  const paint = () => DOTS.forEach((d, i) => d.className = 'st-d' + (sel.has(i) ? (kind === 'pick' ? ' r' : ' b') : ''));
+
+  function update(){
+    const m = sel.size ? avg([...sel].map(i => sc[i])) : null, d = m === null ? null : m - ALL;
+    const nr = log.filter(x => x.k === 'rand').length;
+    $('#st-stats').innerHTML = `<div><b>${ALL.toFixed(1)}</b><span>全校平均（84 人）</span></div>
+      <div><b>${m === null ? '—' : m.toFixed(1)}</b><span>樣本平均（35 人）</span></div>
+      <div><b style="color:${d === null ? 'inherit' : Math.abs(d) > 20 ? 'var(--mc-r)' : 'var(--mc-g)'}">${d === null ? '—' : fmt(d)}</b><span>差距</span></div>
+      <div><b>${nr}</b><span>已隨機抽樣次數</span></div>`;
+    $('#st-strip').innerHTML = `<span class="z" style="left:${pos(0)}%"></span>`
+      + log.map(x => `<i class="${x.k === 'pick' ? 'r' : 'b'}" style="left:${pos(x.d)}%;top:${x.y}%"></i>`).join('');
+    const rs = log.filter(x => x.k === 'rand').map(x => x.d);
+    $('#st-msg').innerHTML = kind === 'none'
+      ? '👆 按「軟件隨機抽 35 人」多試幾次，再比較「學校揀人」的結果。'
+      : kind === 'rand'
+        ? `<b>隨機抽樣：</b>今次差距 ${fmt(d)} 分。${rs.length >= 3 ? `${rs.length} 次隨機抽樣的平均差距為 ${fmt(avg(rs))} 分，有正有負，平均接近 0，沒有系統性偏差。` : '多抽幾次，看看差距是否有正有負。'}這種偶然差距就是「抽樣誤差」，已計入標準誤。`
+        : `<b>學校揀人（PISA 不容許）：</b>樣本平均高出全校 ${fmt(d)} 分，而且每次都一樣偏高。這是「系統性偏差」，標準誤無法修正，所以 PISA 規定由軟件隨機抽出學生。`;
+  }
+  function finishRand(final){
+    sel = final; kind = 'rand'; busy = false;
+    log.push({k: 'rand', d: avg([...sel].map(i => sc[i])) - ALL, y: 18 + Math.random() * 64});
+    paint(); update();
+  }
+  $('#st-rand').addEventListener('click', () => {
+    if (busy) return;
+    const final = shuffle();
+    if (RM) return finishRand(final);
+    busy = true; kind = 'rand'; let f = 0;
+    const iv = setInterval(() => { sel = shuffle(); paint(); if (++f >= 7){ clearInterval(iv); finishRand(final); } }, 70);
+  });
+  $('#st-pick').addEventListener('click', () => {
+    if (busy) return;
+    sel = top(); kind = 'pick';
+    if (!log.some(x => x.k === 'pick')) log.push({k: 'pick', d: avg([...sel].map(i => sc[i])) - ALL, y: 50});
+    paint(); update();
+  });
+  $('#st-reset').addEventListener('click', () => { if (busy) return; sel = new Set(); kind = 'none'; log = []; paint(); update(); });
+  update();
+
+  const MY = [['學校可以揀成績好的學生去考 PISA', '學校須列出全部合資格學生，由軟件隨機抽出；只要名單完整，學校無法影響誰被抽中。'],
+              ['抽中的學生缺席或不想考，學校可以揀另一位頂替', '不可替換。須安排補考，而且整體學生回應率仍須 ≥80%。'],
+              ['有學習困難的學生可以不列入名單', '所有合資格學生都要列出；如符合排除準則，須以代碼記錄原因，不得自行剔除。']];
+  $('#flips').innerHTML = MY.map(([m, f]) => `<div class="mc-flip" role="button" tabindex="0" aria-pressed="false">
+    <div class="in"><div class="fa"><small>✗ 誤解</small><p>「${m}」</p><em>點擊翻轉 ↻</em></div>
+    <div class="ba"><small>✓ 事實</small><p>${f}</p><em>再點擊返回 ↻</em></div></div></div>`).join('');
+  const flip = c => { c.classList.toggle('on'); c.setAttribute('aria-pressed', c.classList.contains('on')); };
+  $('#flips').addEventListener('click', e => { const c = e.target.closest('.mc-flip'); if (c) flip(c); });
+  $('#flips').addEventListener('keydown', e => {
+    const c = e.target.closest('.mc-flip'); if (c && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); flip(c); }
+  });
+})();
+</script>
+</body>
+</html>

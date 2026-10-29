@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>誤解 1：抽樣｜誰決定誰參加 PISA？</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="mc.css">
+<script src="../js/site.js" defer></script>
+</head>
+<body data-page="misconceptions/index.html" data-mc="sampling" id="top">
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <div class="inner">
+    <span class="eyebrow">04B · 先排除誤解 · 誤解 1：抽樣</span>
+    <h1>誰決定哪些學生參加 PISA？</h1>
+    <p class="lead">答案是由 PISA 決定，不是經濟體。國家中心只負責提供名單與執行，無權揀學校、揀學生或替換樣本。</p>
+  </div>
+</section>
+
+<main class="content">
+  <nav id="mc-nav"></nav>
+
+  <div class="mc-mf">
+    <div class="m"><b>✗ 誤解</b><p>「學校可以自行揀選學生參加 PISA，所以樣本不能代表香港。」</p></div>
+    <div class="f"><b>✓ 事實</b><p>學校和學生都由 PISA 隨機抽出。國家中心只提供名單及執行，不能揀選或替換。</p></div>
+  </div>
+
+  <h2>兩個階段，兩次隨機</h2>
+  <div class="mc-fun">
+    <div style="--w:100%;--c:#6b7280"><b>全港所有有 15 歲學生的學校</b><br>國家中心提供完整名單，PISA 審核</div>
+    <i>▼ 第一階段：PPS 系統抽樣（由 PISA 進行）</i>
+    <div style="--w:72%;--c:var(--mc-b)"><b>230 所學校</b><br>香港 PISA 2025 參與學校</div>
+    <i>▼ 第二階段：軟件隨機抽學生（每校目標 35 人）</i>
+    <div style="--w:48%;--c:var(--mc-o)"><b>6,445 名學生</b><br>完成施測</div>
+  </div>
+
+  <h2>六個步驟：誰負責甚麼？</h2>
+  <p>點選任何一個步驟或方格，看看 PISA 國際中心與國家中心各自的角色。</p>
+  <div class="mc-box">
+    <div class="mc-scroll"><div class="mc-lane" id="lane"></div></div>
+    <div id="lane-dt" aria-live="polite"></div>
+  </div>
+
+  <div class="mc-bar red"><b>國家中心不能做：</b>✗ 揀學校　✗ 揀學生　✗ 自行換校／換人　✗ 修改抽樣結果</div>
+
+  <h2>小測驗：國家中心可以……嗎？</h2>
+  <div class="mc-quiz" id="quiz"></div>
+  <p class="mc-score" id="quiz-s" aria-live="polite"></p>
+
+  <h2>關鍵數字（PISA 技術標準）</h2>
+  <div class="mc-nums">
+    <div><b>≥150</b><span>所學校</span></div>
+    <div><b>≥6,300</b><span>名完成施測學生</span></div>
+    <div><b>35</b><span>每校目標人數（最少 25，最多 42）</span></div>
+    <div><b>≥85%</b><span>學校回應率</span></div>
+    <div><b>≥80%</b><span>學生回應率</span></div>
+    <div><b>≤5%</b><span>排除率</span></div>
+  </div>
+
+  <div class="mc-bar"><b>要點：</b>抽樣的每一步都有清楚分工，「抽」由 PISA 負責，「提供」與「執行」由國家中心負責。國家中心從制度上就無法影響誰被抽中。</div>
+
+  <p class="mc-src">資料來源：OECD, PISA 2022 Technical Report（Sample Design）；PISA 2025 Technical Standards；NCES PISA Technical Notes；PISA 2025 National Report for England。數字以最新 Technical Standards 為準。</p>
+
+  <div id="mc-next"></div>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="mc.js"></script>
+<script>
+(function(){
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const STEPS = ['① 建立名單','② 分層','③ 抽學校','④ 邀請學校','⑤ 抽學生','⑥ 施測與審核'];
+  const P = [['核准名單','審核名單完整性；批准排除（合計 ≤5%）'],
+             ['議定分層','與國家中心商定分層變項，設定明確／隱含分層'],
+             ['抽出學校','PPS 系統抽樣 ≥150 校，同時定出 2 所後備校'],
+             ['管制後備','後備校次序在抽樣時已定；原校參與率須 ≥65%，否則不能補救'],
+             ['抽出學生','提供 ACER Maple 軟件與規則：隨機抽 35 人（不足則全取）'],
+             ['審核品質','核算回應率；未達標須審議（加註或不報告）']];
+  const N = [['提供名單','提供全部有 15 歲學生的學校名單及人數'],
+             ['提出建議','提出與教育相關的分層（如學校類別、地區）'],
+             ['無權介入','✗ 不能揀校、換校、改抽樣結果'],
+             ['邀請學校','邀請被抽中的學校，盡力說服原校參與'],
+             ['提供學生名單','取得該校全部 15 歲學生名單輸入軟件；✗ 不可換人'],
+             ['執行施測','安排考試及補考；確保學生回應率 ≥80%']];
+  const WHY = ['名單必須完整，否則部分學生根本沒有機會被抽中。因嚴重殘障、語言等原因排除的學校及學生，合計不得超過 5%。',
+               '分層令各類學校在樣本中的比例與全港一致，提高估計的精確度；分層只影響樣本分佈，不影響個別學校是否被抽中。',
+               '抽樣由 PISA 進行，國家中心只收到結果，沒有任何介入空間。',
+               '後備校在抽樣時已按次序定好；原校拒絕參加時，國家中心不能自行挑選替代學校。',
+               '學生由軟件按等機會隨機抽出，學校只提供完整名單，不能決定誰被抽中。',
+               '回應率不達標的地區須提交無回應偏差分析，結果可能加註或不納入報告。'];
+
+  const lane = $('#lane');
+  lane.innerHTML = '<div></div>' + STEPS.map((s, i) => `<button type="button" class="st" data-col="${i}">${s}</button>`).join('')
+    + `<div class="lb" style="background:var(--mc-b)"><b>PISA 國際中心</b>OECD 委託 Consortium／Westat<em>負責「抽」</em></div>`
+    + P.map((p, i) => `<button type="button" class="cl p" data-col="${i}"><b>${p[0]}</b>${p[1]}</button>`).join('')
+    + `<div class="lb" style="background:var(--mc-o)"><b>經濟體國家中心</b>National Centre（香港）<em>負責「提供」與「執行」</em></div>`
+    + N.map((n, i) => `<button type="button" class="cl ${i === 2 ? 'x' : 'n'}" data-col="${i}"><b>${n[0]}</b>${n[1]}</button>`).join('');
+
+  function sel(i){
+    lane.classList.add('sel');
+    $$('#lane [data-col]').forEach(b => b.classList.toggle('on', +b.dataset.col === i));
+    $('#lane-dt').innerHTML = `<div class="mc-detail"><h4>${STEPS[i]}</h4>
+      <div class="two"><div style="--c:var(--mc-b)"><b>PISA 國際中心：${P[i][0]}</b>${P[i][1]}</div>
+      <div style="--c:${i === 2 ? 'var(--mc-r)' : 'var(--mc-o)'}"><b>國家中心：${N[i][0]}</b>${N[i][1]}</div></div>
+      <p>💡 ${WHY[i]}</p>
+      <div class="mc-row" style="margin:10px 0 0"><button type="button" class="mc-btn" data-go="${i - 1}"${i ? '' : ' disabled'}>← 上一步</button>
+      <button type="button" class="mc-btn pri" data-go="${i + 1}"${i < 5 ? '' : ' disabled'}>下一步 →</button></div></div>`;
+  }
+  lane.addEventListener('click', e => { const b = e.target.closest('[data-col]'); if (b) sel(+b.dataset.col); });
+  $('#lane-dt').addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) sel(+b.dataset.go); });
+  sel(0);
+
+  const QZ = [['提供全港有 15 歲學生的學校名單', 1, '這是國家中心的責任；名單須完整，並由 PISA 審核。'],
+              ['挑選表現較好的學校參加', 0, '學校由 PISA 以 PPS 系統抽樣抽出，國家中心只收到結果。'],
+              ['被抽中的學校拒絕參加時，自行找另一所學校代替', 0, '只能按抽樣時已定的次序使用後備校，而且原校參與率須 ≥65%。'],
+              ['建議以學校類別、地區等作分層變項', 1, '可以建議，但須與 PISA 議定；分層不影響個別學校是否被抽中。'],
+              ['把成績較弱的學生從名單中剔除', 0, '所有合資格學生都要列出；只有符合排除準則者可排除並須記錄原因，排除合計 ≤5%。'],
+              ['為缺席的被抽中學生安排補考', 1, '這是國家中心的責任，用以確保學生回應率 ≥80%；但不可換人。']];
+  let score = 0, done = 0;
+  $('#quiz').innerHTML = QZ.map((q, k) => `<div class="mc-q" data-k="${k}"><p>${k + 1}. ${q[0]}</p>
+    <div class="op"><button type="button" data-a="1">✓ 可以</button><button type="button" data-a="0">✗ 不可以</button></div>
+    <p class="fb" hidden></p></div>`).join('');
+  $('#quiz').addEventListener('click', e => {
+    const b = e.target.closest('[data-a]'); if (!b) return;
+    const box = b.closest('.mc-q'); if (box.dataset.done) return;
+    const q = QZ[+box.dataset.k], ok = +b.dataset.a === q[1];
+    box.dataset.done = 1; done++; if (ok) score++;
+    b.classList.add(ok ? 'ok' : 'no');
+    if (!ok) box.querySelector(`[data-a="${q[1]}"]`).classList.add('ok');
+    const fb = box.querySelector('.fb'); fb.hidden = false; fb.textContent = (ok ? '✓ 答對了！' : '✗ 再想想：') + q[2];
+    if (done === QZ.length) $('#quiz-s').textContent = `你答對了 ${score} / ${QZ.length} 題。${score === QZ.length ? '🎉 你已清楚分辨誰負責甚麼！' : '可點選上面的步驟再看一次。'}`;
+  });
+})();
+</script>
+</body>
+</html>
