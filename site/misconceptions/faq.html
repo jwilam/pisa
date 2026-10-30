@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>常見問題 FAQ｜先排除誤解｜PISA 2025 研討會專題</title>
+<meta name="description" content="香港 PISA 表現常見誤解的問答總覽：抽樣、施測日期、學生投入、翻譯、操練、疫情及趨勢。">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="mc.css">
+<script src="../js/site.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  .fq-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 10px}
+  .fq-bar input{flex:1 1 280px;font:inherit;padding:10px 18px;border:1.5px solid var(--mc-line);border-radius:999px;background:#fff}
+  .fq-bar input:focus{outline:none;border-color:var(--mc-b);box-shadow:0 0 0 3px #0072b222}
+  .fq-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 6px}
+  .fq-chips button{font:inherit;font-size:.9rem;font-weight:700;border:1.5px solid var(--mc-line);background:#fff;border-radius:999px;padding:5px 14px;cursor:pointer}
+  .fq-chips button.on{background:var(--mc-dark);border-color:var(--mc-dark);color:#fff}
+  .fq-chips small{opacity:.7;margin-left:5px}
+  .fq-g{margin:24px 0 0}
+  .fq-g>h2{display:flex;align-items:center;gap:8px;font-size:1.2rem;margin:0 0 10px}
+  .fq-g>h2 small{font-size:.78rem;background:var(--mc-paper);border-radius:999px;padding:1px 10px;color:var(--mc-mut)}
+  .fq-it{background:#fff;border:1px solid var(--mc-line);border-radius:16px;margin:0 0 10px;box-shadow:var(--mc-sh);overflow:hidden;transition:border-color .2s,box-shadow .3s;scroll-margin-top:90px}
+  .fq-it.open{border-color:var(--mc-b)}
+  .fq-it.flash{box-shadow:0 0 0 4px #D55E0055}
+  .fq-h{margin:0;font-size:1rem}
+  .fq-q{font:inherit;width:100%;display:flex;align-items:center;gap:10px;text-align:left;background:none;border:0;padding:14px 16px;cursor:pointer;color:var(--mc-ink);font-weight:800;font-size:1.04rem;line-height:1.5}
+  .fq-q:hover{background:var(--mc-paper)}
+  .fq-q:focus-visible{outline:3px solid var(--mc-o);outline-offset:-3px}
+  .fq-n{flex:none;font-size:.78rem;background:var(--mc-lb);color:var(--mc-b);border-radius:8px;padding:2px 8px}
+  .fq-t{flex:1}
+  .fq-chev{flex:none;color:var(--mc-mut);transition:transform .25s}
+  .fq-it.open .fq-chev{transform:rotate(180deg)}
+  .fq-b{padding:0 16px 14px;animation:mcIn .3s ease}
+  .fq-m{background:var(--mc-lr);border-left:6px solid var(--mc-r);border-radius:12px;padding:10px 14px;margin:0 0 10px}
+  .fq-m>b,.fq-a>b{font-size:.82rem;letter-spacing:.04em}
+  .fq-m>b{color:var(--mc-r)}
+  .fq-m p,.fq-m ul{margin:4px 0 0;line-height:1.7;font-weight:700}
+  .fq-m ul{padding-left:20px}
+  .fq-m.x p,.fq-m.x li{text-decoration:line-through;text-decoration-color:#b4231880;text-decoration-thickness:2px}
+  .fq-gate{display:none;gap:8px;align-items:center;flex-wrap:wrap;background:var(--mc-paper);border-radius:12px;padding:10px 14px;margin:0 0 10px;font-weight:700}
+  #fq-list.test .fq-it:not(.rev) .fq-gate{display:flex}
+  #fq-list.test .fq-it:not(.rev) .fq-ans{display:none}
+  #fq-list.test .fq-it:not(.rev) .fq-m.x :is(p,li){text-decoration:none}
+  .fq-a{background:var(--mc-lb);border-left:6px solid var(--mc-b);border-radius:12px;padding:10px 14px}
+  .fq-a>b{color:var(--mc-b)}
+  .fq-a p{margin:4px 0 0;font-weight:700;font-size:1.04rem;line-height:1.7}
+  .fq-fb{margin:8px 0 0;font-weight:700;color:var(--mc-g)}
+  .fq-more{font:inherit;font-weight:700;font-size:.94rem;border:0;background:none;color:var(--mc-b);cursor:pointer;padding:10px 0 4px}
+  .fq-more::after{content:" ▾"}.fq-more[aria-expanded="true"]::after{content:" ▴"}
+  .fq-d{border-left:3px solid var(--mc-line);padding:2px 0 2px 14px;line-height:1.8;color:#374151;animation:mcIn .3s ease}
+  .fq-d p{margin:6px 0}.fq-d ul{margin:6px 0;padding-left:20px}
+  .fq-l{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}
+  .fq-l a{font-weight:700;font-size:.9rem;text-decoration:none;background:#fff;border:1.5px solid var(--mc-b);color:var(--mc-b);border-radius:999px;padding:5px 14px}
+  .fq-l a:hover{background:var(--mc-b);color:#fff}
+  .fq-tool{margin:10px 0 0;text-align:right}
+  .fq-copy{font:inherit;font-size:.82rem;border:0;background:none;color:var(--mc-mut);cursor:pointer}
+  .fq-copy:hover{color:var(--mc-b)}
+  .fq-empty{text-align:center;color:var(--mc-mut);padding:30px}
+  .fq-errb{background:var(--mc-la);border:2px solid var(--mc-a);border-radius:16px;padding:16px 20px;line-height:1.75;margin:12px 0}
+  .fq-errb h3{margin:0 0 6px}
+  .fq-errb code{background:#fff;border-radius:6px;padding:1px 6px}
+  .fq-chk{background:#fff;border:2px dashed var(--mc-o);border-radius:16px;padding:12px 18px;margin:12px 0;line-height:1.7}
+  .fq-chk h3{margin:0 0 4px;color:var(--mc-o)}
+  .fq-chk li{color:var(--mc-r)}
+  @media print{
+    .fq-bar,.fq-chips,.fq-gate,.fq-tool,.fq-more,.mc-bar,#fq-count{display:none !important}
+    .fq-b,.fq-d,.fq-ans{display:block !important}
+    .fq-it{break-inside:avoid;box-shadow:none}
+  }
+</style>
+</head>
+<body data-page="misconceptions/index.html" data-mc="faq" id="top">
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <div class="inner">
+    <span class="eyebrow">05 · 先排除誤解 · 常見問題</span>
+    <h1>常見問題 FAQ：一頁看清所有誤解</h1>
+    <p class="lead">香港學生的 PISA 表現下降，坊間有不少解釋。這裏把團隊已檢驗及正在分析的誤解集中整理：先看簡答，想深入了解再展開詳細解釋。</p>
+  </div>
+</section>
+
+<main class="content">
+  <div class="mc-crumb"><a href="index.html">🧭 先排除誤解</a> › ❓ 常見問題 FAQ</div>
+
+  <div class="mc-nums" id="fq-stats"></div>
+
+  <div class="fq-bar">
+    <input type="search" id="fq-s" placeholder="🔎 搜尋問題、誤解或答案（例如：抽樣、翻譯、35）" aria-label="搜尋常見問題">
+    <div class="mc-seg" id="fq-mode" role="group" aria-label="顯示模式">
+      <button type="button" data-mode="read" class="on">📖 閱讀</button>
+      <button type="button" data-mode="test">🎯 先猜後看</button>
+    </div>
+    <button type="button" class="mc-btn" id="fq-all">全部展開</button>
+  </div>
+  <div class="fq-chips" id="fq-chips" role="group" aria-label="按分類篩選"></div>
+  <p class="mc-note" id="fq-count" aria-live="polite"></p>
+
+  <div id="fq-check" hidden></div>
+  <div id="fq-err" hidden></div>
+  <div id="fq-list"><p class="fq-empty">⏳ 正在載入常見問題…</p></div>
+
+  <div class="mc-bar"><b>還有其他疑問？</b>團隊仍在收集坊間對 PISA 的誤解。如你聽過其他說法，歡迎在研討會後與 PISA 香港研究團隊分享。</div>
+  <p class="mc-src" id="fq-upd"></p>
+</main>
+
+<div id="pager"></div>
+<div id="site-footer"></div>
+
+<script src="mc.js"></script>
+<script>
+(function(){
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const SRC = 'faq.txt', CHECK = /[?&]check\b/.test(location.search);
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const KEYS = {Q:'q','問題':'q','誤解':'m',M:'m','簡答':'a','答':'a',A:'a','詳細':'d','詳':'d',D:'d',
+                '連結':'l',L:'l','分類':'c',C:'c','狀態':'s',S:'s',ID:'id','更新':'u'};
+  const KEY_RE = /^\s*(Q|問題|誤解|M|簡答|答|A|詳細|詳|D|連結|L|分類|C|狀態|S|ID|更新)\s*[:：]\s*(.*)$/i;
+  const ST = {'已排除':['done','✓ 已排除'], '分析中':['plan','⏳ 分析中'], '見其他專題':['link','↗ 見其他專題']};
+  let ITEMS = [], BY = {}, cat = '全部', query = '', mode = 'read';
+
+  /* ---------- 文字工具 ---------- */
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const safeUrl = u => /^\s*(javascript|data|vbscript):/i.test(u) ? '#' : u;
+  const inl = s => esc(s)
+    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, t, u) =>
+      `<a href="${safeUrl(u)}"${/^https?:/i.test(u) ? ' target="_blank" rel="noopener"' : ''}>${t}</a>`)
+    .replace(/\n+/g, '<br>');
+  const block = s => s.split(/\n\s*\n/).map(p => {
+    let h = '', ul = [], tx = [];
+    const flush = () => {
+      if (tx.length){ h += '<p>' + tx.map(inl).join('<br>') + '</p>'; tx = []; }
+      if (ul.length){ h += '<ul>' + ul.map(x => '<li>' + inl(x) + '</li>').join('') + '</ul>'; ul = []; }
+    };
+    p.split('\n').forEach(x => {
+      x = x.trim(); if (!x) return;
+      const b = x.match(/^[-•]\s+(.*)$/);
+      if (b){ if (tx.length) flush(); ul.push(b[1]); } else { if (ul.length) flush(); tx.push(x); }
+    });
+    flush(); return h;
+  }).join('');
+  const hash = s => { let h = 5381; for (const ch of s) h = ((h << 5) + h + ch.codePointAt(0)) >>> 0; return 'q' + h.toString(36); };
+
+  /* ---------- 解析 faq.txt ---------- */
+  function parse(txt){
+    const items = [], warn = [], meta = {}; let cur = null, field = null;
+    const add = (c, f, s) => { if (f === 'm') c.m[c.m.length - 1] += '\n' + s; else c[f] += '\n' + s; };
+    txt.replace(/^\uFEFF/, '').split(/\r?\n/).forEach((raw, n) => {
+      const line = raw.replace(/\s+$/, ''), ln = n + 1;
+      if (/^\s*#/.test(line)) return;
+      if (/^\s*-{3,}\s*$/.test(line)){ field = null; return; }
+      const m = line.match(KEY_RE);
+      if (m){
+        const k = KEYS[m[1].toUpperCase()], v = m[2].trim();
+        if (k === 'u'){ meta.u = v; return; }
+        if (k === 'q'){ cur = {q:v, m:[], a:'', d:'', l:[], c:'', s:'', id:'', ln}; items.push(cur); field = 'q'; return; }
+        if (!cur){ warn.push(`第 ${ln} 行：「${m[1]}」出現在第一個「Q:」之前，已略過。`); return; }
+        if (k === 'm'){ cur.m.push(v); field = 'm'; }
+        else if (k === 'l'){
+          const p = v.split('|'), u = p[0].trim(), t = p.slice(1).join('|').trim();
+          if (u) cur.l.push({u, t: t || u}); else warn.push(`第 ${ln} 行：連結缺少網址。`);
+          field = null;
+        }
+        else if (k === 'c' || k === 's' || k === 'id'){ cur[k] = v; field = null; }
+        else { cur[k] = v; field = k; }
+        return;
+      }
+      if (!line.trim()){ if (cur && field) add(cur, field, ''); return; }
+      if (!cur || !field){ warn.push(`第 ${ln} 行：不屬於任何欄位，已略過（是否漏了「詳:」等標記？）`); return; }
+      add(cur, field, line.trim());
+    });
+    const used = new Set();
+    items.forEach(it => {
+      ['q','a','d'].forEach(k => it[k] = it[k].trim());
+      it.m = it.m.map(s => s.trim()).filter(Boolean);
+      it.c = it.c || '其他';
+      if (!it.q) warn.push(`第 ${it.ln} 行：問題是空白的。`);
+      if (!it.a) warn.push(`第 ${it.ln} 行「${it.q}」：缺少「答:」。`);
+      if (it.s && !ST[it.s]) warn.push(`第 ${it.ln} 行「${it.q}」：狀態「${it.s}」無法辨認，可用：已排除、分析中、見其他專題。`);
+      let id = (it.id || '').replace(/[^\w-]/g, '') || hash(it.q);
+      if (used.has(id)){ warn.push(`第 ${it.ln} 行：ID「${id}」重複，已自動改名。`); let k = 2; while (used.has(id + '-' + k)) k++; id += '-' + k; }
+      used.add(id); it.id = id;
+      it.txt = [it.q, ...it.m, it.a, it.d, it.c].join(' ').toLowerCase();
+    });
+    return {items, warn, meta};
+  }
+
+  /* ---------- 繪製 ---------- */
+  function card(it){
+    const st = ST[it.s], x = it.s === '已排除' ? ' x' : '';
+    const myth = it.m.length ? `<div class="fq-m${x}"><b>💬 常聽到的說法</b>${it.m.length > 1
+      ? '<ul>' + it.m.map(s => `<li>「${inl(s)}」</li>`).join('') + '</ul>' : `<p>「${inl(it.m[0])}」</p>`}</div>` : '';
+    const gate = it.m.length
+      ? `<span>你認為上面的說法對嗎？</span><button type="button" class="mc-btn" data-g="對">對</button><button type="button" class="mc-btn" data-g="不對">不對</button><button type="button" class="mc-btn" data-g="不肯定">不肯定</button>`
+      : `<span>先想一想，再看答案。</span><button type="button" class="mc-btn pri" data-g="">顯示答案</button>`;
+    return `<article class="fq-it" id="faq-${it.id}" data-id="${it.id}">
+      <h3 class="fq-h"><button type="button" class="fq-q" aria-expanded="false" aria-controls="faq-${it.id}-b">
+        <span class="fq-n">Q${it.n}</span><span class="fq-t">${inl(it.q)}</span>
+        ${st ? `<span class="mc-tag ${st[0]}">${st[1]}</span>` : ''}<span class="fq-chev" aria-hidden="true">▾</span></button></h3>
+      <div class="fq-b" id="faq-${it.id}-b" hidden>
+        ${myth}
+        <div class="fq-gate">${gate}</div>
+        <div class="fq-ans">
+          <div class="fq-a"><b>✓ 簡答</b>${block(it.a)}</div>
+          <p class="fq-fb" hidden></p>
+          ${it.d ? `<button type="button" class="fq-more" aria-expanded="false">📖 詳細解釋</button><div class="fq-d" hidden>${block(it.d)}</div>` : ''}
+          ${it.l.length ? `<div class="fq-l">${it.l.map(l => `<a href="${safeUrl(esc(l.u))}">${inl(l.t)} →</a>`).join('')}</div>` : ''}
+        </div>
+        <div class="fq-tool"><button type="button" class="fq-copy" data-copy="${it.id}">🔗 複製此問題的連結</button></div>
+      </div></article>`;
+  }
+
+  function go(txt){
+    const {items, warn, meta} = parse(txt);
+    $('#fq-err').hidden = true;
+    if (warn.length) console.warn('[FAQ] faq.txt 格式提示：\n' + warn.join('\n'));
+    const cats = [...new Set(items.map(i => i.c))];
+    const order = cats.flatMap(c => items.filter(i => i.c === c));
+    order.forEach((it, i) => it.n = i + 1);
+    ITEMS = order; BY = {}; order.forEach(i => BY[i.id] = i);
+    if (!cats.includes(cat)) cat = '全部';
+
+    if (CHECK){
+      const c = $('#fq-check'); c.hidden = false;
+      c.innerHTML = `<div class="fq-chk"><h3>🛠️ 檢查模式</h3><p>從 faq.txt 讀到 <b>${items.length}</b> 條問題、<b>${cats.length}</b> 個分類。</p>
+        ${warn.length ? `<p>發現 ${warn.length} 個需要注意的地方：</p><ul>${warn.map(w => `<li>${esc(w)}</li>`).join('')}</ul>` : '<p>✓ 沒有發現格式問題。</p>'}</div>`;
+    }
+    $('#fq-upd').textContent = (meta.u ? `內容更新：${meta.u}。` : '') + '本頁內容由 faq.txt 自動生成；簡答以團隊最新分析為準。';
+
+    if (!items.length){ $('#fq-list').innerHTML = '<p class="fq-empty">faq.txt 暫時沒有內容。</p>'; return; }
+    $('#fq-stats').innerHTML = `<div><b>${items.length}</b><span>條問題</span></div>
+      <div><b>${cats.length}</b><span>個分類</span></div>
+      <div><b>${items.filter(i => i.s === '已排除').length}</b><span>條已有證據排除</span></div>
+      <div><b>${items.filter(i => i.s === '分析中').length}</b><span>條分析中</span></div>`;
+    $('#fq-chips').innerHTML = ['全部', ...cats].map(c => `<button type="button" data-c="${esc(c)}">${esc(c)}<small>${c === '全部' ? items.length : items.filter(i => i.c === c).length}</small></button>`).join('');
+    $('#fq-list').innerHTML = cats.map(c => `<section class="fq-g" data-c="${esc(c)}"><h2>${esc(c)}<small>${items.filter(i => i.c === c).length}</small></h2>
+      ${order.filter(i => i.c === c).map(card).join('')}</section>`).join('')
+      + '<p class="fq-empty" id="fq-none" hidden>找不到相符的問題，試試其他關鍵字。</p>';
+    $('#fq-list').classList.toggle('test', mode === 'test');
+    syncChips(); apply(); fromHash();
+  }
+
+  /* ---------- 互動 ---------- */
+  function setOpen(a, on){
+    a.classList.toggle('open', on);
+    a.querySelector('.fq-q').setAttribute('aria-expanded', on);
+    a.querySelector('.fq-b').hidden = !on;
+  }
+  function allLabel(){
+    const vis = $$('.fq-it:not([hidden])');
+    $('#fq-all').textContent = vis.length && vis.every(a => a.classList.contains('open')) ? '全部收起' : '全部展開';
+  }
+  function syncChips(){
+    $$('#fq-chips button').forEach(b => { const on = b.dataset.c === cat; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+  }
+  function apply(){
+    const terms = query.toLowerCase().split(/\s+/).filter(Boolean), hits = [];
+    $$('.fq-it').forEach(a => {
+      const it = BY[a.dataset.id], ok = (cat === '全部' || it.c === cat) && terms.every(t => it.txt.includes(t));
+      a.hidden = !ok; if (ok) hits.push(a);
+    });
+    $$('.fq-g').forEach(g => g.hidden = !g.querySelector('.fq-it:not([hidden])'));
+    const none = $('#fq-none'); if (none) none.hidden = hits.length > 0;
+    if (terms.length && hits.length && hits.length <= 3) hits.forEach(a => setOpen(a, true));
+    $('#fq-count').textContent = terms.length || cat !== '全部'
+      ? `顯示 ${hits.length} / ${ITEMS.length} 條問題`
+      : `共 ${ITEMS.length} 條問題 · 點選問題展開答案`;
+    allLabel();
+  }
+  function reveal(btn){
+    const a = btn.closest('.fq-it'), it = BY[a.dataset.id], v = btn.dataset.g, fb = a.querySelector('.fq-fb');
+    a.classList.add('rev');
+    const t = it.s === '分析中' ? '⏳ 團隊仍在分析，以下是目前的檢驗方向 👇'
+      : v === '對' ? '💡 不少人也這樣想，但證據顯示並非如此 👇'
+      : v === '不對' ? '✓ 你的判斷與證據一致 👇'
+      : v === '不肯定' ? '🔍 看看證據怎樣說 👇' : '';
+    fb.textContent = t; fb.hidden = !t;
+  }
+  function copy(b){
+    const id = b.dataset.copy, url = location.href.split('#')[0] + '#faq-' + id;
+    history.replaceState(null, '', '#faq-' + id);
+    const done = () => { b.textContent = '✓ 已複製連結'; setTimeout(() => b.textContent = '🔗 複製此問題的連結', 1800); };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(url).then(done, () => prompt('複製以下連結：', url));
+    else prompt('複製以下連結：', url);
+  }
+  function fromHash(){
+    const h = decodeURIComponent(location.hash.slice(1)); if (!h.startsWith('faq-')) return;
+    const a = document.getElementById(h); if (!a) return;
+    if (a.hidden){ cat = '全部'; query = ''; $('#fq-s').value = ''; syncChips(); apply(); }
+    setOpen(a, true); allLabel();
+    a.classList.add('flash'); setTimeout(() => a.classList.remove('flash'), 1600);
+    requestAnimationFrame(() => a.scrollIntoView({behavior: RM ? 'auto' : 'smooth', block: 'start'}));
+  }
+
+  $('#fq-list').addEventListener('click', e => {
+    const q = e.target.closest('.fq-q');
+    if (q){ const a = q.closest('.fq-it'); setOpen(a, !a.classList.contains('open')); allLabel(); return; }
+    const mo = e.target.closest('.fq-more');
+    if (mo){ const on = mo.getAttribute('aria-expanded') !== 'true'; mo.setAttribute('aria-expanded', on); mo.nextElementSibling.hidden = !on; return; }
+    const g = e.target.closest('[data-g]'); if (g){ reveal(g); return; }
+    const cp = e.target.closest('[data-copy]'); if (cp) copy(cp);
+  });
+  $('#fq-chips').addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (!b) return; cat = b.dataset.c; syncChips(); apply(); });
+  let tm; $('#fq-s').addEventListener('input', e => { clearTimeout(tm); tm = setTimeout(() => { query = e.target.value.trim(); apply(); }, 120); });
+  $('#fq-mode').addEventListener('click', e => {
+    const b = e.target.closest('[data-mode]'); if (!b) return;
+    mode = b.dataset.mode;
+    $$('#fq-mode button').forEach(x => x.classList.toggle('on', x === b));
+    $('#fq-list').classList.toggle('test', mode === 'test');
+    $$('.fq-it').forEach(a => { a.classList.remove('rev'); const f = a.querySelector('.fq-fb'); if (f) f.hidden = true; });
+  });
+  $('#fq-all').addEventListener('click', () => {
+    const vis = $$('.fq-it:not([hidden])'), on = !vis.every(a => a.classList.contains('open'));
+    vis.forEach(a => setOpen(a, on)); allLabel();
+  });
+  addEventListener('hashchange', fromHash);
+
+  /* ---------- 載入 ---------- */
+  function fail(err){
+    $('#fq-list').innerHTML = '';
+    const el = $('#fq-err'); el.hidden = false;
+    const local = location.protocol === 'file:';
+    el.innerHTML = `<div class="fq-errb"><h3>⚠️ 未能載入 faq.txt</h3>
+      <p>${local
+        ? '你正以 <code>file://</code> 方式直接開啟網頁，瀏覽器會封鎖網頁讀取同一資料夾的檔案。請改用本地伺服器（例如 VS Code 的 Live Server，或在 site 資料夾執行 <code>python -m http.server</code>，再開啟 <code>http://localhost:8000/misconceptions/faq.html</code>），或上載到 GitHub Pages。'
+        : '請確認 faq.txt 與 faq.html 放在同一資料夾（misconceptions/），而且檔名全部是小寫。'}</p>
+      <p class="mc-note">技術訊息：${esc(err && err.message || err)}</p>
+      <label class="mc-btn pri" style="display:inline-block">📂 選擇本機的 faq.txt 預覽<input type="file" id="fq-file" accept=".txt,text/plain" hidden></label></div>`;
+    $('#fq-file').addEventListener('change', e => {
+      const f = e.target.files[0]; if (!f) return;
+      const r = new FileReader(); r.onload = () => go(r.result); r.readAsText(f, 'utf-8');
+    });
+  }
+  fetch(SRC + '?v=' + Date.now(), {cache: 'no-store'})
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+    .then(go).catch(fail);
+})();
+</script>
+</body>
+</html>
