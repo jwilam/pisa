@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>常見問題 FAQ｜先排除誤解｜PISA 2025 研討會專題</title>
+<meta name="description" content="解讀香港 PISA 2025 結果的常見問題（中英雙語）：排名、趨勢、能力水平、疫情、抽樣、應考語言、學生投入及題型。Bilingual FAQ on interpreting Hong Kong's PISA 2025 results.">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="mc.css">
+<script src="../js/site.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  .fq-top{display:flex;justify-content:space-between;align-items:center;gap:8px 12px;flex-wrap:wrap;margin:0 0 12px}
+  .fq-top .mc-crumb{margin:0;flex:1 1 auto}
+  .fq-lang button{min-width:56px;font-weight:800}
+  .fq-lang[aria-busy="true"]{opacity:.6;pointer-events:none}
+  .fq-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 10px}
+  .fq-bar input{flex:1 1 280px;font:inherit;padding:10px 18px;border:1.5px solid var(--mc-line);border-radius:999px;background:#fff}
+  .fq-bar input:focus{outline:none;border-color:var(--mc-b);box-shadow:0 0 0 3px #0072b222}
+  .fq-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 6px}
+  .fq-chips button{font:inherit;font-size:.9rem;font-weight:700;border:1.5px solid var(--mc-line);background:#fff;border-radius:999px;padding:5px 14px;cursor:pointer}
+  .fq-chips button.on{background:var(--mc-dark);border-color:var(--mc-dark);color:#fff}
+  .fq-chips small{opacity:.7;margin-left:6px}
+
+  .fq-g{margin:26px 0 0}
+  .fq-g>h2{display:flex;align-items:center;gap:8px;font-size:1.2rem;margin:0 0 10px;line-height:1.4}
+  .fq-g>h2 small{font-size:.78rem;background:var(--mc-paper);border-radius:999px;padding:1px 10px;color:var(--mc-mut)}
+  .fq-it{background:#fff;border:1px solid var(--mc-line);border-radius:16px;margin:0 0 10px;box-shadow:var(--mc-sh);overflow:hidden;transition:border-color .2s,box-shadow .3s;scroll-margin-top:90px}
+  .fq-it.open{border-color:var(--mc-b)}
+  .fq-it.flash{box-shadow:0 0 0 4px #D55E0055}
+  .fq-h{margin:0;font-size:1rem}
+  .fq-q{font:inherit;width:100%;display:flex;align-items:center;gap:10px;text-align:left;background:none;border:0;padding:14px 16px;cursor:pointer;color:var(--mc-ink);font-weight:800;font-size:1.04rem;line-height:1.5}
+  .fq-q:hover{background:var(--mc-paper)}
+  .fq-q:focus-visible{outline:3px solid var(--mc-o);outline-offset:-3px}
+  .fq-n{flex:none;font-size:.78rem;background:var(--mc-lb);color:var(--mc-b);border-radius:8px;padding:2px 8px}
+  .fq-t{flex:1}
+  .fq-chev{flex:none;color:var(--mc-mut);transition:transform .25s}
+  .fq-it.open .fq-chev{transform:rotate(180deg)}
+  .mc-tag.clar{background:#EEF2FF;color:#4338CA}
+  .fq-b{padding:0 16px 14px;animation:mcIn .3s ease}
+
+  /* 誤解 */
+  .fq-m{background:var(--mc-lr);border-left:6px solid var(--mc-r);border-radius:12px;padding:10px 14px;margin:0 0 10px}
+  .fq-m>b,.fq-a>b{font-size:.82rem;letter-spacing:.04em}
+  .fq-m>b{color:var(--mc-r)}
+  .fq-m p,.fq-m ul{margin:4px 0 0;line-height:1.7;font-weight:700;max-width:78ch}
+  .fq-m ul{padding-left:20px}
+  .fq-m.x p,.fq-m.x li{text-decoration:line-through;text-decoration-color:#b4231866;text-decoration-thickness:1.5px}
+
+  /* 先猜後看 */
+  .fq-gate{display:none;gap:8px;align-items:center;flex-wrap:wrap;background:var(--mc-paper);border-radius:12px;padding:10px 14px;margin:0 0 10px;font-weight:700}
+  #fq-list.test .fq-it:not(.rev) .fq-gate{display:flex}
+  #fq-list.test .fq-it:not(.rev) .fq-ans{display:none}
+  #fq-list.test .fq-it:not(.rev) .fq-m.x :is(p,li){text-decoration:none}
+
+  /* 簡答 */
+  .fq-a{background:var(--mc-lb);border-left:6px solid var(--mc-b);border-radius:12px;padding:10px 14px}
+  .fq-a>b{color:var(--mc-b)}
+  .fq-a p{margin:6px 0 0;line-height:1.75;font-weight:400;max-width:78ch}
+  .fq-a .fq-lead{font-weight:700;font-size:1.04rem}
+  .fq-fb{margin:8px 0 0;font-weight:700;color:var(--mc-g)}
+
+  /* 詳細解釋 */
+  .fq-more{font:inherit;font-weight:800;font-size:.94rem;border:1.5px solid var(--mc-b);background:#fff;color:var(--mc-b);border-radius:999px;cursor:pointer;padding:5px 16px;margin:12px 0 4px}
+  .fq-more:hover{background:var(--mc-lb)}
+  .fq-more::after{content:" ▾"}.fq-more[aria-expanded="true"]::after{content:" ▴"}
+  .fq-d{border-left:3px solid var(--mc-line);padding:2px 0 2px 14px;margin-top:6px;line-height:1.8;color:#374151;max-width:78ch;animation:mcIn .3s ease}
+  .fq-d p{margin:8px 0}
+
+  /* 清單、小標題、引用、表格 */
+  .fq-a ul,.fq-a ol,.fq-d ul,.fq-d ol{margin:6px 0;padding-left:22px;line-height:1.75;max-width:78ch}
+  .fq-a li,.fq-d li{margin:3px 0}
+  .fq-a li ul,.fq-d li ul{margin:3px 0;list-style:circle}
+  .fq-sh{margin:14px 0 2px;font-size:1rem;color:var(--mc-dark)}
+  .fq-ref{background:#fff;border-radius:10px;padding:8px 12px !important;font-size:.9rem;color:var(--mc-mut)}
+  .fq-d .fq-ref{background:var(--mc-paper)}
+  .fq-tw{overflow-x:auto;margin:10px 0;border-radius:10px;border:1px solid var(--mc-line)}
+  .fq-tbl{border-collapse:collapse;width:100%;min-width:460px;font-size:.93rem;background:#fff;margin:0}
+  .fq-tbl th,.fq-tbl td{border-bottom:1px solid var(--mc-line);padding:8px 10px;text-align:left;vertical-align:top}
+  .fq-tbl th{background:var(--mc-paper);font-weight:800}
+  .fq-tbl tr:last-child td{border-bottom:0}
+  .fq-tbl td:not(:first-child),.fq-tbl th:not(:first-child){text-align:center}
+  .fq-tbl td:not(:first-child){white-space:nowrap}
+  mark.fq-hl{background:#FFE8A3;color:inherit;border-radius:3px;padding:0 1px}
+
+  /* 連結與工具列 */
+  .fq-l{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}
+  .fq-l a{font-weight:700;font-size:.9rem;text-decoration:none;background:#fff;border:1.5px solid var(--mc-b);color:var(--mc-b);border-radius:999px;padding:5px 14px}
+  .fq-l a:hover{background:var(--mc-b);color:#fff}
+  .fq-tool{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;margin:14px 0 0;padding-top:8px;border-top:1px dashed var(--mc-line)}
+  .fq-tool button{font:inherit;font-size:.84rem;font-weight:700;border:0;background:none;color:var(--mc-mut);cursor:pointer;padding:4px 8px;border-radius:8px}
+  .fq-tool button:hover{color:var(--mc-b);background:var(--mc-paper)}
+
+  .fq-empty{text-align:center;color:var(--mc-mut);padding:30px}
+  .fq-errb{background:var(--mc-la);border:2px solid var(--mc-a);border-radius:16px;padding:16px 20px;line-height:1.75;margin:12px 0}
+  .fq-errb h3{margin:0 0 6px}
+  .fq-errb code{background:#fff;border-radius:6px;padding:1px 6px}
+  .fq-chk{background:#fff;border:2px dashed var(--mc-o);border-radius:16px;padding:12px 18px;margin:12px 0;line-height:1.7}
+  .fq-chk h3,.fq-chk h4{margin:6px 0 4px;color:var(--mc-o)}
+  .fq-chk li{color:var(--mc-r)}
+  @media print{
+    .fq-bar,.fq-chips,.fq-gate,.fq-tool,.fq-more,.fq-lang,.mc-bar,#fq-count{display:none !important}
+    .fq-b,.fq-d,.fq-ans{display:block !important}
+    .fq-it{break-inside:avoid;box-shadow:none}
+  }
+</style>
+</head>
+<body data-page="misconceptions/index.html" data-mc="faq" id="top">
+<div id="site-header"></div>
+
+<section class="page-hero" id="fq-hero">
+  <div class="inner">
+    <span class="eyebrow" id="fq-eyebrow">05 · 先排除誤解 · 常見問題</span>
+    <h1 id="fq-title">常見問題：解讀香港 PISA 2025 結果</h1>
+    <p class="lead" id="fq-intro"></p>
+  </div>
+</section>
+
+<main class="content" id="fq-main">
+  <div class="fq-top">
+    <div class="mc-crumb"><a href="index.html" id="fq-home">🧭 先排除誤解</a> › <span id="fq-here">❓ 常見問題 FAQ</span></div>
+    <div class="mc-seg fq-lang" id="fq-lang" role="group" aria-label="語言 Language">
+      <button type="button" data-lang="zh" lang="zh-Hant-HK">繁中</button>
+      <button type="button" data-lang="en" lang="en">EN</button>
+    </div>
+  </div>
+
+  <div class="mc-nums" id="fq-stats"></div>
+
+  <div class="fq-bar">
+    <input type="search" id="fq-s" placeholder="🔎 搜尋問題、誤解或答案" aria-label="搜尋常見問題">
+    <div class="mc-seg" id="fq-mode" role="group" aria-label="Mode">
+      <button type="button" data-mode="read" class="on">📖 閱讀</button>
+      <button type="button" data-mode="test">🎯 先猜後看</button>
+    </div>
+    <button type="button" class="mc-btn" id="fq-all">全部展開</button>
+  </div>
+  <div class="fq-chips" id="fq-chips" role="group" aria-label="Categories"></div>
+  <p class="mc-note" id="fq-count" aria-live="polite"></p>
+
+  <div id="fq-check" hidden></div>
+  <div id="fq-err" hidden></div>
+  <div id="fq-list"></div>
+
+  <div class="mc-bar" id="fq-endbar"></div>
+  <p class="mc-src" id="fq-upd"></p>
+</main>
+
+<div id="pager"></div>
+<div id="site-footer"></div>
+
+<script src="mc.js"></script>
+<script>
+(function(){
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+
+  /* ---------- 設定 ---------- */
+  const SRC = {zh:['faq-zh.txt'], en:['faq-en.txt', 'faq.txt']};   // 英文版暫時兼容舊檔名 faq.txt
+  const DEFAULT = 'zh', STORE = 'pisaFaqLang';
+  const PARAMS = new URLSearchParams(location.search), CHECK = PARAMS.has('check');
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches, SCROLL = RM ? 'auto' : 'smooth';
+  const pick = v => /^en/i.test(v || '') ? 'en' : /^(zh|tc)/i.test(v || '') ? 'zh' : '';
+  let saved = ''; try { saved = pick(localStorage.getItem(STORE)); } catch (e) {}
+  let lang = pick(PARAMS.get('lang')) || saved || DEFAULT;
+
+  /* ---------- 欄位名稱（中英皆可） ---------- */
+  const KEYS = {Q:'q','問題':'q', M:'m','誤解':'m', A:'a','答':'a','簡答':'a', D:'d','詳':'d','詳細':'d',
+    L:'l','連結':'l', C:'c','分類':'c', S:'s','狀態':'s', ID:'id',
+    '更新':'u', UPDATED:'u', '語言':'lang', LANG:'lang', '標題':'title', TITLE:'title', '引言':'intro', INTRO:'intro'};
+  const KEY_RE = /^\s*(Q|問題|M|誤解|A|簡答|答|D|詳細|詳|L|連結|C|分類|S|狀態|ID|更新|Updated|語言|Lang|標題|Title|引言|Intro)\s*[:：]\s*(.*)$/i;
+  const META = ['u', 'lang', 'title', 'intro'];
+  const STATUS = {'已排除':'done','ruled out':'done','已澄清':'clar','clarified':'clar',
+                  '分析中':'plan','under analysis':'plan','見其他專題':'link','see other section':'link'};
+
+  /* ---------- 介面文字 ---------- */
+  const T = {
+    zh:{docTitle:'常見問題 FAQ｜先排除誤解｜PISA 2025 研討會專題',
+        eyebrow:'05 · 先排除誤解 · 常見問題', home:'🧭 先排除誤解', here:'❓ 常見問題 FAQ',
+        title:'常見問題：解讀香港 PISA 2025 結果',
+        intro:'在解釋香港學生表現的成因之前，我們先釐清一些證據並不支持的常見解讀。',
+        all:'全部', other:'其他', myth:'💬 常見誤解', ans:'✓ 簡答', more:'📖 詳細解釋', qo:'「', qc:'」',
+        gate:'你認為上面的說法對嗎？', yes:'對', no:'不對', unsure:'不肯定', think:'先想一想，再看答案。', show:'顯示答案',
+        fbYes:'💡 不少人也這樣想，但證據顯示並非如此 👇', fbNo:'✓ 你的判斷與證據一致 👇', fbUn:'🔍 看看證據怎樣說 👇',
+        fbPlan:'⏳ 團隊仍在分析，以下是目前的檢驗方向 👇',
+        close:'▲ 收起', next:'下一題 ↓', copy:'🔗 複製連結', copied:'✓ 已複製', prompt:'複製以下連結：',
+        expand:'全部展開', collapse:'全部收起', search:'🔎 搜尋問題、誤解或答案', searchLabel:'搜尋常見問題',
+        read:'📖 閱讀', test:'🎯 先猜後看', loading:'⏳ 正在載入常見問題…',
+        shown:(h, n) => `顯示 ${h} / ${n} 條問題`, total:n => `共 ${n} 條問題 · 點選問題展開答案`,
+        none:'找不到相符的問題，試試其他關鍵字。',
+        nQ:'條問題', nC:'個分類', done:'條誤解已排除', clar:'條已澄清', plan:'條分析中',
+        st:{done:'✓ 已排除', clar:'💡 已澄清', plan:'⏳ 分析中', link:'↗ 見其他專題'},
+        upd:u => `內容更新：${u}。`, gen:f => `本頁內容由 ${f} 自動生成。`,
+        switchFail:'⚠️ 未能載入另一語言版本',
+        end:'<b>還有其他疑問？</b>團隊仍在收集坊間對 PISA 結果的解讀。如你聽過其他說法，歡迎在研討會後與 PISA 香港研究團隊分享。',
+        errTitle:'⚠️ 未能載入 FAQ 資料檔',
+        errLocal:'你正以 <code>file://</code> 方式直接開啟網頁，瀏覽器會封鎖網頁讀取同一資料夾的檔案。請改用本地伺服器（例如 VS Code 的 Live Server，或在 site 資料夾執行 <code>python -m http.server</code>，再開啟 <code>http://localhost:8000/misconceptions/faq.html</code>），或上載到 GitHub Pages。',
+        errServer:f => `請確認 <code>${f}</code> 與 faq.html 放在同一資料夾（misconceptions/），而且檔名全部是小寫。`,
+        errTech:'技術訊息：', errPick:'📂 選擇本機的 FAQ 文字檔預覽'},
+    en:{docTitle:'FAQ | Misconceptions | PISA 2025 Seminar',
+        eyebrow:'05 · Misconceptions · FAQ', home:'🧭 Misconceptions', here:'❓ FAQ',
+        title:"Frequently Asked Questions: Interpreting Hong Kong's PISA 2025 Results",
+        intro:"Before explaining the causes of Hong Kong's performance, we first set aside common interpretations that the evidence does not support.",
+        all:'All', other:'Other', myth:'💬 Common confusion', ans:'✓ Response', more:'📖 Clarification', qo:'“', qc:'”',
+        gate:'Do you think the statement above is right?', yes:'Right', no:'Not right', unsure:'Not sure',
+        think:'Think first, then reveal the answer.', show:'Show answer',
+        fbYes:'💡 Many people think so, but the evidence suggests otherwise 👇', fbNo:'✓ Your judgement matches the evidence 👇',
+        fbUn:'🔍 See what the evidence says 👇', fbPlan:'⏳ Analysis in progress. Here is the current direction 👇',
+        close:'▲ Collapse', next:'Next question ↓', copy:'🔗 Copy link', copied:'✓ Link copied', prompt:'Copy this link:',
+        expand:'Expand all', collapse:'Collapse all', search:'🔎 Search questions, confusions or answers', searchLabel:'Search the FAQ',
+        read:'📖 Read', test:'🎯 Guess first', loading:'⏳ Loading the FAQ…',
+        shown:(h, n) => `Showing ${h} of ${n} questions`, total:n => `${n} questions · click a question to open it`,
+        none:'No matching questions. Try another keyword.',
+        nQ:'questions', nC:'categories', done:'misconceptions ruled out', clar:'interpretations clarified', plan:'under analysis',
+        st:{done:'✓ Ruled out', clar:'💡 Clarified', plan:'⏳ Under analysis', link:'↗ See other section'},
+        upd:u => `Last updated: ${u}. `, gen:f => `This page is generated automatically from ${f}.`,
+        switchFail:'⚠️ Could not load the other language version',
+        end:'<b>Have another question?</b> The PISA HKU team is still collecting common interpretations of PISA results. Please share yours with us after the seminar.',
+        errTitle:'⚠️ Could not load the FAQ data file',
+        errLocal:'You opened this page directly from your computer (<code>file://</code>), so the browser blocks it from reading other files. Use a local server (e.g. VS Code Live Server, or run <code>python -m http.server</code> in the site folder and open <code>http://localhost:8000/misconceptions/faq.html</code>), or upload the site to GitHub Pages.',
+        errServer:f => `Please check that <code>${f}</code> is in the same folder as faq.html (misconceptions/) and that the file name is all lower case.`,
+        errTech:'Technical message: ', errPick:'📂 Preview a local FAQ text file'}
+  };
+  let L = T[lang], ITEMS = [], BY = {}, cat = '', query = '', mode = 'read', busy = false;
+  const CACHE = {};
+
+  /* ---------- 文字工具 ---------- */
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const safeUrl = u => /^\s*(javascript|data|vbscript):/i.test(u) ? '#' : u;
+  const ext = u => /^https?:/i.test(u) ? ' target="_blank" rel="noopener"' : '';
+  const shortUrl = u => { try { const x = new URL(u.replace(/&amp;/g, '&'));
+      const p = x.pathname.length > 30 ? x.pathname.slice(0, 28) + '…' : x.pathname;
+      return x.hostname.replace(/^www\./, '') + p; } catch (e) { return u; } };
+  const inl = s => esc(s)
+    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, t, u) => `<a href="${safeUrl(u)}"${ext(u)}>${t}</a>`)
+    .replace(/(^|[\s(（：:])(https?:\/\/[^\s<)）]+)/g, (_, p, u) => `${p}<a href="${u}" target="_blank" rel="noopener">${shortUrl(u)}</a>`)
+    .replace(/\n+/g, '<br>');
+
+  /* 段落、清單（含子項目）、編號清單、表格、小標題、引用 */
+  function block(src, lead){
+    const out = []; let para = [], list = null, table = null;
+    const fP = () => { if (para.length){ out.push('<p>' + para.map(inl).join('<br>') + '</p>'); para = []; } };
+    const fL = () => { if (!list) return;
+      out.push(`<${list.t}${list.t === 'ol' && list.s > 1 ? ` start="${list.s}"` : ''}>`
+        + list.i.map(x => `<li>${x.h}${x.sub.length ? '<ul>' + x.sub.map(s => `<li>${s}</li>`).join('') + '</ul>' : ''}</li>`).join('')
+        + `</${list.t}>`);
+      list = null; };
+    const fT = () => { if (!table) return;
+      const [h, ...b] = table;
+      out.push('<div class="fq-tw"><table class="fq-tbl"><thead><tr>' + h.map(c => `<th>${inl(c)}</th>`).join('')
+        + '</tr></thead><tbody>' + b.map(r => '<tr>' + r.map(c => `<td>${inl(c)}</td>`).join('') + '</tr>').join('')
+        + '</tbody></table></div>');
+      table = null; };
+    const fA = () => { fP(); fL(); fT(); };
+
+    src.split('\n').forEach(raw => {
+      const line = raw.replace(/\t/g, '    '), t = line.trim();
+      if (!t){ fA(); return; }
+      let m;
+      if (/^\|.*\|$/.test(t)){
+        fP(); fL();
+        if (/^\|[\s:|-]+\|$/.test(t)) return;
+        (table = table || []).push(t.slice(1, -1).split('|').map(c => c.trim()));
+        return;
+      }
+      fT();
+      const ind = line.length - line.trimStart().length;
+      if ((m = t.match(/^[-•]\s+(.*)$/))){
+        fP();
+        if (ind >= 2 && list && list.i.length){ list.i[list.i.length - 1].sub.push(inl(m[1])); return; }
+        if (list && list.t !== 'ul') fL();
+        if (!list) list = {t:'ul', s:1, i:[]};
+        list.i.push({h: inl(m[1]), sub: []}); return;
+      }
+      if ((m = t.match(/^(\d+)[.)]\s+(.*)$/))){
+        fP();
+        if (list && list.t !== 'ol') fL();
+        if (!list) list = {t:'ol', s:+m[1], i:[]};
+        list.i.push({h: inl(m[2]), sub: []}); return;
+      }
+      if ((m = t.match(/^\*\*([^*]+)\*\*$/))){ fA(); out.push(`<h4 class="fq-sh">${inl(m[1])}</h4>`); return; }
+      if ((m = t.match(/^>\s?(.*)$/))){ fA(); out.push(`<p class="fq-ref">${inl(m[1])}</p>`); return; }
+      fL(); para.push(t);
+    });
+    fA();
+    if (lead && out.length && out[0].startsWith('<p>')) out[0] = '<p class="fq-lead">' + out[0].slice(3);
+    return out.join('');
+  }
+  const hash = s => { let h = 5381; for (const ch of s) h = ((h << 5) + h + ch.codePointAt(0)) >>> 0; return 'q' + h.toString(36); };
+
+  /* ---------- 解析資料檔 ---------- */
+  function parse(txt){
+    const items = [], warn = [], meta = {}; let cur = null, field = null;
+    const add = (c, f, s) => { if (f === 'm') c.m[c.m.length - 1] += '\n' + s; else c[f] += '\n' + s; };
+    txt.replace(/^\uFEFF/, '').split(/\r?\n/).forEach((raw, n) => {
+      const line = raw.replace(/\s+$/, ''), ln = n + 1;
+      if (/^\s*#/.test(line)) return;
+      if (/^\s*-{3,}\s*$/.test(line)){ field = null; return; }
+      const m = line.match(KEY_RE);
+      if (m){
+        const k = KEYS[m[1].toUpperCase()], v = m[2].trim();
+        if (META.includes(k)){ meta[k] = v; field = null; return; }
+        if (k === 'q'){ cur = {q:v, m:[], a:'', d:'', l:[], c:'', cs:'', s:'', id:'', ln}; items.push(cur); field = 'q'; return; }
+        if (!cur){ warn.push(`第 ${ln} 行：「${m[1]}」出現在第一個「Q:」之前，已略過。`); return; }
+        if (k === 'm'){ cur.m.push(v); field = 'm'; }
+        else if (k === 'l'){
+          const p = v.split('|'), u = p[0].trim(), t = p.slice(1).join('|').trim();
+          if (u) cur.l.push({u, t: t || u}); else warn.push(`第 ${ln} 行：連結缺少網址。`);
+          field = null;
+        }
+        else if (k === 'c'){ const p = v.split('|'); cur.c = p[0].trim(); cur.cs = (p[1] || '').trim(); field = null; }
+        else if (k === 's' || k === 'id'){ cur[k] = v; field = null; }
+        else { cur[k] = v; field = k; }
+        return;
+      }
+      if (!line.trim()){ if (cur && field) add(cur, field, ''); return; }
+      if (!cur || !field){ warn.push(`第 ${ln} 行：不屬於任何欄位，已略過（是否漏了「D:」等標記？）`); return; }
+      add(cur, field, line.replace(/^(\s*)\\/, '$1'));
+    });
+    const used = new Set();
+    items.forEach(it => {
+      ['q', 'a', 'd'].forEach(k => it[k] = it[k].replace(/^\s+|\s+$/g, ''));
+      it.m = it.m.map(s => s.trim()).filter(Boolean);
+      it.st = it.s ? STATUS[it.s.trim().toLowerCase()] || '' : '';
+      if (!it.q) warn.push(`第 ${it.ln} 行：問題是空白的。`);
+      if (!it.a) warn.push(`第 ${it.ln} 行「${it.q}」：缺少「A:」（簡答）。`);
+      if (it.s && !it.st) warn.push(`第 ${it.ln} 行「${it.q}」：狀態「${it.s}」無法辨認。可用：已排除／已澄清／分析中／見其他專題（或 Ruled out / Clarified / Under analysis / See other section）。`);
+      if (it.l.some(l => /^https?:\/\/\.\.\./.test(l.u))) warn.push(`第 ${it.ln} 行「${it.q}」：有連結仍是 https://... 佔位。`);
+      if (!it.id) warn.push(`第 ${it.ln} 行「${it.q}」：沒有 ID:。中英對照及固定連結都需要 ID。`);
+      let id = (it.id || '').replace(/[^\w-]/g, '') || hash(it.q);
+      if (used.has(id)){ warn.push(`第 ${it.ln} 行：ID「${id}」重複，已自動改名。`); let k = 2; while (used.has(id + '-' + k)) k++; id += '-' + k; }
+      used.add(id); it.id = id;
+    });
+    return {items, warn, meta};
+  }
+
+  /* ---------- 繪製 ---------- */
+  const quote = s => L.qo + s + L.qc;
+  function card(it){
+    const st = it.st, x = st === 'done' || st === 'clar' ? ' x' : '';
+    const myth = it.m.length ? `<div class="fq-m${x}"><b>${L.myth}</b>${it.m.length > 1
+      ? '<ul>' + it.m.map(s => `<li>${quote(inl(s))}</li>`).join('') + '</ul>' : `<p>${quote(inl(it.m[0]))}</p>`}</div>` : '';
+    const gate = it.m.length
+      ? `<span>${L.gate}</span><button type="button" class="mc-btn" data-g="yes">${L.yes}</button><button type="button" class="mc-btn" data-g="no">${L.no}</button><button type="button" class="mc-btn" data-g="unsure">${L.unsure}</button>`
+      : `<span>${L.think}</span><button type="button" class="mc-btn pri" data-g="">${L.show}</button>`;
+    const links = it.l.map(l => { const e = /^https?:/i.test(l.u);
+      return `<a href="${safeUrl(esc(l.u))}"${e ? ' target="_blank" rel="noopener"' : ''}>${inl(l.t)} ${e ? '↗' : '→'}</a>`; }).join('');
+    return `<article class="fq-it" id="faq-${it.id}" data-id="${it.id}">
+      <h3 class="fq-h"><button type="button" class="fq-q" aria-expanded="false" aria-controls="faq-${it.id}-b">
+        <span class="fq-n">Q${it.n}</span><span class="fq-t">${inl(it.q)}</span>
+        ${st ? `<span class="mc-tag ${st}">${L.st[st]}</span>` : ''}<span class="fq-chev" aria-hidden="true">▾</span></button></h3>
+      <div class="fq-b" id="faq-${it.id}-b" hidden>
+        ${myth}
+        <div class="fq-gate">${gate}</div>
+        <div class="fq-ans">
+          <div class="fq-a"><b>${L.ans}</b>${block(it.a, true)}</div>
+          <p class="fq-fb" hidden></p>
+          ${it.d ? `<button type="button" class="fq-more" aria-expanded="false">${L.more}</button><div class="fq-d" hidden>${block(it.d)}</div>` : ''}
+          ${links ? `<div class="fq-l">${links}</div>` : ''}
+        </div>
+        <div class="fq-tool"><span><button type="button" data-close>${L.close}</button><button type="button" data-next>${L.next}</button></span>
+          <button type="button" data-copy="${it.id}">${L.copy}</button></div>
+      </div></article>`;
+  }
+
+  /* 介面文字及語言按鈕 */
+  function chrome(meta){
+    const lc = lang === 'en' ? 'en' : 'zh-Hant-HK';
+    ['#fq-hero', '#fq-main'].forEach(s => $(s).lang = lc);
+    document.title = L.docTitle;
+    $('#fq-eyebrow').textContent = L.eyebrow;
+    $('#fq-home').textContent = L.home;
+    $('#fq-here').textContent = L.here;
+    $('#fq-title').textContent = meta.title || L.title;
+    $('#fq-intro').textContent = meta.intro || L.intro;
+    $('#fq-s').placeholder = L.search;
+    $('#fq-s').setAttribute('aria-label', L.searchLabel);
+    $('#fq-mode [data-mode="read"]').textContent = L.read;
+    $('#fq-mode [data-mode="test"]').textContent = L.test;
+    $('#fq-endbar').innerHTML = L.end;
+    $$('#fq-lang button').forEach(b => { const on = b.dataset.lang === lang; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+  }
+
+  /* mc.js 樞紐卡片 ↔ FAQ ID 檢查 */
+  function hubCheck(warn){
+    if (!window.MC || !Array.isArray(MC.myths)) return;
+    MC.myths.forEach(m => {
+      const main = m.href && m.href.startsWith('faq.html#faq-') ? m.href.slice(13) : '';
+      [main, ...(m.faq || []).map(f => f[0])].filter(Boolean).forEach(id => {
+        if (!BY[id]) warn.push(`mc.js「${m.t}」連到 FAQ ID「${id}」，但資料檔沒有這個 ID（是否改了名或刪除了？）。`);
+      });
+      if (main && BY[main] && (m.st === 'plan') !== (BY[main].st === 'plan'))
+        warn.push(`狀態不一致：mc.js「${m.t}」是「${m.st}」，但 FAQ「${BY[main].q}」是「${BY[main].s || '（未設定）'}」。`);
+    });
+  }
+
+  /* 中英兩個資料檔對照 */
+  function crossCheck(mine){
+    const other = lang === 'zh' ? 'en' : 'zh', box = $('#fq-check .fq-chk');
+    getText(other).then(d => {
+      const o = parse(d.t).items, oi = {}, mi = {}, w = [];
+      o.forEach(i => oi[i.id] = i); mine.forEach(i => mi[i.id] = i);
+      mine.forEach(i => { const j = oi[i.id];
+        if (!j){ w.push(`ID「${i.id}」（${i.q}）：${d.f} 沒有這個 ID。`); return; }
+        if (i.st !== j.st) w.push(`ID「${i.id}」：兩個語言的狀態不同（${i.s || '—'} ／ ${j.s || '—'}）。`);
+        if (i.l.length !== j.l.length) w.push(`ID「${i.id}」：連結數目不同（${i.l.length} ／ ${j.l.length}）。`);
+      });
+      o.forEach(j => { if (!mi[j.id]) w.push(`ID「${j.id}」（${j.q}）：只在 ${d.f} 出現。`); });
+      const a = mine.map(i => i.id).filter(id => oi[id]).join(), b = o.map(i => i.id).filter(id => mi[id]).join();
+      if (a !== b) w.push('兩個語言檔的問題次序不同，切換語言時 Q 編號會不一致。');
+      box.insertAdjacentHTML('beforeend', `<h4>🌐 中英對照檢查（對照 ${esc(d.f)}）</h4>`
+        + (w.length ? `<ul>${w.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '<p>✓ 兩個語言檔的 ID、狀態、連結數目及次序一致。</p>'));
+    }).catch(e => box.insertAdjacentHTML('beforeend', `<p>⚠️ 未能載入另一語言檔作對照：${esc(e && e.message || e)}</p>`));
+  }
+
+  function go(d, snap){
+    L = T[lang];
+    const {items, warn, meta} = parse(d.t);
+    items.forEach(it => {
+      it.c = it.c || L.other;
+      it.txt = [it.q, ...it.m, it.a, it.d, it.c].join(' ').toLowerCase();
+      it.dtxt = it.d.toLowerCase();
+    });
+    $('#fq-err').hidden = true;
+    chrome(meta);
+
+    const cats = [...new Set(items.map(i => i.c))];
+    const order = cats.flatMap(c => items.filter(i => i.c === c));
+    order.forEach((it, i) => it.n = i + 1);
+    ITEMS = order; BY = {}; order.forEach(i => BY[i.id] = i);
+    hubCheck(warn);
+    if (warn.length) console.warn(`[FAQ] ${d.f}:\n` + warn.join('\n'));
+
+    if (CHECK){
+      const c = $('#fq-check'); c.hidden = false;
+      c.innerHTML = `<div class="fq-chk"><h3>🛠️ 檢查模式 Check mode · ${esc(d.f)}</h3><p>讀到 <b>${items.length}</b> 條問題、<b>${cats.length}</b> 個分類。</p>
+        ${warn.length ? `<p>發現 ${warn.length} 個需要注意的地方：</p><ul>${warn.map(w => `<li>${esc(w)}</li>`).join('')}</ul>` : '<p>✓ 沒有發現格式問題。</p>'}</div>`;
+      crossCheck(items);
+    }
+    $('#fq-upd').textContent = (meta.u ? L.upd(meta.u) : '') + L.gen(d.f);
+
+    if (!items.length){ $('#fq-list').innerHTML = `<p class="fq-empty">${L.none}</p>`; return; }
+    const cnt = k => items.filter(i => i.st === k).length;
+    $('#fq-stats').innerHTML = [[items.length, L.nQ], [cats.length, L.nC], [cnt('done'), L.done], [cnt('clar'), L.clar], [cnt('plan'), L.plan]]
+      .filter((x, i) => i < 2 || x[0]).map(([n, t]) => `<div><b>${n}</b><span>${t}</span></div>`).join('');
+    const short = {}; items.forEach(i => { if (i.cs && !short[i.c]) short[i.c] = i.cs; });
+    $('#fq-chips').innerHTML = [['', L.all, items.length], ...cats.map(c => [c, short[c] || c, items.filter(i => i.c === c).length])]
+      .map(([c, t, n]) => `<button type="button" data-c="${esc(c)}"${c ? ` title="${esc(c)}"` : ''}>${esc(t)}<small>${n}</small></button>`).join('');
+    $('#fq-list').innerHTML = cats.map(c => `<section class="fq-g" data-c="${esc(c)}"><h2>${esc(c)}<small>${items.filter(i => i.c === c).length}</small></h2>
+      ${order.filter(i => i.c === c).map(card).join('')}</section>`).join('')
+      + `<p class="fq-empty" id="fq-none" hidden>${L.none}</p>`;
+    $('#fq-list').classList.toggle('test', mode === 'test');
+
+    if (snap){ cat = snap.catId && BY[snap.catId] ? BY[snap.catId].c : ''; query = ''; $('#fq-s').value = ''; }
+    else if (cat && !cats.includes(cat)) cat = '';
+    syncChips(); apply();
+    if (snap) restore(snap); else fromHash();
+  }
+
+  /* ---------- 切換語言 ---------- */
+  function getText(lg){
+    if (CACHE[lg]) return Promise.resolve(CACHE[lg]);
+    const list = SRC[lg];
+    const tryAt = i => fetch(list[i] + '?v=' + Date.now(), {cache: 'no-store'})
+      .then(r => { if (!r.ok) throw new Error(list[i] + ' · HTTP ' + r.status); return r.text(); })
+      .then(t => ({t, f: list[i]}))
+      .catch(e => i + 1 < list.length ? tryAt(i + 1) : Promise.reject(e));
+    return tryAt(0).then(d => (CACHE[lg] = d));
+  }
+  function snapshot(){
+    const ofIt = sel => $$(sel).map(e => e.closest('.fq-it').dataset.id);
+    const an = $$('.fq-it:not([hidden])').find(a => a.getBoundingClientRect().bottom > 90);
+    return {open: ofIt('.fq-it.open'), more: ofIt('.fq-more[aria-expanded="true"]'), rev: ofIt('.fq-it.rev'),
+      catId: cat ? ((ITEMS.find(i => i.c === cat) || {}).id || '') : '',
+      anchor: an ? an.dataset.id : '', off: an ? an.getBoundingClientRect().top : 0};
+  }
+  function restore(s){
+    const el = id => document.getElementById('faq-' + id);
+    s.open.forEach(id => { const a = el(id); if (a && !a.hidden) setOpen(a, true); });
+    s.more.forEach(id => { const a = el(id); if (a) setMore(a, true); });
+    s.rev.forEach(id => { const a = el(id); if (a) a.classList.add('rev'); });
+    allLabel();
+    const a = s.anchor && el(s.anchor);
+    if (a && !a.hidden) window.scrollBy(0, a.getBoundingClientRect().top - s.off);
+  }
+  function remember(lg){
+    try { localStorage.setItem(STORE, lg); } catch (e) {}
+    const u = new URL(location.href); u.searchParams.set('lang', lg); history.replaceState(null, '', u.href);
+  }
+  function setLang(lg){
+    if (lg === lang || busy) return;
+    busy = true;
+    const snap = ITEMS.length ? snapshot() : null, prev = lang;
+    $('#fq-lang').setAttribute('aria-busy', 'true');
+    getText(lg)
+      .then(d => { lang = lg; remember(lg); go(d, snap); })
+      .catch(e => { lang = prev; L = T[prev]; $('#fq-count').textContent = `${L.switchFail}（${e && e.message || e}）`; })
+      .finally(() => { busy = false; $('#fq-lang').removeAttribute('aria-busy'); });
+  }
+
+  /* ---------- 搜尋標示 ---------- */
+  function unmark(root){
+    root.querySelectorAll('mark.fq-hl').forEach(m => m.replaceWith(document.createTextNode(m.textContent)));
+    root.normalize();
+  }
+  function mark(root, terms){
+    const re = new RegExp(terms.map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'), 'gi');
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n =>
+      n.parentNode.closest('.fq-tool, .fq-gate, .fq-n, .mc-tag') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT});
+    const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
+    nodes.forEach(n => {
+      const s = n.nodeValue; re.lastIndex = 0; if (!re.test(s)) return;
+      const f = document.createDocumentFragment(); let i = 0; re.lastIndex = 0;
+      s.replace(re, (m, off) => { f.append(s.slice(i, off)); const mk = document.createElement('mark');
+        mk.className = 'fq-hl'; mk.textContent = m; f.append(mk); i = off + m.length; return m; });
+      f.append(s.slice(i)); n.replaceWith(f);
+    });
+  }
+
+  /* ---------- 互動 ---------- */
+  function setOpen(a, on){
+    a.classList.toggle('open', on);
+    a.querySelector('.fq-q').setAttribute('aria-expanded', on);
+    a.querySelector('.fq-b').hidden = !on;
+  }
+  function setMore(a, on){
+    const mo = a.querySelector('.fq-more'); if (!mo) return;
+    mo.setAttribute('aria-expanded', on); mo.nextElementSibling.hidden = !on;
+  }
+  function allLabel(){
+    const vis = $$('.fq-it:not([hidden])');
+    $('#fq-all').textContent = vis.length && vis.every(a => a.classList.contains('open')) ? L.collapse : L.expand;
+  }
+  function syncChips(){
+    $$('#fq-chips button').forEach(b => { const on = b.dataset.c === cat; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+  }
+  function apply(){
+    const terms = query.toLowerCase().split(/\s+/).filter(Boolean), hits = [];
+    $$('.fq-it').forEach(a => {
+      const it = BY[a.dataset.id], ok = (!cat || it.c === cat) && terms.every(t => it.txt.includes(t));
+      a.hidden = !ok; if (ok) hits.push(a);
+    });
+    $$('.fq-g').forEach(g => g.hidden = !g.querySelector('.fq-it:not([hidden])'));
+    const none = $('#fq-none'); if (none) none.hidden = hits.length > 0;
+    unmark($('#fq-list'));
+    if (terms.length){
+      hits.forEach(a => mark(a, terms));
+      if (hits.length <= 3) hits.forEach(a => {
+        setOpen(a, true);
+        if (terms.some(t => BY[a.dataset.id].dtxt.includes(t))) setMore(a, true);
+      });
+    }
+    $$('[data-next]').forEach(b => b.hidden = false);
+    if (hits.length){ const lb = hits[hits.length - 1].querySelector('[data-next]'); if (lb) lb.hidden = true; }
+    $('#fq-count').textContent = terms.length || cat ? L.shown(hits.length, ITEMS.length) : L.total(ITEMS.length);
+    allLabel();
+  }
+  function reveal(btn){
+    const a = btn.closest('.fq-it'), it = BY[a.dataset.id], v = btn.dataset.g, fb = a.querySelector('.fq-fb');
+    a.classList.add('rev');
+    const t = it.st === 'plan' ? L.fbPlan : v === 'yes' ? L.fbYes : v === 'no' ? L.fbNo : v === 'unsure' ? L.fbUn : '';
+    fb.textContent = t; fb.hidden = !t;
+  }
+  function copy(b){
+    const id = b.dataset.copy, u = new URL(location.href);
+    u.searchParams.delete('check'); u.searchParams.set('lang', lang); u.hash = 'faq-' + id;
+    const url = u.href;
+    history.replaceState(null, '', '#faq-' + id);
+    const done = () => { b.textContent = L.copied; setTimeout(() => b.textContent = L.copy, 1800); };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(url).then(done, () => prompt(L.prompt, url));
+    else prompt(L.prompt, url);
+  }
+  function fromHash(){
+    const h = decodeURIComponent(location.hash.slice(1)); if (!h.startsWith('faq-')) return;
+    const a = document.getElementById(h); if (!a) return;
+    if (a.hidden){ cat = ''; query = ''; $('#fq-s').value = ''; syncChips(); apply(); }
+    setOpen(a, true); allLabel();
+    a.classList.add('flash'); setTimeout(() => a.classList.remove('flash'), 1600);
+    requestAnimationFrame(() => a.scrollIntoView({behavior: SCROLL, block: 'start'}));
+  }
+
+  $('#fq-list').addEventListener('click', e => {
+    const q = e.target.closest('.fq-q');
+    if (q){ const a = q.closest('.fq-it'); setOpen(a, !a.classList.contains('open')); allLabel(); return; }
+    const mo = e.target.closest('.fq-more');
+    if (mo){ setMore(mo.closest('.fq-it'), mo.getAttribute('aria-expanded') !== 'true'); return; }
+    const g = e.target.closest('[data-g]'); if (g){ reveal(g); return; }
+    const cl = e.target.closest('[data-close]');
+    if (cl){
+      const a = cl.closest('.fq-it'); setOpen(a, false); allLabel();
+      if (a.getBoundingClientRect().top < 0) a.scrollIntoView({behavior: SCROLL, block: 'start'});
+      return;
+    }
+    const nx = e.target.closest('[data-next]');
+    if (nx){
+      const a = nx.closest('.fq-it'), vis = $$('.fq-it:not([hidden])'), n = vis[vis.indexOf(a) + 1];
+      setOpen(a, false);
+      if (n){ setOpen(n, true); requestAnimationFrame(() => n.scrollIntoView({behavior: SCROLL, block: 'start'})); }
+      allLabel(); return;
+    }
+    const cp = e.target.closest('[data-copy]'); if (cp) copy(cp);
+  });
+  $('#fq-lang').addEventListener('click', e => { const b = e.target.closest('[data-lang]'); if (b) setLang(b.dataset.lang); });
+  $('#fq-chips').addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (!b) return; cat = b.dataset.c; syncChips(); apply(); });
+  let tm; $('#fq-s').addEventListener('input', e => { clearTimeout(tm); tm = setTimeout(() => { query = e.target.value.trim(); apply(); }, 150); });
+  $('#fq-mode').addEventListener('click', e => {
+    const b = e.target.closest('[data-mode]'); if (!b) return;
+    mode = b.dataset.mode;
+    $$('#fq-mode button').forEach(x => x.classList.toggle('on', x === b));
+    $('#fq-list').classList.toggle('test', mode === 'test');
+    $$('.fq-it').forEach(a => { a.classList.remove('rev'); const f = a.querySelector('.fq-fb'); if (f) f.hidden = true; });
+  });
+  $('#fq-all').addEventListener('click', () => {
+    const vis = $$('.fq-it:not([hidden])'), on = !vis.every(a => a.classList.contains('open'));
+    vis.forEach(a => setOpen(a, on)); allLabel();
+  });
+  addEventListener('hashchange', fromHash);
+
+  /* ---------- 載入 ---------- */
+  function fail(err){
+    $('#fq-list').innerHTML = '';
+    const el = $('#fq-err'); el.hidden = false;
+    const local = location.protocol === 'file:';
+    el.innerHTML = `<div class="fq-errb"><h3>${L.errTitle}</h3><p>${local ? L.errLocal : L.errServer(SRC[lang][0])}</p>
+      <p class="mc-note">${L.errTech}${esc(err && err.message || err)}</p>
+      <label class="mc-btn pri" style="display:inline-block">${L.errPick}<input type="file" id="fq-file" accept=".txt,text/plain" hidden></label></div>`;
+    $('#fq-file').addEventListener('change', e => {
+      const file = e.target.files[0]; if (!file) return;
+      lang = /-en\b|_en\b/i.test(file.name) ? 'en' : /-zh\b|_zh\b/i.test(file.name) ? 'zh' : lang;
+      const r = new FileReader(); r.onload = () => go({t: r.result, f: file.name}); r.readAsText(file, 'utf-8');
+    });
+  }
+  chrome({});
+  $('#fq-list').innerHTML = `<p class="fq-empty">${L.loading}</p>`;
+  getText(lang).then(d => go(d)).catch(fail);
+})();
+</script>
+</body>
+</html>
