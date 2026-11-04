@@ -97,7 +97,7 @@ window.LDW = (() => {
     <nav class="lw-tabs" aria-label="LDW 專題導覽">
       ${PAGES.map((p,i) => `<a href="${p.f}" class="${p.f === cur ? 'on' : ''}"${p.f === cur ? ' aria-current="page"' : ''}>${String(i).padStart(2,'0')} ${p.tab || p.zh}</a>`).join('')}
       <a class="play${cur === 'player.html' ? ' on' : ''}" href="player.html"${cur === 'player.html' ? ' aria-current="page"' : ''}>▶ 試做</a>
-      <a class="back" href="${CH.f}" title="返回第 09 章：從 LDW 到 MAIL">↩ 09 數碼與 AI</a>
+      <a class="back" href="${CH.f}" title="返回第 09 章：從 LDW 到 MAIL">↩ 10 數碼與 AI</a>
     </nav></div>`;
   const oldH = document.getElementById('site-header');
   if (oldH) oldH.replaceWith(hdr); else document.body.prepend(hdr);
