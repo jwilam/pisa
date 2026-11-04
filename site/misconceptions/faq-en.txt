@@ -1,0 +1,279 @@
+# =====================================================================
+#  PISA HKU | Frequently Asked Questions — data file for faq.html
+#  faq.html reads this file automatically. Edit THIS file only.
+#  網頁 faq.html 會自動讀取本檔；只需修改本檔。
+#
+#  FIELDS (each question starts with "Q:" and ends at the next "Q:")
+#    Q:   Question (required)
+#    ID:  Short English id for a permanent link, e.g. faq.html#faq-covid
+#    C:   Category | short label for the filter button (short label optional)
+#    S:   Status: Ruled out / Clarified / Under analysis / See other section
+#    M:   Common confusion (one "M:" line per confusion)
+#    A:   Response = short answer (required)
+#    D:   Clarification = elaboration (may span many lines)
+#    L:   URL | button text (one "L:" line per link)
+#           pages in this folder:  sampling.html
+#           main-site pages:       ../trends.html
+#           external pages:        https://...
+#  中文欄位亦可：問題／分類／狀態／誤解／答／詳／連結
+#
+#  FORMATTING inside A: and D:
+#    blank line              -> new paragraph
+#    - item                  -> bullet list   ("   - item" = sub-bullet)
+#    1. item                 -> numbered list
+#    **Heading**             -> bold line on its own = sub-heading
+#    **bold**, [text](url)   -> bold text, inline link; bare https://... links also work
+#    > text                  -> reference note (grey box)
+#    | a | b | c |           -> table row (first row = header)
+#    \                       -> start a line with \ if it looks like a field, e.g. "\A: ..."
+#
+#  NOTES
+#    - Lines starting with # are comments and are never shown.
+#    - Save as UTF-8. After editing, open faq.html?check to validate.
+# =====================================================================
+
+Lang: en
+Updated: 2026-10-30
+Title: Frequently Asked Questions: Interpreting Hong Kong's PISA 2025 Results
+Intro: Before explaining the causes of Hong Kong's performance, we first set aside common interpretations that the evidence does not support. Each answer begins with a short response; open the clarification to read more.
+
+
+# ════════ Category 1: Purpose, Interpretation and Use of PISA Data ════════
+
+Q: How should educators use PISA data meaningfully, beyond looking at rankings?
+ID: beyond-rankings
+C: Purpose, Interpretation and Use of PISA Data | Purpose & use
+S: Clarified
+M: An education system's ranking is sometimes taken as a sufficient summary of students' abilities and overall system performance.
+A: PISA assesses how well 15-year-old students apply their knowledge and skills to problems and situations beyond familiar classroom tasks.
+
+To interpret its findings meaningfully, educators should first understand the competencies that PISA assesses in each domain. Rankings indicate relative standing, but understanding students' actual capabilities and learning needs requires going beyond rankings. To gain actionable insights, educators should analyze PISA data through four key perspectives:
+
+- **International comparisons:** How does performance compare with the OECD average and peer systems?
+- **Longer-term trends:** How have scores and proficiency levels changed over time?
+- **Proficiency distributions:** How many students reach baseline versus advanced proficiency?
+- **Contextual information:** How do student backgrounds and school environments relate to performance?
+
+By examining these areas, educators can effectively identify which student groups need targeted support and determine which future-ready competencies require strengthening.
+D: Rankings indicate an education system's relative position among participating systems, based on estimated average scores in a particular domain and assessment cycle. They do not, by themselves, show the magnitude of performance differences, the distribution of performance within a system, or what students at different proficiency levels can and cannot do.
+
+Particular care is needed when comparing systems ranked next to or close to one another: their average scores may not differ statistically significantly, so different ranks do not necessarily indicate a clear difference in performance. Changes in ranking also need to be examined alongside changes in scores and in the composition of participating systems.
+
+For Hong Kong, the important message is how these four actionable insights show areas requiring attention, especially advanced competencies such as evidence-based reasoning, evaluating information, solving unfamiliar problems, and transferring knowledge across contexts.
+L: ../pisa-nature.html | Chapter 02 · PISA 的性質與定位
+
+Q: Why does PISA's assessment focus change over time, and does this affect validity?
+ID: framework-change
+C: Purpose, Interpretation and Use of PISA Data | Purpose & use
+S: Clarified
+M: Some people think PISA is "moving the goalposts" and that changes in the framework make results invalid.
+A: PISA evolves because the knowledge and skills young people need also change. Recent cycles have placed more emphasis on evaluating information, reasoning with evidence, solving complex problems, and learning in digital environments.
+D: Framework changes are part of PISA's design, not a flaw. OECD uses technical standards, trend items, scaling procedures and quality checks to support valid comparisons over time where such comparisons are reported. However, trends should still be interpreted carefully, especially when the assessment framework has evolved.
+L: ../competencies.html | Chapter 03 · 演化中的能力
+
+
+# ════════ Category 2: Hong Kong Students' Performance and Learning Needs ════════
+
+Q: What do international comparisons reveal about Hong Kong students' relative strengths and areas for development?
+ID: international-comparisons
+C: Hong Kong Students' Performance and Learning Needs | HK performance
+S: Clarified
+M: Lower performance than leading Asian systems means Hong Kong students are generally weak at applying knowledge and solving problems.
+A: International comparisons reveal a differentiated profile. In PISA 2025, Hong Kong scored above OECD averages in science, mathematics, and reading. In Learning in the Digital World (LDW), its computational problem-solving score (545 vs. OECD 500) placed it among the highest-performing systems. While these overall results provide context, specific comparisons help identify precise development priorities.
+
+HKU item analyses reveal distinct patterns compared to global references and high-performing Asian peers:
+
+- **Science:** Above the global reference across all competencies, but consistently below Asian peers.
+- **Mathematics:** Closer to Asian peers in employing concepts and procedures, but larger gaps exist in mathematical reasoning and space and shape.
+- **Reading:** Shows a strong advantage over the global reference in evaluating information quality and credibility. Smaller advantages appeared in searching for relevant texts and corroborating conflicting information. However, gaps with Asian peers remain consistent across all reading processes.
+- **LDW:** Both programming and modelling exceeded global averages. Programming surpassed the Asian-peer aggregate, while modelling fell slightly below it.
+D: Broad labels obscure nuanced differences. International comparisons aim to identify specific capabilities to develop, not simply to classify students as strong or weak.
+
+These findings suggest building on programming strengths while expanding modelling opportunities—such as translating real-world situations into models, testing predictions, and refining solutions. Alongside fostering mathematical reasoning and evidence-based interpretation, these insights provide concrete directions for teaching, which should be continuously evaluated against classroom evidence to ensure improved learning outcomes.
+L: ../science.html | Chapter 07 · 科學
+L: ../mathematics.html | Chapter 08 · 數學
+L: ../reading.html | Chapter 09 · 閱讀
+L: ../digital.html | Chapter 10 · 數碼與 AI
+
+Q: What does the PISA trend data show about Hong Kong students' performance?
+ID: trend
+C: Hong Kong Students' Performance and Learning Needs | HK performance
+S: Ruled out
+M: Hong Kong's decline in PISA performance is a recent phenomenon that only began with the 2025 assessment.
+A: Hong Kong's trend data reveal a decline in performance, reflecting a broader international pattern. The OECD PISA 2025 Results highlight a global downward trend in science, mathematics, and reading spanning more than a decade. For Hong Kong, scores peaked in 2012 and have generally followed a downward trajectory since, though this pattern has varied slightly across different domains and assessment cycles.
+
+Hong Kong's mean scores consistently remained above the OECD average between the 2015 and 2025 cycles. This relative strength is encouraging, but it also presents a valuable opportunity to proactively address the recent shifts in performance. Both international and local trends require educators' active attention, rather than complacency based on comparative global standings.
+
+Readers are encouraged to examine the OECD's Hong Kong (China) Country Note, particularly its discussion of longer-term trends.
+D: The decline was evident and well documented by the OECD before 2025. Therefore, it helps to interpret the latest results as part of a longer-term trajectory rather than an isolated drop.
+
+To grasp the true educational significance of these trends, educators are encouraged to look beyond mean scores. Examining shifts in proficiency distributions and specific assessed competencies provides a clearer picture of which student groups and capabilities need the most attention.
+
+Ultimately, educational decisions are best driven by these nuanced interpretations and backed by contextual, school-based evidence—not by overall scores or rankings alone. The goal is to implement targeted support, evaluate its positive impact on learning, and carefully monitor the outcomes for all students.
+# TODO: please verify this OECD URL (see note in the reply)
+L: https://www.oecd.org/en/publications/pisa-2025-results-volume-i-country-notes_2d4ff9ea-en/hong-kong-china_453f39ca-en.html | OECD Country Note: Hong Kong (China)
+L: ../trends.html | Chapter 04 · 從十年趨勢看香港
+
+Q: What do the proficiency levels show about Hong Kong students' performance?
+ID: proficiency
+C: Hong Kong Students' Performance and Learning Needs | HK performance
+S: Clarified
+M: Some people focus only on rankings or scores and do not pay attention to the proficiency distributions.
+A: In PISA 2025, approximately 79% of Hong Kong students reached at least baseline proficiency (Level 2) in science, 83% in mathematics and 78% in reading. Around one-fifth of students in science and reading did not reach this baseline.
+
+Between 2022 and 2025, the proportion below baseline increased, while the proportion attaining advanced proficiency declined in all three core domains:
+
+| Domain | Below baseline (below Level 2), 2022 → 2025 | Top performance (Levels 5–6), 2022 → 2025 |
+|---|---|---|
+| Science | 12.8% → 20.9% | 10.7% → 9.1% |
+| Mathematics | 13.8% → 17.0% | 27.2% → 20.7% |
+| Reading | 17.5% → 22.0% | 9.0% → 5.8% |
+
+These findings highlight two complementary needs: strengthening foundations for students below baseline and helping more students progress towards advanced proficiency.
+
+This requires moving beyond basic knowledge consolidation to flexible, independent application. To support this, teaching must connect content and procedures with epistemic understanding—knowing how and why knowledge is established. Students need progressive challenges to evaluate evidence, solve unfamiliar problems, and justify conclusions.
+D: The proficiency-level distribution points to important learning needs. Two key needs are identified:
+
+**Support for students below baseline proficiency**
+These students need stronger foundations in subject concepts, academic language, reading comprehension, and simple evidence-based reasoning.
+
+**Stretching more students towards advanced proficiency**
+More students need opportunities to solve complex and unfamiliar problems, evaluate multiple sources of information, use abstract reasoning supported by scientific evidence, build models, and explain conclusions independently.
+
+Scores and rankings alone provide limited guidance on what support students need. Examining proficiency distributions alongside the competencies described at each level points to the need to strengthen future-ready competencies across the full range of student abilities and proficiency levels.
+L: ../trends.html | Chapter 04 · 從十年趨勢看香港
+
+Q: Besides test scores, why should we pay attention to contextual factors such as student agency, motivation, school experience and teacher support?
+ID: context-agency
+C: Hong Kong Students' Performance and Learning Needs | HK performance
+S: Clarified
+M: Some people pay attention only to cognitive scores and disregard contextual factors. This gives an incomplete understanding of PISA.
+A: PISA is not only a cognitive assessment. It also collects contextual information about students' learning attitudes, school experience, wellbeing, teacher support, attendance, digital habits and learning environment. These data help explain the conditions under which students learn.
+
+For PISA 2025, the HKU analysis placed strong emphasis on student agency as an important component of the findings. Student agency refers to students' capacity to set goals, make informed choices, seek help, adjust learning strategies, use evidence, and take responsibility for learning.
+
+Crucially, student agency serves as a foundational condition for student future readiness—the capacity to adapt, solve novel problems, and keep learning. This future readiness, in turn, manifests in students' performance across different academic domains.
+
+Readers are encouraged to explore the interactive PISA Dashboards to see these contextual factors in detail:
+- PISA Dashboard › Holistic Student Learning
+- PISA Dashboard › Mindsets, Attitudes and Learning
+D: Contextual factors are deeply intertwined with performance. The data reveal that Hong Kong students have a mixed agency profile rather than uniformly strong or weak characteristics. Three key perspectives help interpret this profile:
+
+1. **Drive to learn:** curiosity, perseverance, enjoyment of problem-solving and perceived value of schooling.
+   - Science enjoyment and goal setting met or exceeded OECD averages, but curiosity and perseverance lagged behind OECD and Asian peers.
+2. **Self-regulated learning capacity:** seeking help, monitoring progress and adapting strategies.
+   - Help-seeking was above average, but school belonging, cognitive adaptability, and growth mindset (44% vs. 69% OECD) were comparatively low.
+3. **Evidence-based reasoning:** using evidence, checking sources, interpreting data and explaining conclusions.
+   - Epistemic beliefs about the nature of science surpassed the OECD average but trailed all six selected Asian peers.
+
+The data analysis also showed that teacher cognitive activation and evidence-based collaborative reasoning among peers will support the cultivation of student agency.
+# TODO: add the two dashboard URLs, remove the "#" below, and (optionally) delete the two dashboard bullets in A:
+L: https://www.oecd.org/en/data/dashboards/pisa-education-and-skills/holistic-student-learning.html?oecdcontrol-chart-control-bar-77e61e9180-var1=G337 | PISA 數據儀表板 › 全人學習
+L: https://www.oecd.org/en/data/dashboards/pisa-education-and-skills/Mindsets-attitudes-and-learning.html?oecdcontrol-chart-control-bar-7c5b2dfb9c-var1=HKG | PISA 數據儀表板 › 思維、態度與學習
+L: ../agency.html | 第 06 章 · 學習能動性的結構
+
+Q: Can Hong Kong's PISA 2025 performance be explained by the impact of COVID-19?
+ID: covid
+C: Hong Kong Students' Performance and Learning Needs | HK performance
+S: Ruled out
+M: A common assumption is that the decline must be mainly or entirely due to COVID-related school disruption.
+A: COVID-19 may be part of the background, but PISA alone cannot prove how much of the performance change was caused by the pandemic.
+D: This explanation is not sufficient on its own. Many education systems experienced COVID-related disruption, and Hong Kong's downward trend in most domains began before the pandemic.
+
+PISA is a survey, so it can show patterns and associations, but it cannot by itself identify the exact causal share of COVID-19, digital habits, student engagement, curriculum experience or other factors.
+L: ../trends.html | Chapter 04 · 從十年趨勢看香港
+
+Q: How can PISA 2025 findings be used to provide more precise and effective support to schools and students?
+ID: school-support
+C: Hong Kong Students' Performance and Learning Needs | HK performance
+S: Clarified
+M: Some people think PISA can directly identify which individual schools or students are "weak" and prescribe a ready-made solution.
+A: PISA can help identify broad learning needs and guide follow-up support, but it should be used together with local school data. Support should be based on students' proficiency levels, learning processes, learning motivation and behaviours, and school context, not on rankings.
+
+For PISA 2025, support can focus on at least three areas:
+- Strengthening foundations for students below baseline proficiency
+- Stretching students towards advanced proficiency
+- Developing student agency
+D: PISA is designed for system-level and group-level analysis, not for ranking individual students or diagnosing individual schools.
+
+Precise support should therefore combine PISA findings with school-based assessment data, classroom observations, student work, attendance and wellbeing data, teachers' professional judgement, and feedback from students and parents.
+
+The aim is not to find who or what to blame, nor to label schools or students. More importantly, the focus should be on identifying learning needs and providing timely support.
+L: ../conclusion.html | Chapter 11 · 結語：為未來而教
+
+
+# ════════ Category 3: Test Validity, Administration and Data Quality ════════
+
+Q: Did the sampling method, testing period or test administration negatively affect Hong Kong's PISA 2025 results?
+ID: administration
+C: Test Validity, Administration and Data Quality | Data quality
+S: Ruled out
+M: Some people suggest that changes in sampling, the testing period, or test administration (including school-level administration) may explain the decline.
+A: There is no evidence that sampling, testing period or test administration invalidated Hong Kong's PISA 2025 results. Hong Kong's data met OECD quality standards and were considered fit for reporting.
+
+The OECD Hong Kong Country Note states that Hong Kong's reported data met PISA 2025 quality standards and were fit for reporting.
+
+> Reference: OECD, PISA 2025 Results: Hong Kong (China) Country Note, p. 1 / reporting notes section.
+D: PISA follows strict OECD technical standards. Schools and students are selected through probability sampling. Schools cannot choose participating students or replace selected students with others. Test administrators follow standardised scripts and timing rules, and administration is subject to quality monitoring.
+
+Hong Kong's PISA 2025 assessment was conducted from May to July 2025. This timing alone cannot explain the results. Hong Kong's PISA 2022 main study was also conducted from May to July. Local analysis of PISA 2025 testing dates found no statistically significant association between later testing dates and lower scores after controlling for available student and school variables.
+
+More importantly, any administration matter in PISA 2025 cannot explain the longer-term decline since around 2012. The trend started well before the 2025 administration.
+# TODO: please verify this OECD URL (see note in the reply)
+L: https://www.oecd.org/en/publications/pisa-2025-results-volume-i-country-notes_2d4ff9ea-en/hong-kong-china_453f39ca-en.html | OECD Country Note: Hong Kong (China)
+L: sampling.html | How sampling works: who decides?
+L: sampling-students.html | Students are randomly selected
+L: sampling-standards.html | Quality standards & sampling error
+
+Q: Did the larger number of students taking PISA in English affect comparability?
+ID: assessment-language
+C: Test Validity, Administration and Data Quality | Data quality
+S: Ruled out
+M: Some people assume that students taking the assessment in English must have lowered the overall reading score, or that language choice makes cross-cycle comparison impossible.
+A: The use of English as an assessment language does not by itself make the results invalid or incomparable. PISA has procedures for approved assessment languages, translation, adaptation and verification.
+D: The available Hong Kong data do not support the claim that English-medium assessment caused the decline. In weighted PISA 2025 data, about 55% of students took the assessment in Chinese and about 45% in English.
+
+In unadjusted comparisons, the English assessment group had higher average scores than the Chinese assessment group. After adjusting for socioeconomic background, gender and sampling strata, the differences became smaller. However, the English assessment group still obtained higher average scores than the Chinese assessment group.
+
+
+# ════════ Category 4: Student Engagement and Familiarity with PISA Tasks ════════
+
+Q: Did Hong Kong students take PISA 2025 less seriously, and did this explain the score decline?
+ID: engagement
+C: Student Engagement and Familiarity with PISA Tasks | Engagement & familiarity
+S: Ruled out
+M: Some people assume that lower scores mean students "gave up" or did not try.
+A: The evidence does not support the claim that Hong Kong students generally did not take PISA seriously. Several indicators were positive:
+
+- Students' self-reported effort remained broadly stable, at around 7.3 out of 10.
+- The rate of non-reached items was low.
+- Most students attempted the assessment rather than simply leaving large parts blank.
+- Some indicators of late-test fatigue did not worsen enough to explain the overall decline.
+
+One negative indicator was that the share of hasty responses in reading increased from 5.0% in 2018 to 8.8% in 2025, close to the OECD average of about 9%.
+D: Student engagement matters, especially in a low-stakes assessment such as PISA. However, the evidence does not show that disengagement explains Hong Kong's overall trend.
+
+In particular, disengagement cannot explain:
+- the longer-term decline since around 2012; or
+- the drastic drop of around 24 points in science and 20 points in reading between PISA 2022 and PISA 2025.
+
+The more balanced interpretation is that some students may have been more prone to rapid and inaccurate responding, but this is only one factor to monitor. It should not be used as a single or main explanation for Hong Kong's performance trend.
+
+Q: Did unfamiliar PISA item formats cause Hong Kong students to perform less well?
+ID: item-format
+C: Student Engagement and Familiarity with PISA Tasks | Engagement & familiarity
+S: Ruled out
+M: Some people think students did not do well simply because they had not practised PISA-style questions.
+A: Unfamiliarity with PISA-style items may affect some students, but it is not a sufficient explanation for Hong Kong's performance. PISA is intentionally designed to assess whether students can apply knowledge and skills in unfamiliar and real-life situations.
+
+The more important issue is whether students have enough future-ready competencies, including the ability to:
+- apply knowledge in unfamiliar contexts;
+- evaluate information from multiple sources;
+- reason with evidence;
+- model complex problems;
+- adapt strategies when tasks are difficult;
+- explain and justify conclusions.
+D: This explanation is not convincing on its own. The most unfamiliar domain in PISA 2025 was likely Learning in the Digital World, which used innovative digital tasks involving computational problem-solving, modelling and programming. Yet this was Hong Kong's strongest area, with a score of 545, among the top-performing systems. This shows that unfamiliar item format alone cannot explain weaker performance in other domains.
+
+The purpose is not to train students for PISA items. Rather, schools should provide more regular opportunities for students to think deeply, solve unfamiliar problems, evaluate evidence, and transfer learning across subjects.
+L: ../digital.html | Chapter 10 · 從 LDW 到 MAIL
