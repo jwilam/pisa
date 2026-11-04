@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">☰ 目錄</button>
         <nav class="site-nav" id="site-nav" aria-label="系列導覽"><ul>
           ${SF_PAGES.map(p => `<li><a href="${p.file}"${p.file === current ? ' aria-current="page"' : ""}>${p.no} ${p.short}</a></li>`).join("")}
-          <li><a href="../science.html">↩ 06 科學</a></li>
+          <li><a href="../science.html">↩ 07 科學</a></li>
         </ul></nav>
       </div>
       <div class="progress"><span></span></div>
