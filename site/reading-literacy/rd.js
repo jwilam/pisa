@@ -27,7 +27,7 @@ window.RD = (() => {
     {f:'sample.html',     ch:'s', ic:'▶️', zh:'樣例試做與評析',   q:'uej', min:30, d:'站內試做，對照題目解析、評析及文本結構圖'}
   ];
   const Q = {u:'說了甚麼？', e:'可信嗎？', j:'為何相信？'};
-  const BACK = {f:'../reading.html#rl-feature', ic:'📖', zh:'08 閱讀教育的反思'};
+  const BACK = {f:'../reading.html#rl-feature', ic:'📖', zh:'09 閱讀教育的反思'};
 
   const cur = document.body.dataset.rd || 'index.html';
   const me = PAGES.find(p => p.f === cur) || PAGES[0];
