@@ -6,7 +6,7 @@
   const LINKS = [
     {n:1, time:'5 分鐘', icon:'📊', type:'互動圖表',
      zh:'PISA 2025 重點結果（Dashboard）', en:'PISA 2025 key results',
-     url:'https://www.oecd.org/en/about/programmes/pisa/pisa-data.html', /* TODO：換成附件 Dashboard／infographic 的實際網址 */
+     url:'https://www.oecd.org/en/data/dashboards/pisa-education-and-skills.html', /* TODO：換成附件 Dashboard／infographic 的實際網址 */
      aud:['teacher','leader'],
      note:'最快掌握全球結果的入口。適合在科組會議開場時，用 5 分鐘建立共同背景。',
      rel:['../trends.html','香港歷屆趨勢']},
