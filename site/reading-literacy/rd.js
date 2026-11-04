@@ -61,7 +61,7 @@ window.RD = (() => {
 
   /* 麵包屑 */
   const cr = document.getElementById('rd-crumb');
-  if (cr) cr.innerHTML = `<a href="../index.html">首頁</a> › <a href="${BACK.f}">08 閱讀</a> › ` +
+  if (cr) cr.innerHTML = `<a href="../index.html">首頁</a> › <a href="${BACK.f}">09 閱讀</a> › ` +
     (cur === 'index.html' ? '閱讀素養專題' : `<a href="index.html">閱讀素養專題</a> › ${me.zh}`);
 
   /* 翻頁 */
@@ -77,7 +77,7 @@ window.RD = (() => {
   const ft = document.createElement('footer');
   ft.className = 'rd-foot';
   ft.innerHTML = `<div class="in"><span>PISA 2025 研討會專題 · 閱讀素養專題</span>
-    <span><a href="${BACK.f}">第 08 章</a> · <a href="../index.html">研討會主頁</a></span></div>`;
+    <span><a href="${BACK.f}">第 09 章</a> · <a href="../index.html">研討會主頁</a></span></div>`;
   const of = document.getElementById('site-footer'); if (of) of.replaceWith(ft); else document.body.append(ft);
 
   return {CH, PAGES, Q, num};
