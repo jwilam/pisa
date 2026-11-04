@@ -45,7 +45,7 @@ window.RD = (() => {
     <nav class="rd-tabs" aria-label="閱讀素養專題導覽">
       <a href="index.html" class="${cur === 'index.html' ? 'on' : ''}">00 總覽</a>
       ${Object.entries(CH).map(([k,c]) => `<a href="${first(k).f}" class="${me.ch === k ? 'on' : ''}" style="--tc:${c.c}"><span class="n">${c.n}</span>${c.zh}</a>`).join('')}
-      <a class="back" href="${BACK.f}" title="返回第 08 章">↩ 08 閱讀</a>
+      <a class="back" href="${BACK.f}" title="返回第 09 章">↩ 09 閱讀</a>
     </nav></div>`;
   const oh = document.getElementById('site-header'); if (oh) oh.replaceWith(hdr); else document.body.prepend(hdr);
 
